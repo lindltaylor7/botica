@@ -27,7 +27,7 @@
                     <div class="d-table-cell align-middle">
 
                         <div class="text-center mt-4">
-                            <h1 class="h2">Bienvenido a Farmacia Excelentemente</h1>
+                            <h1 class="h2">Bienvenido a Botica Excelentemente</h1>
                                 <pre>{{Auth::user() }}</pre>
                             <p class="lead">
                                 Ingrese sus accesos para continuar
