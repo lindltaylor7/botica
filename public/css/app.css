@@ -10844,7 +10844,7 @@ screen and (-ms-high-contrast: active) {
 .sidebar,
 .sidebar-content {
     transition: margin-left .35s ease-in-out, left .35s ease-in-out, margin-right .35s ease-in-out, right .35s ease-in-out;
-    background: #ffc107
+    background: #FFA81E
 }
 .sidebar-content {
     display: flex;
@@ -10867,7 +10867,7 @@ a.sidebar-link {
     text-decoration: none;
     cursor: pointer;
     color: rgba(233, 236, 239);
-    background: #ffc107;
+    background: #FFA81E;
     border-left: 3px solid transparent
 }
 .sidebar-link i,
@@ -12221,4 +12221,10 @@ span.flatpickr-weekday {
 .flatpickr-calendar.inline .flatpickr-prev-month:hover {
     background: #e6e6e6;
     color: #000
+}
+
+.pull-left{float:left!important;}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 300%;
 }

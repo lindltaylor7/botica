@@ -27,3 +27,6 @@ Route::post('save',[InicioController::class , 'save'])->name('save');
 Route::post('check',[InicioController::class,'check'])->name('check');
 Route::post('logout',[InicioController::class , 'logout'])->name('logout');
 Route::get('login',[InicioController::class , 'login'])->name('login')->middleware('guest');
+Route::get('seller', function (){
+    return view('seller.index');
+});

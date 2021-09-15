@@ -28,7 +28,7 @@ class InicioController extends Controller
                                     ->where('stocks.cantidad','!=',null)
                                     ->groupBy('stocks.medicamento_id')
                                     ->orderBy('medicamentos.n_generico')
-                                    ->paginate(10);
+                                    ->get();
 
         return view('admin.inicio.index', compact('medicamentos','data'));
     }
