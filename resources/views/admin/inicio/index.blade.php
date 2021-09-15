@@ -3,48 +3,111 @@
 @section('title', 'Inicio')
 
 @section('content')
-<main class="content">
-    <div class="container-fluid p-0">
+<div class="">
+    <h1><b>Action</b> Dashboard</h1>
+    <div class="main__action">
+      <a href="#" class="main__action-item">
+        <div class="main__action-text">
+          <h2>Stock</h2>
+          <span>Agregar Stock</span>
+        </div>
+        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+      </a>
+      <a href="#" class="main__action-item">
+        <div class="main__action-text">
+          <h2>Añadir</h2>
+          <span>Añadir medicamento</span>
+        </div>
+        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+      </a>
+      <a href="#" class="main__action-item">
+        <div class="main__action-text">
+          <h2>Generar</h2>
+          <span>Nuevo reporte</span>
+        </div>
+        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+      </a>
+      <a href="#" class="main__action-item">
+        <div class="main__action-text">
+          <h2>Nuevo</h2>
+          <span>Nueva venta</span>
+        </div>
+        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+      </a>
+    </div>
+  </div>
 
-        <h1 class="h3 mb-3">Inicio</h1>
-            <div class="d-flex justify-content-between">
-                {{-- <input type="text" class="d-inline form-control mb-3 w-75" id="search_index" placeholder="Buscar"> --}}
+  <div class="main-analytics">
+    <h2><b>Analytics</b> Dashboard</h2>
+    <div class="main__analytics">
+      <div class="main__analytics-items">
+        <div class="main__analytics-text">
+          <h2>Ingreso</h2>
+          <span>S/. 1500.00</span>
+        </div>
+        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
+      </div>
+      <div class="main__analytics-items">
+        <div class="main__analytics-text">
+          <h2>Ingreso</h2>
+          <span>S/. 1500.00</span>
+        </div>
+        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
+      </div>
+      <div class="main__analytics-items">
+        <div class="main__analytics-text">
+          <h2>Ingreso</h2>
+          <span>S/. 1500.00</span>
+        </div>
+        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
+      </div>
 
-            </div>
+    </div>
+
+    <div class="main__grafic">
+      Table
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
 
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="buttons-space">
-                            @can('nullSell')
-                            <a href="{{route('stock.create')}}" title="Agregar Stock" class="d-inline h-75 btn btn-secondary btn-lg"><i class="align-middle" data-feather="bar-chart"></i> Agregar Stock</a>
-                            <a href="{{route('medicamentos.create')}}" title="Añadir Medicamento" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle" data-feather="box"></i> Añadir Medicamento</a>
-                            @endcan
 
-                            <a href="{{route('ventas.index')}}" data-bs-toggle="modal" data-bs-target="#clientModal" title="Vender" class="d-inline h-75 btn btn-success btn-lg"><i class="align-middle" data-feather="dollar-sign"></i> Vender</a>
-                            <a href="{{route('reportes.ven')}}" title="Reporte de Vencimiento" class="d-inline h-75 btn btn-info btn-lg"><i class="align-middle" data-feather="book"></i> Reporte de Vencimiento</a>
-                        </div>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <table id="myTable" class="table table-hover my-0">
-                            <thead>
-                                <tr>
-                                    <th class="d-none d-md-table-cell">Nombre Genérico</th>
-                                    <th class="d-none d-md-table-cell">Nombre Comercial</th>
-                                    <th class="d-none d-md-table-cell">Present.</th>
-                                    <th class="d-none d-md-table-cell">Concent.</th>
-                                    <th class="d-none d-md-table-cell">Precio</th>
-                                    {{-- <th class="d-none d-md-table-cell">Utilidad</th> --}}
-                                    <th class="d-none d-md-table-cell">Cantidad</th>
-                                    <th class="d-none d-md-table-cell">Laboratorio</th>
-                                    <th class="d-none d-md-table-cell">Anaquel</th>
-                                    <th class="d-none d-md-table-cell">Foto</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dynamic-row-index">
-                                @foreach($medicamentos as $medicamento)
+  <div class="main__datatable">
+    <h2><b>Tabla de </b> Medicamentos</h2>
+
+    <div class="main__datatable-content">
+      <div class="main__datatable-pagination">
+        <label for="datatable-input" class="main__datatable-input">
+          <i class="fas fa-search"></i>
+          <input type="search" class="" id="datatable-input" placeholder="Search">
+        </label>
+        <div class="main__pagination">
+          <span class="active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+        </div>
+      </div>
+
+      <div class="main__table">
+        <table id="myTable" class="main__datatable-table">
+          <thead>
+            <tr>
+              <th>Nombre Genérico</th>
+              <th>Nombre Comercial</th>
+              <th>Present.</th>
+              <th>Concent.</th>
+              <th>Precio</th>
+              <th>Cant.</th>
+              <th>Laboratorio</th>
+              <th>Anaquel</th>
+              <th>Foto</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($medicamentos as $medicamento)
                                     <tr>
                                         <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
                                         <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
@@ -55,20 +118,16 @@
                                         <td>{{$medicamento->total}}</td>
                                         <td>{{$medicamento->lab}}</td>
                                         <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
-                                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="align-middle" data-feather="image"></i></a></td>
+                                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars"></i></a></td>
                                         @include('admin.inicio.imgmodal')
                                     </tr>
                                 @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </tbody>
+        </table>
+      </div>
     </div>
-    @include('admin.inicio.clientmodal')
-</main>
+  </div>
+
 @endsection
 @section('javascript')
     <script src="{{ asset('js/inicio/search.js') }}"></script>
@@ -87,4 +146,45 @@
             });
         } );
     </script>
+    <script>
+        var ctx = document.getElementById('myChart');
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var ctx = $('#myChart');
+      var ctx = 'myChart';
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      </script>
 @endsection

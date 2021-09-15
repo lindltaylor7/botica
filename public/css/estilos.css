@@ -289,11 +289,21 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 400px;
+}
+
+.dataTables_filter input{
+    height: 35px;
+    border-radius: 50px;
+    width: 100%;
+    border: 1px solid #000;
+    padding-left: 45px;
 }
 
 .main__datatable-input input {
   height: 35px;
   border-radius: 50px;
+  width: 100%;
   border: 1px solid #000;
   padding-left: 45px;
 }
