@@ -225,6 +225,7 @@ h2 {
 .main__action-item:hover, .main__analytics-items:hover {
   background: #00826F;
   color: #fff;
+  transition: 0.5s;
 }
 
 .main__action-text span {
@@ -278,8 +279,10 @@ h2 {
 .main__datatable-content {
   width: 100%;
   background-color: #fff;
-  padding: 15px 0;
+  padding: 25px 0px;
   overflow: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.116);
 }
 
 .main__datatable-pagination {
@@ -299,20 +302,27 @@ h2 {
   width: 400px;
 }
 
-.dataTables_filter input{
-    height: 35px;
-    border-radius: 50px;
-    width: 100%;
-    border: 1px solid #000;
-    padding-left: 45px;
-}
+
 
 .main__datatable-input input {
   height: 35px;
-  border-radius: 50px;
+  border-radius: 10px;
   width: 100%;
-  border: 1px solid #000;
+  border: 1px solid rgb(129, 129, 129);
   padding-left: 45px;
+}
+
+.dataTables_filter input{
+    height: 35px !important;
+    border-radius: 5px !important;
+    width: 300% !important;
+    border: 1px solid rgb(99, 99, 99) !important;
+    padding-left: 15px !important;
+    margin-bottom: 25px;
+}
+
+.pull-left{
+    float:left!important;
 }
 
 .main__datatable-input i {
@@ -336,9 +346,18 @@ h2 {
   align-items: center;
 }
 
-.main__pagination > span.active {
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
   background: #00826F;
-  color: #fff;
+  color: #fff !important;
+}
+
+.paginate_button {
+    border-radius: 50% !important;
+}
+
+.paginate_button.current .page-link {
+    background: #00826F !important;
+    color: #fff !important;
 }
 
 .main__table {
@@ -352,6 +371,7 @@ h2 {
   min-width: 750px;
   margin-top: 25px;
   border-spacing: 0px;
+  border-radius: 10px;
 }
 
 .main__datatable-table > thead {
@@ -368,6 +388,7 @@ h2 {
 .main__datatable-table > tbody td {
   padding: 15px 0 15px 15px;
 }
+
 
 .main__datatable-table > tbody tr:hover {
   background: rgba(235, 235, 235, 0.384);
