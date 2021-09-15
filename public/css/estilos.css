@@ -9,6 +9,13 @@ html {
   font-size: 16px;
 }
 
+main {
+ grid-column: 1/-1;
+}
+
+.container-fluid {
+   grid-column: 1/-1 !important;
+}
 body {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
