@@ -10,7 +10,7 @@
         <li class="nav__list"><a href="#" class="nav__link link--active"><i class="fas fa-bars"></i><span class="nav__link-text">Inicio</span></a></li>
         <li class="nav__list"><a href="./page/medicamento.html" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Medicamento</span></a></li>
         <li class="nav__list"><a href="#" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Articulos</span></a></li>
-        <li class="nav__list"><a href="#" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Stocks</span></a></li>
+        <li class="nav__list"><a href="{{route('stock.index')}}" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Stocks</span></a></li>
         <li class="nav__list"><a href="#" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Ventas</span></a></li>
         <li class="nav__list"><a href="#" class="nav__link"><i class="fas fa-bars"></i><span class="nav__link-text">Reportes</span></a></li>
       </ul>

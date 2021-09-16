@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 /*
@@ -30,3 +31,5 @@ Route::get('login',[InicioController::class , 'login'])->name('login')->middlewa
 Route::get('seller', function (){
     return view('seller.index');
 });
+
+Route::get('/stock',[StockController::class, 'index'])->name('stock.index');
