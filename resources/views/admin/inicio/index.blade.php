@@ -65,7 +65,7 @@
     </div>
 
     <div class="main__grafic">
-      Table
+      Ventas por Mes
       <canvas id="myChart"></canvas>
     </div>
   </div>
@@ -76,7 +76,7 @@
     <h2><b>Tabla de </b> Medicamentos</h2>
 
     <div class="main__datatable-content">
-      <div class="main__datatable-pagination">
+      {{-- <div class="main__datatable-pagination">
         <label for="datatable-input" class="main__datatable-input">
           <i class="fas fa-search"></i>
           <input type="search" class="" id="datatable-input" placeholder="Search">
@@ -89,7 +89,7 @@
           <span>5</span>
           <span>6</span>
         </div>
-      </div>
+      </div> --}}
 
       <div class="main__table">
         <table id="myTable" class="main__datatable-table">
@@ -116,7 +116,7 @@
                                         <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
                                         {{-- <td>S./{{number_format($medicamento->precio->p_costo*$medicamento->precio->utilidad/100,1,".",'')}}0</td> --}}
                                         <td>{{$medicamento->total}}</td>
-                                        <td>{{$medicamento->lab}}</td>
+                                        <td>{{ucfirst(strtolower($medicamento->lab))}}</td>
                                         <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
                                         <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars"></i></a></td>
                                         @include('admin.inicio.imgmodal')
@@ -126,6 +126,7 @@
         </table>
       </div>
     </div>
+  </div>
   </div>
 
 @endsection

@@ -23,6 +23,7 @@ Route::get('storagelink', function () {
     Artisan::call('storage:link');
 });
 
+
 Route::get('register',[InicioController::class , 'register'])->name('register');
 Route::post('save',[InicioController::class , 'save'])->name('save');
 Route::post('check',[InicioController::class,'check'])->name('check');

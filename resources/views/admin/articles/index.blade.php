@@ -4,24 +4,20 @@
 
 
 @section('content')
-    <main class="content">
-        <div class="container-fluid p-0">
-
-            <h1 class="h3 mb-3">Articulos</h1>
-            <div class="d-flex justify-content-between">
-                <input type="text" class="d-inline form-control mb-3 w-75" id="search_med" placeholder="Buscar">
-                <a href="{{ route('medicamentos.create') }}" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle"
-                        data-feather="plus"></i>Agregar Artículos</a>
-            </div>
-
-
-            <div class="row">
-                <div class="col-12">
+   
+        <div class="container-fluid">
+            <h1 class="h3 mb-3">Tabla de Articulos</h1>
+            <div>
+                <div class="">
                     <div class="card">
                         <div class="card-header">
                         </div>
-                        <div class="card-body table-responsive">
-                            <table class="table table-hover my-0 mb-3">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('medicamentos.create') }}" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle"
+                                    data-feather="plus"></i>Agregar Artículos</a>
+                        </div>
+                        <div class="table table-responsive">
+                            <table id="tablearticles" class="">
                                 <thead>
                                     <tr>
                                         <th class="d-none d-md-table-cell">Nombre Genérico</th>
@@ -46,15 +42,10 @@
                                             <td>{{ $medicamento->lab }}</td>
                                             <td>{{ $medicamento->nro_caja }}</td>
                                             <td><span class="badge bg-primary">{{ $medicamento->anaquel }}</span></td>
-                                            <td>
-                                                <a href="#" class="btn-price" id="{{ $medicamento->id }}"
-                                                    data-bs-toggle="modal" data-bs-target="#priceModal"><i
-                                                        class="align-middle" data-feather="dollar-sign"></i></a>
-                                                <a href="#" class="btn-editar" id="{{ $medicamento->id }}"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                                        class="align-middle" data-feather="edit-2"></i></a>
-                                                <a href="#" class="btn-eliminar" id="{{ $medicamento->id }}"><i
-                                                        class="align-middle" data-feather="trash"></i></a>
+                                            <td class="text-center">
+                                             <button class="btn-success" id="{{ $medicamento->id }}" data-bs-toggle="modal" data-bs-target="#priceModal"><i  class="fa fa-dollar-sign mr-25"></i></button>
+                                             <button class="btn-info"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit mr-25"></i></button>
+                                             <button class="btn-danger" id="{{ $medicamento->id }}"><i class="fas fa-trash mr-25"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -68,9 +59,9 @@
                 </div>
             </div>
         </div>
+        
         @include('admin.medicamentos.modal')
-        @include('admin.medicamentos.pricemodal')
-    </main>
+        @include('admin.medicamentos.pricemodal')         
 @endsection
 
 @section('javascript')
@@ -78,4 +69,20 @@
     <script src="{{ asset('js/medicamentos/medicamentos_update.js') }}"></script>
     <script src="{{ asset('js/medicamentos/medicamentos_search.js') }}"></script>
     <script src="{{ asset('js/medicamentos/medicamentos_delete.js') }}"></script>
-@endsection
+    <!-- JavaScript Bundle with Popper -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#tablearticles').DataTable({
+                language: {
+                searchPlaceholder: "Buscar medicamento",
+                search: ""
+                },
+                "dom":"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'><'col-sm-7'p>>",
+            });
+        } );
+    </script>
+    @endsection
