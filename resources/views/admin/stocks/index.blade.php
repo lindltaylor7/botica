@@ -13,6 +13,51 @@
                 <a href="{{route('stock.export')}}" class="d-inline h-75 btn btn-success btn-lg">Excel</a>
             </div>
 
+            <div class="row">
+                @foreach($stocks as $stock)
+                    <div class="col-xl-6 col-sm-6 col-md-6">
+                        <div class="card mb-3 mt-2 rounded">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <div class="text-center p-4 border-end">
+                                        <div>
+                                            <img class="img__stock rounded-circle" src="{{asset('img/medic1.jpg')}}" alt="">
+                                        </div>
+                                        <br>
+                                        <span class="text-truncate pb-1 fw-bold display-block">{{$stock->medicamento->n_generico}}</span><br>
+                                        <small class="text-truncate pb-1">{{$stock->medicamento->n_comercial}}</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-7">
+                                    <div class="p-4 text-center text-xl-start">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div>
+                                                    <p class="text-muted mb-2 text-truncate">Cantidad</p>
+                                                    <h5>{{$stock->cantidad}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div>
+                                                    <p class="text-muted mb-2 text-truncate">Laboratorio</p>
+                                                    <h5>{{$stock->medicamento->lab}}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <a href="#" class="text-decoration-underline text-reset">Ver más <i class="mdi mdi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                @endforeach
+                
+            </div>
 
         <div class="row">
             <div class="col-12">
