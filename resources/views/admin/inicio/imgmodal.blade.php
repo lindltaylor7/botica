@@ -7,8 +7,8 @@
             </div>
             <div class="modal-body">
                 @if($medicamento->img)
-                <img class="" src="{{Storage::url($medicamento->img)}}" alt="Imagen de medicamento" style="width:100%">
-                {{-- <img class="" src="https://boticaexcelentemente.com/storage/{{$medicamento->img}}" alt="Imagen de medicamento" style="width:100%"> --}}
+                {{-- <img class="" src="{{Storage::url($medicamento->img)}}" alt="Imagen de medicamento" style="width:100%"> --}}
+                <img class="" src="https://boticaexcelentemente.com/storage/{{$medicamento->img}}" alt="Imagen de medicamento" style="width:100%">
                 @else
                 <p>No hay imagen para mostrar</p>
                 @endif

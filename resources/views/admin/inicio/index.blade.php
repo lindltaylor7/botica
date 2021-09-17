@@ -3,6 +3,8 @@
 @section('title', 'Inicio')
 
 @section('content')
+
+
   <div class="">
     <h1><b>Action</b> Dashboard</h1>
     <div class="main__action">
@@ -71,7 +73,7 @@
 
   <div class="main__datatable">
     <h2><b>Tabla de </b> Medicamentos</h2>
-
+  
     <div class="main__datatable-content">
       <div class="main__table">
         <table id="myTable" class="main__datatable-table">
