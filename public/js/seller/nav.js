@@ -5,32 +5,42 @@ const $navMenu = d.querySelectorAll(".nav__span");
 const $link = d.querySelectorAll(".nav__link");
 const $logo = d.querySelector(".span-logo");
 
-if (localStorage.getItem("nav")) {
-  $nav.classList.replace("col-lg-3", "col-lg-1");
-  $header.classList.replace("col-lg-9", "col-lg-11");
-  $logo.classList.replace("d-lg-block", "d-lg-none");
-  $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))
-  $navMenu.forEach(el => el.classList.replace("d-lg-block", "d-lg-none"))
-}
+d.addEventListener("DOMContentLoaded", e => {
+  if (localStorage.getItem("nav")) {
+    d.querySelector(".panel-btn").classList.add("is-active"); 
+    $nav.classList.replace("col-lg-3", "col-lg-1");
+    $header.classList.replace("col-lg-9", "col-lg-11");
+    $logo.classList.replace("d-lg-block", "d-lg-none");
+    $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))
+    $navMenu.forEach(el => {
+      el.classList.replace("d-lg-block", "d-lg-none")
+      el.closest("li").title = el.textContent
+    })
+  }
+})
 
 d.addEventListener("click", e => {
   if (e.target.matches(".panel-btn") || e.target.matches(".panel-btn *")) {
     d.querySelector(".panel-btn").classList.toggle("is-active"); 
+    localStorage.getItem("nav") ? localStorage.removeItem("nav") : storage = localStorage.setItem("nav","active")
     if (d.querySelector(".panel-btn").matches(".is-active")) {
-      let storage;
-      localStorage.getItem("nav") ? localStorage.removeItem("nav") : storage = localStorage.setItem("nav","active")
       $nav.classList.replace("col-lg-3", "col-lg-1");
       $header.classList.replace("col-lg-9", "col-lg-11");
       $logo.classList.replace("d-lg-block", "d-lg-none");
       $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))
-      $navMenu.forEach(el => el.classList.replace("d-lg-block", "d-lg-none"))
+      $navMenu.forEach(el => {
+        el.classList.replace("d-lg-block", "d-lg-none")
+        el.closest("li").title = el.textContent
+      })
     } else {
-   
       $nav.classList.replace("col-lg-1", "col-lg-3");
       $header.classList.replace("col-lg-11", "col-lg-9");
       $logo.classList.replace("d-lg-none", "d-lg-block")
       $link.forEach(el => el.classList.replace("justify-content-lg-center", "justify-content-lg-start"))
-      $navMenu.forEach(el => el.classList.replace("d-lg-none", "d-lg-block"))
+      $navMenu.forEach(el => {
+        el.classList.replace("d-lg-none", "d-lg-block")
+        el.closest("li").removeAttribute("title")
+      })
     }
   }
 })

@@ -16,15 +16,6 @@ main {
 .container-fluid {
    grid-column: 1/-1 !important;
 }
-body {
-  /* min-height: 100vh; */
-  /* font-family: Poppins,sans-serif; */
-  /* display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr; */
-  /* background: #F7F7FC; */
-  /* overflow: auto; */
-}
 
 span {
   display: inline-block;
@@ -66,7 +57,7 @@ main {
   height: 68px;
   grid-column: 2 / -1;
   grid-row: 1 / 2;
-  padding: 60px 20px;
+  /* padding: 60px 20px; */
   background: #fff;
   box-shadow: 5px 0 25px 1px rgba(0, 0, 0, 0.096);
   display: flex;
@@ -291,12 +282,16 @@ main {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  background: #00826F;
+  background: #00826F !important;
   color: #fff !important;
 }
 
 .paginate_button {
-    border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #fff !important;
 }
 
 .paginate_button.current .page-link {

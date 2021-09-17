@@ -51,3 +51,8 @@ a {
 .hamburger-inner:before {
   background: var(--bg-primary) !important;
 }
+
+#SvgjsPath1401 {
+  background: red;
+  stroke: green !important;
+}
