@@ -17,6 +17,8 @@ a {
 .nav {
   background: var(--bg-primary);
   transition: all .5s ease;
+  position: fixed;
+  left: 0;
 }
 
 .nav::-webkit-scrollbar {
@@ -29,9 +31,9 @@ a {
   background: rgba(46, 46, 46, 0.397);
 }
 
-.header {
+/* .header {
   height: 70px;
-}
+} */
 
 .nav__list:hover i {
   background: rgba(224, 224, 224, 0.274);

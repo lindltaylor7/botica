@@ -14,6 +14,7 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
 
@@ -21,9 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css" integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
 
+    {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
     <!-- CSS only -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -31,8 +32,8 @@
 
 <body>
     <div class="container-fluid" style="height: 100vh;">
-        <div class="row flex-row-reverse justify-content-between h-100 flex-nowrap">
-            <div class="header col-9 col-sm-10 col-md-11 col-lg-9" id="header">
+        <div class="row flex-row-reverse justify-content-between h-100 flex-wrap">
+            <div class="col-9 col-sm-10 col-md-11 col-lg-9 px-0" id="header">
                 @include('layout.header')
               
                 <main class="main">
@@ -45,6 +46,6 @@
     </div>
 
     <script src="{{asset('js/seller/nav.js')}}"></script>
-    {{-- @yield('javascript') --}}
+    @yield('javascript')
 </body>
 </html>
