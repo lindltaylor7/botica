@@ -12,14 +12,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
     <title>@yield('title')</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css" integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
     {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
     <!-- CSS only -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -27,14 +30,21 @@
 </head>
 
 <body>
-        @include('layout.header')
-		@include('layout.navigation')
-		<div class="main">
-            @yield('content')
-		</div>
+    <div class="container-fluid" style="height: 100vh;">
+        <div class="row flex-row-reverse justify-content-between h-100 flex-nowrap">
+            <div class="header col-9 col-sm-10 col-md-11 col-lg-9" id="header">
+                @include('layout.header')
+              
+                <main class="main">
+                    @yield('content')
+                </main>
+            </div>
 
+            @include('layout.navigation')
+        </div>
+    </div>
 
     <script src="{{asset('js/seller/nav.js')}}"></script>
-    @yield('javascript')
+    {{-- @yield('javascript') --}}
 </body>
 </html>

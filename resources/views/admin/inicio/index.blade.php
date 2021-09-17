@@ -3,7 +3,7 @@
 @section('title', 'Inicio')
 
 @section('content')
-<div class="">
+  <div class="">
     <h1><b>Action</b> Dashboard</h1>
     <div class="main__action">
       <a href="#" class="main__action-item">
@@ -70,8 +70,6 @@
     </div>
   </div>
 
-
-
   <div class="main__datatable">
     <h2><b>Tabla de </b> Medicamentos</h2>
 
@@ -108,27 +106,27 @@
           </thead>
           <tbody>
             @foreach($medicamentos as $medicamento)
-                                    <tr>
-                                        <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
-                                        <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
-                                        <td>{{ucfirst(strtolower($medicamento->present))}}</td>
-                                        <td>{{ucfirst(strtolower($medicamento->concent))}}</td>
-                                        <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
-                                        {{-- <td>S./{{number_format($medicamento->precio->p_costo*$medicamento->precio->utilidad/100,1,".",'')}}0</td> --}}
-                                        <td>{{$medicamento->total}}</td>
-                                        <td>{{$medicamento->lab}}</td>
-                                        <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
-                                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars"></i></a></td>
-                                        @include('admin.inicio.imgmodal')
-                                    </tr>
-                                @endforeach
+                <tr>
+                    <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->present))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->concent))}}</td>
+                    <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
+                    {{-- <td>S./{{number_format($medicamento->precio->p_costo*$medicamento->precio->utilidad/100,1,".",'')}}0</td> --}}
+                    <td>{{$medicamento->total}}</td>
+                    <td>{{$medicamento->lab}}</td>
+                    <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars" data-feather="image"></i></a></td>
+                    @include('admin.inicio.imgmodal')
+                </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
 @endsection
+
 @section('javascript')
     <script src="{{ asset('js/inicio/search.js') }}"></script>
     <script src="{{ asset('js/inicio/reniec_dni.js') }}"></script>
@@ -186,5 +184,5 @@
               }
           }
       });
-      </script>
+    </script>
 @endsection

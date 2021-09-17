@@ -51,6 +51,10 @@ h2 {
   font-weight: 400;
 }
 
+main {
+  grid-column: 1 / -1;
+}
+
 .header {
   height: 68px;
   grid-column: 2 / -1;
@@ -115,6 +119,7 @@ h2 {
 .nav__menu {
   padding-left: 15px;
   font-size: .95rem;
+  overflow: hidden;
 }
 
 .nav__list-title {
@@ -292,12 +297,15 @@ h2 {
   width: 400px;
 }
 
+
+
 .dataTables_filter input{
-    height: 35px;
-    border-radius: 50px;
-    width: 100%;
-    border: 1px solid #000;
-    padding-left: 45px;
+  width: 50% !important;
+  min-width: 250px !important;
+  height: 35px !important;
+  border-radius: 50px !important;
+  border: 1px solid #000 !important;
+  padding-left: 45px !important;
 }
 
 .main__datatable-input input {
@@ -306,6 +314,10 @@ h2 {
   width: 100%;
   border: 1px solid #000;
   padding-left: 45px;
+}
+
+.row {
+  margin-bottom: 15px;
 }
 
 .main__datatable-input i {
@@ -333,6 +345,7 @@ h2 {
   background: #00826F;
   color: #fff;
 }
+
 
 .main__table {
   width: 95%;
@@ -371,3 +384,5 @@ h2 {
     grid-column: 1 / -1;
   }
 }
+
+

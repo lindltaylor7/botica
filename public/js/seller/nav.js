@@ -1,23 +1,36 @@
 const d = document;
-const $nav = d.getElementById("nav")
-const $body = d.body;
+const $nav = d.getElementById("nav");
+const $header = d.getElementById("header");
+const $navMenu = d.querySelectorAll(".nav__span");
+const $link = d.querySelectorAll(".nav__link");
+const $logo = d.querySelector(".span-logo");
 
-d.addEventListener("DOMContentLoaded", e => {
-  if (localStorage.getItem("nav")) {
-    $nav.classList.add("nav-active")
-  }
-})
+if (localStorage.getItem("nav")) {
+  $nav.classList.replace("col-lg-3", "col-lg-1");
+  $header.classList.replace("col-lg-9", "col-lg-11");
+  $logo.classList.replace("d-lg-block", "d-lg-none");
+  $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))
+  $navMenu.forEach(el => el.classList.replace("d-lg-block", "d-lg-none"))
+}
 
 d.addEventListener("click", e => {
-  if (e.target.matches("#btnNav, #btnNav *")) {
-    let storage;
-    localStorage.getItem("nav") ? localStorage.removeItem("nav") : storage = localStorage.setItem("nav","active")
-    $nav.style.setProperty("transition", "margin-left .5s ease")
-    $nav.classList.toggle("nav-active")
-  } else {
-
+  if (e.target.matches(".panel-btn") || e.target.matches(".panel-btn *")) {
+    d.querySelector(".panel-btn").classList.toggle("is-active"); 
+    if (d.querySelector(".panel-btn").matches(".is-active")) {
+      let storage;
+      localStorage.getItem("nav") ? localStorage.removeItem("nav") : storage = localStorage.setItem("nav","active")
+      $nav.classList.replace("col-lg-3", "col-lg-1");
+      $header.classList.replace("col-lg-9", "col-lg-11");
+      $logo.classList.replace("d-lg-block", "d-lg-none");
+      $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))
+      $navMenu.forEach(el => el.classList.replace("d-lg-block", "d-lg-none"))
+    } else {
+   
+      $nav.classList.replace("col-lg-1", "col-lg-3");
+      $header.classList.replace("col-lg-11", "col-lg-9");
+      $logo.classList.replace("d-lg-none", "d-lg-block")
+      $link.forEach(el => el.classList.replace("justify-content-lg-center", "justify-content-lg-start"))
+      $navMenu.forEach(el => el.classList.replace("d-lg-none", "d-lg-block"))
+    }
   }
-
-
-
 })

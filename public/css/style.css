@@ -1,0 +1,51 @@
+:root {
+  --bg-primary: #ffc107;
+}
+
+body {
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  background: var(--bg-primary);
+  transition: all .5s ease;
+}
+
+.nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.nav::-webkit-scrollbar-thumb {
+  width: 5px;
+  border-radius: 50px;
+  background: rgba(46, 46, 46, 0.397);
+}
+
+.header {
+  height: 70px;
+}
+
+.nav__list:hover i {
+  background: rgba(224, 224, 224, 0.274);
+}
+
+.hamburger-inner {
+  transform: scale(0.6) rotate(180deg);
+  background: var(--bg-primary) !important;
+}
+
+.hamburger-inner:after {
+  background: var(--bg-primary) !important;
+}
+
+.hamburger-inner:before {
+  background: var(--bg-primary) !important;
+}
