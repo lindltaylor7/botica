@@ -6,13 +6,15 @@
       </div>
     </div>
 
-    <span class="ms-3 ms-lg-2 fw-bolder fs-5">Dashboard</span>
+    <span class="ms-3 ms-lg-2 fw-bolder" style="font-size:30px;">Dashboard</span>
   </div>
 
   <span class="header__admin">
     <img src="{{asset('img/avatars/avatar-2.jpg')}}" class="header__admin-img" alt="Carrillo">
-    <span>{{Auth::user()->name}}</span><br>
-    <small>Rol de Usuario</small>
+      <div class="header__admin-text">
+        <span>{{Auth::user()->name}}</span>
+        <small>Rol de Usuario</small>
+      </div>
     <i class="fas fa-chevron-down"></i>
   </span>
-</header> 
+</header>

@@ -6,14 +6,13 @@
 
 
   <div class="">
-    <h1><b>Action</b> Dashboard</h1>
     <div class="main__action">
       <a href="#" class="main__action-item">
         <div class="main__action-text">
           <h2>Stock</h2>
           <span>Agregar Stock</span>
         </div>
-        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+        <span class="main__action-icon"><i class="fas fa-plus"></i></span>
       </a>
       <a href="#" class="main__action-item">
         <div class="main__action-text">
@@ -40,45 +39,22 @@
   </div>
 
   <div class="main-analytics">
-    <h2><b>Analytics</b> Dashboard</h2>
-    {{-- <div class="main__analytics">
-      <div class="main__analytics-items">
-        <div class="main__analytics-text">
-          <h2>Ingreso</h2>
-          <span>S/. 1500.00</span>
+        <div class="main__grafic bg-white">
+            <div class="main__grafic-title">
+                <div class="separator"></div>
+                <div class="main__grafic-text">
+                    <span class="d-block fs-4 fw-bolder">Ventas por mes</span>
+                    <span>Lorem ipsum dolor sit amet, consectetur</span>
+                </div>
+            </div>
+            <div id="chart" style="position: relative;">
+            </div>
         </div>
-        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
-      </div>
-      <div class="main__analytics-items">
-        <div class="main__analytics-text">
-          <h2>Ingreso</h2>
-          <span>S/. 1500.00</span>
-        </div>
-        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
-      </div>
-      <div class="main__analytics-items">
-        <div class="main__analytics-text">
-          <h2>Ingreso</h2>
-          <span>S/. 1500.00</span>
-        </div>
-        <span class="main__analytics-icon"><i class="fab fa-stack-overflow"></i></span>
-      </div>
-    </div> --}}
-
-    <div class="main__grafic bg-white">
-      <div>
-        <span class="d-block fs-4 fw-bolder">Customer Map</span>
-        <span>Lorem ipsum dolor sit amet, consectetur</span>
-      </div>
-
-      <div id="chart" style="position: relative;">
-      </div>
-    </div>
   </div>
 
   <div class="main__datatable">
     <h2><b>Tabla de </b> Medicamentos</h2>
-  
+
     <div class="main__datatable-content">
       <div class="main__table">
         <table id="myTable" class="main__datatable-table">
@@ -137,7 +113,7 @@
     <script>
       var options = {
         chart: {
-          height: 380,
+          height: 470,
           type: "area"
         },
         dataLabels: {
@@ -167,6 +143,6 @@
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
 
-      
+
     </script>
 @endsection
