@@ -13,31 +13,43 @@
 
     <title>@yield('title')</title>
     
+    
+    
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> --}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- FORM wizzard --}}
+    <!-- Font Icon -->
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="{{asset('fuentes/fonts/material-design-iconic-font/css/material-design-iconic-font.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/css/datepicker.min.css')}}">
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{asset('vendor/css/styleForm.css')}}">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> --}}
     
+    {{-- DATATABLES --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js">
+
+    {{-- BTN Hamburguers --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css" integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    {{-- <link rel="stylesheet" href="{{asset('css/estilos.css')}}"> --}}
+    {{-- CSS template --}}
     <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- CSS only -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+    
 </head>
 
 <body>
     <div class="container-fluid" style="height: 100vh;">
         <div class="row flex-row-reverse justify-content-between h-100 flex-wrap">
-            <div class="col-9 col-sm-10 col-md-11 col-lg-9 px-0" id="header">
+            <div class="col-10 col-sm-10 col-md-11 col-lg-9 px-0" id="header">
                 @include('layout.header')
               
                 <main class="main">

@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#clientModal" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle" data-feather="plus"></i>Venta</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#clientModal" class="d-inline-block h-75 btn btn-primary btn-lg fs-6 m-1"><i class="align-middle" data-feather="plus"></i>Venta</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover my-0">

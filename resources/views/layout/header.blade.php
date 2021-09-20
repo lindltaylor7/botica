@@ -6,10 +6,10 @@
       </div>
     </div>
 
-    <span class="ms-3 ms-lg-2 fw-bolder" style="font-size:30px;">Dashboard</span>
+    <span class="ms-3 ms-lg-2 fw-bolder text-black" style="font-size:30px;">Dashboard</span>
   </div>
 
-  <span class="header__admin">
+  <span class="header__admin" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     <img src="{{asset('img/avatars/avatar-2.jpg')}}" class="header__admin-img" alt="Carrillo">
       <div class="header__admin-text">
         <span>{{Auth::user()->name}}</span>
@@ -17,4 +17,7 @@
       </div>
     <i class="fas fa-chevron-down"></i>
   </span>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Salir</a></li>
+  </ul>
 </header>

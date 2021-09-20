@@ -7,10 +7,10 @@
     <div class="container-fluid p-0">
 
         <h1 class="h3 mb-3">Stock</h1>
-            <div class="d-flex justify-content-between">
-                <input type="text" class="d-inline form-control mb-3 w-75" id="search_stock" placeholder="Buscar">
-                <a href="{{route('stock.create')}}" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle" data-feather="plus"></i>Agregar Stock</a>
-                <a href="{{route('stock.export')}}" class="d-inline h-75 btn btn-success btn-lg">Excel</a>
+            <div class="d-flex align-items-center flex-wrap">
+                <input type="text" class="form-control w-75 h-100" id="search_stock" placeholder="Buscar">
+                <a href="{{route('stock.create')}}" class="btn btn-primary btn-md fs-6 mx-2 my-2"><i class="align-middle" data-feather="plus"></i>Agregar Stock</a>
+                <a href="{{route('stock.export')}}" class="btn btn-success btn-md fs-6">Excel</a>
             </div>
 
             <div class="row">
