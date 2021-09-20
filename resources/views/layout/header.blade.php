@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <span class="ms-3 ms-lg-2 fw-bolder" style="font-size:30px;">Dashboard</span>
+    <span class="ms-3 ms-lg-2 fw-bolder" style="font-size:30px;">@yield('title')</span>
   </div>
 
   <span class="header__admin">
