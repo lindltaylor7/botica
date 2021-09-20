@@ -5,14 +5,12 @@
 @section('content')
 <main class="content">
     <div class="container-fluid p-0">
-            <div class="d-flex flex-row align-items-center">
-                <input type="text" class="d-inline form-control w-75" id="search_stock" autocomplete="off" placeholder="Buscar">
-                    <div class="ms-1">
-                        <a href="{{route('stock.create')}}" class="d-inline h-75 btn btn-warning text-white btn-md"><i class="fas fa-plus"></i></a>
-                        <a href="{{route('stock.export')}}" class="d-inline h-75 btn btn-success text-white btn-md"><i class="fas fa-file-excel"></i></a>
-                    </div>
-               </div>
-
+        <h1 class="h3 mb-3">Stock</h1>
+            <div class="d-flex align-items-center flex-wrap">
+                <input type="text" class="form-control w-75 h-100" id="search_stock" placeholder="Buscar">
+                <a href="{{route('stock.create')}}" class="btn btn-primary btn-md fs-6 mx-2 my-2"><i class="align-middle" data-feather="plus"></i>Agregar Stock</a>
+                <a href="{{route('stock.export')}}" class="btn btn-success btn-md fs-6">Excel</a>
+            </div>
             <div class="row">
                 @foreach($stocks as $stock)
                     <div class="col-xl-6 col-sm-6 col-md-6">

@@ -12,28 +12,28 @@
           <h2>Stock</h2>
           <span>Agregar Stock</span>
         </div>
-        <span class="main__action-icon"><i class="fas fa-plus"></i></span>
+        <span class="main__action-icon"><i class="fas fa-layer-group"></i></span>
       </a>
       <a href="#" class="main__action-item">
         <div class="main__action-text">
           <h2>Añadir</h2>
           <span>Añadir medicamento</span>
         </div>
-        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+        <span class="main__action-icon"> <i class="fas fa-capsules"></i></span>
       </a>
       <a href="#" class="main__action-item">
         <div class="main__action-text">
           <h2>Generar</h2>
           <span>Nuevo reporte</span>
         </div>
-        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+        <span class="main__action-icon"><i class="fas fa-file-alt"></i></span>
       </a>
       <a href="#" class="main__action-item">
         <div class="main__action-text">
           <h2>Nuevo</h2>
           <span>Nueva venta</span>
         </div>
-        <span class="main__action-icon"><i class="fab fa-stack-overflow"></i></span>
+        <span class="main__action-icon"><i class="fas fa-shopping-basket"></i></span>
       </a>
     </div>
   </div>
@@ -82,7 +82,7 @@
                     <td>{{$medicamento->total}}</td>
                     <td>{{ucfirst(strtolower($medicamento->lab))}}</td>
                     <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
-                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars"></i></a></td>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
                     @include('admin.inicio.imgmodal')
                 </tr>
             @endforeach
