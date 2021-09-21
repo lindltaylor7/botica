@@ -34,3 +34,7 @@ Route::get('seller', function (){
 });
 
 Route::get('/stock',[StockController::class, 'index'])->name('stock.index');
+Route::get('/ventas/ventas', function()
+{
+    return view('admin.ventas.ventas');
+})->name('prueba');
