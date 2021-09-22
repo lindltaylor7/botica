@@ -10,11 +10,8 @@
             <div>
                 <div class="">
                     <div class="card">
-                        <div class="card-header">
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('medicamentos.create') }}" class="d-inline h-75 btn btn-primary btn-lg"><i class="align-middle"
-                                    data-feather="plus"></i>Agregar Artículos</a>
+                        <div class="m-3">
+                            <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
                         </div>
                         <div class="table table-responsive">
                             <table id="tablearticles" class="">
@@ -43,9 +40,9 @@
                                             <td>{{ $medicamento->nro_caja }}</td>
                                             <td><span class="badge bg-primary">{{ $medicamento->anaquel }}</span></td>
                                             <td class="text-center">
-                                             <button class="btn-success" id="{{ $medicamento->id }}" data-bs-toggle="modal" data-bs-target="#priceModal"><i  class="fa fa-dollar-sign mr-25"></i></button>
-                                             <button class="btn-info"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit mr-25"></i></button>
-                                             <button class="btn-danger" id="{{ $medicamento->id }}"><i class="fas fa-trash mr-25"></i></button>
+                                             <button class="" id="{{ $medicamento->id }}" data-bs-toggle="modal" data-bs-target="#priceModal"><i  class="fa fa-dollar-sign mr-25"></i></button>
+                                             <button class=""  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit mr-25"></i></button>
+                                             <button class="" id="{{ $medicamento->id }}"><i class="fas fa-trash mr-25"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

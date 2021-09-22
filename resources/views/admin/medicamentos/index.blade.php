@@ -37,26 +37,18 @@
               </thead>
               
               <tbody>
-                @foreach ($medicamentos as $medicamento)
-                <tr id="row{{ $medicamento->id }}">
-                    <td>{{ $medicamento->n_generico }}</td>
-                    <td>{{ $medicamento->n_comercial }}</td>
-                    <td>{{ $medicamento->concent }}</td>
-                    <td>{{ $medicamento->present }}</td>
-                    <td>{{ $medicamento->lab }}</td>
-                    <td>{{ $medicamento->nro_caja }}</td>
-                    <td><span class="badge bg-primary">{{ $medicamento->anaquel }}</span></td>
-                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-bars"></i></a></td>
-                    <td>
-                        <a href="#" class="btn-price" id="{{ $medicamento->id }}"
-                            data-bs-toggle="modal" data-bs-target="#priceModal"><i
-                                class="align-middle" data-feather="dollar-sign"></i></a>
-                        <a href="#" class="btn-editar" id="{{ $medicamento->id }}"
-                            data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                class="align-middle" data-feather="edit-2"></i></a>
-                        <!--<a href="#" class="btn-eliminar" id="{{ $medicamento->id }}"><i
-                                class="align-middle" data-feather="trash"></i></a>-->
-                    </td>
+                @foreach($medicamentos as $medicamento)
+                <tr>
+                    <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->present))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->concent))}}</td>
+                    <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
+                    <td>{{$medicamento->total}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->lab))}}</td>
+                    <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
+                    @include('admin.inicio.imgmodal')
                 </tr>
                 @endforeach
               </tbody>
