@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['cantidad', 'f_vencimiento', 'f_ingreso', 'lote', 'costo','medicamento_id','status'];
-
-    public function medicamento(){
-        return $this->belongsTo('App\Models\Medicamento');
+    protected $fillable=['quantity','shelf','stockable_id','stockable_type'];
+    //Relación de uno a muchos Stock-Batchs
+    public function batches() {
+        return $this->hasMany("App\Models\Batch");
     }
 
+    //Relacion polimorfica de uno a muchos Sotck-Medicine-Articles
+    public function stockable()
+    {
+        return $this->morphTo();
+    }
 }

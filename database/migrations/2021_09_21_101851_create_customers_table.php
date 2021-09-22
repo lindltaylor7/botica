@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBoletasTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBoletasTable extends Migration
      */
     public function up()
     {
-        Schema::create('boletas', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo',10);
-            $table->double('igv',5,2);
-            $table->unsignedBigInteger('venta_id')->nullable();
-            $table->foreign('venta_id')->references('id')->on('ventas')->onDelete('set null')->onUpdate('cascade');
+            $table->string('name',100);
+            $table->string('dni',8);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBoletasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boletas');
+        Schema::dropIfExists('customers');
     }
 }
