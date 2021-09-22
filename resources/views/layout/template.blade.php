@@ -13,19 +13,19 @@
 
     <title>@yield('title')</title>
     
-    
-    
-    
+    {{-- SELECT PICKER --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> --}}
 
     {{-- FORM wizzard --}}
-    <!-- Font Icon -->
-    <!-- MATERIAL DESIGN ICONIC FONT -->
     <link rel="stylesheet" href="{{asset('fuentes/fonts/material-design-iconic-font/css/material-design-iconic-font.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/css/datepicker.min.css')}}">
-    <!-- Main css -->
     <link rel="stylesheet" href="{{asset('vendor/css/styleForm.css')}}">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -41,9 +41,10 @@
     {{-- CSS template --}}
     <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/select2.css')}}">
+    
     <!-- CSS only -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
 </head>
 
 <body>

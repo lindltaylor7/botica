@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Customer extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'dni'];
-    public function ventas(){
-        return $this->hasMany('App\Models\Venta');
+    
+    //Relación de uno a muchos Customer-Sale
+    public function sales() {
+        return $this->hasMany("App\Models\Sale");
     }
 }

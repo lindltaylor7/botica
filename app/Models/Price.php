@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Detail extends Model
+class Price extends Model
 {
     use HasFactory;
-    protected $fillable=['quantity','unit_type_id','detailable_id','detailable_type','sale_id','partial_igv','partial_utility','partial_sale'];
+    
+    protected $fillable = ['cost_price', 'utility', 'sale_price','priceable_id','priceable_type','unit_tye_id'];
+
     //Relacion inversa de uno a muchos Unit_type-Price
     public function unit_type() {
         return $this->belongsTo("App\Models\Unit_type");
     }
-    //Relacion inversa de uno a muchos Sale-Detail
-    public function sale() {
-        return $this->belongsTo("App\Models\Sale");
-    }
     //Relacion polimorfica de uno a muchos Price-Medicine-Articles
-    public function detailable()
+    public function priceable()
     {
         return $this->morphTo();
     }
