@@ -78,30 +78,7 @@ img {
   right: 42px;
   top: 5px;
   z-index: 9; }
-  .steps ul {
-    position: relative; }
-    .steps ul:before {
-      content: "1";
-      font-size: 40px;
-      color: #ccc;
-      font-family: "Poppins-Medium"; }
-    .steps ul:after {
-      content: "/ 3";
-      font-size: 15px;
-      color: #ccc;
-      font-family: "Poppins-Medium";
-      position: absolute;
-      left: 16px;
-      top: 13px;
-      width: 22px; }
-    .steps ul.step-2:before {
-      content: "2"; }
-    .steps ul.step-2:after {
-      left: 31px; }
-    .steps ul.step-3:before {
-      content: "3"; }
-    .steps ul.step-3:after {
-      left: 31px; }
+
 
 h3 {
   font-family: "Poppins-SemiBold";
