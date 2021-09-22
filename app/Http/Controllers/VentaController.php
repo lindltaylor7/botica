@@ -92,8 +92,7 @@ class VentaController extends Controller
     {
         $venta = Venta::where('id',$id)->first();
         $details = Detail::where('venta_id', $id)->get();
-        $cliente = Cliente::where('id',$venta->cliente_id)->first();
-        return view('admin.ventas.venta',compact('id','details','cliente','venta'));
+        return view('admin.ventas.venta',compact('id','details','venta'));
     }
 
     /**

@@ -3,27 +3,52 @@
 @section('title', 'Cesta de Productos')
 
 @section('content')
+
 <main class="content">
     <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">Ventas</h1>
-            @if ($venta->utilidad == null)
-            <div id="container-search" class="d-flex flex-column justify-content-between">
-                <input type="text" class="d-inline form-control w-100" autocomplete="off" id="search" placeholder="Buscar producto">
-                <table class="table table-hover table-sm">
-                    <tbody class="border border-primary" id="medicamentos_select">
-                    </tbody>
-                </table>
+        <h1 class="h3 mb-3">Ventas</h1>
+
+        <div id="client-search" class="d-flex flex-column justify-content-between">
+            <p id="info-medic"></p>
+            <input type="hidden" name="cliente_id" id="cliente_id">
+
+            <div class="form-group">
+                <label for="dni">Cliente</label>
+                <div class="">
+                    <input type="text" name="dni" class="d-inline form-control w-25" id="search_dni" placeholder="Ingrese el DNI del cliente">
+                </div>
+                <input type="text" name="nombre_cliente" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-50" readonly require>
             </div>
-            @endif
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" name="check" type="checkbox" id="cajaCheck">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Sin DNI
+                </label>
+            </div>
+
+            <div class="form-group mb-5">
+                <label for="date">Fecha Actual</label>
+                <input type="date" class="form-control" name="fecha" id="fecha" value="@php echo date('Y-m-d'); @endphp" readonly>
+            </div>
+        </div>
+
+        <div id="container-search" class="d-flex flex-column justify-content-between">
+            <label for="search" class="mb-1">Buscar Producto</label>
+            <input type="text" class="d-inline form-control w-100" autocomplete="off" id="search" placeholder="Buscar producto">
+            <table class="table table-hover table-sm">
+                <tbody class="border border-primary" id="medicamentos_select">
+                </tbody>
+            </table>
+        </div>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Cesta de Productos {{$id}}</h5>
+                        <h5 class="card-title mb-0">Cesta de Productos</h5>
                     </div>
                     <div class="card-body">
-                        <p><strong>Cliente:</strong>{{$cliente->name}}</p>
                         <table class="table table-hover my-0">
                             <thead>
                                 <tr>
@@ -33,9 +58,7 @@
                                     <th class="d-none d-xl-table-cell">Cantidad</th>
                                     <th class="d-none d-xl-table-cell">Precio</th>
                                     <th class="d-none d-xl-table-cell">Subtotal</th>
-                                    @if ($venta->utilidad == null)
                                     <th class="d-none d-md-table-cell">Operaciones</th>
-                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,53 +99,23 @@
                                         </form>
                                     </td>
                                      @endif
-
-
                                 </tr>
 
                                 @endforeach
 
                             </tbody>
                         </table>
-
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-6">
-                                <form action="{{route('ventas.update',$id)}}" method="post" class="form-inline">
-                                    @csrf
-                                    <label for="total" class="mx-sm-3">TOTAL</label>
-                                    <div class="input-group mx-sm-3 mb-2">
-                                        <span class="input-group-text" id="basic-addon1">S./</span>
-
-                                        <input type="number" name="total" class="form-control" id="total" value="@php echo number_format($sum,2,'.',"") @endphp" readonly>
-                                    </div>
-                                    @if ($venta->utilidad == null)
-                                        <button type="submit" class="btn btn-primary mx-3">Finalizar Venta</button>
-                                    @endif
-
-                                    <a target="_blank" href="{{route('generarpdf.reporte',$id)}}" class="btn btn-success">Ver Boleta</a>
-                                </form>
-
-                            </div>
-
-
-
-
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-@include('admin.ventas.modal')
-@include('admin.ventas.editmodal')
+
 @endsection
 
 @section('javascript')
+    <script src="{{ asset('js/ventas/reniec_dni.js') }}"></script>
     <script src="{{ asset('js/ventas/detail_modal.js') }}"></script>
     <script src="{{ asset('js/ventas/selectpicker.js') }}"></script>
     <script src="{{ asset('js/ventas/edit_modal.js') }}"></script>
