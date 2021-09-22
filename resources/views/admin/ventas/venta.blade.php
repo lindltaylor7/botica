@@ -110,6 +110,8 @@
             </div>
         </div>
     </div>
+    @include('admin.ventas.modal')
+    @include('admin.ventas.editmodal')
 </main>
 
 @endsection
