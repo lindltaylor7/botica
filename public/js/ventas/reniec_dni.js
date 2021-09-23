@@ -56,6 +56,7 @@ $(document).ready(function(){
 
     $("#cajaCheck").on( 'change', function() {
         if( $(this).is(':checked') ) {
+            $('#search_dni').val("");
             $('#nombre_cliente').val("PACIENTE EXTERNO");
         } else {
             $('#nombre_cliente').attr("readonly", true)

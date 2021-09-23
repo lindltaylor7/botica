@@ -4,7 +4,7 @@
         <i class="fab fa-buysellads display-1 my-3 me--lg-2 my-lg-0 text-white"></i>
         <span class="span-logo fs-1 fw-bolder text-white d-none d-md-none d-lg-block">Excel</span>
       </div>
-  
+
       <ul class="nav__menu list-group w-100">
         <li class="nav__list w-100 my-2">
           <a href="{{ route('inicio.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav__list w-100 my-2">
-          <a href="{{ route('articulos.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
+          <a href="{{ route('articles.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
             <i class="fas fa-archive fs-2 d-block text-white p-2 p-lg-3"></i>
             <span class="nav__span fs-6 d-none d-sm-none d-md-none d-lg-block ps-lg-2 text-white">Articulos</span>
           </a>

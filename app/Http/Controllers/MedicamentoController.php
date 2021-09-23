@@ -175,8 +175,4 @@ class MedicamentoController extends Controller
         return redirect(route('medicamentos.index'));
     }
 
-    public function articleIndex(){
-        $medicamentos = Medicamento::where('type',1)->paginate(10);
-        return view('admin.articles.index', compact('medicamentos'));
-    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medicamento;
+
 use App\Models\Medicine;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -102,7 +102,7 @@ class InicioController extends Controller
 
     public function all(Request $request)
     {
-        $medicamentos = Medicamento::select('medicamentos.*','precios.p_unitario','precios.utilidad',DB::raw('sum(stocks.cantidad) as total'))
+        $medicamentos = Medicine::select('medicamentos.*','precios.p_unitario','precios.utilidad',DB::raw('sum(stocks.cantidad) as total'))
                                     ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
                                     ->leftJoin('stocks','stocks.medicamento_id','=','medicamentos.id')
                                     ->groupBy('stocks.medicamento_id')

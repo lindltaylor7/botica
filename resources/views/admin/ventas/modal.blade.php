@@ -11,12 +11,14 @@
                     <p id="info_medic"></p>
                     <input type="hidden" name="medicamento_id" id="medicamento_id">
                     <input type="hidden" name="venta_id" id="venta_id" value="{{$id}}">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tipo" id="cajaCheck">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Venta por caja
-                        </label>
+                    <div class="form-group mt-3 mb-2">
+                        <select class="form-select" name="tipo" id="cajaCheck">
+                            <option value="1" selected>Venta Unitaria</option>
+                            <option value="2">Venta por Blister</option>
+                            <option value="3">Venta por Caja</option>
+                          </select>
                     </div>
+                    
                     <div class="form-group">
                         <label for="">Cantidad</label>
                         <input type="number" name="cantidad" id="cantidad" class="form-control">
@@ -24,8 +26,15 @@
                             La cantidad solicitada excede al stock
                         </div>
                     </div>
+                    <div class="form-group" id="cant_blister">
+                        <label for="">Cantidad por Blister</label>
+                        <input type="number" id="nro_blister" class="form-control" readonly>
+                        <div class="invalid-feedback" id="ad-danger">
+                            La cantidad solicitada excede al stock
+                        </div>
+                    </div>
                     <div class="form-group" id="cant_caja">
-                        <label for="">Cantidad por caja</label>
+                        <label for="">Cantidad por Caja</label>
                         <input type="number" id="nro_caja" class="form-control" readonly>
                         <div class="invalid-feedback" id="ad-danger">
                             La cantidad solicitada excede al stock

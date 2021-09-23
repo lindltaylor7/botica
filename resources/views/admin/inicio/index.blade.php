@@ -28,7 +28,7 @@
         </div>
         <span class="main__action-icon"><i class="fas fa-file-alt"></i></span>
       </a>
-      <a href="#" class="main__action-item">
+      <a href="{{ route('ventas.create') }}" class="main__action-item">
         <div class="main__action-text">
           <h2>Nuevo</h2>
           <span>Nueva venta</span>

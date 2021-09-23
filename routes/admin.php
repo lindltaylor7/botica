@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\StockController;
-use App\Http\Controllers\VentaController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,31 +28,32 @@ Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->n
 Route::post('medicamentos/precios', [MedicineController::class, 'precios'])->name('medicamentos.precios');
 Route::post('medicamentos/updprecios', [MedicineController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
 
-Route::get('articulos',[MedicineController::class, 'articleIndex'])->name('articulos.index');
 
+Route::get('articulos',[ArticleController::class, 'index'])->name('articles.index');
+Route::get('articulos/create',[ArticleController::class, 'create'])->name('articles.create');
+Route::post('articulos/store',[ArticleController::class, 'store'])->name('articles.store');
 
-
-Route::post('clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
+Route::post('clientes/store', [CustomerController::class, 'store'])->name('clientes.store');
 
 Route::post('detail/store',[DetailController::class,'store'])->name('detail.store');
 Route::post('detail/update',[DetailController::class,'update'])->name('detail.update');
 Route::delete('detail/destroy/{id}', [DetailController::class, 'destroy'])->name('detail.destroy');
 Route::post('detail/infoedit', [DetailController::class, 'infoedit']);
 
-Route::get('ventas', [VentaController::class, 'index'])->name('ventas.index');
-Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
-Route::get('ventas/invoice/{id}', [VentaController::class, 'invoice'])->name('ventas.invoice');
-Route::get('ventas/{id}', [VentaController::class, 'show'])->name('ventas.show');
-Route::post('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
-Route::get('ventas/reporte/{id}', [VentaController::class, 'vista'])->name('vistapdf.vista');
-Route::get('ventas/reporte/pdf/{id}', [VentaController::class, 'generarPdf'])->name('generarpdf.reporte');
+Route::get('ventas', [SaleController::class, 'index'])->name('ventas.index');
+Route::post('ventas/create', [SaleController::class, 'create'])->name('ventas.create');
+Route::get('ventas/invoice/{id}', [SaleController::class, 'invoice'])->name('ventas.invoice');
+Route::get('ventas/{id}', [SaleController::class, 'show'])->name('ventas.show');
+Route::post('ventas/update/{id}', [SaleController::class, 'update'])->name('ventas.update');
+Route::get('ventas/reporte/{id}', [SaleController::class, 'vista'])->name('vistapdf.vista');
+Route::get('ventas/reporte/pdf/{id}', [SaleController::class, 'generarPdf'])->name('generarpdf.reporte');
 
-Route::get('ventas/ticket/{id}', [VentaController::class, 'ticket'])->name('vistaticket.ventas');
-Route::get('ventas/ticket/pdf/{id}', [VentaController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
+Route::get('ventas/ticket/{id}', [SaleController::class, 'ticket'])->name('vistaticket.ventas');
+Route::get('ventas/ticket/pdf/{id}', [SaleController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
 
 
 
-Route::get('ventas/anular/{id}', [VentaController::class, 'anular'])->name('ventas.anular');
+Route::get('ventas/anular/{id}', [SaleController::class, 'anular'])->name('ventas.anular');
 
 
 Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Batch;
 use App\Models\Medicine;
 use App\Models\Price;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use function GuzzleHttp\Promise\all;
 
 class MedicineController extends Controller
 {
@@ -18,7 +21,9 @@ class MedicineController extends Controller
      */
     public function index()
     {
+
         $medicamentos = Medicine::all();
+
         return view('admin.medicamentos.index', compact('medicamentos'));
     }
 
@@ -40,7 +45,6 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate([
             'generic_name' => 'required',
             'tradename'   => 'required',
@@ -57,6 +61,7 @@ class MedicineController extends Controller
         if ($request->file('image')) {
             $url = Storage::put('medicines', $request->file('image'));
             /*  return $url; */
+
             $request->merge([
                 'img' => $url
             ]);
@@ -107,7 +112,8 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $upd_med = Medicine::where('id', $request->get('id_med'))->update(request()->except(['_token', 'id_med']));
+        return redirect()->back();
     }
 
     /**
@@ -119,5 +125,54 @@ class MedicineController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function all(Request $request)
+    {
+        $medicamentos = Medicine::where('generic_name', 'like', '%' . $request->get('search') . '%')
+            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
+            ->get();
+        return json_encode($medicamentos);
+    }
+
+    public function infoedit(Request $request)
+    {
+        $medicamentos = Medicine::where('id', $request->get('id'))->get();
+        return json_encode($medicamentos);
+    }
+
+    public function delmedic(Request $request)
+    {
+        $del_med = Medicine::where('id', $request->get('id'))->delete();
+
+        return $del_med;
+    }
+    public function medPrice(Request $request)
+    {
+        $medicamentos = Medicine::select('medicines.*', 'prices.sale_price', 'stocks.quantity', DB::raw('sum(stocks.quantity) as sumatoria'))
+            ->leftJoin('prices', 'prices.priceable_id', '=', 'medicines.id')
+            ->leftJoin('stocks', 'stocks.stockable_id', '=', 'medicines.id')
+            ->where('generic_name', 'like', '%' . $request->get('search') . '%')
+            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
+            ->groupBy('stocks.stockable_id')
+            ->get();
+        return json_encode($medicamentos);
+    }
+    public function precios(Request $request){
+        $precios = Price::where('priceable_id',$request->get('id'))->first();
+
+        return json_encode($precios);
+    }
+
+    public function preciosUpd(Request $request){
+
+        $precio = Price::where('id',$request->get('id_precio'))->update(request()->except(['_token', 'id_precio']));
+
+        return redirect(route('medicamentos.index'));
+    }
+
+    public function articleIndex(){
+        $medicamentos = Medicine::paginate(10);
+        return view('admin.articles.index', compact('medicamentos'));
     }
 }

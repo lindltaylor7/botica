@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -34,7 +35,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = Customer::create($request->all());
+        return $cliente->id;
     }
 
     /**
