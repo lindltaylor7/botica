@@ -10,17 +10,15 @@
             <!-- SECTION 1 -->
             <h4></h4>
             <section>
-                <h3>Datos generales</h3>
+                <h3>Datos generales De Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Tipo <span class="text-danger">*</span></label>
+                        <label class="form-label" for="inputUsername">Nombre genérico <span class="text-danger">*</span></label>
                         <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <select class="form-control" name="type" id="type">
-                                <option value="0">Medicamento</option>
-                                <option value="1">Artículo</option>
-                            </select>
-
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-edit"></i>
+                                <input type="text" name="generic_name" class="form-control" id="inputUsername" placeholder="Nombre genérico">
+                            </div>
                             @error('n_generico')
                                 <p class="alert alert-danger">El nombre genérico es obligatorio</p>
                             @enderror
@@ -30,7 +28,7 @@
                         <label class="form-label" for="inputUsername">Nombre Comercial</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="n_comercial" class="form-control" id="inputUsername" placeholder="Nombre Comercial">
+                            <input type="text" name="tradename" class="form-control" id="inputUsername" placeholder="Nombre Comercial">
                         </div>
                     </div>
                 </div>
@@ -39,14 +37,14 @@
                         <label class="form-label" for="inputUsername">Concentración</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="concentration" class="form-control" id="inputUsername" placeholder="Concentración">
                         </div>
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Presentación</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="presentation" class="form-control" id="inputUsername" placeholder="Concentración">
                         </div>
                     </div>
                 </div>
@@ -55,21 +53,21 @@
                         <label class="form-label" for="inputUsername">Laboratorio</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="laboratory" class="form-control" id="inputUsername" placeholder="Concentración">
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Cantidad de cajas</label>
+                        <label class="form-label" for="inputUsername">Numero por cajas</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="number_box" class="form-control" id="inputUsername" placeholder="Concentración">
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Número de Lister</label>
+                        <label class="form-label" for="inputUsername">Número por Blister</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="number_blister" class="form-control" id="inputUsername" placeholder="Concentración">
                         </div>
                     </div>
                 </div>
@@ -77,27 +75,51 @@
 
             <h4></h4>
             <section>
-                <h3>Precios</h3>
+                <h3>Precios del Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="p_caja">Precio de Costo<span class="text-danger">*</span></label>
+                        <label class="form-label" for="p_caja">Precio de Costo por caja<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
-                            <input type="number" step="any" name="p_caja" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="p_caja">Utilidad<span class="text-danger">*</span></label>
+                        <label class="form-label" for="p_caja">Utilidad por caja<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">IGV por caja<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">Precio de venta por caja<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">%</span>
+                                <span class="input-group-text" id="basic-addon2">S./</span>
                             </div>
-                            <input type="number" step="any" name="p_caja" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
                             @error('utilidad')
                                 <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
                             @enderror
@@ -106,30 +128,101 @@
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="">Precio de venta</label>
-                        <div class="form-holder input-group">
+                        <label class="form-label" for="p_caja">Precio de Costo por blister<span class="text-danger">*</span></label>
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
-                            <input type="number" step="any" name="p_caja" class="form-control" id="p_caja" placeholder="Precio de venta">
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">Utilidad por blister<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">IGV por blister<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">Precio de venta por blister<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">S./</span>
+                            </div>
+                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
                             @error('utilidad')
                                 <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
                             @enderror
                         </div>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-col">
-                        <label for="">
-                            Tipo
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <div class="form-holder">
-                                <select class="form-control" name="" id="">
-                                    <option value="">Caja</option>
-                                    <option value="">Lister</option>
-                                    <option value="">Unidad</option>
-                                </select>
+                        <label class="form-label" for="p_caja">Precio de Costo por unidad<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">Utilidad por unidad<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">IGV por unidad<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S./</span>
+                            </div>
+                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('p_caja')
+                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="p_caja">Precio de venta por unidad<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">S./</span>
+                            </div>
+                            <input type="number" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            @error('utilidad')
+                                <p class="alert alert-danger">La utilidad es obligatorio</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -145,7 +238,7 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="text" class="form-control">
+                            <input type="text" name="quantity" class="form-control">
                         </div>
                     </div>
                     <div class="form-col">
@@ -154,7 +247,7 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="text" name="" class="form-control">
+                            <input type="text" name="shelf" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -165,7 +258,7 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                            <input type="text" name="code" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
                         </div>
                     </div>
                     <div class="form-col">
@@ -175,7 +268,7 @@
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <div class="form-holder">
-                                <input type="date" name="f_ingreso" class="form-control" id="inputUsername" placeholder="">
+                                <input type="date" name="entry_date" class="form-control" id="inputUsername" placeholder="">
                                 @error('f_ingreso')
                                     <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
                                 @enderror
@@ -189,7 +282,7 @@
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <div class="form-holder">
-                                <input type="date" name="f_vencimiento" class="form-control" id="inputUsername" placeholder="">
+                                <input type="date" name="expiry_date" class="form-control" id="inputUsername" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -205,7 +298,7 @@
                         <div class="mt-2">
                             <label for="foto">
                                 <span class="btn btn-primary" aria-hidden="true">Subir Imagen</span>
-                                <input type="file" name="foto" accept="image/*" id="foto" style="display:none">
+                                <input type="file" name="image" accept="image/*" id="foto" style="display:none">
                             </label>
                         </div>
                         <small>Suba la imagen del medicamento (Opcional)</small>

@@ -18,7 +18,7 @@ class CreateMedicinesTable extends Migration
             $table->string('generic_name',100);
             $table->string('tradename',100);
             $table->string('concentration',100);
-            $table->string('pesentation',100);
+            $table->string('presentation',100);
             $table->string('laboratory',50);
             $table->integer('number_box');
             $table->integer('number_blister');

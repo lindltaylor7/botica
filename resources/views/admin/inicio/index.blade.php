@@ -62,7 +62,6 @@
             <tr>
               <th>Nombre Genérico</th>
               <th>Nombre Comercial</th>
-              <th>Present.</th>
               <th>Concent.</th>
               <th>Precio</th>
               <th>Cant.</th>
@@ -74,14 +73,17 @@
           <tbody>
             @foreach($medicamentos as $medicamento)
                 <tr>
-                    <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->present))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->concent))}}</td>
-                    <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
+                    <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
+                    <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
+                    @foreach ($medicamento->prices as $precio)
+                    <td>{{$precio->sale_price}}</td>
+                    @endforeach
                     <td>{{$medicamento->total}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->lab))}}</td>
-                    <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
+                    <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
+                    @foreach ($medicamento->stocks as $stock)
+                    <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
+                    @endforeach
                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
                     @include('admin.inicio.imgmodal')
                 </tr>

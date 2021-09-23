@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
+use App\Models\Medicine;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +23,12 @@ class InicioController extends Controller
 
         $data = User::where('id',session('LoggedUser'))->first();
 
-        $medicamentos = Medicamento::select('medicamentos.*','precios.p_unitario',DB::raw('sum(stocks.cantidad) as total'))
-                                    ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                                    ->leftJoin('stocks','stocks.medicamento_id','=','medicamentos.id')
-                                    ->where('stocks.cantidad','!=',null)
-                                    ->groupBy('stocks.medicamento_id')
-                                    ->orderBy('medicamentos.n_generico')
+        $medicamentos = Medicine::select('medicines.*','prices.sale_price',DB::raw('sum(stocks.quantity) as total'))
+                                    ->leftJoin('prices','prices.priceable_id','=','medicines.id')
+                                    ->leftJoin('stocks','stocks.stockable_id','=','medicines.id')
+                                    ->where('stocks.quantity','!=',null)
+                                    ->groupBy('stocks.stockable_id')
+                                    ->orderBy('medicines.generic_name')
                                     ->get();
 
         return view('admin.inicio.index', compact('medicamentos','data'));

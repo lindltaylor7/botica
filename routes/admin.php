@@ -3,7 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\InicioController;
-use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\StockController;
@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InicioController::class, 'index'])->middleware('auth')->name('inicio.index');
 Route::post('all', [InicioController::class, 'all'])->name('inicio.all');
 
-Route::get('medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
-Route::get('medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');
-Route::post('medicamentos/all', [MedicamentoController::class, 'all'])->name('medicamentos.all');
-Route::post('medicamentos/infoedit', [MedicamentoController::class, 'infoedit']);
-Route::post('medicamentos/delmedic', [MedicamentoController::class, 'delmedic']);
-Route::post('medicamentos/update', [MedicamentoController::class, 'update'])->name('medicamentos.update');
-Route::post('medicamentos/store', [MedicamentoController::class, 'store'])->name('medicamentos.store');
-Route::post('medicamentos/medPrice', [MedicamentoController::class, 'medPrice'])->name('medicamentos.medPrice');
-Route::post('medicamentos/precios', [MedicamentoController::class, 'precios'])->name('medicamentos.precios');
-Route::post('medicamentos/updprecios', [MedicamentoController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
+Route::get('medicamentos', [MedicineController::class, 'index'])->name('medicamentos.index');
+Route::get('medicamentos/create', [MedicineController::class, 'create'])->name('medicamentos.create');
+Route::post('medicamentos/all', [MedicineController::class, 'all'])->name('medicamentos.all');
+Route::post('medicamentos/infoedit', [MedicineController::class, 'infoedit']);
+Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic']);
+Route::post('medicamentos/update', [MedicineController::class, 'update'])->name('medicamentos.update');
+Route::post('medicamentos/store', [MedicineController::class, 'store'])->name('medicamentos.store');
+Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->name('medicamentos.medPrice');
+Route::post('medicamentos/precios', [MedicineController::class, 'precios'])->name('medicamentos.precios');
+Route::post('medicamentos/updprecios', [MedicineController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
 
-Route::get('articulos',[MedicamentoController::class, 'articleIndex'])->name('articulos.index');
+Route::get('articulos',[MedicineController::class, 'articleIndex'])->name('articulos.index');
 
 
 

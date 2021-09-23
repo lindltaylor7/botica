@@ -3,58 +3,65 @@
 @section('title', 'Inicio')
 
 @section('content')
-<div class="main__datatable">
-    <h2><b>Tabla de </b> Medicamentos</h2>
-    <div class="main__datatable-content">
-        {{-- <div class="main__datatable-pagination">
-            <label for="datatable-input" class="main__datatable-input">
-              <i class="fas fa-search"></i>
-              <input type="search" class="" id="datatable-input" placeholder="Search">
-            </label>
-            <div class="main__pagination">
-              <span class="active">1</span>
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>
-              <span>6</span>
-            </div>
-        </div> --}}
-        <div class="main__table">
-            <table id="myTable" class="main__datatable-table">
-              <thead>
-                <tr>
-                    <th>Nombre Genérico</th>
-                    <th>Nombre Comercial</th>
-                    <th>Present.</th>
-                    <th>Concent.</th>
-                    <th>Laboratorio</th>
-                    <th>Nro por Caja</th>
-                    <th>Anaquel</th>
-                    <th>Opciones</th>
-                    <th>Foto</th>
-                </tr>
-              </thead>
-              
-              <tbody>
-                @foreach($medicamentos as $medicamento)
-                <tr>
-                    <td>{{ucfirst(strtolower($medicamento->n_generico))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->n_comercial))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->present))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->concent))}}</td>
-                    <td>S./{{number_format($medicamento->precio->p_unitario, 1, ".", '')}}0</td>
-                    <td>{{$medicamento->total}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->lab))}}</td>
-                    <td><span class="badge bg-primary">{{$medicamento->anaquel}}</span></td>
-                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
-                    @include('admin.inicio.imgmodal')
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-        </div>
-    </div>
+<div class="container-fluid">
+  <h1 class="h3 mb-3">Tabla de Medicamentos</h1>
+  <div>
+      <div class="">
+          <div class="card">
+              <div class="m-3">
+                  <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
+              </div>
+              <div class="table table-responsive">
+                <table id="myTable" class="main__datatable-table">
+                      <thead>
+                          <tr>
+                            <th>Nombre Genérico</th>
+                            <th>Nombre Comercial</th>                    
+                            <th>Concent.</th>
+                            <th>Laboratorio</th>                    
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Anaquel</th>
+                            <th>Foto</th>
+                            <th>Opciones</th>
+                          </tr>
+
+
+                      </thead>
+                      <tbody id="dynamic-row">
+                        @foreach($medicamentos as $medicamento)
+                        <tr>
+                            <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
+                            <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
+                            <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
+                            <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
+                           
+                            @foreach ($medicamento->prices as $precio)
+                            <td>{{$precio->sale_price}}</td>
+                            @endforeach
+                            <td>{{$medicamento->total}}</td>
+                            @foreach ($medicamento->stocks as $stock)
+                            <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
+                            @endforeach
+                            <td>
+                              <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
+                               @include('admin.inicio.imgmodal')
+                            </td>
+                            <td>
+                              <button type="button"  class="btn btn-xs btn-success fas fa-dollar-sign" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
+                              <button type="button"  class="btn btn-xs btn-info fas fa-trash" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
+                              <button type="button"  class="btn btn-xs btn-danger fas fa-trash" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
+                            </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
 </div>
    
 @endsection
