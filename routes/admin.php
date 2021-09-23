@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\InicioController;
@@ -27,9 +28,9 @@ Route::post('medicamentos/medPrice', [MedicamentoController::class, 'medPrice'])
 Route::post('medicamentos/precios', [MedicamentoController::class, 'precios'])->name('medicamentos.precios');
 Route::post('medicamentos/updprecios', [MedicamentoController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
 
-Route::get('articulos',[MedicamentoController::class, 'articleIndex'])->name('articulos.index');
-
-
+Route::get('articulos',[ArticleController::class, 'index'])->name('articles.index');
+Route::get('articulos/create',[ArticleController::class, 'create'])->name('articles.create');
+Route::post('articulos/store',[ArticleController::class, 'store'])->name('articles.store');
 
 Route::post('clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
 

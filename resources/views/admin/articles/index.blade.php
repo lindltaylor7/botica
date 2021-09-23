@@ -4,14 +4,14 @@
 
 
 @section('content')
-   
+
         <div class="container-fluid">
             <h1 class="h3 mb-3">Tabla de Articulos</h1>
             <div>
                 <div class="">
                     <div class="card">
                         <div class="m-3">
-                            <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
+                            <a href="{{ route('articles.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
                         </div>
                         <div class="table table-responsive">
                             <table id="tablearticles" class="">
@@ -48,7 +48,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$medicamentos->links()}}
+
                         </div>
 
                     </div>
@@ -56,9 +56,9 @@
                 </div>
             </div>
         </div>
-        
+
         @include('admin.medicamentos.modal')
-        @include('admin.medicamentos.pricemodal')         
+        @include('admin.medicamentos.pricemodal')
 @endsection
 
 @section('javascript')

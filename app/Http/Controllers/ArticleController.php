@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,7 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $medicamentos = Article::all();
+        return view('admin.articles.index', compact('medicamentos'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.articles.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
