@@ -6,14 +6,15 @@ $(function(){
         enableAllSteps: true,
         transitionEffectSpeed: 300,
         labels: {
-            next: "Next",
-            previous: "Back"
+            next: "Siguiente",
+            previous: "Atrás",
+            finish:"Registrar"
         },
-        onStepChanging: function (event, currentIndex, newIndex) { 
+        onStepChanging: function (event, currentIndex, newIndex) {
             if ( newIndex === 1 ) {
                 $('.steps ul').addClass('step-2');
             } else {
-                
+
                 $('.steps ul').removeClass('step-2');
             }
             if ( newIndex === 2 ) {
@@ -30,7 +31,7 @@ $(function(){
                 $('.steps ul').removeClass('step-4');
                 $('.actions ul').removeClass('mt-7');
             }
-            return true; 
+            return true;
         }
     });
     // Custom Button Jquery Steps
@@ -40,19 +41,19 @@ $(function(){
     $('.backward').click(function(){
         $("#wizard").steps('previous');
     })
-    // Grid 
+    // Grid
     $('.grid .grid-item').click(function(){
         $('.grid .grid-item').removeClass('active');
         $(this).addClass('active');
     })
-    // Click to see password 
+    // Click to see password
     $('.password i').click(function(){
         if ( $('.password input').attr('type') === 'password' ) {
             $(this).next().attr('type', 'text');
         } else {
             $('.password input').attr('type', 'password');
         }
-    }) 
+    })
     // Date Picker
     // var dp1 = $('#dp1').datepicker().data('datepicker');
     // dp1.selectDate( new Date( ));
