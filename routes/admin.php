@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\InicioController;
-use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\StockController;
-use App\Http\Controllers\VentaController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,42 +16,42 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InicioController::class, 'index'])->middleware('auth')->name('inicio.index');
 Route::post('all', [InicioController::class, 'all'])->name('inicio.all');
 
-Route::get('medicamentos', [MedicamentoController::class, 'index'])->name('medicamentos.index');
-Route::get('medicamentos/create', [MedicamentoController::class, 'create'])->name('medicamentos.create');
-Route::post('medicamentos/all', [MedicamentoController::class, 'all'])->name('medicamentos.all');
-Route::post('medicamentos/infoedit', [MedicamentoController::class, 'infoedit']);
-Route::post('medicamentos/delmedic', [MedicamentoController::class, 'delmedic']);
-Route::post('medicamentos/update', [MedicamentoController::class, 'update'])->name('medicamentos.update');
-Route::post('medicamentos/store', [MedicamentoController::class, 'store'])->name('medicamentos.store');
-Route::post('medicamentos/medPrice', [MedicamentoController::class, 'medPrice'])->name('medicamentos.medPrice');
-Route::post('medicamentos/precios', [MedicamentoController::class, 'precios'])->name('medicamentos.precios');
-Route::post('medicamentos/updprecios', [MedicamentoController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
+Route::get('medicamentos', [MedicineController::class, 'index'])->name('medicamentos.index');
+Route::get('medicamentos/create', [MedicineController::class, 'create'])->name('medicamentos.create');
+Route::post('medicamentos/all', [MedicineController::class, 'all'])->name('medicamentos.all');
+Route::post('medicamentos/infoedit', [MedicineController::class, 'infoedit']);
+Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic']);
+Route::post('medicamentos/update', [MedicineController::class, 'update'])->name('medicamentos.update');
+Route::post('medicamentos/store', [MedicineController::class, 'store'])->name('medicamentos.store');
+Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->name('medicamentos.medPrice');
+Route::post('medicamentos/precios', [MedicineController::class, 'precios'])->name('medicamentos.precios');
+Route::post('medicamentos/updprecios', [MedicineController::class, 'preciosUpd'])->name('medicamentos.prec_upd');
 
-Route::get('articulos',[MedicamentoController::class, 'articleIndex'])->name('articulos.index');
+Route::get('articulos',[MedicineController::class, 'articleIndex'])->name('articulos.index');
 
 
 
-Route::post('clientes/store', [ClienteController::class, 'store'])->name('clientes.store');
+Route::post('clientes/store', [CustomerController::class, 'store'])->name('clientes.store');
 
 Route::post('detail/store',[DetailController::class,'store'])->name('detail.store');
 Route::post('detail/update',[DetailController::class,'update'])->name('detail.update');
 Route::delete('detail/destroy/{id}', [DetailController::class, 'destroy'])->name('detail.destroy');
 Route::post('detail/infoedit', [DetailController::class, 'infoedit']);
 
-Route::get('ventas', [VentaController::class, 'index'])->name('ventas.index');
-Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
-Route::get('ventas/invoice/{id}', [VentaController::class, 'invoice'])->name('ventas.invoice');
-Route::get('ventas/{id}', [VentaController::class, 'show'])->name('ventas.show');
-Route::post('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
-Route::get('ventas/reporte/{id}', [VentaController::class, 'vista'])->name('vistapdf.vista');
-Route::get('ventas/reporte/pdf/{id}', [VentaController::class, 'generarPdf'])->name('generarpdf.reporte');
+Route::get('ventas', [SaleController::class, 'index'])->name('ventas.index');
+Route::post('ventas/create', [SaleController::class, 'create'])->name('ventas.create');
+Route::get('ventas/invoice/{id}', [SaleController::class, 'invoice'])->name('ventas.invoice');
+Route::get('ventas/{id}', [SaleController::class, 'show'])->name('ventas.show');
+Route::post('ventas/update/{id}', [SaleController::class, 'update'])->name('ventas.update');
+Route::get('ventas/reporte/{id}', [SaleController::class, 'vista'])->name('vistapdf.vista');
+Route::get('ventas/reporte/pdf/{id}', [SaleController::class, 'generarPdf'])->name('generarpdf.reporte');
 
-Route::get('ventas/ticket/{id}', [VentaController::class, 'ticket'])->name('vistaticket.ventas');
-Route::get('ventas/ticket/pdf/{id}', [VentaController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
+Route::get('ventas/ticket/{id}', [SaleController::class, 'ticket'])->name('vistaticket.ventas');
+Route::get('ventas/ticket/pdf/{id}', [SaleController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
 
 
 
-Route::get('ventas/anular/{id}', [VentaController::class, 'anular'])->name('ventas.anular');
+Route::get('ventas/anular/{id}', [SaleController::class, 'anular'])->name('ventas.anular');
 
 
 Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');

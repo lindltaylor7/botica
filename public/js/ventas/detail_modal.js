@@ -8,11 +8,11 @@ $(document).ready(function(){
 
         var cant_stock = $('#cant_stock').val()
 
-        if( $('#cajaCheck').val() == 1) {
+        if( $('#cajaCheck').val() == "1") {
             var utl = cant * price
             $('#utilidad').val(utl.toFixed(2))
         }
-        else if ( $('#cajaCheck').val() == 2) {
+        else if ( $('#cajaCheck').val() == "2") {
             var cant2 = cant
             var cant = cant * nro_blister
             var utl = cant2 * $('#price').val()
