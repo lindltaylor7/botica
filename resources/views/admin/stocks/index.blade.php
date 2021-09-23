@@ -27,8 +27,8 @@
                                             @endif
 
                                         </div>
-                                        <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$stock->medicamento->n_generico}}</span><br>
-                                        <small class="text-truncate pb-1">{{$stock->medicamento->n_comercial}}</small>
+                                        <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$stock->stockable->generic_name}}</span><br>
+                                        <small class="text-truncate pb-1">{{$stock->stockable->tradename}}</small>
                                     </div>
                                 </div>
 
@@ -38,13 +38,13 @@
                                             <div class="col-6">
                                                 <div>
                                                     <p class="text-muted mb-2 text-truncate">Cantidad</p>
-                                                    <h5>{{$stock->cantidad}}</h5>
+                                                    <h5>{{$stock->quantity}}</h5>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div>
                                                     <p class="text-muted mb-2 text-truncate">Laboratorio</p>
-                                                    <h5>{{$stock->medicamento->lab}}</h5>
+                                                    <h5>{{$stock->stockable->laboratory}}</h5>
                                                 </div>
                                             </div>
                                         </div>

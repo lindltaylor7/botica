@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
+use App\Models\Medicine;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks=Stock::join('medicamentos', 'medicamentos.id', '=', 'stocks.medicamento_id')
-        ->orderBy('medicamentos.n_generico', 'asc')
-        ->where('status',1)
-        ->paginate(10);
+        $stocks=Stock::paginate(10);
         return view('admin.stocks.index', compact('stocks'));
     }
 
@@ -31,7 +29,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        $medicamentos=Medicamento::all();
+        $medicamentos=Medicine::all();
         return view('admin.stocks.create', compact('medicamentos'));
     }
 
