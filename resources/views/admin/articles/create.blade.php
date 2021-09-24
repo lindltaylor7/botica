@@ -39,7 +39,7 @@
                         <label class="form-label" for="inputUsername">Presentación</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concent" class="form-control" id="inputUsername" placeholder="Presentación">
+                            <input type="text" name="presentation" class="form-control" id="inputUsername" placeholder="Presentación">
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <label class="form-label" for="inputUsername">Cantidad por caja</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box" class="form-control" id="inputUsername" placeholder="Cantidad por caja">
+                            <input type="text" name="number_box" class="form-control" id="number_box" placeholder="Cantidad por caja">
                         </div>
                     </div>
                     <div class="form-col">
@@ -59,69 +59,51 @@
 
             <h4></h4>
             <section>
-                <h3>Precios</h3>
+                <h3>Precios del Artículo</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="">Precio de Costo</label>
+                        <label class="form-label" for="inputUsername">Precio de Costo por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <div class="form-holder">
-                                <input type="number" step="any" name="p_costo" class="form-control" id="p_caja" placeholder="Precio de costo">
-                            </div>
-                        </div>
-                        <div class="form-holder input-group">
-
-
-                            @error('utilidad')
-                                <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
-                            @enderror
+                            <input type="text" name="cost_price" id="cost_price" class="form-control" id="inputUsername" placeholder="Costo por Caja">
                         </div>
                     </div>
                     <div class="form-col">
-                        <label for="">Utilidad</label>
+                        <label class="form-label" for="inputUsername">Utilidad por caja</label>
                         <div class="form-holder">
-                            <i>%</i>
-                            <div class="form-holder">
-                                <input type="number" step="any" name="p_costo" class="form-control" id="p_caja" placeholder="Utilidad">
-                            </div>
+                            <i>S./</i>
+                            <input type="text" name="utility" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja">
                         </div>
-                        <div class="form-holder input-group">
-
-
-                            @error('utilidad')
-                                <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
-                            @enderror
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="inputUsername">Precio de venta por caja</label>
+                        <div class="form-holder">
+                            <i>S./</i>
+                            <input type="text" name="tradename" id="sale_price_box" class="form-control" id="inputUsername" placeholder="P. de venta por caja" readonly>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="">Precio de venta</label>
+                        <label class="form-label" for="inputUsername">Precio de Costo por unidad</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <div class="form-holder">
-                                <input type="number" step="any" name="p_caja" class="form-control" id="p_caja" placeholder="Precio de venta">
-                            </div>
-                        </div>
-                        <div class="form-holder input-group">
-
-
-                            @error('utilidad')
-                                <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
-                            @enderror
+                            <input type="text" name="cost_price" id="cost_price_unit" class="form-control" id="inputUsername" placeholder="Costo por unidad" readonly>
                         </div>
                     </div>
                     <div class="form-col">
-                        <label for="">Tipo</label>
+                        <label class="form-label" for="inputUsername">Utilidad por unidad</label>
                         <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <div class="form-holder">
-                                <select class="form-control" name="" id="">
-                                    <option value="">Caja</option>
-                                    <option value="">Blister</option>
-                                    <option value="">Unidad</option>
-                                </select>
-                            </div>
+                            <i>S./</i>
+                            <input type="text" name="tradename" id="utility_unit" class="form-control" id="inputUsername" placeholder="Utilidad por unidad" readonly>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="inputUsername">Precio de venta por unidad</label>
+                        <div class="form-holder">
+                            <i>S./</i>
+                            <input type="text" name="tradename" id="sale_price_unit" class="form-control" id="inputUsername" placeholder="P. de venta por unidad" readonly>
                         </div>
                     </div>
                 </div>
@@ -499,6 +481,28 @@
             $("a[href='#finish']").on('click',function(){
                 $('#wizard').submit();
             });
+
+            $('#cost_price').on('keyup', function(){
+                var calc = $(this).val()/$('#number_box').val()
+                var igv = parseInt($(this).val()*18/100)
+                var igv_total = parseInt($(this).val())+igv
+                $('#sale_price_box').val(igv_total.toFixed(1))
+                $('#cost_price_unit').val(calc.toFixed(1))
+                var igv_calc= calc*18/100
+                var igv_calc_total= calc+calc*18/100
+                $('#sale_price_unit').val(igv_calc_total.toFixed(1))
+            });
+
+            $('#utility_box').on('keyup', function(){
+                var pc = parseInt($('#cost_price').val())
+                var utility = parseInt($(this).val())
+                var suma = pc + utility
+               var total = pc+utility+(parseInt(suma)*18/100)
+               $('#sale_price_box').val(total.toFixed(1))
+               $('#utility_unit').val(($(this).val()/$('#number_box').val()).toFixed(1))
+               $('#sale_price_unit').val(($('#sale_price_box').val()/$('#number_box').val()).toFixed(1))
+            });
+
         });
     </script>
 @endsection
