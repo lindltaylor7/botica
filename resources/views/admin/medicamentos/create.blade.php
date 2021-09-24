@@ -591,8 +591,14 @@
 @section('javascript')
     <script src="{{ asset('js/medicamentos/math_precios.js') }}"></script>
     <script src="{{ asset('js/medicamentos/img_create.js') }}"></script>
-
     <script src="{{asset('vendor/js/jquery.steps.js')}}"></script>
     <script src="{{asset('vendor/js/datepicker.js')}}"></script>
     <script src="{{asset('vendor/js/main.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $("a[href='#finish']").on('click',function(){
+                $('#wizard').submit();
+            });
+        });
+    </script>
 @endsection
