@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{--  @if($medicamento->img)
+                 {{-- @if($medicamento->img)
                 <img class="" src="{{Storage::url($medicamento->img)}}" alt="Imagen de medicamento" style="width:100%">
                 <img class="" src="https://boticaexcelentemente.com/storage/{{$medicamento->img}}" alt="Imagen de medicamento" style="width:100%">
                 @else
@@ -17,16 +17,11 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-
-                        <div class="user_pro_img_area">
-                                                    
-                                <img id="pictureUser" src="{{asset('storage/'.$medicamento->image->url)}}" alt=""
-                                    style="width: 150px; height: 150px; object-fit: cover;">                                   
-                    
+                        <div class="user_pro_img_area">                        
+                            <img id="pictureUser" src="{{asset('storage/'.$medicamento->image->url)}}" alt="" style="width: 150px; height: 150px; object-fit: cover;">                                   
                             <div class="custom-file-upload">
                                 <input type="file" id="fileUser" name="imageMedicine">
                             </div>
-
                         </div>
                     </div>
                     <button type="submit" class="btn btn-block btn-lg btn-success">Actualizar</button>

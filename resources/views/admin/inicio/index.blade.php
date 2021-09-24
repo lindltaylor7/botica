@@ -47,8 +47,7 @@
                     <span>Lorem ipsum dolor sit amet, consectetur</span>
                 </div>
             </div>
-            <div id="chart" style="position: relative;">
-            </div>
+            <div id="chart" style="position: relative; max-width: 250px; min-width: 100%;"></div>
         </div>
   </div>
 

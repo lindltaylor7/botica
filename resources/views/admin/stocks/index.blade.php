@@ -76,8 +76,6 @@
                 @include('admin.stocks.modal_medicine')
             @endforeach
             {{-- {{$stocks->links()}} --}}
-        </div>
-        <div class="row">
             @foreach($articles as $article)
                 <div class="col-xl-6 col-sm-6 col-md-6">
                     <div class="card mb-3 mt-2 rounded">
@@ -91,13 +89,13 @@
                                         @else
                                         <img class="img__stock rounded-circle" src="{{asset('img/medic1.jpg')}}" alt="">
                                         @endif
-
+    
                                     </div>
                                     <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$article->tradename}}</span><br>
                                     <small class="text-truncate pb-1">{{$article->trademark}}</small>
                                 </div>
                             </div>
-
+    
                             <div class="col-xl-7">
                                 <div class="p-4 text-center text-xl-start">
                                     <div class="row">
@@ -132,10 +130,10 @@
                                         <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modal{{$medicine->id}}">Ver más <i class="mdi mdi-arrow-right"></i></a>
                                     </div>
                                 </div>
-
+    
                             </div>
                         </div>
-
+    
                     </div>
                 </div>
                 <br>
