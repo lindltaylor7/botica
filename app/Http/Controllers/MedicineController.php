@@ -45,6 +45,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
             'generic_name' => 'required',
             'tradename'   => 'required',
@@ -112,8 +113,19 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $upd_med = Medicine::where('id', $request->get('id_med'))->update(request()->except(['_token', 'id_med']));
-        return redirect()->back();
+         $medicine= Medicine::where('id',$id)->first();
+         $medicine->update($request->except(['_token','_method']));
+
+         if ($request->file('imageMedicine')) {
+            $medicine->image()->delete();
+            $url = Storage::disk('public')->put('usuarios', $request->file('imageMedicine'));
+            $medicine->image()->create([                
+                'url' => $url
+            ]);
+        }
+
+
+         return redirect()->back();
     }
 
     /**

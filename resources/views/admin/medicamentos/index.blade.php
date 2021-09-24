@@ -9,7 +9,7 @@
       <div class="">
           <div class="card">
               <div class="m-3">
-                  <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
+                  <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Medicamentos</a>
               </div>
               <div class="table table-responsive">
                 <table id="myTable" class="main__datatable-table">
@@ -18,6 +18,7 @@
                             <th>Nombre Genérico</th>
                             <th>Nombre Comercial</th>                    
                             <th>Concent.</th>
+                            <th>Present.</th>
                             <th>Laboratorio</th>                    
                             <th>Precio</th>
                             <th>Stock</th>
@@ -34,23 +35,23 @@
                             <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
+                            <td>{{ucfirst(strtolower($medicamento->presentation))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
-                           
-                            @foreach ($medicamento->prices as $precio)
-                            <td>{{$precio->sale_price}}</td>
-                            @endforeach
+                            <td>{{$medicamento->prices->where('unit_type_id',1)->first()->sale_price}}</td>                
                             <td>{{$medicamento->total}}</td>
                             @foreach ($medicamento->stocks as $stock)
                             <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
                             @endforeach
                             <td>
                               <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
-                               @include('admin.inicio.imgmodal')
+                               @include('admin.medicamentos.imgmodal')
                             </td>
                             <td>
-                              <button type="button"  class="btn btn-xs btn-success fas fa-dollar-sign" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
-                              <button type="button"  class="btn btn-xs btn-info fas fa-trash" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
-                              <button type="button"  class="btn btn-xs btn-danger fas fa-trash" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"></button>
+                              <button type="button"  class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-comments-dollar"></i></button>
+                              @include('admin.medicamentos.pricemodal')
+                              <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$medicamento->id}}"><i class="far fa-edit"></i></button>
+                              @include('admin.medicamentos.medicinemodaledit')
+                              <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         @endforeach
