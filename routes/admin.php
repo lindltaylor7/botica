@@ -22,7 +22,7 @@ Route::get('medicamentos/create', [MedicineController::class, 'create'])->name('
 Route::post('medicamentos/all', [MedicineController::class, 'all'])->name('medicamentos.all');
 Route::post('medicamentos/infoedit', [MedicineController::class, 'infoedit']);
 Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic']);
-Route::post('medicamentos/update', [MedicineController::class, 'update'])->name('medicamentos.update');
+Route::put('medicamentos/{id}/update', [MedicineController::class, 'update'])->name('medicamentos.update');
 Route::post('medicamentos/store', [MedicineController::class, 'store'])->name('medicamentos.store');
 Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->name('medicamentos.medPrice');
 Route::post('medicamentos/precios', [MedicineController::class, 'precios'])->name('medicamentos.precios');

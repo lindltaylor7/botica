@@ -390,3 +390,22 @@ table.dataTable.no-footer {
   height: 100px;
   object-fit: cover;
 }
+<<<<<<< HEAD
+=======
+
+.report-medicine {
+  min-width: 350px;
+  border-radius: 14px;
+  transition: background .5s ease;
+}
+
+.report-medicine:hover {
+  background: #00C2F0;
+  color: #fff;
+}
+
+.report-medicine:hover a {
+  color: #00C2F0 !important;
+  background: #FFf !important;
+}
+>>>>>>> 45450695ee8f496995a1d2aaa5d5c6025209a30c

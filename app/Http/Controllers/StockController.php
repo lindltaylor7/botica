@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
+use App\Models\Article;
 use App\Models\Medicine;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -18,8 +19,12 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks=Stock::paginate(10);
-        return view('admin.stocks.index', compact('stocks'));
+        $medicines = Medicine::all();
+        $articles = Article::all();
+        // $stocks = Stock::all();
+        $cantidad = Stock::select('quantity', 'stockable_id', 'stockable_type')->get();
+        // return $cantidad;
+        return view('admin.stocks.index', compact('medicines', 'articles', 'cantidad'));
     }
 
     /**
@@ -30,7 +35,9 @@ class StockController extends Controller
     public function create()
     {
         $medicamentos=Medicine::all();
-        return view('admin.stocks.create', compact('medicamentos'));
+        $articles = Article::all();
+        
+        return view('admin.stocks.create', compact('medicamentos', 'articles'));
     }
 
     /**
@@ -41,19 +48,28 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'stockId' => 'required',
+        //     'quantity' => 'required',
+        //     'f_vencimiento' => 'required',
+        //     'f_ingreso' => 'required'
+        // ]);
+        
+        // $request->merge([
+        //     "status" => 1
+        // ]);
 
-        $request->validate([
-            'cantidad' => 'required',
-            'f_vencimiento' => 'required',
-            'f_ingreso'    => 'required',
-        ]);
-
-        $request->merge([
-            "status" => 1
-        ]);
-
-        $stock=Stock::create($request->all());
-
+        $stock = new Stock;
+        $stock->stockable_type = $request->type;
+        $stock->stockable_id = $request->stockId;
+        $stock->quantity = $request->quantity;
+        $stock->shelf = $request->anaquel;
+        $stock->costo = $request->costo;
+        $stock->created_at = $request->f_ingreso;
+        $stock->updated_at = $request->f_vencimiento;
+        $stock->save();
+        return $stock;
+        
         return redirect(route('stock.index'));
 
 
@@ -111,7 +127,6 @@ class StockController extends Controller
                         ->where('n_generico','like', '%' . $request->get('search') . '%')
                         ->orderBy('medicamentos.n_generico', 'asc')
                         ->get();
-
         return json_encode($stocks);
     }
 

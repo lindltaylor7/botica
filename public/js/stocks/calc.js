@@ -7,14 +7,3 @@ $(document).ready(() => {
   })
 });
 
-// $(document).ready(() => {
-//   $(".medicamentoImg").on("click"),function () {
-//     console.log(e.target)
-//   }
-// })
-
-// document.addEventListener("click",e => {
-//   console.log(d.getElementById("selectSearch"))
-//   if (e.target.matches(".medicamentoImg")) {
-//   }
-// })
