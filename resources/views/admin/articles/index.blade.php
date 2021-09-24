@@ -56,9 +56,9 @@
                 </div>
             </div>
         </div>
-
+{{--
         @include('admin.medicamentos.modal')
-        @include('admin.medicamentos.pricemodal')
+        @include('admin.medicamentos.pricemodal') --}}
 @endsection
 
 @section('javascript')
