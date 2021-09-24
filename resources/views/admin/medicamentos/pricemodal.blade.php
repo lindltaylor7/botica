@@ -12,6 +12,27 @@
 
                     <section>
                         <div class="form-row">
+
+                            <div class="form-col">
+                                <div class="input-group">
+                                    <h6> Rol Asignado: </h6>
+                                    @foreach ($precios as $precio)
+                                    <div>
+                                        @if ($medicamento->prices()->first()->id == $precio->preciable_id)
+                                            <input class="mr-2" type="radio" id="{{$precio->id}}" name="roles[]" value="{{$precio->id}}" checked>
+                                        @else
+                                            <input class="mr-2" type="radio" id="{{$precio->id}}" name="roles[]" value="{{$precio->id}}">
+                                        @endif
+                                        <label>{{$precio->cost_price}}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                                                    
+                        </div>
+
+
+                        <div class="form-row">
                             <div class="form-col">
                                 <label class="form-label" for="p_caja">Precio de Costo por caja<span class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -61,6 +82,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="form-col">
                                 <label class="form-label" for="p_caja">Precio de Costo por blister<span class="text-danger">*</span></label>

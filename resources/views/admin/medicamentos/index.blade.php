@@ -38,7 +38,7 @@
                             <td>{{ucfirst(strtolower($medicamento->presentation))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
                             <td>{{$medicamento->prices->where('unit_type_id',1)->first()->sale_price}}</td>                
-                            <td>{{$medicamento->total}}</td>
+                            <td>{{$medicamento->stocks()->first()->quantity}}</td>
                             @foreach ($medicamento->stocks as $stock)
                             <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
                             @endforeach

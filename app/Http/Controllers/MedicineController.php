@@ -23,8 +23,9 @@ class MedicineController extends Controller
     {
 
         $medicamentos = Medicine::all();
+        $precios = Price::all();
 
-        return view('admin.medicamentos.index', compact('medicamentos'));
+        return view('admin.medicamentos.index', compact('medicamentos','precios'));
     }
 
     /**
