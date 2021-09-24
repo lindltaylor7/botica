@@ -258,15 +258,23 @@ main {
     display: flex;
     align-items: center;
 }
+.main__table-title{
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    padding-bottom: 25px;
+}
 
 
 .dataTables_filter input{
-  width: 50% !important;
-  min-width: 250px !important;
+  width: 200% !important;
   height: 35px !important;
-  border-radius: 50px !important;
-  border: 1px solid #000 !important;
+  border-radius: 5px !important;
+  border: 1px solid rgba(0, 0, 0, 0.267) !important;
   padding-left: 45px !important;
+  margin-bottom: 20px !important;
+  background-color: rgba(0, 0, 0, 0.075) !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 .main__datatable-input input {
@@ -276,6 +284,11 @@ main {
   border: 1px solid rgb(129, 129, 129);
   padding-left: 45px;
 }
+
+table.dataTable.no-footer {
+    border-bottom: none !important;
+}
+
 
 /* .dataTables_filter input{
   height: 35px !important;
@@ -305,19 +318,20 @@ main {
 .main__pagination > span {
   width: 25px;
   height: 25px;
-  border-radius: 50%;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  background: #00826F !important;
+  background: #ffc107 !important;
   color: #fff !important;
 }
 
 .paginate_button {
-  border-radius: 50% !important;
+  border-radius: 2px !important;
+  border:none !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
@@ -325,8 +339,9 @@ main {
 }
 
 .paginate_button.current .page-link {
-    background: #00826F !important;
+    background: #ffc107 !important;
     color: #fff !important;
+
 }
 
 
@@ -345,11 +360,11 @@ main {
 }
 
 .main__datatable-table > thead {
-  background: rgba(47, 72, 88, 0.09);
+  background: rgb(255, 255, 255);
 }
 
 .main__datatable-table > thead th {
-  color: #495057;
+  color: #000000;
   font-weight: 500;
   padding: 15px;
   text-align: start;

@@ -23,13 +23,7 @@ class InicioController extends Controller
 
         $data = User::where('id',session('LoggedUser'))->first();
 
-        $medicamentos = Medicine::select('medicines.*','prices.sale_price',DB::raw('sum(stocks.quantity) as total'))
-                                    ->leftJoin('prices','prices.priceable_id','=','medicines.id')
-                                    ->leftJoin('stocks','stocks.stockable_id','=','medicines.id')
-                                    ->where('stocks.quantity','!=',null)
-                                    ->groupBy('stocks.stockable_id')
-                                    ->orderBy('medicines.generic_name')
-                                    ->get();
+        $medicamentos = Medicine::all();
 
         return view('admin.inicio.index', compact('medicamentos','data'));
     }
@@ -102,14 +96,7 @@ class InicioController extends Controller
 
     public function all(Request $request)
     {
-        $medicamentos = Medicine::select('medicamentos.*','precios.p_unitario','precios.utilidad',DB::raw('sum(stocks.cantidad) as total'))
-                                    ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                                    ->leftJoin('stocks','stocks.medicamento_id','=','medicamentos.id')
-                                    ->groupBy('stocks.medicamento_id')
-                                    ->orderBy('medicamentos.n_generico')
-                                    ->where('n_generico', 'like', '%' . $request->get('search') . '%')
-                                    ->orWhere('n_comercial', 'like', '%' . $request->get('search') . '%')
-                                    ->get();
+        $medicamentos = Medicine::all();
 
         return json_encode($medicamentos);
     }

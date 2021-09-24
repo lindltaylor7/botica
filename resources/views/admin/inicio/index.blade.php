@@ -53,9 +53,15 @@
   </div>
 
   <div class="main__datatable">
-    <h2><b>Tabla de </b> Medicamentos</h2>
 
     <div class="main__datatable-content">
+        <div class="main__table-title">
+            <div class="separator mr-3"></div>
+            <div class="main__grafic-text">
+                <span class="d-block fs-4 fw-bolder">Tabla de Medicamentos</span>
+                <span>Lorem ipsum dolor sit amet, consectetur</span>
+            </div>
+        </div>
       <div class="main__table">
         <table id="myTable" class="main__datatable-table">
           <thead>
@@ -76,14 +82,18 @@
                     <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
+                    <td>
                     @foreach ($medicamento->prices as $precio)
-                    <td>{{$precio->sale_price}}</td>
+                    {{$precio->sale_price}}
                     @endforeach
+                    </td>
                     <td>{{$medicamento->total}}</td>
                     <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
+                    <td>
                     @foreach ($medicamento->stocks as $stock)
-                    <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
+                    <span class="badge bg-primary">{{$stock->shelf}}</span>
                     @endforeach
+                    </td>
                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
                     @include('admin.inicio.imgmodal')
                 </tr>
