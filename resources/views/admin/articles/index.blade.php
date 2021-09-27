@@ -1,6 +1,6 @@
 @extends('layout.template')
 
-@section('title', 'Inicio')
+@section('title', 'Artículos')
 
 
 @section('content')
@@ -56,9 +56,9 @@
                 </div>
             </div>
         </div>
-
+{{--
         @include('admin.medicamentos.modal')
-        @include('admin.medicamentos.pricemodal')
+        @include('admin.medicamentos.pricemodal') --}}
 @endsection
 
 @section('javascript')

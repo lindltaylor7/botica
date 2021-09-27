@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Detail;
 use App\Models\Stock;
-use App\Models\Venta;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +18,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $ventas = Venta::where('status',1)->get();
+        $ventas = Sale::all();
         $stocks = Stock::all();
         return view('admin.reportes.index', compact('ventas','stocks'));
     }
