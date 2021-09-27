@@ -67,29 +67,27 @@
                                 @endphp
                                 @foreach ($details as $detail)
                                 <tr>
-                                    <td class="d-none d-xl-table-cell">{{$detail->medicamento->n_generico}}</td>
-                                    <td class="d-none d-xl-table-cell">{{$detail->medicamento->n_comercial}}</td>
+                                    <td class="d-none d-xl-table-cell">{{$detail->medicine->generic_name}}</td>
+                                    <td class="d-none d-xl-table-cell">{{$detail->medicine->tradename}}</td>
                                     <td class="d-none d-xl-table-cell">
-                                        @foreach ($detail->medicamento->stocks as $stock)
-                                        {{date('d/m/Y', strtotime($stock->f_vencimiento))}}<br>
+                                        @foreach ($detail->medicine->stocks as $stock)
+                                        {{date('d/m/Y', strtotime($stock->batches->expiry_date))}}<br>
                                         @endforeach
                                     </td>
-                                    <td>{{$detail->cantidad}}</td>
-                                    @if ($detail->tipo == 0)
-                                        <td>S./{{number_format($detail->medicamento->precio->p_unitario,2,'.',"")}}</td>
+                                    <td>{{$detail->quantity}}</td>
+                                    @if ($detail->unit_type_id == 1)
+                                        <td>S./{{number_format($detail->medicine->prices->sale_price,2,'.',"")}}</td>
                                     @else
-                                        <td>S./{{number_format($detail->medicamento->precio->p_venta_caja,2,'.',"")}}</td>
+                                        <td>S./{{number_format($detail->medicine->prices->sale_price,2,'.',"")}}</td>
                                     @endif
 
-
-                                     <td class="d-none d-xl-table-cell">S./{{number_format($detail->utilidad,2,'.',"")}}</td>
+                                     <td class="d-none d-xl-table-cell">S./{{number_format($detail->partial_utility,2,'.',"")}}</td>
                                      @php
-                                     $sum = $sum + $detail->utilidad;
+                                     $sum = $sum + $detail->partial_utility;
                                      @endphp
-                                     @if ($venta->utilidad == 0.00)
+                                     @if ($venta->total_utility == 0.00)
                                      <td class="d-none d-md-table-cell">
-
-                                        <button class="btn btn-primary" id="btn-edit-detail" data-cant="{{$detail->cantidad}}" data-price="{{$detail->medicamento->precio->p_unitario}}" value="{{$detail->id}}" data-bs-toggle="modal" data-bs-target="#editModal"><i class="align-middle" data-feather="edit-2"></i></button>
+                                        <button class="btn btn-primary" id="btn-edit-detail" data-cant="{{$detail->quantity}}" data-price="{{$detail->medicine->prices->sale_price}}" value="{{$detail->id}}" data-bs-toggle="modal" data-bs-target="#editModal"><i class="align-middle" data-feather="edit-2"></i></button>
                                         <form action="{{route('detail.destroy', $detail->id)}}" class="d-inline" method="POST">
                                             @csrf
                                             @method('delete')

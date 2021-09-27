@@ -36,15 +36,6 @@ class DetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        //return $request;
-        if($request->get('tipo')){
-            $request->merge([
-                'tipo' => 1
-            ]);
-        }else{
-            $request->input('tipo', 0);
-        }
-
         $detail = Detail::create($request->except(['_token']));
         return redirect()->back();
     }
@@ -99,11 +90,11 @@ class DetailController extends Controller
     }
 
     public function infoedit(Request $request){
-        $detail = Detail::select('details.*','precios.p_unitario', 'precios.p_venta_caja','medicamentos.nro_caja',DB::raw('sum(stocks.cantidad) as total'))
-                        ->leftJoin('precios','precios.medicamento_id','=','details.medicamento_id')
-                        ->leftJoin('medicamentos','medicamentos.id','=','details.medicamento_id')
-                        ->leftJoin('stocks','stocks.medicamento_id','=','details.medicamento_id')
-                        ->groupBy('medicamento_id')
+        $detail = Detail::select('details.*','sales.sale_price', 'medicines.number_box',DB::raw('sum(stocks.quantity) as total'))
+                        ->leftJoin('sales','sales.id','=','details.sale_id')
+                        ->leftJoin('medicines','medicines.id','=','details.detailable_id')
+                        ->leftJoin('stocks','stocks.stockable_id','=','details.detailable_id')
+                        ->groupBy('medicine.id')
                         ->where('details.id',$request->get('id'))
                         ->first();
         return json_encode($detail);
