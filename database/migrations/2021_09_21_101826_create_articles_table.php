@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('tradename',100);
             $table->string('trademark',100);
             $table->string('supplier',50);
-            $table->string('pesentation',100);
+            $table->string('presentation',100);
             $table->integer('number_box');
             $table->timestamps();
         });
