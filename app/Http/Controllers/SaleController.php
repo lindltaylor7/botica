@@ -39,8 +39,8 @@ class SaleController extends Controller
             ]);
 
             $request->merge([
-                "cliente_id" => $cliente->id,
-                "vendedor" => Auth::user()->name
+                "customer_id" => $cliente->id,
+                "seller" => Auth::user()->name
             ]);
 
             $venta = Sale::create($request->all());
@@ -48,7 +48,7 @@ class SaleController extends Controller
         else
         {
             $request->merge([
-                "vendedor" => Auth::user()->name
+                "seller" => Auth::user()->name
             ]);
 
             $venta = Sale::create($request->all());

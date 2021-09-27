@@ -42,25 +42,19 @@
                                 @foreach($ventas as $venta)
                                     <tr>
                                         <td>B-000{{$venta->id}}</td>
-                                        <td>{{$venta->cliente->name}}</td>
-                                        <td>{{date('d/m/Y', strtotime($venta->fecha))}}</td>
+                                        <td>{{$venta->customer->name}}</td>
+                                        <td>{{date('d/m/Y', strtotime($venta->date))}}</td>
 
-
-
-                                        <td>S./{{$venta->utilidad}}</td>
+                                        <td>S./{{$venta->total_utility}}</td>
                                         <td>
-                                            @if ($venta->status == 1)
-                                                <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
-                                            @else
-                                                <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-danger">Anulada</span></a>
-                                            @endif
+                                            <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
                                         </td>
                                         <td>
                                             <a target="_blank" href="{{route('generar_pdfticket.ventas', $venta->id)}}">Ver Ticket</a>
                                         </td>
 
                                         <td>
-                                            {{$venta->vendedor}}
+                                            {{$venta->seller}}
                                         </td>
 
                                         <td><a href="{{route('ventas.show', $venta->id)}}">Ver más</a></td>

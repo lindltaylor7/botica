@@ -3,6 +3,8 @@ $(document).ready(function(){
     $('#medicamentos_select').hide()
     $('#cant_blister').hide()
     $('#cant_caja').hide()
+    $('#stock_blister').hide()
+    $('#stock_caja').hide()
 
     $('#search').on('click', function(){
         $('#medicamentos_select').show()
@@ -37,11 +39,13 @@ $(document).ready(function(){
                     
                     $('.search-link').on('click', function(){
                         $('#cant_stock').val($(this).data('cant'))
-                        $('#medicamento_id').val($(this).attr('id'))
+                        $('#cant_stock_blister').val($(this).data('cant'))
+                        $('#cant_stock_caja').val($(this).data('cant'))
+                        $('#medicine_id').val($(this).attr('id'))
                         $('#info_medic').html($(this).text())
                         $('#price').val($(this).data('price'))
-                        $('#nro_caja').val($(this).data('nbox'))
-                        $('#nro_blister').val($(this).data('nbox'))
+                        $('#number_box').val($(this).data('nbox'))
+                        $('#number_blister').val($(this).data('nbox'))
 
                         $('#pricebox').hide()
 
@@ -52,29 +56,30 @@ $(document).ready(function(){
                             if( $(this).val() == "3" ) {
                                 $('#cant_caja').show()
                                 $('#cant_blister').hide()
+                                $('#stock_caja').show()
+                                $('#stock').hide()
+                                $('#stock_blister').hide()
                                 $('#price').val(pricebox)
                             }
                             else if ( $(this).val() == "2") {
                                 $('#cant_blister').show()
                                 $('#cant_caja').hide()
+                                $('#stock_caja').hide()
+                                $('#stock').hide()
+                                $('#stock_blister').show()
                                 $('#price').val(pricebox)
                             } else {
                                 $('#cant_caja').hide()
                                 $('#cant_blister').hide()
+                                $('#stock_caja').hide()
+                                $('#stock').show()
+                                $('#stock_blister').hide()
                                 $('#price').val(price)
                             }
                         });
                     })
-
-
-
-
                 });
-
-
-
             }
-
-            });
+        });
     });
 });
