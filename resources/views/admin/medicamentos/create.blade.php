@@ -44,7 +44,7 @@
                         <label class="form-label" for="inputUsername">Presentación</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="presentation" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="presentation" class="form-control" id="inputUsername" placeholder="Presentación">
                         </div>
                     </div>
                 </div>
@@ -53,21 +53,21 @@
                         <label class="form-label" for="inputUsername">Laboratorio</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="laboratory" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="laboratory" class="form-control" id="inputUsername" placeholder="Laboratorio">
                         </div>
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Numero por cajas</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="number_box" class="form-control" id="inputUsername" placeholder="Número por cajas">
                         </div>
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Número por Blister</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_blister" class="form-control" id="inputUsername" placeholder="Concentración">
+                            <input type="text" name="number_blister" class="form-control" id="inputUsername" placeholder="Número por Blister">
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
-                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Costo por Caja">
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
@@ -93,33 +93,22 @@
                         <label class="form-label" for="p_caja">Utilidad por caja<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
+                                <span class="input-group-text" id="basic-addon1">%</span>
                             </div>
-                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Utilidad por Caja">
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-col">
-                        <label class="form-label" for="p_caja">IGV por caja<span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
-                            </div>
-                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
-                            @error('p_caja')
-                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
-                            @enderror
-                        </div>
-                    </div>
+                   
                     <div class="form-col">
                         <label class="form-label" for="p_caja">Precio de venta por caja<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">S./</span>
                             </div>
-                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Venta por Caja"  readonly>
                             @error('utilidad')
                                 <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
                             @enderror
@@ -133,7 +122,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
-                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Costo Blister"  readonly>
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
@@ -143,33 +132,22 @@
                         <label class="form-label" for="p_caja">Utilidad por blister<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
+                                <span class="input-group-text" id="basic-addon1">%</span>
                             </div>
-                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Utilidad blister" readonly>
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-col">
-                        <label class="form-label" for="p_caja">IGV por blister<span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
-                            </div>
-                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
-                            @error('p_caja')
-                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
-                            @enderror
-                        </div>
-                    </div>
+                    
                     <div class="form-col">
                         <label class="form-label" for="p_caja">Precio de venta por blister<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">S./</span>
                             </div>
-                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Venta Blister"  readonly>
                             @error('utilidad')
                                 <p class="alert alert-danger">El porcentaje de utilidad es obligatorio</p>
                             @enderror
@@ -183,7 +161,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">S./</span>
                             </div>
-                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="cost_price" class="form-control" id="p_caja" placeholder="Costo Unidad" readonly>
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
@@ -193,33 +171,22 @@
                         <label class="form-label" for="p_caja">Utilidad por unidad<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
+                                <span class="input-group-text" id="basic-addon1">%</span>
                             </div>
-                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="text" step="any" name="utility" class="form-control" id="p_caja" placeholder="Utilidad Unitaria" readonly>
                             @error('p_caja')
                             <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-col">
-                        <label class="form-label" for="p_caja">IGV por unidad<span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">S./</span>
-                            </div>
-                            <input type="text" step="any" name="igv" class="form-control" id="p_caja" placeholder="Precio unitario">
-                            @error('p_caja')
-                            <p class="alert alert-danger">El precio de caja unitario es obligatorio</p>
-                            @enderror
-                        </div>
-                    </div>
+                    
                     <div class="form-col">
                         <label class="form-label" for="p_caja">Precio de venta por unidad<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">S./</span>
                             </div>
-                            <input type="number" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Precio unitario">
+                            <input type="number" step="any" name="sale_price" class="form-control" id="p_caja" placeholder="Venta por Unidad" readonly>
                             @error('utilidad')
                                 <p class="alert alert-danger">La utilidad es obligatorio</p>
                             @enderror
