@@ -20,8 +20,6 @@ class CreatePricesTable extends Migration
             $table->decimal('sale_price',11,2);
             $table->unsignedBigInteger('priceable_id');
             $table->string('priceable_type');
-            $table->unsignedBigInteger('unit_type_id');
-            $table->foreign('unit_type_id')->references('id')->on('unit_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

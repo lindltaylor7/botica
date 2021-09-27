@@ -17,7 +17,9 @@ class CreateBatchesTable extends Migration
             $table->id();
             $table->string('code');
             $table->date('entry_date');
-            $table->date('expiry_date');            
+            $table->date('expiry_date'); 
+            $table->decimal('cost_box',11,2); 
+            $table->integer('quantity_box');          
             $table->unsignedBigInteger('stock_id');
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
             $table->timestamps();

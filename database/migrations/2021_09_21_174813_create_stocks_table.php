@@ -17,6 +17,7 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->integer('quantity');
             $table->string('shelf',50);
+            $table->decimal('cost_stock',11,2);
             $table->unsignedBigInteger('stockable_id');
             $table->string('stockable_type');
             $table->timestamps();
