@@ -17,8 +17,13 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <div class="user_pro_img_area">                        
-                            <img id="pictureUser" src="{{asset('storage/'.$medicamento->image->url)}}" alt="" style="width: 150px; height: 150px; object-fit: cover;">                                   
+                        <div class="user_pro_img_area">
+                            @isset($medicamento->image)
+                            <img id="pictureUser" src="{{asset('storage/'.$medicamento->image->url)}}" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                            @else
+                            <p>No hay imagen para mostrar.</p>
+                            @endisset
+
                             <div class="custom-file-upload">
                                 <input type="file" id="fileUser" name="imageMedicine">
                             </div>
@@ -46,5 +51,4 @@
         };
         reader.readAsDataURL(file);
     }
-    </script>
-    
+</script>

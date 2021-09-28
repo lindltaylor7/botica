@@ -14,12 +14,12 @@ class CreatePricesTable extends Migration
     public function up()
     {
         Schema::create('prices', function (Blueprint $table) {
-            $table->id();
             $table->decimal('cost_price',11,2);
             $table->decimal('utility',11,2);
             $table->decimal('sale_price',11,2);
             $table->unsignedBigInteger('priceable_id');
             $table->string('priceable_type');
+            $table->primary(['priceable_id','priceable_type']);
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-<div class="modal fade" id="priceModal{{$medicamento->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="priceModal{{$medicamento->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,7 +16,7 @@
                                 <div class="input-group">
                                     <h6> Precios: </h6>
                                 </div>
-                            </div>                                                    
+                            </div>
                         </div>
                         @foreach ($medicamento->prices as $precio)
 
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach        
+                        @endforeach
                     </section>
                 </form>
             </div>
@@ -80,3 +80,4 @@
         </div>
     </div>
 </div>
+ --}}

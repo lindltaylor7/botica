@@ -19,8 +19,8 @@ class Article extends Model
         return $this->morphMany('App\Models\Stock','stockable');
     }
     //Relacion POLIMORFICA de uno a muchos Article-Price
-    public function prices(){
-        return $this->morphMany('App\Models\Price','priceable');
+    public function price(){
+        return $this->morphOne('App\Models\Price','priceable');
     }
     //Relacion POLIMORFICA de uno a muchos Article-Detail
     public function details(){

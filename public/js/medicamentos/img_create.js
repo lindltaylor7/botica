@@ -1,13 +1,12 @@
-//Cambiar imagen
-document.getElementById("foto").addEventListener('change', cambiarImagen);
+$(document).ready(function(){
+    $('#foto').on('change', function(){
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = (e) => {
+            $("#picture").setAttribute('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+});
 
-function cambiarImagen(event){
-    var file = event.target.files[0];
 
-    var reader = new FileReader();
-    reader.onload = (event) => {
-        document.getElementById("picture").setAttribute('src', event.target.result);
-    };
-
-    reader.readAsDataURL(file);
-}

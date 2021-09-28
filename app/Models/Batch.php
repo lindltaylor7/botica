@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Batch extends Model
 {
     use HasFactory;
-    protected $fillable=['code','entry_date','expiry_date','stock_id'];
+    protected $fillable=['code','entry_date','expiry_date','cost_box','quantity_box','quantity_unit','stock_id'];
 
     //Relacion inversa de uno a muchos Stock-Batch
     public function stock() {
