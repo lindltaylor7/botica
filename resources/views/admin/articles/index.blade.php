@@ -17,32 +17,37 @@
                             <table id="tablearticles" class="">
                                 <thead>
                                     <tr>
-                                        <th class="d-none d-md-table-cell">Nombre Genérico</th>
-                                        <th class="d-none d-md-table-cell">Nombre Comercial</th>
-                                        <th class="d-none d-md-table-cell">Concentración</th>
-                                        <th class="d-none d-md-table-cell">Presentación</th>
-                                        <th class="d-none d-md-table-cell">Laboratorio</th>
-                                        <th class="d-none d-md-table-cell">Nro por Caja</th>
-                                        <th class="d-none d-md-table-cell">Anaquel</th>
-                                        <th class="d-none d-md-table-cell">Opciones</th>
+                                        <th>Nombre comercial</th>                  
+                                        <th>Marca</th>
+                                        <th>Proovedor</th>  
+                                        <th>Present.</th>                                                       
+                                        <th>Precio</th>
+                                        <th>Stock</th>
+                                        <th>Anaquel</th>
+                                        <th>Foto</th>
+                                        <th>Opciones</th>
                                     </tr>
-
-
                                 </thead>
                                 <tbody id="dynamic-row">
-                                    @foreach ($medicamentos as $medicamento)
-                                        <tr id="row{{ $medicamento->id }}">
-                                            <td>{{ $medicamento->n_generico }}</td>
-                                            <td>{{ $medicamento->n_comercial }}</td>
-                                            <td>{{ $medicamento->concent }}</td>
-                                            <td>{{ $medicamento->present }}</td>
-                                            <td>{{ $medicamento->lab }}</td>
-                                            <td>{{ $medicamento->nro_caja }}</td>
-                                            <td><span class="badge bg-primary">{{ $medicamento->anaquel }}</span></td>
+                                    @foreach ($articulos as $articulo)
+                                        <tr id="row{{ $articulo->id }}">
+                                            <td>{{ $articulo->tradename}}</td>
+                                            <td>{{ $articulo->trademark}}</td>
+                                            <td>{{ $articulo->supplier}}</td>
+                                            <td>{{ $articulo->presentation}}</td>
+                                            <td>{{$articulo->prices->first()->sale_price}}</td>    
+                                            <td>{{ $articulo->supplier}}</td>
+                                            <td><span class="badge bg-primary">a</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$articulo->id}}"></button>
+                                                 @include('admin.articles.imgarticlemodal')
+                                              </td>
                                             <td class="text-center">
-                                             <button class="" id="{{ $medicamento->id }}" data-bs-toggle="modal" data-bs-target="#priceModal"><i  class="fa fa-dollar-sign mr-25"></i></button>
-                                             <button class=""  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit mr-25"></i></button>
-                                             <button class="" id="{{ $medicamento->id }}"><i class="fas fa-trash mr-25"></i></button>
+                                                <button type="button"  class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-comments-dollar"></i></button>
+                                                {{-- @include('admin.articles.pricemodal') --}}
+                                                <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$articulo->id}}"><i class="far fa-edit"></i></button>
+                                   {{--              @include('admin.articles.medicinemodaledit') --}}
+                                                <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

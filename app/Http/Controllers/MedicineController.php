@@ -172,7 +172,7 @@ class MedicineController extends Controller
          if ($request->file('imageMedicine')) {
             $medicine->image()->delete();
             $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
-            $medicine->image()->create([
+            $medicine->image()->create([                
                 'url' => $url
             ]);
         }
