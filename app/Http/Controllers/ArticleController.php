@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Price;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,8 +15,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $medicamentos = Article::all();
-        return view('admin.articles.index', compact('medicamentos'));
+        $articulos = Article::all();
+        $precios = Price::all();
+
+        return view('admin.articles.index', compact('articulos','precios'));
     }
 
     /**

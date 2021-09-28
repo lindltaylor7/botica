@@ -6,7 +6,7 @@
 
 <main class="content">
     <div class="wrapper">
-        <form method="POST" action="{{route('medicamentos.store')}}" enctype="multipart/form-data" id="wizard">
+        <form method="POST" action="{{route('medicamentos.store')}}" enctype="multipart/form-data" id="wizard" style="height: auto;">
             @csrf
             <!-- SECTION 1 -->
             <h4></h4>
@@ -19,11 +19,11 @@
                 <h3>Datos generales De Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Nombre genérico <span class="text-danger">*</span></label>
+                        <label class="form-label">Nombre genérico <span class="text-danger">*</span></label>
                         <div class="form-holder">
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
-                                <input type="text" name="generic_name" class="form-control" id="inputUsername" autocomplete="off" placeholder="Nombre genérico" value="{{old('generic_name')}}">
+                                <input type="text" name="generic_name" class="form-control" autocomplete="off" placeholder="Nombre genérico" value="{{old('generic_name')}}">
                             </div>
                             @error('generic_name')
                                 <p class="text-danger">{{$message}}</p>
@@ -31,10 +31,10 @@
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Nombre Comercial</label>
+                        <label class="form-label">Nombre Comercial</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="tradename" class="form-control" id="inputUsername" autocomplete="off" placeholder="Nombre Comercial" value="{{old('tradename')}}">
+                            <input type="text" name="tradename" class="form-control" autocomplete="off" placeholder="Nombre Comercial" value="{{old('tradename')}}">
                         </div>
                         @error('tradename')
                         <p class="text-danger">{{$message}}</p>
@@ -43,20 +43,20 @@
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Concentración</label>
+                        <label class="form-label">Concentración</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="concentration" class="form-control" id="inputUsername" autocomplete="off" placeholder="Concentración" value="{{old('concentration')}}">
+                            <input type="text" name="concentration" class="form-control" autocomplete="off" placeholder="Concentración" value="{{old('concentration')}}">
                         </div>
                         @error('concentration')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Presentación</label>
+                        <label class="form-label">Presentación</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="presentation" class="form-control" id="inputUsername" autocomplete="off" placeholder="Presentación" value="{{old('presentation')}}">
+                            <input type="text" name="presentation" class="form-control" autocomplete="off" placeholder="Presentación" value="{{old('presentation')}}">
                         </div>
                         @error('presentation')
                         <p class="text-danger">{{$message}}</p>
@@ -65,30 +65,30 @@
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Laboratorio</label>
+                        <label class="form-label">Laboratorio</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="laboratory" class="form-control" id="inputUsername" autocomplete="off" placeholder="Laboratorio" value="{{old('laboratory')}}">
+                            <input type="text" name="laboratory" class="form-control" autocomplete="off" placeholder="Laboratorio" value="{{old('laboratory')}}">
                         </div>
                         @error('laboratory')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Numero por cajas</label>
+                        <label class="form-label">Numero por cajas</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" id="inputUsername" placeholder="Numero por cajas" value="{{old('number_box')}}">
+                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero por cajas" value="{{old('number_box')}}">
                         </div>
                         @error('number_box')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Número por Blister</label>
+                        <label class="form-label">Número por Blister</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" id="inputUsername" placeholder="Número por Blister" value="{{old('number_blister')}}">
+                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número por Blister" value="{{old('number_blister')}}">
                         </div>
                         @error('number_blister')
                         <p class="text-danger">{{$message}}</p>
@@ -102,76 +102,76 @@
                 <h3>Precios del Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de Costo por caja</label>
+                        <label class="form-label">Precio de Costo por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_box" id="cost_box" class="form-control" id="inputUsername" placeholder="Costo por Caja">
+                            <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja">
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Porcentaje de Utilidad por caja</label>
+                        <label class="form-label">Porcentaje de Utilidad por caja</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja">
+                            <input type="text" id="utility_box" class="form-control" placeholder="Utilidad por caja">
 
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de venta por caja</label>
+                        <label class="form-label">Precio de venta por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" id="sale_price_box" class="form-control" id="inputUsername" placeholder="P. de venta por caja" readonly>
+                            <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja" readonly>
 
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de Costo por blister</label>
+                        <label class="form-label">Precio de Costo por blister</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" id="cost_price_blister" class="form-control" id="inputUsername" placeholder="Costo por blister" readonly>
+                            <input type="text" id="cost_price_blister" class="form-control" placeholder="Costo por blister" readonly>
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Porcentaje de Utilidad por blister</label>
+                        <label class="form-label">Porcentaje de Utilidad por blister</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" id="utility_blister" class="form-control" id="inputUsername" placeholder="Utilidad por blister" readonly>
+                            <input type="text" id="utility_blister" class="form-control" placeholder="Utilidad por blister" readonly>
 
                         </div>
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de venta por blister</label>
+                        <label class="form-label">Precio de venta por blister</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" id="sale_price_blister" class="form-control" id="inputUsername" placeholder="P. de venta por blister" readonly>
+                            <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly>
 
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de Costo por unidad</label>
+                        <label class="form-label">Precio de Costo por unidad</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_price" id="cost_price_unit" class="form-control" id="inputUsername" placeholder="Costo por unidad" readonly>
+                            <input type="text" name="cost_price" id="cost_price_unit" class="form-control" placeholder="Costo por unidad" readonly>
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Porcentaje de Utilidad por unidad</label>
+                        <label class="form-label">Porcentaje de Utilidad por unidad</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility" id="utility_unit" class="form-control" id="inputUsername" placeholder="Utilidad por unidad" readonly>
+                            <input type="text" name="utility" id="utility_unit" class="form-control" placeholder="Utilidad por unidad" readonly>
                         </div>
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Precio de venta por unidad</label>
+                        <label class="form-label">Precio de venta por unidad</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="sale_price" id="sale_price_unit" class="form-control" id="inputUsername" placeholder="P. de venta por unidad" readonly>
+                            <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly>
 
                         </div>
                     </div>
@@ -180,7 +180,7 @@
 
             <h4></h4>
             <section>
-                <h3>stock</h3>
+                <h3>stock / lote</h3>
                 <div class="form-row">
                     <div class="form-col">
                         <label for="">
@@ -200,72 +200,89 @@
                             <input type="text" name="cost_stock" class="form-control">
                         </div>
                     </div>
+                </div>
+                
+                <div class="form-row">
                     <div class="form-col">
                         <label for="">
                             Cantidad de Cajas
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="nunmber" name="quantity_box" class="form-control">
+                            <input type="number" name="quantity_box" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label for="">
+                            N° de Lotes
+                        </label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <select class="form-control" name="" id="inputDynamic">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <h3>Lotes</h3>
-                <div class="shadow card p-4">
-                    <div class="form-row">
-                        <div class="form-col">
-                            <label for="">
-                                Código de lote
-                            </label>
-                            <div class="form-holder">
-                                <i class="zmdi zmdi-edit"></i>
-                                <input type="text" name="code" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
-                            </div>
-                        </div>
 
-                        <div class="form-col">
-                            <label for="">
-                                Cantidad de unidades
-                            </label>
-                            <div class="form-holder">
-                                <i class="zmdi zmdi-edit"></i>
-                                <input type="number" name="quantity_unit" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-col">
-                            <label for="">
-                                Fecha de ingreso
-                            </label>
-                            <div class="form-holder">
-                                <i class="zmdi zmdi-edit"></i>
+                <div id="boxDynamic">
+                    <div class="p-4 border border-secondary">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="">
+                                    Código de lote
+                                </label>
                                 <div class="form-holder">
-                                    <input type="date" name="entry_date" class="form-control" id="inputUsername" placeholder="">
-                                    @error('f_ingreso')
-                                        <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
-                                    @enderror
+                                    <i class="zmdi zmdi-edit"></i>
+                                    <input type="text" name="batch[1][code]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                </div>
                             </div>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <label for="">
-                                Fecha de vencimiento
-                            </label>
-                            <div class="form-holder">
-                                <i class="zmdi zmdi-edit"></i>
+            
+                            <div class="form-col">
+                                <label for="">
+                                    Cantidad de unidades
+                                </label>
                                 <div class="form-holder">
-                                    <input type="date" name="expiry_date" class="form-control" id="inputUsername" placeholder="">
+                                    <i class="zmdi zmdi-edit"></i>
+                                    <input type="number" name="batch[1][quantity_unit]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                </div>
+                            </div>
+            
+            
+                        </div>
+            
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="">
+                                    Fecha de ingreso
+                                </label>
+                                <div class="form-holder">
+                                    <i class="zmdi zmdi-edit"></i>
+                                    <div class="form-holder">
+                                        <input type="date" name="batch[1][entry_date]" class="form-control" placeholder="">
+                                        @error('f_ingreso')
+                                            <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
+                                        @enderror
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <label for="">
+                                    Fecha de vencimiento
+                                </label>
+                                <div class="form-holder">
+                                    <i class="zmdi zmdi-edit"></i>
+                                    <div class="form-holder">
+                                        <input type="date" name="batch[1][expiry_date]" class="form-control" placeholder="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </section>
 
             <h4></h4>
@@ -288,12 +305,68 @@
     </div>
 </main>
 
+<template id="template-input">
+    <div class="p-4 border border-secondary mt-3">
+        <div class="form-row">
+            <div class="form-col">
+                <label for="">
+                    Código de lote
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <input type="text" name="" class="form-control code" placeholder="Ingrese el código de lote" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-col">
+                <label for="">
+                    Cantidad de unidades
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <input type="number" name="" class="form-control quantity_unit" placeholder="Ingrese el código de lote" required autocomplete="off">
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-col">
+                <label for="">
+                    Fecha de ingreso
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <div class="form-holder">
+                        <input type="date" name="" class="form-control entry_date" placeholder="">
+                        @error('f_ingreso')
+                            <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
+                        @enderror
+                </div>
+                </div>
+            </div>
+            <div class="form-col">
+                <label for="">
+                    Fecha de vencimiento
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <div class="form-holder">
+                        <input type="date" name=""  class="form-control expiry_date" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 
 
 @endsection
 
 @section('javascript')
-    <script src="{{asset('js/medicamentos/math_precios.js')}}"></script>
+    {{-- <script src="{{asset('js/medicamentos/math_precios.js')}}"></script> --}}
     <script src="{{asset('vendor/js/jquery.steps.js')}}"></script>
     <script src="{{asset('vendor/js/datepicker.js')}}"></script>
     <script src="{{asset('vendor/js/main.js')}}"></script>
@@ -331,12 +404,12 @@
             $('#utility_box').on('keyup', function(){
 
                 //CAJA
-                var pc_box = $('#cost_box').val()
-                var percent = $(this).val() * pc_box / 100
-                var subtotal = parseFloat(pc_box) + parseFloat(percent)
-                var igv = subtotal * 18 /100
-                var total = subtotal + igv
-                $('#sale_price_box').val(total.toFixed(1))
+                var pc_box = $('#cost_box').val();
+                var percent = $(this).val();
+                var subtotal = parseFloat(pc_box) + parseFloat(percent);
+                var igv = subtotal * 18 /100;
+                var total = subtotal + igv;
+                $('#sale_price_box').val(total.toFixed(1));
 
                 $('#utility_blister').val(percent)
                 $('#utility_unit').val(percent)
@@ -353,8 +426,22 @@
                 };
                 reader.readAsDataURL(file);
             });
+
+            const $template = document.getElementById("template-input").content;
+            const $fragment = document.createDocumentFragment(); 
+            $('#inputDynamic').on('change', function (e) {
+                d.getElementById("boxDynamic").textContent = "";
+                for (let i = 0; i < $(this).val(); i++) {
+                    $template.querySelector(".code").name = `batch[${i}][code]`;
+                    $template.querySelector(".quantity_unit").name = `batch[${i}][quantity_unit]`;
+                    $template.querySelector(".entry_date").name = `batch[${i}][entry_date]`;
+                    $template.querySelector(".expiry_date").name = `batch[${i}][expiry_date]`;
+
+                    let $clone = d.importNode($template, true);
+                    $fragment.appendChild($clone);
+                }
+                $('#boxDynamic').append($fragment)
+            })
         });
-
     </script>
-
 @endsection

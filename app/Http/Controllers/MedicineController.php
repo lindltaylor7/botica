@@ -48,7 +48,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        return $request;
         $request->validate([
                 'generic_name' => 'required',
                 'tradename' => 'required',
@@ -172,7 +172,7 @@ class MedicineController extends Controller
          if ($request->file('imageMedicine')) {
             $medicine->image()->delete();
             $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
-            $medicine->image()->create([
+            $medicine->image()->create([                
                 'url' => $url
             ]);
         }
