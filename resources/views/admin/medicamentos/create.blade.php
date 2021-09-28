@@ -113,6 +113,7 @@
                         <div class="form-holder">
                             <i>%</i>
                             <input type="text" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja">
+
                         </div>
                     </div>
                     <div class="form-col">
@@ -120,6 +121,7 @@
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" id="sale_price_box" class="form-control" id="inputUsername" placeholder="P. de venta por caja" readonly>
+
                         </div>
                     </div>
                 </div>
@@ -136,13 +138,16 @@
                         <div class="form-holder">
                             <i>%</i>
                             <input type="text" id="utility_blister" class="form-control" id="inputUsername" placeholder="Utilidad por blister" readonly>
+
                         </div>
                     </div>
+
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Precio de venta por blister</label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" id="sale_price_blister" class="form-control" id="inputUsername" placeholder="P. de venta por blister" readonly>
+
                         </div>
                     </div>
                 </div>
@@ -161,11 +166,13 @@
                             <input type="text" name="utility" id="utility_unit" class="form-control" id="inputUsername" placeholder="Utilidad por unidad" readonly>
                         </div>
                     </div>
+
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Precio de venta por unidad</label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" name="sale_price" id="sale_price_unit" class="form-control" id="inputUsername" placeholder="P. de venta por unidad" readonly>
+
                         </div>
                     </div>
                 </div>
