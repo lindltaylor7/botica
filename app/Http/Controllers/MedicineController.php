@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\Promise\all;
 
+use App\Http\Requests\StoreMedicineRequest;
+
 class MedicineController extends Controller
 {
     /**
@@ -46,31 +48,81 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //return $request;
         $request->validate([
-            'generic_name' => 'required',
-            'tradename'   => 'required',
-            'shelf'    => 'required',
-            'cost_price' => 'required',
-            'utility'    => 'required',
-            'sale_price'     => 'required',
-            'code'  => 'required',
-            'entry_date'   => 'required',
-            'expiry_date' => 'required'
-      
+                'generic_name' => 'required',
+                'tradename' => 'required',
+                'concentration'   => 'required',
+                'presentation'   => 'required',
+                'laboratory'   => 'required',
+                'number_box' => 'required',
+                'number_blister' => 'required',
+                'cost_box' => 'required',
+                'cost_price' => 'required',
+                'utility' => 'required',
+                'sale_price' => 'required',
+
         ]);
 
-        if ($request->file('image')) {
+        $duplicate = Medicine::where('generic_name', $request->get('generic_name'))
+                                ->where('tradename', $request->get('tradename'))
+                                ->where('concentration', $request->get('concentration'))
+                                ->where('presentation', $request->get('presentation'))
+                                ->where('laboratory', $request->get('laboratory'))
+                                ->count();
+
+        if($duplicate == 0){
+            $medicamento = Medicine::create($request->all());
+            $medicamento->price()->create([
+                'cost_price' => $request->get('cost_price'),
+                'utility' => $request->get('utility'),
+                'sale_price' =>$request->get('sale_price')
+            ]);
+            $stock=$medicamento->stocks()->create([
+                'shelf' => $request->get('shelf'),
+                'cost_stock' => $request->get('cost_stock')
+            ]);
+
+            $batch =  Batch::create([
+                'code' => $request->get('code'),
+                'entry_date' => $request->get('entry_date'),
+                'expiry_date' => $request->get('expiry_date'),
+                'cost_box' => $request->get('cost_box'),
+                'quantity_box' => $request->get('quantity_box'),
+                'quantity_unit' => $request->get('quantity_unit'),
+                'stock_id' => $stock->id
+            ]);
+
+            if($request->file('foto')){
+                $url = Storage::disk('public')->put('medicines', $request->file('foto'));
+                $medicamento->image()->create([
+                    'url' => $url
+                ]);
+            }
+
+
+        }else{
+            return redirect()->back()->with('message','Este medicamento ya ha sido registrado');
+        }
+
+
+
+
+
+
+
+
+        /* if ($request->file('image')) {
             $url = Storage::put('medicines', $request->file('image'));
-            /*  return $url; */
+             return $url;
 
             $request->merge([
                 'img' => $url
             ]);
-        }
+        } */
 
-        $medicamento = Medicine::create($request->all());
-        $request->merge([
+
+       /*  $request->merge([
             'stockable_id' => $medicamento->id,
             'stockable_type' => "App\Models\Medicine",
             'priceable_id' => $medicamento->id,
@@ -78,7 +130,7 @@ class MedicineController extends Controller
         ]);
         $precio = Price::create($request->all());
         $stock = Stock::create($request->all());
-        $batch = Batch::created($request->all());
+        $batch = Batch::created($request->all()); */
 
         return redirect(route('medicamentos.index'));
     }
@@ -119,8 +171,8 @@ class MedicineController extends Controller
 
          if ($request->file('imageMedicine')) {
             $medicine->image()->delete();
-            $url = Storage::disk('public')->put('usuarios', $request->file('imageMedicine'));
-            $medicine->image()->create([                
+            $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
+            $medicine->image()->create([
                 'url' => $url
             ]);
         }

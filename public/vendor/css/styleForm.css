@@ -67,7 +67,7 @@ img {
 .wizard {
   position: relative;
   background: #fff;
-  padding: 64px 58px 0;
+  padding: 24px 58px 0;
   height: 548px; }
 
 .steps .current-info, .steps .number {
@@ -130,16 +130,16 @@ h3 {
   padding-left: 46px;
   color: #999;
   font-family: "Poppins-Medium";
-  /* &::-webkit-input-placeholder { 
+  /* &::-webkit-input-placeholder {
   	color: #333;
   }
-  &::-moz-placeholder { 
+  &::-moz-placeholder {
   	color: #333;
   }
-  &:-ms-input-placeholder { 
+  &:-ms-input-placeholder {
   	color: #333;
   }
-  &:-moz-placeholder { 
+  &:-moz-placeholder {
   	color: #333;
   } */ }
   .form-control:focus {

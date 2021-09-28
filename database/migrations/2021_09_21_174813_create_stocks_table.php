@@ -15,7 +15,6 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
             $table->string('shelf',50);
             $table->decimal('cost_stock',11,2);
             $table->unsignedBigInteger('stockable_id');

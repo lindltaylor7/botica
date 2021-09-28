@@ -18,11 +18,11 @@ class Medicine extends Model
      //Relacion POLIMORFICA de uno a muchos Medicine-Stock
      public function stocks(){
         return $this->morphMany('App\Models\Stock','stockable');
-    }  
+    }
     //Relacion POLIMORFICA de uno a muchos Article-Price
-    public function prices(){
-        return $this->morphMany('App\Models\Price','priceable');
-    } 
+    public function price(){
+        return $this->morphOne('App\Models\Price','priceable');
+    }
     //Relacion POLIMORFICA de uno a muchos Medicine-Detail
     public function details(){
         return $this->morphMany('App\Models\Detail','detailable');

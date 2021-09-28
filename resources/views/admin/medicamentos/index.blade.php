@@ -16,10 +16,10 @@
                       <thead>
                           <tr>
                             <th>Nombre Genérico</th>
-                            <th>Nombre Comercial</th>                    
+                            <th>Nombre Comercial</th>
                             <th>Concent.</th>
                             <th>Present.</th>
-                            <th>Laboratorio</th>                    
+                            <th>Laboratorio</th>
                             <th>Precio</th>
                             <th>Stock</th>
                             <th>Anaquel</th>
@@ -37,11 +37,19 @@
                             <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->presentation))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
-                            <td>{{$medicamento->prices->first()->sale_price}}</td>                
-                            <td>{{$medicamento->stocks()->first()->quantity}}</td>
+                            <td>S./ {{$medicamento->price->sale_price}}</td>
+                            <td>
+                                @foreach ($medicamento->stocks as $stock)
+                                    @foreach ($stock->batches as $batch)
+                                        {{$batch->quantity_unit}}
+                                    @endforeach
+                                @endforeach
+                            </td>
+                            <td>
                             @foreach ($medicamento->stocks as $stock)
-                            <td><span class="badge bg-primary">{{$stock->shelf}}</span></td>
+                            <span class="badge bg-primary">{{$stock->shelf}}</span>
                             @endforeach
+                            </td>
                             <td>
                               <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
                                @include('admin.medicamentos.imgmodal')
@@ -64,7 +72,7 @@
       </div>
   </div>
 </div>
-   
+
 @endsection
 
 @section('javascript')

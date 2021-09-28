@@ -30,6 +30,7 @@ class MedicamentoController extends Controller
      */
     public function create()
     {
+
         return view('admin.medicamentos.create');
     }
 

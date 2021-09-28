@@ -81,11 +81,7 @@
                     <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
-                    <td>
-                    @foreach ($medicamento->prices as $precio)
-                    {{$precio->sale_price}}
-                    @endforeach
-                    </td>
+                    <td>{{$medicamento->price->sale_price}}</td>
                     <td>{{$medicamento->total}}</td>
                     <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
                     <td>
