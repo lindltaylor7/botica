@@ -48,7 +48,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        return $request;
         $request->validate([
                 'generic_name' => 'required',
                 'tradename' => 'required',
