@@ -18,16 +18,41 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <select class="form-control" name="type">
-                                <option selected disabled>Selecciona tipo de stock</option>
+                            <select class="form-control" name="type" id="type">
+                                <option selected disabled>Seleccionar</option>
                                 <option value="1">Articulo</option>
                                 <option value="2">Medicamento</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-col">
+                    <div class="form-col" id="stockIdN" name="stockIdN">
                         <label for="">
-                            Medicamento
+                            Lista de Productos
+                        </label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <select class="js-example-basic-single form-control" name="stockId">
+                                <option selected disabled>Search</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col" id="stockIdA" name="stockIdA">
+                        <label for="">
+                            Lista de Artículos
+                        </label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <select class="js-example-basic-single form-control" name="stockId">
+                                <option selected disabled>Search</option>
+                                @foreach ($articles as $article)
+                                    <option value="{{{$article->id, 'App\Models\Article'}}}">{{$article->tradename}} - {{$article->trademark}} - {{$article->presentation}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col" id="stockIdM" name="stockIdM">
+                        <label for="">
+                            Lista de Medicamentos
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
@@ -36,97 +61,100 @@
                                 @foreach ($medicamentos as $medicamento)
                                     <option value="{{{$medicamento->id, 'App\Models\Medicine'}}}">{{$medicamento->generic_name}} - {{$medicamento->tradename}} - {{$medicamento->concentration}}</option>
                                 @endforeach
-                                @foreach ($articles as $article)
-                                    <option value="{{{$article->id, 'App\Models\Article'}}}">{{$article->tradename}} - {{$article->trademark}} - {{$article->presentation}}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="form-col">
-                        <label for="">
-                            Código de lote
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="codLote" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
-                        </div>
-                    </div>
                 </div>
-                <div class="form-row">   
-                    <div class="form-col">
-                        <label for="">
-                            Cajas
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-email"></i>
-                            <input type="number" name="box" class="val form-control" id="value1" placeholder="Cantidad de cajas" required autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <label for="">
-                            Cantidad de u/c
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-smartphone-android"></i>
-                            <input type="number" name="boxcu" class="val form-control" id="value2" placeholder="Ingrese la cantidad de cajas" required autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <label for="">
-                            Cantidad
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-spellcheck"></i>
-                            <input type="number" name="quantity" class="form-control" id="valueFinal" readonly>
-                        </div>
-                    </div>
-                </div>
+            </section>
+
+            <section>
+                <h3>stock</h3>
                 <div class="form-row">
                     <div class="form-col">
                         <label for="">
                             Anaquel
                         </label>
                         <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="anaquel" class="form-control" placeholder="Ingrese Anaquel" required autocomplete="off">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <input type="text" name="shelf" class="form-control">
                         </div>
                     </div>
                     <div class="form-col">
                         <label for="">
-                            Costo
+                            Costo de Stock
                         </label>
                         <div class="form-holder">
-                            <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="costo" class="form-control" placeholder="Ingrese Anaquel" required autocomplete="off">
+                            <i>S./</i>
+                            <input type="text" name="cost_stock" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <label for="">
+                            Cantidad de Cajas
+                        </label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <input type="nunmber" name="quantity_box" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <h3>Lotes</h3>
+                <div class="shadow card p-4">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="">
+                                Código de lote
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-edit"></i>
+                                <input type="text" name="code" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="form-col">
+                            <label for="">
+                                Cantidad de unidades
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-edit"></i>
+                                <input type="number" name="quantity_unit" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="">
+                                Fecha de ingreso
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-edit"></i>
+                                <div class="form-holder">
+                                    <input type="date" name="entry_date" class="form-control" id="inputUsername" placeholder="">
+                                    @error('f_ingreso')
+                                        <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
+                                    @enderror
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="">
+                                Fecha de vencimiento
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-edit"></i>
+                                <div class="form-holder">
+                                    <input type="date" name="expiry_date" class="form-control" id="inputUsername" placeholder="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <h4></h4>
-            <section>
-                <h3>Añadir Fecha</h3>
-                <div class="form-row">
-                    <div class="form-col">
-                        <label for="">
-                            Fecha de ingreso
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-calendar"></i>
-                            <input type="date" class="form-control" name="f_ingreso">
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <label for="">
-                            Fecha de vencimiento
-                        </label>
-                        <div class="form-holder">
-                            <i class="zmdi zmdi-calendar"></i>
-                            <input type="date" class="form-control" name="f_vencimiento">
-                        </div>
-                    </div>
-                </div>
-            </section>
         </form>
     </div>
 </main>
@@ -151,7 +179,33 @@
                 $('#wizard').submit();
             });
         });
+
+        $(document).ready(function() {
+            $('#stockIdN').show();
+            $('#stockIdM').hide();
+            $('#stockIdA').hide();
+
+            $("select#type").on( 'change', function() {
+                if( $(this).val() == "1" ) {
+                    $('#stockIdM').hide();
+                    $('#stockIdA').show();
+                    $('#stockIdN').hide();
+                }
+                else if ( $(this).val() == "2") {
+                    $('#stockIdA').hide();
+                    $('#stockIdM').show();
+                    $('#stockIdN').hide();
+                }
+                else
+                {
+                    $('#stockIdN').show();
+                    $('#stockIdM').hide();
+                    $('#stockIdA').hide();
+                }
+            });
+        });
     </script>
+
     <script src="{{asset('js/stocks/calc.js')}}"></script>
 
 @endsection
