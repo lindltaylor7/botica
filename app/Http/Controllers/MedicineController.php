@@ -48,7 +48,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        return $request;
         $request->validate([
                 'generic_name' => 'required',
                 'tradename' => 'required',
@@ -215,12 +215,11 @@ class MedicineController extends Controller
     }
     public function medPrice(Request $request)
     {
-        $medicamentos = Medicine::select('medicines.*', 'prices.sale_price', 'stocks.quantity', DB::raw('sum(stocks.quantity) as sumatoria'))
+        $medicamentos = Medicine::select('medicines.*','prices.*')
             ->leftJoin('prices', 'prices.priceable_id', '=', 'medicines.id')
-            ->leftJoin('stocks', 'stocks.stockable_id', '=', 'medicines.id')
             ->where('generic_name', 'like', '%' . $request->get('search') . '%')
             ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
-            ->groupBy('stocks.stockable_id')
+            ->take(5)
             ->get();
         return json_encode($medicamentos);
     }

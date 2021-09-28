@@ -6,31 +6,38 @@
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Ventas</h1>
 
         <div id="client-search" class="d-flex flex-column justify-content-between">
             <p id="info-medic"></p>
             <input type="hidden" name="cliente_id" id="cliente_id">
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="dni">Cliente</label>
+                        <div class="">
+                            <input type="text" name="dni" class="d-inline form-control w-100" id="search_dni" placeholder="Ingrese el DNI del cliente">
+                        </div>
+                        <input type="text" name="nombre_cliente" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-50" readonly require>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" name="check" type="checkbox" id="cajaCheck">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Sin DNI
+                        </label>
+                    </div>
 
-            <div class="form-group">
-                <label for="dni">Cliente</label>
-                <div class="">
-                    <input type="text" name="dni" class="d-inline form-control w-25" id="search_dni" placeholder="Ingrese el DNI del cliente">
                 </div>
-                <input type="text" name="nombre_cliente" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-50" readonly require>
+                <div class="col-md">
+                    <div class="form-group mb-5">
+                        <label for="date">Fecha Actual</label>
+                        <input type="date" class="form-control" name="fecha" id="fecha" value="@php echo date('Y-m-d'); @endphp" readonly>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-check mb-3">
-                <input class="form-check-input" name="check" type="checkbox" id="cajaCheck">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Sin DNI
-                </label>
-            </div>
 
-            <div class="form-group mb-5">
-                <label for="date">Fecha Actual</label>
-                <input type="date" class="form-control" name="fecha" id="fecha" value="@php echo date('Y-m-d'); @endphp" readonly>
-            </div>
+
+
         </div>
 
         <div id="container-search" class="d-flex flex-column justify-content-between">

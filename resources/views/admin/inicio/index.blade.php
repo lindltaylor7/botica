@@ -43,7 +43,7 @@
             <div class="main__grafic-title">
                 <div class="separator"></div>
                 <div class="main__grafic-text">
-                    <span class="d-block fs-4 fw-bolder">Ventas por mes</span>
+                    <span class="d-block fs-4 fw-bolder">Ventas por día</span>
                     <span>Lorem ipsum dolor sit amet, consectetur</span>
                 </div>
             </div>
@@ -78,12 +78,12 @@
           <tbody>
             @foreach($medicamentos as $medicamento)
                 <tr>
-                    <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
+                    <td>{{ucfirst(mb_strtolower($medicamento->generic_name,'UTF-8'))}}</td>
+                    <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
                     <td>{{$medicamento->price->sale_price}}</td>
                     <td>{{$medicamento->total}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
+                    <td>{{ucfirst(mb_strtolower($medicamento->laboratory,'UTF-8'))}}</td>
                     <td>
                     @foreach ($medicamento->stocks as $stock)
                     <span class="badge bg-primary">{{$stock->shelf}}</span>

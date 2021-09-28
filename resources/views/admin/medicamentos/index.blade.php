@@ -7,7 +7,7 @@
   <h1 class="h3 mb-3">Tabla de Medicamentos</h1>
   <div>
       <div class="">
-          <div class="card">
+          <div class="card shadow p-4">
               <div class="m-3">
                   <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Medicamentos</a>
               </div>
