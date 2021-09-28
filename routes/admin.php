@@ -32,6 +32,9 @@ Route::post('medicamentos/updprecios', [MedicineController::class, 'preciosUpd']
 Route::get('articulos',[ArticleController::class, 'index'])->name('articles.index');
 Route::get('articulos/create',[ArticleController::class, 'create'])->name('articles.create');
 Route::post('articulos/store',[ArticleController::class, 'store'])->name('articles.store');
+Route::put('articulos/{id}/update', [ArticleController::class, 'update'])->name('articles.update');
+
+
 
 Route::post('clientes/store', [CustomerController::class, 'store'])->name('clientes.store');
 

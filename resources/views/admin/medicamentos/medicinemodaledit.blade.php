@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
-                <form action="{{route('medicamentos.update',$medicamento->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('articles.update',$medicamento->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group">

@@ -35,7 +35,7 @@
                                             <td>{{ $articulo->trademark}}</td>
                                             <td>{{ $articulo->supplier}}</td>
                                             <td>{{ $articulo->presentation}}</td>
-                                            <td>{{$articulo->prices->first()->sale_price}}</td>    
+                                            <td>{{$articulo->price->first()->sale_price}}</td>    
                                             <td>{{ $articulo->supplier}}</td>
                                             <td><span class="badge bg-primary">a</span></td>
                                             <td>
@@ -44,9 +44,9 @@
                                               </td>
                                             <td class="text-center">
                                                 <button type="button"  class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-comments-dollar"></i></button>
-                                                {{-- @include('admin.articles.pricemodal') --}}
+                                                @include('admin.articles.pricearticlemodal')
                                                 <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$articulo->id}}"><i class="far fa-edit"></i></button>
-                                   {{--              @include('admin.articles.medicinemodaledit') --}}
+                                                @include('admin.articles.articlemodaledit')
                                                 <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>

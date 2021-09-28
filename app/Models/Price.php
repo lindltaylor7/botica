@@ -9,7 +9,7 @@ class Price extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['cost_price', 'utility', 'sale_price','priceable_id','priceable_type','unit_tye_id'];
+    protected $fillable = ['cost_price', 'utility', 'sale_price','priceable_id','priceable_type'];
 
     //Relacion inversa de uno a muchos Unit_type-Price
     public function unit_type() {

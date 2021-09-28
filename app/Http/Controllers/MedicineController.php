@@ -173,6 +173,7 @@ class MedicineController extends Controller
             $medicine->image()->delete();
             $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
             $medicine->image()->create([                
+
                 'url' => $url
             ]);
         }
