@@ -10,7 +10,7 @@
                 @csrf
                 <input type="hidden" name="id_stock" id="id_stock">
 
-                <table class="table">
+                <table class="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">Características</th>
