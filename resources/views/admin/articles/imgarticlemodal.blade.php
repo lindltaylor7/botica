@@ -12,13 +12,19 @@
                 @else
                 <p>No hay imagen para mostrar</p>
                 @endif  --}}
-                
+
                 <form action="{{route('articles.update',$articulo->id)}}" id="signup-form" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <div class="user_pro_img_area">                        
-                            <img id="pictureArticleupdate" src="{{asset('storage/'.$articulo->image->url)}}" alt="" style="width: 150px; height: 150px; object-fit: cover;">                                   
+                        <div class="user_pro_img_area">
+                            @if($articulo->image)
+                            <img class="" id="pictureArticleupdate" src="{{Storage::url($articulo->image->url)}}" alt="Imagen de medicamento" style="width:100%">
+                            {{-- <img class="" src="https://boticaexcelentemente.com/storage/{{$medicamento->img}}" alt="Imagen de medicamento" style="width:100%">
+                            <img id="pictureArticleupdate" src="{{asset('storage/'.$articulo->image->url)}}" alt="" style="width: 150px; height: 150px; object-fit: cover;">                                    --}}
+                            @else
+                            <p>No hay imagen para mostrar</p>
+                            @endif
                             <div class="custom-file-upload">
                                 <input type="file" id="fotoArticleupdate" name="fotoArticleupdate">
                             </div>
@@ -46,6 +52,5 @@
         };
         reader.readAsDataURL(file);
     }
-    
+
     </script>
-    

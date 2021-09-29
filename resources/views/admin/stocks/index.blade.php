@@ -14,19 +14,19 @@
         <div class="row">
             @foreach($medicines as $medicine)
                 <div class="col-xl-6 col-sm-6 col-md-6">
-                    <div class="card mb-3 mt-2 rounded">
+                    <div class="shadow card mb-3 mt-2 rounded">
                         <div class="row">
                             <div class="col-xl-5">
                                 <div class="text-center p-4 border-end">
                                     <div>
-                                        @if($medicine->img)
-                                        <img class="" src="{{Storage::url($medicamento->img)}}" alt="Imagen de medicamento" style="width:100%">
-                                        {{-- <img class="img__stock rounded-circle" src="https://boticaexcelentemente.com/storage/{{$stock->img}}" alt="Imagen de medicamento"> --}}
+                                        @if($medicine->image)
+                                        <img class="img__stock rounded-circle" src="{{Storage::url($medicine->image->url)}}" alt="Imagen de medicamento">
+                                        {{-- <img class=" rounded-circle" src="https://boticaexcelentemente.com/storage/{{$stock->img}}" alt="Imagen de medicamento"> --}}
                                         @else
                                         <img class="img__stock rounded-circle" src="{{asset('img/medic1.jpg')}}" alt="">
                                         @endif
                                     </div>
-                                    <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$medicine->generic_name}}</span><br>
+                                    <h5 class="mt-3">{{$medicine->generic_name}}</h5 class="mt-3">
                                     <small class="text-truncate pb-1">{{$medicine->tradename}}</small>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                         <div class="col-6">
                                             <div>
                                                 @php
-                                                    $suma=0    
+                                                    $suma=0
                                                 @endphp
                                                 <p class="text-muted mb-2 text-truncate">Cantidad</p>
                                                 <h5>
@@ -59,7 +59,7 @@
                                         <div class="col-6">
                                             <div>
                                                 <p class="text-muted mb-2 text-truncate">Laboratorio</p>
-                                                <h5>{{$medicine->laboratory}}</h5>
+                                                <h6>{{$medicine->laboratory}}</h6>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-4">
@@ -68,7 +68,7 @@
                                                 <h5>
                                                     @foreach ($precio as $p)
                                                         @if ($medicine->id == $p->priceable_id && $p->priceable_type == "App\Models\Medicine")
-                                                            {{$p->sale_price}}
+                                                            S./ {{$p->sale_price}}
                                                         @endif
                                                     @endforeach
                                                 </h5>
@@ -102,13 +102,13 @@
                                         @else
                                         <img class="img__stock rounded-circle" src="{{asset('img/medic1.jpg')}}" alt="">
                                         @endif
-    
+
                                     </div>
                                     <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$article->tradename}}</span><br>
                                     <small class="text-truncate pb-1">{{$article->trademark}}</small>
                                 </div>
                             </div>
-    
+
                             <div class="col-xl-7">
                                 <div class="p-4 text-center text-xl-start">
                                     <div class="row">
@@ -116,7 +116,7 @@
                                             <div>
                                                 <p class="text-muted mb-2 text-truncate">Cantidad</p>
                                                 @php
-                                                $suma=0    
+                                                $suma=0
                                                 @endphp
                                                 <h5>
                                                     @foreach ($cantidad as $cant)
@@ -157,10 +157,10 @@
                                         <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalA{{$article->id}}">Ver más <i class="mdi mdi-arrow-right"></i></a>
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
                 <br>

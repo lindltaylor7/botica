@@ -14,20 +14,32 @@ $(document).ready(function(){
         //$('#medicamentos_select').hide()
     })
 
+  /*   $('#radio_form').on('change', function(){
+        if($('.radiobtn').is(':checked')){
+            var tipo = $('.radiobtn').val()
+            alert(tipo)
+           }
+    }) */
+
+
+
     $('#search').on('keyup', function(){
        var search = $(this).val()
+       var tipo = $("input[name='type']:checked").val();
        $('#medicamentos_select').trigger("click")
         $.ajax({
             url:"../medicamentos/medPrice",
             type: "POST",
             dataType: 'json',
             data:{
-                search: search
+                search: search,
+                tipo:tipo
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success:function(res){
+
                 console.log(res);
                 var list = '';
 

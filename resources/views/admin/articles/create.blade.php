@@ -69,9 +69,9 @@
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Utilidad por caja</label>
+                        <label class="form-label" for="inputUsername">Porcentaje de Utilidad por caja</label>
                         <div class="form-holder">
-                            <i>S./</i>
+                            <i>%</i>
                             <input type="text" name="utility_box" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja">
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label" for="inputUsername">Utilidad por unidad</label>
+                        <label class="form-label" for="inputUsername">Porcentaje de Utilidad por unidad</label>
                         <div class="form-holder">
-                            <i>S./</i>
+                            <i>%</i>
                             <input type="text" name="utility" id="utility_unit" class="form-control" id="inputUsername" placeholder="Utilidad por unidad" readonly>
                         </div>
                     </div>
@@ -237,23 +237,26 @@
             });
 
             $('#cost_price').on('keyup', function(){
+                //BOX
                 var calc = $(this).val()/$('#number_box').val()
+                $('#cost_price_unit').val(calc.toFixed(1))
                 var igv = parseInt($(this).val()*18/100)
                 var igv_total = parseInt($(this).val())+igv
                 $('#sale_price_box').val(igv_total.toFixed(1))
-                $('#cost_price_unit').val(calc.toFixed(1))
+                //UNIT
                 var igv_calc= calc*18/100
                 var igv_calc_total= calc+calc*18/100
                 $('#sale_price_unit').val(igv_calc_total.toFixed(1))
             });
 
             $('#utility_box').on('keyup', function(){
-                var pc = parseInt($('#cost_price').val())
-                var utility = parseInt($(this).val())
-                var suma = pc + utility
-               var total = pc+utility+(parseInt(suma)*18/100)
+                $('#utility_unit').val($(this).val())
+
+                var percent = parseFloat($('#cost_price').val())*parseFloat($(this).val())/100
+                var subtotal = parseFloat($('#cost_price').val()) + percent
+                var total = subtotal + (subtotal *18/100)
                $('#sale_price_box').val(total.toFixed(1))
-               $('#utility_unit').val(($(this).val()/$('#number_box').val()).toFixed(1))
+
                $('#sale_price_unit').val(($('#sale_price_box').val()/$('#number_box').val()).toFixed(1))
             });
 

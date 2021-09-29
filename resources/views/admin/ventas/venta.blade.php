@@ -40,6 +40,13 @@
 
         </div>
 
+        <form id="radio_form">
+            <input type="radio" name="type" class="radiobtn" id="med" value="1" checked>
+            <label for="pr">Medicamento</label>
+            <input type="radio" name="type" class="radiobtn" id="med" value="2">
+            <label for="med">Producto</label>
+        </form>
+
         <div id="container-search" class="d-flex flex-column justify-content-between">
             <label for="search" class="mb-1">Buscar Producto</label>
             <input type="text" class="d-inline form-control w-100" autocomplete="off" id="search" placeholder="Buscar producto">

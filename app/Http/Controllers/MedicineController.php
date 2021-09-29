@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\Promise\all;
 
 use App\Http\Requests\StoreMedicineRequest;
+use App\Models\Article;
 use Illuminate\Bus\Batch as BusBatch;
 
 class MedicineController extends Controller
@@ -219,13 +220,29 @@ class MedicineController extends Controller
     }
     public function medPrice(Request $request)
     {
-        $medicamentos = Medicine::select('medicines.*','prices.*')
-            ->leftJoin('prices', 'prices.priceable_id', '=', 'medicines.id')
+        if($request->get('tipo') == 1){
+            $res = Medicine::select('medicines.*','prices.*')
+            ->join('prices', function($join){
+                $join->on('prices.priceable_id', '=', 'medicines.id')
+                    ->where('prices.priceable_type','App\Models\Medicine');
+            })
             ->where('generic_name', 'like', '%' . $request->get('search') . '%')
             ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
             ->take(5)
             ->get();
-        return json_encode($medicamentos);
+        }else{
+            $res = Article::select('articles.*','prices.*')
+            ->join('prices', function($join){
+                $join->on('prices.priceable_id', '=', 'articles.id')
+                    ->where('prices.priceable_type','App\Models\Article');
+            })
+            ->where('trademark', 'like', '%' . $request->get('search') . '%')
+            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
+            ->take(5)
+            ->get();
+        }
+
+        return json_encode($res);
     }
     public function precios(Request $request){
         $precios = Price::where('priceable_id',$request->get('id'))->first();

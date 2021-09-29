@@ -9,18 +9,18 @@
             <h1 class="h3 mb-3">Tabla de Articulos</h1>
             <div>
                 <div class="">
-                    <div class="card">
-                        <div class="m-3">
+                    <div class="card p-3">
+                        <div class="">
                             <a href="{{ route('articles.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Artículos</a>
                         </div>
                         <div class="table table-responsive">
                             <table id="tablearticles" class="">
                                 <thead>
                                     <tr>
-                                        <th>Nombre comercial</th>                  
+                                        <th>Nombre comercial</th>
                                         <th>Marca</th>
-                                        <th>Proovedor</th>  
-                                        <th>Present.</th>                                                       
+                                        <th>Proovedor</th>
+                                        <th>Present.</th>
                                         <th>Precio</th>
                                         <th>Stock</th>
                                         <th>Anaquel</th>
@@ -35,9 +35,13 @@
                                             <td>{{ $articulo->trademark}}</td>
                                             <td>{{ $articulo->supplier}}</td>
                                             <td>{{ $articulo->presentation}}</td>
-                                            <td>{{$articulo->price->first()->sale_price}}</td>    
+                                            <td>{{ $articulo->price->first()->sale_price}}</td>
                                             <td>{{ $articulo->supplier}}</td>
-                                            <td><span class="badge bg-primary">a</span></td>
+                                            <td>
+                                                @foreach ($articulo->stocks as $stock)
+                                                <span class="badge bg-primary">{{$stock->shelf}}</span>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$articulo->id}}"></button>
                                                  @include('admin.articles.imgarticlemodal')
