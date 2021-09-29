@@ -64,24 +64,69 @@ $(document).ready(function(){
                                         </select>
                                         </td>
                                         <td><input id="cant${value.id}" type="text" class="form-control"></td>
-                                        <td>${value.sale_price}</td>
+                                        <td id="vunit${value.id}" class="vunit">${value.sale_price}</td>
                                         <td id="subtotal${value.id}" class="subtotal"></td>
+                                        <td id="igv_unique${value.id}"></td>
+                                        <td id="importe${value.id}" class="importe"></td>
                                         <td><a id="close${value.id}" class="btn btn-danger">X</a></td>
                                         </tr>`
                             $('#cart-shop').append(row);
 
                             $('#cant'+value.id).on('keyup',function(){
-                                $('#subtotal'+value.id).html(parseFloat($(this).val()*value.sale_price*$('#tipo'+value.id).val()).toFixed(1)+'0')
+                                var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
+                                $('#importe'+value.id).html(importe1)
+                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
+                                $('#subtotal'+value.id).html(subtotal1)
+                                $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
+
                                 var suma = 0;
+
                                 $('.subtotal').each(function() {
                                     suma = suma + parseFloat($(this).html())
-                                    $('#total').html(suma.toFixed(1)+'0')
+
                                 })
+                                $('#total_igv').html((suma*0.18).toFixed(2));
+                                var importe = 0;
+
+                                $('.importe').each(function() {
+                                    importe = importe + parseFloat($(this).html())
+                                    $('#total').html(importe.toFixed(1)+'0')
+                                })
+
+                                $('#total_noigv').html(($('#total').html()-$('#total_igv').html()).toFixed(2))
+                            })
+
+                            $('#tipo'+value.id).on('change', function(){
+                                $('#vunit'+value.id).html(($(this).val()*value.sale_price).toFixed(2))
+                                var importe1= parseFloat($('#vunit'+value.id).html()).toFixed(1)
+                                $('#importe'+value.id).html(importe1)
+                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
+                                $('#subtotal'+value.id).html(subtotal1)
+                                $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
+
+                                var suma = 0;
+
+                                $('.subtotal').each(function() {
+                                    suma = suma + parseFloat($(this).html())
+                                })
+                                $('#total_igv').html((suma*0.18).toFixed(2));
+
+                                var importe = 0;
+
+                                $('.importe').each(function() {
+                                    importe = importe + parseFloat($(this).html())
+                                })
+                                $('#total').html(importe.toFixed(1)+'0')
+
+                                $('#total_noigv').html(($('#total').html()-$('#total_igv').html()).toFixed(2))
                             })
 
                             $('#close'+value.id).on('click', function() {
-                                var total = parseFloat($('#total').html()) - parseFloat($('#subtotal'+value.id).html())
+                                var total = parseFloat($('#total').html()) - parseFloat($('#importe'+value.id).html())
                                 $('#total').html(total.toFixed(1)+'0')
+                                var subtotal = parseFloat($('#total').html()/1.18)
+                                $('#total_noigv').html(subtotal.toFixed(2))
+                                $('#total_igv').html((subtotal*0.18).toFixed(2))
                                 $('#row'+value.id).remove()
 
                             })

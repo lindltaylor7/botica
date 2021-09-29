@@ -201,7 +201,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-col">
                         <label for="">
@@ -237,23 +237,23 @@
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
-                                    <input type="text" name="batch[1][code]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                    <input type="text" name="batch[0][code]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
                                 </div>
                             </div>
-            
+
                             <div class="form-col">
                                 <label for="">
                                     Cantidad de unidades
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
-                                    <input type="number" name="batch[1][quantity_unit]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                    <input type="number" name="batch[0][quantity_unit]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
                                 </div>
                             </div>
-            
-            
+
+
                         </div>
-            
+
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="">
@@ -262,7 +262,7 @@
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
                                     <div class="form-holder">
-                                        <input type="date" name="batch[1][entry_date]" class="form-control" placeholder="">
+                                        <input type="date" name="batch[0][entry_date]" class="form-control" placeholder="">
                                         @error('f_ingreso')
                                             <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
                                         @enderror
@@ -276,7 +276,7 @@
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
                                     <div class="form-holder">
-                                        <input type="date" name="batch[1][expiry_date]" class="form-control" placeholder="">
+                                        <input type="date" name="batch[0][expiry_date]" class="form-control" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -379,25 +379,18 @@
             $('#cost_box').on('keyup', function(){
 
                 //CAJA
-                var pc_box = $(this).val()
-                var igv_box = parseFloat($(this).val()*18/100)
-                var igv_total = parseFloat(pc_box)+parseFloat(igv_box)
-                $('#sale_price_box').val(igv_total.toFixed(1))
+                var pc_box = parseFloat($(this).val())
+                $('#sale_price_box').val(pc_box.toFixed(1))
 
                 //BLISTER
                 var pc_blister = pc_box / $('#number_blister').val()
-                $('#cost_price_blister').val(pc_blister.toFixed(1))
-
-                var igv_blister = parseFloat(pc_blister * 18 / 100)
-                var igv_total_blister = parseFloat(pc_blister) + parseFloat(igv_blister)
-                $('#sale_price_blister').val(igv_total_blister.toFixed(1))
+                $('#cost_price_blister').val(pc_blister.toFixed(2))
+                $('#sale_price_blister').val(pc_blister.toFixed(1))
 
                 //UNIDAD
                 var pc_ud = pc_box/$('#number_box').val()
-                $('#cost_price_unit').val(pc_ud.toFixed(1))
-                var igv_ud = parseFloat(pc_ud*18/100)
-                var total_ud = parseFloat(pc_ud)+igv_ud
-                $('#sale_price_unit').val(total_ud.toFixed(1))
+                $('#cost_price_unit').val(pc_ud.toFixed(2))
+                $('#sale_price_unit').val(pc_ud.toFixed(1))
 
             });
 
@@ -406,9 +399,7 @@
                 //CAJA
                 var pc_box = $('#cost_box').val();
                 var percent = $(this).val();
-                var subtotal = parseFloat(pc_box) + parseFloat(percent);
-                var igv = subtotal * 18 /100;
-                var total = subtotal + igv;
+                var total = parseFloat(pc_box) + parseFloat(pc_box*percent/100);
                 $('#sale_price_box').val(total.toFixed(1));
 
                 $('#utility_blister').val(percent)
@@ -428,7 +419,7 @@
             });
 
             const $template = document.getElementById("template-input").content;
-            const $fragment = document.createDocumentFragment(); 
+            const $fragment = document.createDocumentFragment();
             $('#inputDynamic').on('change', function (e) {
                 d.getElementById("boxDynamic").textContent = "";
                 for (let i = 0; i < $(this).val(); i++) {

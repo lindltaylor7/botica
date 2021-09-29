@@ -68,11 +68,13 @@
                                 <tr>
                                     <th class="d-none d-xl-table-cell">Nombre Genérico</th>
                                     <th class="d-none d-xl-table-cell">Nombre Comercial</th>
-                                    <th class="d-none d-xl-table-cell">Fecha de Vencimiento</th>
+                                    <th class="d-none d-xl-table-cell">Concent.</th>
                                     <th class="d-none d-xl-table-cell">Tipo</th>
                                     <th class="d-none d-xl-table-cell">Cantidad</th>
-                                    <th class="d-none d-xl-table-cell">Precio</th>
+                                    <th class="d-none d-xl-table-cell">P. de Venta</th>
                                     <th class="d-none d-xl-table-cell">Subtotal</th>
+                                    <th class="d-none d-xl-table-cell">IGV</th>
+                                    <th class="d-none d-xl-table-cell">Importe</th>
                                     <th class="d-none d-md-table-cell">Operaciones</th>
                                 </tr>
                             </thead>
@@ -83,7 +85,9 @@
                             </tbody>
                         </table>
                         <div class="row">
-                            <h2 class="text-center">TOTAL S./<strong id="total"></strong></h2>
+                            <h2 class="text-end">SUBTOTAL S./<strong id="total_noigv"></strong></h2>
+                            <h2 class="text-end">I.G.V.(18%)<strong id="total_igv"></strong></h2>
+                            <h2 class="text-end">TOTAL S./<strong id="total"></strong></h2>
                         </div>
                     </div>
                 </div>
