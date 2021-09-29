@@ -39,7 +39,7 @@
                                             <td>{{ $articulo->supplier}}</td>
                                             <td><span class="badge bg-primary">a</span></td>
                                             <td>
-                                                <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$articulo->id}}"></button>
+                                                <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$articulo->id}}"></button>
                                                  @include('admin.articles.imgarticlemodal')
                                               </td>
                                             <td class="text-center">
@@ -47,7 +47,7 @@
                                                 @include('admin.articles.pricearticlemodal')
                                                 <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$articulo->id}}"><i class="far fa-edit"></i></button>
                                                 @include('admin.articles.articlemodaledit')
-                                                <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-trash-alt"></i></button>
+                                 {{--                <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-trash-alt"></i></button> --}}
                                             </td>
                                         </tr>
                                     @endforeach

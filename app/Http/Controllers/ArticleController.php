@@ -139,7 +139,9 @@ class ArticleController extends Controller
            $article->image()->create([                
                'url' => $url
            ]);
-       }
+        }
+       
+        $article->price()->update($request->except(['_token','_method','number_box','cost_box']));
 
 
         return redirect()->back();
