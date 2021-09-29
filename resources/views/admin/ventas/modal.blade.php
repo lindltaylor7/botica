@@ -12,7 +12,7 @@
                     <input type="hidden" name="medicine_id" id="medicine_id">
                     <input type="hidden" name="sale_id" id="sale_id" value="1">
                     <div class="form-group mt-3 mb-2">
-                        <select class="form-select" name="unit_type_id" id="cajaCheck">
+                        <select class="form-select" name="unit_type" id="cajaCheck">
                             <option value="1" selected>Venta Unitaria</option>
                             <option value="2">Venta por Blister</option>
                             <option value="3">Venta por Caja</option>

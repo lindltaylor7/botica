@@ -57,7 +57,7 @@
                             @endforeach
                             </td>
                             <td>
-                              <button type="button" class="btn btn-xs btn-warning fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
+                              <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
                                @include('admin.medicamentos.imgmodal')
                             </td>
                             <td>
@@ -65,7 +65,7 @@
                               @include('admin.medicamentos.pricemodal')
                               <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$medicamento->id}}"><i class="far fa-edit"></i></button>
                               @include('admin.medicamentos.medicinemodaledit')
-                              <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-trash-alt"></i></button>
+                              {{-- <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-trash-alt"></i></button> --}}
                             </td>
                         </tr>
                         @endforeach
