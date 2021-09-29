@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\Promise\all;
 
 use App\Http\Requests\StoreMedicineRequest;
+use Illuminate\Bus\Batch as BusBatch;
 
 class MedicineController extends Controller
 {
@@ -48,7 +49,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //return $request;
         $request->validate([
                 'generic_name' => 'required',
                 'tradename' => 'required',
@@ -83,15 +84,21 @@ class MedicineController extends Controller
                 'cost_stock' => $request->get('cost_stock')
             ]);
 
-            $batch =  Batch::create([
-                'code' => $request->get('code'),
-                'entry_date' => $request->get('entry_date'),
-                'expiry_date' => $request->get('expiry_date'),
-                'cost_box' => $request->get('cost_box'),
-                'quantity_box' => $request->get('quantity_box'),
-                'quantity_unit' => $request->get('quantity_unit'),
-                'stock_id' => $stock->id
-            ]);
+
+            $batches = $request->get('batch');
+
+            for($i=0; $i<count($batches); $i++){
+                Batch::create([
+                    'code' => $batches[$i]['code'],
+                    'entry_date' => $batches[$i]['entry_date'],
+                    'expiry_date' => $batches[$i]['expiry_date'],
+                    'cost_box' => $request->get('cost_box'),
+                    'quantity_box' => $request->get('quantity_box'),
+                    'quantity_unit' => $batches[$i]['quantity_unit'],
+                    'stock_id' => $stock->id
+                ]);
+
+            }
 
             if($request->file('foto')){
                 $url = Storage::disk('public')->put('medicines', $request->file('foto'));
@@ -108,19 +115,15 @@ class MedicineController extends Controller
 
 
 
-
-
-
-
-        /* if ($request->file('image')) {
+     /*    if ($request->file('image')) {
             $url = Storage::put('medicines', $request->file('image'));
              return $url;
 
             $request->merge([
                 'img' => $url
             ]);
-        } */
-
+        }
+ */
 
        /*  $request->merge([
             'stockable_id' => $medicamento->id,
@@ -172,7 +175,7 @@ class MedicineController extends Controller
          if ($request->file('imageMedicine')) {
             $medicine->image()->delete();
             $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
-            $medicine->image()->create([                
+            $medicine->image()->create([
 
                 'url' => $url
             ]);

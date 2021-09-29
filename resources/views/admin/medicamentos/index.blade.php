@@ -8,7 +8,7 @@
   <div>
       <div class="">
           <div class="card shadow p-4">
-              <div class="m-3">
+              <div class="">
                   <a href="{{ route('medicamentos.create') }}" class="d-inline-block btn btn-primary btn-lg fs-6"><i class="align-middle" data-feather="plus"></i>Agregar Medicamentos</a>
               </div>
               <div class="table table-responsive">
@@ -32,18 +32,24 @@
                       <tbody id="dynamic-row">
                         @foreach($medicamentos as $medicamento)
                         <tr>
-                            <td>{{ucfirst(strtolower($medicamento->generic_name))}}</td>
-                            <td>{{ucfirst(strtolower($medicamento->tradename))}}</td>
+                            <td>{{ucfirst(mb_strtolower($medicamento->generic_name,'UTF-8'))}}</td>
+                            <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->presentation))}}</td>
                             <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
                             <td>S./ {{$medicamento->price->sale_price}}</td>
                             <td>
                                 @foreach ($medicamento->stocks as $stock)
+                                    @php
+                                        $s=0;
+                                    @endphp
                                     @foreach ($stock->batches as $batch)
-                                        {{$batch->quantity_unit}}
+                                    @php
+                                        $s+=$batch->quantity_unit
+                                    @endphp
                                     @endforeach
                                 @endforeach
+                                {{$s}}
                             </td>
                             <td>
                             @foreach ($medicamento->stocks as $stock)

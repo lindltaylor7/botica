@@ -324,6 +324,7 @@ table.dataTable.no-footer {
   align-items: center;
 }
 
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
   background: #ffc107 !important;
   color: #fff !important;

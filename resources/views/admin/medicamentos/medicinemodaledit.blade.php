@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
-                <form action="{{route('articles.update',$medicamento->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('medicamentos.update',$medicamento->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Numero por blister</label>
-                        <input type="number" name="number_blister" id="anaquel" class="form-control" value="{{$medicamento->number_blister}}"> 
+                        <input type="number" name="number_blister" id="anaquel" class="form-control" value="{{$medicamento->number_blister}}">
                     </div>
                     <div class="d-grid gap-2 mt-2">
                         <input type="submit" value="Editar" class="btn btn-info">
