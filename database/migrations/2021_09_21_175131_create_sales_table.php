@@ -15,15 +15,16 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string('Ruc');
+            $table->string('ruc');
             $table->string('type');
             $table->string('code');
             $table->date('date');
             $table->string('seller');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->decimal('igv',11,2);
             $table->decimal('total_utility',11,2);
+            $table->decimal('subtotal_sale',11,2);
+            $table->decimal('igv',11,2);
             $table->decimal('total_sale',11,2);
             $table->timestamps();
         });
