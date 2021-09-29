@@ -5,7 +5,7 @@ $(document).ready(function () {
         var token = "{{csrf_token()}}";
 
         $.ajax({
-            url: "../admin/stock/all",
+            url: "../admin/stock",
             type: "POST",
             dataType: "json",
             data: {
@@ -50,15 +50,15 @@ $(document).ready(function () {
                         "<tr id=row" +
                         value.id +
                         '><td class="d-none d-md-table-cell">' +
-                        value.n_generico +
+                        value.generic_name +
                         '</td><td class="d-none d-md-table-cell">' +
-                        value.n_comercial +
+                        value.tradename +
                         '</td><td class="d-none d-md-table-cell">' +
-                        value.cantidad +
+                        value.quantity +
                         '</td><td class="d-none d-md-table-cell">' +
-                        formatDate(value.f_ingreso) +
+                        formatDate(value.entry_date) +
                         '</td><td class="d-none d-md-table-cell">' +
-                        formatDate(value.f_vencimiento) +
+                        formatDate(value.expiry_date) +
                         '</td><td><a href="#" class="btn-editar" id=' +
                         value.id +
                         ' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="align-middle" data-feather="edit-2"></i></a><a href="#" class="btn-eliminar" id=' +

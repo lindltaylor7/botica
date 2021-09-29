@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal{{$medicine->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalM{{$medicine->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -9,33 +9,44 @@
             <form action="{{route('stock.update')}}" method="POST">
                 @csrf
                 <input type="hidden" name="id_stock" id="id_stock">
-                <div class="form-group">
-                    <label for="">Nombre Comercial</label>
-                    <input type="text" name="cantidad" id="cantidad" class="form-control" value="{{$medicine->tradename}}">
-                </div>
-                <div class="form-group">
-                    <label for="">Concentración</label>
-                    <input type="text" name="cantidad" id="cantidad" class="form-control" value="{{$medicine->concentration}}"">
-                </div>
-                <div class="form-group">
-                    <label for="">Presentación</label>
-                    <input type="text" name="cantidad" id="cantidad" class="form-control" value="{{$medicine->presentation}}">
-                </div>
-                <div class="form-group">
-                    <label for="">Laboratorio</label>
-                    <input type="text" name="cantidad" id="cantidad" class="form-control" value="{{$medicine->laboratory}}">
-                </div>
-                <div class="form-group">
-                    <label for="">Fecha de Ingreso</label>
-                    <input type="date" name="f_ingreso" id="f_ingreso" class="form-control" value="{{$medicine->created_at}}">
-                </div>
-                <div class="form-group">
-                    <label for="">Fecha de Vencimiento</label>
-                    <input type="date" name="f_ingreso" id="f_ingreso" class="form-control" value="{{$medicine->updated_at}}">
-                </div>
-                <div class="d-grid gap-2 mt-2">
-                    <input type="submit" value="Editar" class="btn btn-primary">
-                  </div>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Características</th>
+                      <th scope="col">Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Nombre Generico</th>
+                      <td>{{$medicine->generic_name}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre Comercial</th>
+                      <td>{{$medicine->tradename}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Concentración</th>
+                      <td>{{$medicine->concentration}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Presentación</th>
+                      <td>{{$medicine->presentation}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Laboratorio</th>
+                      <td>{{$medicine->laboratory}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Anaquel</th>
+                      <td>@foreach($medicine->stocks as $m)
+                            <li> {{$m->shelf}}</li> 
+                          @endforeach
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
             </form>
         </div>
         <div class="modal-footer">

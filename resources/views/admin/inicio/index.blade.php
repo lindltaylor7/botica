@@ -7,7 +7,7 @@
 
   <div class="">
     <div class="main__action">
-      <a href="#" class="main__action-item">
+      <a href="{{ route('stock.create') }} " class="main__action-item">
         <div class="main__action-text">
           <h2>Stock</h2>
           <span>Agregar Stock</span>

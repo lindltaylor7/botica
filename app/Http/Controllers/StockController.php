@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
 use App\Models\Article;
+use App\Models\Batch;
 use App\Models\Medicine;
+use App\Models\Price;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -22,9 +24,10 @@ class StockController extends Controller
         $medicines = Medicine::all();
         $articles = Article::all();
         // $stocks = Stock::all();
-        $cantidad = Stock::select('quantity', 'stockable_id', 'stockable_type')->get();
+        $cantidad = Stock::all();
+        $precio = Price::all();
         // return $cantidad;
-        return view('admin.stocks.index', compact('medicines', 'articles', 'cantidad'));
+        return view('admin.stocks.index', compact('medicines', 'articles', 'cantidad', 'precio'));
     }
 
     /**
@@ -48,31 +51,38 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'stockId' => 'required',
-        //     'quantity' => 'required',
-        //     'f_vencimiento' => 'required',
-        //     'f_ingreso' => 'required'
-        // ]);
-        
-        // $request->merge([
-        //     "status" => 1
-        // ]);
+        $request->validate([
+            'stockId' => 'required',
+            'shelf' => 'required',
+            'cost_stock' => 'required'
+        ]);
 
-        $stock = new Stock;
-        $stock->stockable_type = $request->type;
-        $stock->stockable_id = $request->stockId;
-        $stock->quantity = $request->quantity;
-        $stock->shelf = $request->anaquel;
-        $stock->costo = $request->costo;
-        $stock->created_at = $request->f_ingreso;
-        $stock->updated_at = $request->f_vencimiento;
-        $stock->save();
-        return $stock;
+        if ($request->type == "1")
+        {
+            $request->type = "App\Models\Article";
+        }
+        else
+        {
+            $request->type = "App\Models\Medicine";
+        }
+
+        $stock = Stock::create([
+            'shelf' => $request->get('shelf'),
+            'cost_stock' => $request->get('cost_stock'),
+            'stockable_id' => $request->get('stockId'),
+            'stockable_type' => $request->type
+        ]);
+
+        $batch =  $stock->batches()->create([
+            'code' => $request->get('code'),
+            'entry_date' => $request->get('entry_date'),
+            'expiry_date' => $request->get('expiry_date'),
+            'quantity_box' => $request->get('quantity_box'),
+            'quantity_unit' => $request->get('quantity_unit'),
+            'stock_id' => $stock->id
+        ]);
         
         return redirect(route('stock.index'));
-
-
     }
 
     /**
