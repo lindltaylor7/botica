@@ -97,7 +97,7 @@
         } );
     </script>
     <script src="{{ asset('js/medicamentos/medicamentos_price.js') }}"></script>
-    <script src="{{ asset('js/medicamentos/medicamentos_update.js') }}"></script>
+    {{-- <script src="{{ asset('js/medicamentos/medicamentos_update.js') }}"></script> --}}
     <script src="{{ asset('js/medicamentos/medicamentos_search.js') }}"></script>
     <script src="{{ asset('js/medicamentos/medicamentos_delete.js') }}"></script>
 @endsection

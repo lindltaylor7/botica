@@ -220,7 +220,6 @@ class MedicineController extends Controller
     }
     public function medPrice(Request $request)
     {
-        if($request->get('tipo') == 1){
             $res = Medicine::select('medicines.*','prices.*')
             ->join('prices', function($join){
                 $join->on('prices.priceable_id', '=', 'medicines.id')
@@ -230,7 +229,13 @@ class MedicineController extends Controller
             ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
             ->take(5)
             ->get();
-        }else{
+
+
+        return json_encode($res);
+    }
+
+    public function artPrice(Request $request)
+    {
             $res = Article::select('articles.*','prices.*')
             ->join('prices', function($join){
                 $join->on('prices.priceable_id', '=', 'articles.id')
@@ -240,7 +245,6 @@ class MedicineController extends Controller
             ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
             ->take(5)
             ->get();
-        }
 
         return json_encode($res);
     }
