@@ -65,7 +65,29 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'dni' => 'required'
+        ]);
+
+        $customer = Customer::create([
+            'name' => $request->get('name'),
+            'dni' => $request->get('dni')
+        ]);
+
+        $sale = Sale::create([
+            'Ruc' => '-',
+            'type' => 1,
+            'code' => 'B'.$customer->id,
+            'date' => $request->get('date'),
+            'seller' => Auth::user()->name,
+            'customer_id' => $customer->id,
+            'igv'=> $request->get('igv'),
+            'total_utility' => $request->get('total_utility'),
+            'total_sale' => $request->get('total_sale')
+        ]);
+
+        return $request;
     }
 
     /**
@@ -126,7 +148,7 @@ class SaleController extends Controller
                 {
                     $newstock = Stock::where('stockable_id', $detail->detailable_id)->first();
                     $pedido = $pedido - $newstock->quantity;
-                    
+
                     if($pedido > 0){
                         $newstock = Stock::where('id',$newstock->id)->update(["quantity" => 0]);
                         echo "traer otro stock";
@@ -160,7 +182,7 @@ class SaleController extends Controller
         $venta = Sale::where('id',$id)->first();
         $details = Detail::where('sale_id', $id)->get();
         $cliente = Customer::where('id',$venta->customer_id)->first();
-        
+
         return view('admin.ventas.invoice', compact('cliente', 'venta', 'details', 'id'));
     }
 
@@ -169,7 +191,7 @@ class SaleController extends Controller
         $venta = Sale::where('id',$id)->first();
         $details = Detail::where('sale_id', $id)->get();
         $cliente = Customer::where('id',$venta->customer_id)->first();
-        
+
         return view('admin.ventas.pdf', compact('cliente', 'venta', 'details', 'id'));
     }
 
@@ -198,7 +220,7 @@ class SaleController extends Controller
         $cliente = Customer::where('id',$venta->customer_id)->first();
         $pdf = PDF::loadView('admin.ventas.ticket', compact('cliente', 'venta', 'details', 'id'));
         $pdf->setPaper('a7');
-       
+
         return $pdf->stream('mi-ticket.pdf');
 
     }
@@ -217,7 +239,7 @@ class SaleController extends Controller
     }
 
     public function insertarVendedor(Request $request){
- 
+
     }
 
 }

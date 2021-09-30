@@ -51,7 +51,7 @@ Route::get('ventas/{id}', [SaleController::class, 'show'])->name('ventas.show');
 Route::post('ventas/update/{id}', [SaleController::class, 'update'])->name('ventas.update');
 Route::get('ventas/reporte/{id}', [SaleController::class, 'vista'])->name('vistapdf.vista');
 Route::get('ventas/reporte/pdf/{id}', [SaleController::class, 'generarPdf'])->name('generarpdf.reporte');
-
+Route::post('ventas/store', [SaleController::class, 'store'])->name('ventas.store');;
 Route::get('ventas/ticket/{id}', [SaleController::class, 'ticket'])->name('vistaticket.ventas');
 Route::get('ventas/ticket/pdf/{id}', [SaleController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
 

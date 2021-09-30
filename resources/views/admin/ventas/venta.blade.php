@@ -12,15 +12,18 @@
             <input type="hidden" name="cliente_id" id="cliente_id">
             <div class="row">
                 <div class="col-md">
+                    <form action="{{route('ventas.store')}}" method="post" id="sale_form">
+                     @csrf
                     <div class="form-group">
                         <label for="dni">Cliente</label>
-                        <div class="">
-                            <input type="text" name="dni" class="d-inline form-control w-100" id="search_dni" placeholder="Ingrese el DNI del cliente">
+                        <div class="d-flex align-items-center">
+                            <input type="text" name="dni" class="d-inline form-control w-75" id="search_dni" placeholder="Ingrese el DNI del cliente">
+                            <a id="search_dni_btn" class="btn btn-primary w-25">Buscar</a>
                         </div>
-                        <input type="text" name="nombre_cliente" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-50" readonly require>
+                        <input type="text" name="name" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-100" readonly require>
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" name="check" type="checkbox" id="cajaCheck">
+                        <input class="form-check-input" type="checkbox" id="cajaCheck">
                         <label class="form-check-label" for="flexCheckDefault">
                           Sin DNI
                         </label>
@@ -30,7 +33,7 @@
                 <div class="col-md">
                     <div class="form-group mb-5">
                         <label for="date">Fecha Actual</label>
-                        <input type="date" class="form-control" name="fecha" id="fecha" value="@php echo date('Y-m-d'); @endphp" readonly>
+                        <input type="date" class="form-control" name="date" id="fecha" value="@php echo date('Y-m-d'); @endphp" readonly>
                     </div>
                 </div>
             </div>
@@ -40,12 +43,10 @@
 
         </div>
 
-        <form id="radio_form">
             <input type="radio" name="type" class="radiobtn" id="med" value="1" checked>
             <label for="pr">Medicamento</label>
             <input type="radio" name="type" class="radiobtn" id="med" value="2">
             <label for="med">Artículo</label>
-        </form>
 
         <div id="container-search" class="d-flex flex-column justify-content-between">
             <label for="search" class="mb-1">Buscar Producto</label>
@@ -78,6 +79,9 @@
                                     <th class="d-none d-md-table-cell">Operaciones</th>
                                 </tr>
                             </thead>
+                            <template id='input_cant'>
+                                <input type="number" id="cant1" class="form-control" name="quantity" step="any">
+                            </template>
                             <tbody id="cart-shop">
 
 
@@ -85,10 +89,19 @@
                             </tbody>
                         </table>
                         <div class="row">
-                            <h2 class="text-end">SUBTOTAL S./<strong id="total_noigv"></strong></h2>
-                            <h2 class="text-end">I.G.V.(18%)<strong id="total_igv"></strong></h2>
-                            <h2 class="text-end">TOTAL S./<strong id="total"></strong></h2>
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4">
+                                <label for="igv">Subtotal</label>
+                                <input type="number" step="any" class="form-control" readonly name="total_utility" id="total_noigv">
+                                <label for="igv">I.G.V.(18%)</label>
+                                <input type="number" step="any" class="form-control" readonly name="igv" id="total_igv">
+                                <label for="igv">Total</label>
+                                <input type="number" step="any" class="form-control" readonly name="total_sale" id="total">
+                            </div>
                         </div>
+
+                        <input type="submit" id="save_form" class="btn btn-success" value="Guardar">
+                    </form>
                     </div>
                 </div>
             </div>

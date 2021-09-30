@@ -14,4 +14,8 @@ class Batch extends Model
     public function stock() {
         return $this->belongsTo("App\Models\Stock");
     }
+    //muchos a muchos
+    public function details(){
+        return $this->belongsToMany("App\Models\Detail");
+    }
 }

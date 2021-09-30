@@ -6,6 +6,7 @@ $(document).ready(function(){
     $('#stock_blister').hide()
     $('#stock_caja').hide()
 
+
     $('#search').on('click', function(){
         $('#medicamentos_select').show()
     })
@@ -20,8 +21,6 @@ $(document).ready(function(){
             alert(tipo)
            }
     }) */
-
-
 
     $('#search').on('keyup', function(){
        var search = $(this).val()
@@ -52,6 +51,7 @@ $(document).ready(function(){
                         $('.search-link'+index).on('click', function(){
                             $('#medicamentos_select').html('');
                             $('#search').val('')
+
                                 row = `<tr id="row${value.id}">
                                         <td>${value.generic_name}</td>
                                         <td>${value.tradename}</td>
@@ -59,18 +59,26 @@ $(document).ready(function(){
                                         <td>
                                         <select id="tipo${value.id}" class="form-control">
                                             <option value="1">Unidad</option>
-                                            <option value=${value.number_box}>Caja</option>
                                             <option value=${value.number_blister}>Blister</option>
+                                            <option value=${value.number_box}>Caja</option>
                                         </select>
                                         </td>
-                                        <td><input id="cant${value.id}" type="text" class="form-control"></td>
+                                        <td><input name="quantity[]" id="cant${value.id}" class="form-control quantity" type="number"/></td>
                                         <td id="vunit${value.id}" class="vunit">${value.sale_price}</td>
                                         <td id="subtotal${value.id}" class="subtotal"></td>
                                         <td id="igv_unique${value.id}"></td>
                                         <td id="importe${value.id}" class="importe"></td>
                                         <td><a id="close${value.id}" class="btn btn-danger">X</a></td>
                                         </tr>`
+
                             $('#cart-shop').append(row);
+                       /*      $('#td-cant'+value.id).html($('<input>').attr({
+                                type: 'text',
+                                id: 'cant'+value.id,
+                                name: 'quantity'+index,
+                                class:'form-control'
+                            }).appendTo('form'));
+ */
 
                             $('#cant'+value.id).on('keyup',function(){
                                 var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
@@ -85,15 +93,15 @@ $(document).ready(function(){
                                     suma = suma + parseFloat($(this).html())
 
                                 })
-                                $('#total_igv').html((suma*0.18).toFixed(2));
+                                $('#total_igv').val((suma*0.18).toFixed(2));
                                 var importe = 0;
 
                                 $('.importe').each(function() {
                                     importe = importe + parseFloat($(this).html())
-                                    $('#total').html(importe.toFixed(1)+'0')
+                                    $('#total').val(importe.toFixed(1)+'0')
                                 })
 
-                                $('#total_noigv').html(($('#total').html()-$('#total_igv').html()).toFixed(2))
+                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
                             })
 
                             $('#tipo'+value.id).on('change', function(){
@@ -109,24 +117,24 @@ $(document).ready(function(){
                                 $('.subtotal').each(function() {
                                     suma = suma + parseFloat($(this).html())
                                 })
-                                $('#total_igv').html((suma*0.18).toFixed(2));
+                                $('#total_igv').val((suma*0.18).toFixed(2));
 
                                 var importe = 0;
 
                                 $('.importe').each(function() {
                                     importe = importe + parseFloat($(this).html())
                                 })
-                                $('#total').html(importe.toFixed(1)+'0')
+                                $('#total').val(importe.toFixed(1)+'0')
 
-                                $('#total_noigv').html(($('#total').html()-$('#total_igv').html()).toFixed(2))
+                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
                             })
 
                             $('#close'+value.id).on('click', function() {
-                                var total = parseFloat($('#total').html()) - parseFloat($('#importe'+value.id).html())
-                                $('#total').html(total.toFixed(1)+'0')
-                                var subtotal = parseFloat($('#total').html()/1.18)
-                                $('#total_noigv').html(subtotal.toFixed(2))
-                                $('#total_igv').html((subtotal*0.18).toFixed(2))
+                                var total = parseFloat($('#total').val()) - parseFloat($('#importe'+value.id).html())
+                                $('#total').val(total.toFixed(1)+'0')
+                                var subtotal = parseFloat($('#total').val()/1.18)
+                                $('#total_noigv').val(subtotal.toFixed(2))
+                                $('#total_igv').val((subtotal*0.18).toFixed(2))
                                 $('#row'+value.id).remove()
 
                             })
@@ -156,18 +164,98 @@ $(document).ready(function(){
                 $('#medicamentos_select').html('');
 
                 $.each(res, function(index, value){
-                    list = '<tr><td><a class="search-link" data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.tradename+' - '+value.trademark+' - '+value.presentation+' - Precio unitario: S./'+value.sale_price+'</a></td></tr>'
-                        $('#medicamentos_select').append(list);
+                    list = '<tr><td><a class="search-link'+index+'" data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.tradename+' - '+value.trademark+' - '+value.presentation+' - '+value.supplier+' - Precio unitario: S./'+value.sale_price+'</a></td></tr>'
+                    $('#medicamentos_select').append(list);
 
-                        $('.search-link').on('click', function(){
-                            $('#medicamentos_select').append('');
+                    $('.search-link'+index).on('click', function(){
+                        $('#medicamentos_select').html('');
+                        $('#search').val('')
+                            row = `<tr id="rowart${value.id}">
+                                    <td>${value.tradename}</td>
+                                    <td>${value.tradename}</td>
+                                    <td>${value.presentation}</td>
+                                    <td>
+                                    <select id="tipoart${value.id}" class="form-control">
+                                        <option value="1">Unidad</option>
+                                        <option value=${value.number_box}>Caja (${value.number_box})</option>
+                                    </select>
+                                    </td>
+                                    <td><input id="cantart${value.id}" type="text" class="form-control"></td>
+                                    <td id="vunitart${value.id}" class="vunit">${value.sale_price}</td>
+                                    <td id="subtotalart${value.id}" class="subtotal"></td>
+                                    <td id="igv_uniqueart${value.id}"></td>
+                                    <td id="importeart${value.id}" class="importe"></td>
+                                    <td><a id="closeart${value.id}" class="btn btn-danger">X</a></td>
+                                    </tr>`
+                                    $('#cart-shop').append(row);
 
-                        })
+                                    $('#cantart'+value.id).on('keyup',function(){
+                                        var importe1= parseFloat($(this).val()*parseFloat($('#vunitart'+value.id).html())).toFixed(1)+'0'
+                                        $('#importeart'+value.id).html(importe1)
+                                        var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
+                                        $('#subtotalart'+value.id).html(subtotal1)
+                                        $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
+
+                                        var suma = 0;
+
+                                        $('.subtotal').each(function() {
+                                            suma = suma + parseFloat($(this).html())
+
+                                        })
+                                        $('#total_igv').val((suma*0.18).toFixed(2));
+                                        var importe = 0;
+
+                                        $('.importe').each(function() {
+                                            importe = importe + parseFloat($(this).html())
+                                            $('#total').val(importe.toFixed(1)+'0')
+                                        })
+
+                                        $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+                                    })
+
+                                    $('#tipoart'+value.id).on('change', function(){
+                                        $('#vunitart'+value.id).html(($(this).val()*value.sale_price).toFixed(2))
+                                        var importe1= parseFloat(($('#vunitart'+value.id).html()*$('#cantart'+value.id).val()).toFixed(1))
+                                        $('#importeart'+value.id).html(importe1.toFixed(2))
+                                        var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
+                                        $('#subtotalart'+value.id).html(subtotal1)
+                                        $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
+
+                                        var suma = 0;
+
+                                        $('.subtotal').each(function() {
+                                            suma = suma + parseFloat($(this).html())
+                                        })
+                                        $('#total_igv').val((suma*0.18).toFixed(2));
+
+                                        var importe = 0;
+
+                                        $('.importe').each(function() {
+                                            importe = importe + parseFloat($(this).html())
+                                        })
+                                        $('#total').val(importe.toFixed(1)+'0')
+
+                                        $('#total_noigv').val(($('#total').html()-$('#total_igv').html()).toFixed(2))
+                                    })
+
+                                    $('#closeart'+value.id).on('click', function() {
+                                        var total = parseFloat($('#total').val()) - parseFloat($('#importeart'+value.id).html())
+                                        $('#total').val(total.toFixed(1)+'0')
+                                        var subtotal = parseFloat($('#total').val()/1.18)
+                                        $('#total_noigv').val(subtotal.toFixed(2))
+                                        $('#total_igv').val((subtotal*0.18).toFixed(2))
+                                        $('#rowart'+value.id).remove()
+
+                                    })
+
+                    });
                 });
+
+
+
+
             }
         });
-       }
-       $('#medicamentos_select').trigger("click")
-
+    }
     });
 });

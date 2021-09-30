@@ -22,4 +22,8 @@ class Detail extends Model
     {
         return $this->morphTo();
     }
+    //muchos a muchos
+    public function batches(){
+        return $this->belongsToMany("App\Models\Batch");
+    }
 }

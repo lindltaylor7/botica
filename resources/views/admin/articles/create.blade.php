@@ -240,9 +240,7 @@
                 //BOX
                 var calc = $(this).val()/$('#number_box').val()
                 $('#cost_price_unit').val(calc.toFixed(1))
-                var igv = parseInt($(this).val()*18/100)
-                var igv_total = parseInt($(this).val())+igv
-                $('#sale_price_box').val(igv_total.toFixed(1))
+                $('#sale_price_box').val($(this).val())
                 //UNIT
                 var igv_calc= calc*18/100
                 var igv_calc_total= calc+calc*18/100
@@ -254,8 +252,7 @@
 
                 var percent = parseFloat($('#cost_price').val())*parseFloat($(this).val())/100
                 var subtotal = parseFloat($('#cost_price').val()) + percent
-                var total = subtotal + (subtotal *18/100)
-               $('#sale_price_box').val(total.toFixed(1))
+               $('#sale_price_box').val(subtotal.toFixed(1))
 
                $('#sale_price_unit').val(($('#sale_price_box').val()/$('#number_box').val()).toFixed(1))
             });
