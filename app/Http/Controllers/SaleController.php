@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Detail;
 use App\Models\Sale;
 use App\Models\Stock;
+use App\Models\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -150,11 +151,6 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function invoice($id){
 
         $venta = Sale::where('id',$id)->first();
@@ -206,14 +202,20 @@ class SaleController extends Controller
     public function anular($id){
         $venta = Sale::where('id', $id)->first();
         $details = Detail::where('sale_id',$venta->id)->get();
-
+        $venta->update(['code'=>$venta->code."_a"]);
         foreach($details as $detail){
-            $last_stock = Stock::where('stockable_id',$detail->detailable_id)->first();
-            $last_stock->update(['quantity' => $last_stock->quantity+$detail->quantity]);
+            // $last_stock = Stock::where('stockable_id',$detail->detailable_id)->first();
+            // $last_stock->update(['quantity' => $last_stock->quantity+$detail->quantity]);
+            $quantity = Batch::where('stock_id',$detail->detailable_id)->first();
+            $quantity->update(['quantity_unit' => $quantity->quantity_unit+$detail->quantity]);
         }
-
+        
         $venta = Sale::where('id', $id);
         return redirect()->route('ventas.index');
+    }
+
+    public function destroy($id)
+    {        
     }
 
     public function insertarVendedor(Request $request){
