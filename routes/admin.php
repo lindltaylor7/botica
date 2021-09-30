@@ -59,7 +59,6 @@ Route::get('ventas/ticket/pdf/{id}', [SaleController::class, 'generar_ticeketPdf
 
 Route::get('ventas/anular/{id}', [SaleController::class, 'anular'])->name('ventas.anular');
 
-
 Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
 Route::get('reportes/top', [ReporteController::class, 'top'])->name('reportes.top');
 Route::get('reportes/bot', [ReporteController::class, 'bot'])->name('reportes.bot');

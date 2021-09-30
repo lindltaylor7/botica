@@ -21,9 +21,7 @@ class CreateDetailsTable extends Migration
             $table->string('detailable_type');
             $table->unsignedBigInteger('sale_id');
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
-            $table->decimal('partial_igv',11,2);
-            $table->decimal('partial_utility',11,2);
-            $table->decimal('partial_sale',11,2);
+            $table->decimal('amount',11,2);
             $table->timestamps();
         });
     }

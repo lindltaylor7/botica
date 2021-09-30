@@ -38,8 +38,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach($ventas as $venta)
+                                    @if (substr($venta->code, -2) == "_a")
+                                    <tr class="d-none">
+                                        <td>B-000{{$venta->id}}</td>
+                                        <td>{{$venta->customer->name}}</td>
+                                        <td>{{date('d/m/Y', strtotime($venta->date))}}</td>
+
+                                        <td>S./{{$venta->total_utility}}</td>
+                                        <td>
+                                            aasasasasasasas<a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{route('generar_pdfticket.ventas', $venta->id)}}">Ver Ticket</a>
+                                        </td>
+
+                                        <td>
+                                            {{$venta->seller}}
+                                        </td>
+
+                                        <td><a href="{{route('ventas.show', $venta->id)}}">Ver más</a></td>
+
+                                        @can('nullSell')
+                                        <td><a href="{{route('ventas.anular',$venta->id)}}" class="btn btn-danger">Anular</a></td>
+                                        @endcan
+
+                                    </tr>
+                                    @else
                                     <tr>
                                         <td>B-000{{$venta->id}}</td>
                                         <td>{{$venta->customer->name}}</td>
@@ -60,10 +85,11 @@
                                         <td><a href="{{route('ventas.show', $venta->id)}}">Ver más</a></td>
 
                                         @can('nullSell')
-                                        <td><a href="{{route('ventas.anular',$venta->id)}}"class="btn btn-danger">Anular</a></td>
+                                        <td><a href="{{route('ventas.anular',$venta->id)}}" class="btn btn-danger">Anular</a></td>
                                         @endcan
 
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
