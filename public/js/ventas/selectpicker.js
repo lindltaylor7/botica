@@ -52,7 +52,7 @@ $(document).ready(function(){
                             $('#medicamentos_select').html('');
                             $('#search').val('')
 
-                                row = `<tr id="row${value.id}">
+                                row = `<tr data-id="Hola" id="row${value.id}">
                                         <td>${value.generic_name}</td>
                                         <td>${value.tradename}</td>
                                         <td>${value.concentration}</td>
@@ -63,7 +63,9 @@ $(document).ready(function(){
                                             <option value=${value.number_box}>Caja</option>
                                         </select>
                                         </td>
-                                        <td><input name="quantity[]" id="cant${value.id}" class="form-control quantity" type="number"/></td>
+                                        <td>
+                                            <input name="quantity" id="cant${value.id}" class="form-control quantity" type="number"/>
+                                        </td>
                                         <td id="vunit${value.id}" class="vunit">${value.sale_price}</td>
                                         <td id="subtotal${value.id}" class="subtotal"></td>
                                         <td id="igv_unique${value.id}"></td>

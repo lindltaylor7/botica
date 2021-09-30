@@ -43,7 +43,6 @@ class SaleController extends Controller
                 "customer_id" => $cliente->id,
                 "seller" => Auth::user()->name
             ]);
-
             $venta = Sale::create($request->all());
         }
         else
@@ -66,6 +65,7 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
+        return $request; 
         $request->validate([
             'name' => 'required',
             'dni' => 'required'
@@ -87,7 +87,6 @@ class SaleController extends Controller
             'total_utility' => $request->get('total_utility'),
             'total_sale' => $request->get('total_sale')
         ]);
-
         return $request;
     }
 
