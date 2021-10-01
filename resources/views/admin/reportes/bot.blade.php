@@ -31,7 +31,7 @@
                               @foreach($bots as $bot)
                                 <tr>
                                     <td>{{$bot->generic_name}}</td>
-                                    <td>{{$bot->total}}</td>
+                                    <td>{{$bot->cantidad}}</td>
                                 </tr>
                               @endforeach
                             </tbody>
