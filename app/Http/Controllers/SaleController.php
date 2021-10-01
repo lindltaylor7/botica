@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Customer;
 use App\Models\Detail;
 use App\Models\Sale;
 use App\Models\Stock;
 use App\Models\Batch;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -65,7 +67,7 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request; 
+
         $request->validate([
             'name' => 'required',
             'dni' => 'required'
@@ -87,7 +89,37 @@ class SaleController extends Controller
             'total_utility' => $request->get('total_utility'),
             'total_sale' => $request->get('total_sale')
         ]);
-        return $request;
+
+        $details = $request->get('detail');
+
+        for($i=0; $i<count($details); $i++){
+            if($details[$i]['unit_type']==1){
+                $medicine = Medicine::find($details[$i]['medicine_id']);
+                $medicine->details()->create([
+                    'quantity' => $details[$i]['quantity'],
+                    'unit_type' => $details[$i]['unit_type'],
+                    'sale_id' => $sale->id,
+                    'partial_igv' => $details[$i]['partial_igv'],
+                    'partial_utility' => $details[$i]['partial_utility'],
+                    'partial_sale' => $details[$i]['partial_sale']
+                ]);
+            }else{
+                $article = Article::find($details[$i]['article_id']);
+                $article->details()->create([
+                    'quantity' => $details[$i]['quantity'],
+                    'unit_type' => $details[$i]['unit_type'],
+                    'sale_id' => $sale->id,
+                    'partial_igv' => $details[$i]['partial_igv'],
+                    'partial_utility' => $details[$i]['partial_utility'],
+                    'partial_sale' => $details[$i]['partial_sale']
+                ]);
+            }
+        }
+
+
+
+        return redirect(route('ventas.index'));
+
     }
 
     /**
@@ -230,13 +262,13 @@ class SaleController extends Controller
             $quantity = Batch::where('stock_id',$detail->detailable_id)->first();
             $quantity->update(['quantity_unit' => $quantity->quantity_unit+$detail->quantity]);
         }
-        
+
         $venta = Sale::where('id', $id);
         return redirect()->route('ventas.index');
     }
 
     public function destroy($id)
-    {        
+    {
     }
 
     public function insertarVendedor(Request $request){

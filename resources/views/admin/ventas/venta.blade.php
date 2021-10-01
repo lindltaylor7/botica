@@ -40,12 +40,12 @@
                         </div>
 
                         <div>
-                            <input type="radio" name="type" class="radiobtn" id="med" value="1" checked>
+                            <input type="radio" name="u_type" class="radiobtn" id="med" value="1" checked>
                             <label for="pr">Medicamento</label>
                         </div>
 
                         <div>
-                            <input type="radio" name="type" class="radiobtn" id="med" value="2">
+                            <input type="radio" name="u_type" class="radiobtn" id="med" value="2">
                             <label for="med">Artículo</label>
                         </div>
 
@@ -65,7 +65,7 @@
                                         <h5 class="card-title mb-0">Cesta de Productos</h5>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover my-0">
+                                        <table class="table table-hover my-0" id="table_sales">
                                             <thead>
                                                 <tr>
                                                     <th class="d-none d-xl-table-cell">Nombre Genérico</th>

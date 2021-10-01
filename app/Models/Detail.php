@@ -26,4 +26,5 @@ class Detail extends Model
     public function batches(){
         return $this->belongsToMany("App\Models\Batch");
     }
+
 }

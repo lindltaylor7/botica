@@ -24,7 +24,7 @@ $(document).ready(function(){
 
     $('#search').on('keyup', function(){
        var search = $(this).val()
-       var tipo = $("input[name='type']:checked").val();
+       var tipo = $("input[name='u_type']:checked").val();
        if(tipo == 1){
         $.ajax({
             url:"../medicamentos/medPrice",
@@ -64,7 +64,12 @@ $(document).ready(function(){
                                         </select>
                                         </td>
                                         <td>
-                                            <input name="quantity" id="cant${value.id}" class="form-control quantity" type="number"/>
+                                            <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cant${value.id}" class="form-control quantity" type="number"/>
+                                            <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
+                                            <input type="hidden" id="partial_utility${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
+                                            <input type="hidden" id="partial_igv${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
+                                            <input type="hidden" id="partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
+                                            <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
                                         </td>
                                         <td id="vunit${value.id}" class="vunit">${value.sale_price}</td>
                                         <td id="subtotal${value.id}" class="subtotal"></td>
@@ -83,12 +88,15 @@ $(document).ready(function(){
  */
 
                             $('#cant'+value.id).on('keyup',function(){
+
                                 var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
                                 $('#importe'+value.id).html(importe1)
+                                $('#partial_sale'+value.id).val(importe1)
                                 var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
                                 $('#subtotal'+value.id).html(subtotal1)
+                                $('#partial_utility'+value.id).val(subtotal1)
                                 $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
-
+                                $('#partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
                                 var suma = 0;
 
                                 $('.subtotal').each(function() {
@@ -177,12 +185,19 @@ $(document).ready(function(){
                                     <td>${value.tradename}</td>
                                     <td>${value.presentation}</td>
                                     <td>
-                                    <select id="tipoart${value.id}" class="form-control">
+                                    <select name="detail[${$('#table_sales tr').length-1}][unit_type]" id="tipoart${value.id}" class="form-control">
                                         <option value="1">Unidad</option>
                                         <option value=${value.number_box}>Caja (${value.number_box})</option>
                                     </select>
                                     </td>
-                                    <td><input id="cantart${value.id}" type="text" class="form-control"></td>
+                                    <td>
+                                            <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cantart${value.id}" class="form-control quantity" type="number"/>
+                                            <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
+                                            <input type="hidden" id="a_partial_utility${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
+                                            <input type="hidden" id="a_partial_igv${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
+                                            <input type="hidden" id="a_partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
+                                            <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][article_id]" />
+                                    </td>
                                     <td id="vunitart${value.id}" class="vunit">${value.sale_price}</td>
                                     <td id="subtotalart${value.id}" class="subtotal"></td>
                                     <td id="igv_uniqueart${value.id}"></td>
@@ -194,10 +209,12 @@ $(document).ready(function(){
                                     $('#cantart'+value.id).on('keyup',function(){
                                         var importe1= parseFloat($(this).val()*parseFloat($('#vunitart'+value.id).html())).toFixed(1)+'0'
                                         $('#importeart'+value.id).html(importe1)
+                                        $('#a_partial_sale'+value.id).val(importe1)
                                         var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
                                         $('#subtotalart'+value.id).html(subtotal1)
+                                        $('#a_partial_utility'+value.id).val(subtotal1)
                                         $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
-
+                                        $('#a_partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
                                         var suma = 0;
 
                                         $('.subtotal').each(function() {
