@@ -36,6 +36,7 @@ class DetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
         $detail = Detail::create($request->except(['_token']));
         return redirect()->back();
     }

@@ -107,20 +107,8 @@
                         <div class="card-body m-sm-3 m-md-5">
                             <div class="mb-4">
                                 Hola <strong>{{$cliente->name}}</strong>,
-                                    @php
-                                        $suma=0;
-                                     @endphp
-                                    @foreach($details as $detail)
-                                        @php
-                                            $suma=$suma+$detail->utilidad;
-                                        @endphp
-                                    @endforeach
-                                    @php
-                                        $igv=($suma*18)/100;
 
-                                        $total=$suma+number_format($igv, 1, ".", '');
-                                    @endphp
-                                <br /> Este es el recibo por el pago de <strong>S/.{{number_format($suma, 2, ".", '')}}</strong> (PEN).
+                                <br /> Este es el recibo por el pago de <strong>S/.{{number_format($venta->total_sale, 2, ".", '')}}</strong> (PEN).
                             </div>
 
                             <div class="row">
@@ -129,7 +117,7 @@
                                         <div class="parte-1-izquierda"><p>Codigo No. <strong>B-00{{$venta->id}}</strong></p></div>
 
 
-                                        <div class="parte-1-derecha"><p >Fecha: <strong>{{date('d/m/Y', strtotime($venta->fecha))}}</strong></p></div>
+                                        <div class="parte-1-derecha"><p>Fecha: <strong>{{date('d/m/Y', strtotime($venta->date))}}</strong></p></div>
 
 
                                     </div>
@@ -163,26 +151,38 @@
                                 <tbody>
 
                                     @foreach($details as $detail)
-                                        <tr>
-                                            <td class="columna">{{$detail->medicamento->n_generico}}</td>
-                                            <td class="columna">{{$detail->medicamento->n_comercial}}</td>
-                                            <td class="columna">{{$detail->cantidad}}</td>
-                                            <td class="columna">S/{{number_format($detail->utilidad, 2, ".", '')}}</td>
-                                        </tr>
+
+                                            @if($detail->detailable->detailable_type == 'App\Models\Medicine')
+                                            <tr>
+                                                <td class="columna">{{$detail->detailable->generic_name}}</td>
+                                                <td class="columna">{{$detail->detailable->tradename}}</td>
+                                                <td class="columna">{{$detail->quantity}}</td>
+                                                <td class="columna">S/.{{number_format($detail->partial_sale, 2, ".", '')}}</td>
+                                            </tr>
+                                            @else
+                                            <tr>
+                                                <td class="columna">{{$detail->detailable->tradename}}</td>
+                                                <td class="columna">{{$detail->detailable->trademark}}</td>
+                                                <td class="columna">{{$detail->quantity}}</td>
+                                                <td class="columna">S/{{number_format($detail->partial_sale, 2, ".", '')}}</td>
+                                            </tr>
+                                            @endif
+
+
 
                                     @endforeach
                                     <tr>
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                         <th>Subtotal </th>
-                                        <th class="text-end">S/{{number_format($suma, 2, ".", '')}}</th>
+                                        <th class="text-end">S/ {{number_format($venta->total_utility, 2, ".", '')}}</th>
                                     </tr>
                                     <tr>
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                         <th>IGV(18%) </th>
 
-                                        <th class="text-end">S/{{number_format($igv, 1, ".", '')}}</th>
+                                        <th class="text-end">S/ {{number_format($venta->igv, 2, ".", '')}}</th>
                                     </tr>
                                     <tr>
                                         <th>&nbsp;</th>
@@ -194,7 +194,7 @@
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                         <th>Total </th>
-                                        <th class="text-end">S/{{number_format($suma, 2, ".", '')}}</th>
+                                        <th class="text-end">S/ {{number_format($venta->total_sale, 2, ".", '')}}</th>
                                     </tr>
                                 </tbody>
                             </table>
