@@ -58,7 +58,7 @@
             <div class="separator mr-3"></div>
             <div class="main__grafic-text">
                 <span class="d-block fs-4 fw-bolder">Tabla de Medicamentos</span>
-                <span>Lorem ipsum dolor sit amet, consectetur</span>
+                <span>Medicamentos Disponibles</span>
             </div>
         </div>
       <div class="main__table">
@@ -82,7 +82,13 @@
                     <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
                     <td>{{$medicamento->price->sale_price}}</td>
-                    <td>{{$medicamento->total}}</td>
+                    <td>
+                    @foreach ($medicamento->stocks as $stock)
+                    @foreach($stock->batches as $batch)
+                        {{$batch->quantity_unit}}
+                    @endforeach
+                    @endforeach
+                    </td>
                     <td>{{ucfirst(mb_strtolower($medicamento->laboratory,'UTF-8'))}}</td>
                     <td>
                     @foreach ($medicamento->stocks as $stock)
