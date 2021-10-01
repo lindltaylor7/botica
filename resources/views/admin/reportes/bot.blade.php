@@ -24,13 +24,13 @@
                             <thead>
                                 <tr>
                                     <th>Nombre de medicamentos</th>
-                                    <th>Ventas</th>
+                                    <th>Cantidad de Ventas</th>
                                 </tr>
                             </thead>
                             <tbody id="row-report">
                               @foreach($bots as $bot)
                                 <tr>
-                                    <td>{{$bot->medicamento->n_generico}}</td>
+                                    <td>{{$bot->generic_name}}</td>
                                     <td>{{$bot->total}}</td>
                                 </tr>
                               @endforeach

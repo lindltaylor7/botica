@@ -5,7 +5,6 @@ $(document).ready(function (){
         var mes = $("#mes").val();
 
         var fecha=year+"-"+mes;
-        console.log(fecha);
         $.ajax({
             type: "POST",
             url: "../reportes/top/fecha",
@@ -20,25 +19,16 @@ $(document).ready(function (){
 
                 $('#row-report').html('')
                 var list = ''
-
+                var sum = 0
                 $.each(response, function (index, value) {
-                     list ='<tr><td>'+value.n_generico+'</td><td>'+value.n_comercial+'</td><td>'+value.total+'</td></tr>'
+                    list ='<tr><td>'+value.generic_name+'</td><td>'+value.tradename+'</td><td>'+value.cantidad+'</td><td>S./ '+value.total+'</td></tr>'
                      $('#row-report').append(list)
+                     sum = sum + parseFloat(value.total)
                 });
 
-               console.log(response)
+               console.log(sum.toFixed(1))
+               $('#suma').html('TOTAL: S./'+sum.toFixed(1)+'0')
             }
         });
     })
-
-
-
 })
-/*
-$(document).ready(function (){
-    $("#mes").on("change", function (){
-        var mes = $(this).val();
-        alert(mes, year);
-    })
-})
-*/

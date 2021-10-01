@@ -26,8 +26,8 @@
                         </div>
                         <div class="col-4">
                             <div class="card-header">
-                                <select class="form-control" name="" id="mes" >
-                                    <option disabled>Seleccione un mes</option>
+                                <select class="form-control" name="mes" id="mes" >
+                                    <option selected disabled>Seleccione un mes</option>
                                     <option value="01">Enero</option>
                                     <option value="02">Febrero</option>
                                     <option value="03">Marzo</option>
@@ -45,8 +45,8 @@
                         </div>
                         <div class="col-4">
                             <div class="card-header">
-                                <select class="form-control" name="" id="year">
-                                    <option disabled>Seleccione un año</option>
+                                <select class="form-control" name="year" id="year">
+                                    <option selected disabled>Seleccione un año</option>
                                     <option value="2021">2021</option>
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option>

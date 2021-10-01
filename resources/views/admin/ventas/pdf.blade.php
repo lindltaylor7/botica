@@ -151,11 +151,10 @@
                                 <tbody>
 
                                     @foreach($details as $detail)
-
                                             @if($detail->detailable->detailable_type == 'App\Models\Medicine')
                                             <tr>
-                                                <td class="columna">{{$detail->detailable->generic_name}}</td>
                                                 <td class="columna">{{$detail->detailable->tradename}}</td>
+                                                <td class="columna">{{$detail->detailable->generic_name}}}</td>
                                                 <td class="columna">{{$detail->quantity}}</td>
                                                 <td class="columna">S/.{{number_format($detail->partial_sale, 2, ".", '')}}</td>
                                             </tr>
@@ -167,9 +166,6 @@
                                                 <td class="columna">S/{{number_format($detail->partial_sale, 2, ".", '')}}</td>
                                             </tr>
                                             @endif
-
-
-
                                     @endforeach
                                     <tr>
                                         <th>&nbsp;</th>
@@ -180,8 +176,7 @@
                                     <tr>
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
-                                        <th>IGV(18%) </th>
-
+                                        <th>IGV(18%)</th>
                                         <th class="text-end">S/ {{number_format($venta->igv, 2, ".", '')}}</th>
                                     </tr>
                                     <tr>
@@ -203,7 +198,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
