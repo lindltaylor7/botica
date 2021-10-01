@@ -136,12 +136,13 @@ class ArticleController extends Controller
         if ($request->file('fotoArticleupdate')) {
            $article->image()->delete();
            $url = Storage::disk('public')->put('articles', $request->file('fotoArticleupdate'));
-           $article->image()->create([                
+           $article->image()->create([
                'url' => $url
            ]);
         }
-       
-        $article->price()->update($request->except(['_token','_method','number_box','cost_box']));
+        else{
+            $article->price()->update($request->except(['_token','_method','number_box','cost_box']));
+        }
 
 
         return redirect()->back();

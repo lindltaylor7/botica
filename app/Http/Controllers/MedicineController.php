@@ -180,8 +180,9 @@ class MedicineController extends Controller
 
                 'url' => $url
             ]);
+        }else{
+            $medicine->price()->update($request->except(['_token','_method','number_box','cost_box']));
         }
-        $medicine->price()->update($request->except(['_token','_method','number_box','cost_box']));
 
 
          return redirect()->back();
