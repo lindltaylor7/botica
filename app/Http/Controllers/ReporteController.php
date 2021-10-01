@@ -113,16 +113,15 @@ class ReporteController extends Controller
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc');
+                            ->groupBy('details.detailable_id');
 
         $bots = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc')
                             ->union($bots1)
+                            ->orderBy('cantidad','asc')
                             ->get();
 
         return view('admin.reportes.bot', compact('bots'));
@@ -144,8 +143,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -154,8 +152,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc')
                             ->union($details1)
+                            ->orderBy('cantidad','desc')
                             ->get();
 
         }else if($request->get('id') == 2){
@@ -164,8 +162,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -174,8 +171,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc')
                             ->union($details1)
+                            ->orderBy('cantidad','desc')
                             ->get();
 
         }else{
@@ -184,8 +181,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -194,8 +190,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','desc')
                             ->union($details1)
+                            ->orderBy('cantidad','desc')
                             ->get();
         }
 
@@ -209,8 +205,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -219,8 +214,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc')
                             ->union($details1)
+                            ->orderBy('cantidad','asc')
                             ->get();
 
         }else if($request->get('id') == 2){
@@ -229,8 +224,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -239,8 +233,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc')
                             ->union($details1)
+                            ->orderBy('cantidad','asc')
                             ->get();
 
         }else{
@@ -249,8 +243,7 @@ class ReporteController extends Controller
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
-                            ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc');
+                            ->groupBy('details.detailable_id');
 
 
             $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -259,8 +252,8 @@ class ReporteController extends Controller
                             ->where('details.detailable_type','App\Models\Article')
                             ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
                             ->groupBy('details.detailable_id')
-                            ->orderBy('cantidad','asc')
                             ->union($details1)
+                            ->orderBy('cantidad','asc')
                             ->get();
         }
 
@@ -273,8 +266,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
-                    ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc');
+                    ->groupBy('details.detailable_id');
 
 
         $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -283,8 +275,8 @@ class ReporteController extends Controller
                     ->where('details.detailable_type','App\Models\Article')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
                     ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc')
                     ->union($tops1)
+                    ->orderBy('cantidad','desc')
                     ->get();
 
         return $tops;
@@ -296,8 +288,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
-                    ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc');
+                    ->groupBy('details.detailable_id');
 
 
         $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
@@ -306,8 +297,8 @@ class ReporteController extends Controller
                     ->where('details.detailable_type','App\Models\Article')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
                     ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc')
                     ->union($tops1)
+                    ->orderBy('cantidad','desc')
                     ->get();
 
         return $tops;
@@ -322,8 +313,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', date('Y-m-d').'%')
-                    ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc');
+                    ->groupBy('details.detailable_id');
 
         $items=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
                     ->leftJoin('articles','details.detailable_id','=','articles.id')
@@ -331,8 +321,8 @@ class ReporteController extends Controller
                     ->where('details.detailable_type','App\Models\Article')
                     ->where('sales.created_at', 'like', date('Y-m-d').'%')
                     ->groupBy('details.detailable_id')
-                    ->orderBy('cantidad','desc')
                     ->union($items1)
+                    ->orderBy('cantidad','desc')
                     ->get();
 
         $headers = array(
