@@ -36,7 +36,7 @@
                                             <td>{{ $articulo->supplier}}</td>
                                             <td>{{ $articulo->presentation}}</td>
                                             <td>{{ $articulo->price->first()->sale_price}}</td>
-                                            <td>{{ $articulo->supplier}}</td>
+                                            <td>{{ $articulo->stocks->first()->batches->first()->quantity_unit}}</td>
                                             <td>
                                                 @foreach ($articulo->stocks as $stock)
                                                 <span class="badge bg-primary">{{$stock->shelf}}</span>

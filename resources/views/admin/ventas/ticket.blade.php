@@ -91,20 +91,8 @@
                         <div class="card-body m-sm-3 m-md-5">
                             <div class="mb-4">
                                 Hola <strong>{{$cliente->name}}</strong>,
-                                    @php
-                                        $suma=0;
-                                     @endphp
-                                    @foreach($details as $detail)
-                                        @php
-                                            $suma=$suma+$detail->utilidad;
-                                        @endphp
-                                    @endforeach
-                                    @php
-                                        $igv=($suma*18)/100;
-
-                                        $total=$suma+$igv;
-                                    @endphp
-                                <br /> El Pago total es de: <strong>S/.{{number_format($suma, 1, ".", '')}}0</strong> (PEN).
+                                <br/>
+                                El Pago total es de: <strong>S/.{{number_format($venta->total_sale, 1, ".", '')}}0</strong> (PEN).
                             </div>
 
 
@@ -124,17 +112,14 @@
                                         <tbody>
 
                                             @foreach($details as $detail)
-                                            @php
-                                                $con_impuesto=($detail->utilidad*118)/100;
-                                            @endphp
                                             <tr>
-                                                <td class="columna">{{$detail->medicamento->n_generico}}</td>
-                                                <td class="columna">S/.{{number_format($detail->utilidad, 2, ".", '')}}</td>
+                                                <td class="columna">{{$detail->detailable->generic_name}}</td>
+                                                <td class="columna">{{$detail->detailable->partial_sale}}</td>
                                             </tr>
                                             @endforeach
                                             <tr>
                                                 <td class="columna">Total</td>
-                                                <td class="columna">S/.{{number_format($suma, 1, ".", '')}}0</td>
+                                                <td class="columna">S/.{{number_format($venta->total_sale, 1, ".", '')}}0</td>
                                             </tr>
                                         </tbody>
 

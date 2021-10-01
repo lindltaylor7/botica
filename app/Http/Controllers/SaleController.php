@@ -95,7 +95,7 @@ class SaleController extends Controller
         for($i=0; $i<count($details); $i++){
             if($details[$i]['unit_type']==1){
                 $medicine = Medicine::find($details[$i]['medicine_id']);
-                $medicine->details()->create([
+                $detail = $medicine->details()->create([
                     'quantity' => $details[$i]['quantity'],
                     'unit_type' => $details[$i]['unit_type'],
                     'sale_id' => $sale->id,
@@ -103,9 +103,26 @@ class SaleController extends Controller
                     'partial_utility' => $details[$i]['partial_utility'],
                     'partial_sale' => $details[$i]['partial_sale']
                 ]);
+
+
+
+                $batches_med = $medicine->stocks->first()->batches;
+
+                $total_stock=0;
+                foreach($batches_med as $batch){
+                    $total_stock = $total_stock + $batch->quantity_unit;
+                }
+
+                $resta = $total_stock - $detail->quantity;
+
+                $medicine->stocks->first()->batches->first()->update([
+                        'quantity_unit' => $resta
+                ]);
+
+
             }else{
                 $article = Article::find($details[$i]['article_id']);
-                $article->details()->create([
+                $detail = $article->details()->create([
                     'quantity' => $details[$i]['quantity'],
                     'unit_type' => $details[$i]['unit_type'],
                     'sale_id' => $sale->id,
@@ -243,7 +260,7 @@ class SaleController extends Controller
 
     public function generar_ticeketPdf($id){
         $venta = Sale::where('id',$id)->first();
-        $details = Detail::where('venta_id', $id)->get();
+        $details = Detail::where('sale_id', $id)->get();
         $cliente = Customer::where('id',$venta->customer_id)->first();
         $pdf = PDF::loadView('admin.ventas.ticket', compact('cliente', 'venta', 'details', 'id'));
         $pdf->setPaper('a7');
