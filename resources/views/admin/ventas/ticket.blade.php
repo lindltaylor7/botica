@@ -113,8 +113,12 @@
 
                                             @foreach($details as $detail)
                                             <tr>
+                                                @if($detail->detailable_type == 'App\Models\Medicine')
                                                 <td class="columna">{{$detail->detailable->generic_name}}</td>
-                                                <td class="columna">{{$detail->detailable->partial_sale}}</td>
+                                                    @else
+                                                <td class="columna">{{$detail->detailable->tradename}}</td>
+                                                @endif
+                                                <td class="columna">S./ {{$detail->partial_sale}}</td>
                                             </tr>
                                             @endforeach
                                             <tr>

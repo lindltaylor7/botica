@@ -151,21 +151,25 @@
                                 <tbody>
 
                                     @foreach($details as $detail)
-                                            @if($detail->detailable->detailable_type == 'App\Models\Medicine')
+
                                             <tr>
                                                 <td class="columna">{{$detail->detailable->tradename}}</td>
-                                                <td class="columna">{{$detail->detailable->generic_name}}}</td>
+                                                @if ($detail->detailable_type == 'App\Models\Medicine')
+                                                <td class="columna">{{$detail->detailable->generic_name}}</td>
+                                                    @else
+                                                <td class="columna">{{$detail->detailable->trademark}}</td>
+                                                @endif
                                                 <td class="columna">{{$detail->quantity}}</td>
                                                 <td class="columna">S/.{{number_format($detail->partial_sale, 2, ".", '')}}</td>
                                             </tr>
-                                            @else
+                                            {{-- @else
                                             <tr>
                                                 <td class="columna">{{$detail->detailable->tradename}}</td>
                                                 <td class="columna">{{$detail->detailable->trademark}}</td>
                                                 <td class="columna">{{$detail->quantity}}</td>
                                                 <td class="columna">S/{{number_format($detail->partial_sale, 2, ".", '')}}</td>
-                                            </tr>
-                                            @endif
+                                            </tr> --}}
+
                                     @endforeach
                                     <tr>
                                         <th>&nbsp;</th>
