@@ -50,7 +50,7 @@
                                             <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
                                         </td>
                                         <td>
-                                            <a target="_blank" href="{{route('generar_pdfticket.ventas', $venta->id)}}">Ver Ticket</a>
+                                            <a target="_blank" href="{{route('generar_pdfticket.ventas', $venta->id)}}"><span class="badge bg-success"> Ver Ticket</span></a>
                                         </td>
 
                                         <td>

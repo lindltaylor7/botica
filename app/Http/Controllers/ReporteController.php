@@ -90,9 +90,8 @@ class ReporteController extends Controller
     }
 
     public function top(){
-        $tops=Detail::select('medicamento_id', DB::raw('sum(details.cantidad) as total'))->groupBy('details.medicamento_id')->orderBy('total', 'desc')->get();
+        $tops=Detail::select('sale_id', DB::raw('sum(details.quantity) as total'))->groupBy('details.sale_id')->orderBy('total', 'desc')->get();
         return view('admin.reportes.top', compact('tops'));
-
     }
 
     public function bot(){
@@ -110,35 +109,65 @@ class ReporteController extends Controller
     }
 
     public function topDay(Request $request){
-
         if($request->get('id') == 1){
-            $details = Detail::select('medicamentos.n_generico','medicamentos.n_comercial','precios.p_unitario','details.medicamento_id', DB::raw('SUM(details.cantidad) as total'))
-                            ->leftJoin('medicamentos','details.medicamento_id','=','medicamentos.id')
-                            ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                            ->whereRaw('DATE(CURDATE()) = DATE(details.created_at)')
-                            ->groupBy('details.medicamento_id')
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('medicines','details.detailable_id','=','medicines.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Medicine')
+                            ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
+                            ->groupBy('details.detailable_id')
+                            ->orderBy('total','desc');
+            
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('articles','details.detailable_id','=','articles.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Article')
+                            ->whereRaw('DATE(CURDATE()) = DATE(sales.created_at)')
+                            ->groupBy('details.detailable_id')
                             ->orderBy('total','desc')
+                            ->union($details1)
                             ->get();
+
         }else if($request->get('id') == 2){
-            $details = Detail::select('medicamentos.n_generico','medicamentos.n_comercial','precios.p_unitario','details.medicamento_id', DB::raw('SUM(details.cantidad) as total'))
-                            ->leftJoin('medicamentos','details.medicamento_id','=','medicamentos.id')
-                            ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                            ->whereRaw('MONTH(CURDATE()) = MONTH(details.created_at)')
-                            ->groupBy('details.medicamento_id')
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('medicines','details.detailable_id','=','medicines.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Medicine')
+                            ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
+                            ->groupBy('details.detailable_id')
+                            ->orderBy('total','desc');
+            
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('articles','details.detailable_id','=','articles.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Article')
+                            ->whereRaw('MONTH(CURDATE()) = MONTH(sales.created_at)')
+                            ->groupBy('details.detailable_id')
                             ->orderBy('total','desc')
+                            ->union($details1)
                             ->get();
+
         }else{
-            $details = Detail::select('medicamentos.n_generico','medicamentos.n_comercial','precios.p_unitario','details.medicamento_id', DB::raw('SUM(details.cantidad) as total'))
-                            ->leftJoin('medicamentos','details.medicamento_id','=','medicamentos.id')
-                            ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                            ->whereRaw('YEAR(CURDATE()) = YEAR(details.created_at)')
-                            ->groupBy('details.medicamento_id')
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('medicines','details.detailable_id','=','medicines.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Medicine')
+                            ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
+                            ->groupBy('details.detailable_id')
+                            ->orderBy('total','desc');
+            
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                            ->leftJoin('articles','details.detailable_id','=','articles.id')
+                            ->leftJoin('sales','details.sale_id','=','sales.id')
+                            ->where('details.detailable_type','App\Models\Article')
+                            ->whereRaw('YEAR(CURDATE()) = YEAR(sales.created_at)')
+                            ->groupBy('details.detailable_id')
                             ->orderBy('total','desc')
+                            ->union($details1)
                             ->get();
         }
 
         return $details;
-
     }
 
     public function botDay(Request $request){
@@ -171,8 +200,6 @@ class ReporteController extends Controller
     }
 
     public function topFecha(Request $request){
-
-
         $tops=Detail::select('medicamentos.n_generico','medicamentos.n_comercial','precios.p_unitario','details.medicamento_id', DB::raw('SUM(details.cantidad) as total'))
                     ->leftJoin('medicamentos','details.medicamento_id','=','medicamentos.id')
                     ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
@@ -180,20 +207,29 @@ class ReporteController extends Controller
                     ->groupBy('details.medicamento_id')
                     ->orderBy('total','desc')
                     ->get();
-
         return $tops;
 
     }
     
-     public function sellsDay(Request $request){
-        $tops=Detail::select('medicamentos.n_generico','medicamentos.n_comercial','precios.p_unitario','details.medicamento_id', DB::raw('SUM(details.cantidad) as total'))
-                    ->leftJoin('medicamentos','details.medicamento_id','=','medicamentos.id')
-                    ->leftJoin('precios','precios.medicamento_id','=','medicamentos.id')
-                    ->where('details.created_at', 'like', $request->get('fecha').'%')
-                    ->groupBy('details.medicamento_id')
+    public function sellsDay(Request $request){
+        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                    ->leftJoin('medicines','details.detailable_id','=','medicines.id')
+                    ->leftJoin('sales','details.sale_id','=','sales.id')
+                    ->where('details.detailable_type','App\Models\Medicine')
+                    ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->groupBy('details.detailable_id')
+                    ->orderBy('total','desc');
+        
+        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+                    ->leftJoin('articles','details.detailable_id','=','articles.id')
+                    ->leftJoin('sales','details.sale_id','=','sales.id')
+                    ->where('details.detailable_type','App\Models\Article')
+                    ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->groupBy('details.detailable_id')
                     ->orderBy('total','desc')
+                    ->union($tops1)
                     ->get();
-
+        
         return $tops;
     }
 

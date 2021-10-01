@@ -14,7 +14,7 @@
                         <div class="card-body py-3 px-5 d-flex justify-content-between align-items-center">
                             <div>
                                 <h5 class="card-title mb-4">Ingresos</h5>
-                                <h1 class="mt-1 mb-3 fs-3">S./{{number_format($ventas->sum('utilidad'), 2, ".", '')}}</h1>
+                                <h1 class="mt-1 mb-3 fs-3">S./{{number_format($ventas->sum('total_sale'), 2, ".", '')}}</h1>
                             </div>
                             <div class="display-1">
                                 <i class="fas fa-file-invoice-dollar"></i>
@@ -27,7 +27,7 @@
                         <div class="card-body py-3 px-5 d-flex justify-content-between align-items-center">
                             <div>
                                 <h5 class="card-title mb-4">Egresos</h5>
-                                <h1 class="mt-1 mb-3 fs-3">S./{{number_format($stocks->sum('costo'), 2, ".", '')}}</h1>
+                                <h1 class="mt-1 mb-3 fs-3">S./{{number_format($stocks->sum('cost_stock'), 2, ".", '')}}</h1>
                             </div>
                             <div class="display-1">
                                 <i class="fas fa-envelope-open-text"></i>

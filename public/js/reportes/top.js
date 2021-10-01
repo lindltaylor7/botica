@@ -17,10 +17,9 @@ $(document).ready(function () {
                 var list = ''
                 var sum = 0
                 $.each(response, function (index, value) {
-                     subt=(value.p_unitario*value.total).toFixed(1)
-                     list ='<tr><td>'+value.n_generico+'</td><td>'+value.n_comercial+'</td><td>'+value.total+'</td><td>S./ '+value.p_unitario+'</td><td>S./ '+subt+'</td></tr>'
+                     list ='<tr><td>'+value.generic_name+'</td><td>'+value.tradename+'</td><td>'+value.cantidad+'</td><td>S./ '+value.total+'</td></tr>'
                      $('#row-report').append(list)
-                     sum = sum+parseFloat(subt)
+                     sum = sum + parseFloat(value.total)
                 });
 
                console.log(sum.toFixed(1))
@@ -48,18 +47,15 @@ $(document).ready(function () {
                 var list = ''
                 var sum = 0
                 $.each(response, function (index, value) {
-                     subt=(value.p_unitario*value.total).toFixed(1)
-                     list ='<tr><td>'+value.n_generico+'</td><td>'+value.n_comercial+'</td><td>'+value.total+'</td><td>S./ '+value.p_unitario+'</td><td>S./ '+subt+'</td></tr>'
+                    list ='<tr><td>'+value.generic_name+'</td><td>'+value.tradename+'</td><td>'+value.cantidad+'</td><td>S./ '+value.total+'</td></tr>'
                      $('#row-report').append(list)
                      
-                     sum = sum+parseFloat(subt)
+                     sum = sum+parseFloat(value.total)
                 });
                 
                console.log(sum.toFixed(1))
-               $('#suma').append('TOTAL: S./'+sum.toFixed(1)+'0')
+               $('#suma').html('TOTAL: S./'+sum.toFixed(1)+'0')
             }
         });
-
-
     })
 });

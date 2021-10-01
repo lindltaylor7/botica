@@ -5,9 +5,7 @@
 @section('content')
 <main class="content">
     <div class="container-fluid p-0">
-
         <h1 class="h3 mb-3">Medicamentos mas Vendidos</h1>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -22,7 +20,7 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="card-header">
-                                <input type="date" class="form-control" name="" id="fecha_calendar">
+                                <input type="date" class="form-control" name="fecha_calendar" id="fecha_calendar">
                                 <a class="btn btn-success mt-3" href="{{route('export')}}">Generar Excel</a>
                             </div>
                         </div>
@@ -45,7 +43,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-4">
                             <div class="card-header">
                                 <select class="form-control" name="" id="year">
@@ -59,7 +56,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="card-body">
                         <table class="table table-hover my-0">
                             <thead>
@@ -67,29 +63,25 @@
                                     <th>Nombre Genérico</th>
                                     <th>Nombre Comercial</th>
                                     <th class="d-none d-md-table-cell">Total de Vendidas</th>
-                                    <th class="d-none d-md-table-cell">Precio</th>
                                     <th class="d-none d-md-table-cell">Monto Total</th>
                                 </tr>
                             </thead>
-                            <tbody id="row-report">
-                                
+                            <tbody id="row-report" name='row-report'>                
                                 @foreach($tops as $top)
                                     <tr>
-                                        <td>{{$top->medicamento->n_generico}}</td>
-                                        <td>{{$top->medicamento->n_comercial}}</td>
-                                        <td>{{$top->total}}</td>
-                                        <td>S./ {{$top->medicamento->precio->p_unitario}}</td>
-                                        <td>S./ {{$top->total*$top->medicamento->precio->p_unitario}}</td>
+                                        <td>{{$top->generic_name}}</td>
+                                        <td>{{$top->tradename}}</td>
+                                        <td>{{$top->cantidad}}</td>
+                                        <td>S./{{$top->total}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                       <div class="text-center"><p id="suma"></p></div>     
+                       <div class="text-end"><p id="suma"></p></div>     
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </main>
 @endsection
