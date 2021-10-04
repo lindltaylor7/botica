@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Detail extends Model
 {
     use HasFactory;
-    protected $fillable=['quantity','unit_type_id','detailable_id','detailable_type','sale_id','partial_igv','partial_utility','partial_sale'];
+    protected $fillable=['quantity','unit_type_id','detailable_id','detailable_type','sale_id','amount','partial_igv','partial_utility','partial_sale'];
     //Relacion inversa de uno a muchos Unit_type-Price
     public function unit_type() {
         return $this->belongsTo("App\Models\Unit_type");

@@ -98,9 +98,7 @@ class SaleController extends Controller
                     'quantity' => $details[$i]['quantity'],
                     'unit_type' => $details[$i]['unit_type'],
                     'sale_id' => $sale->id,
-                    'partial_igv' => $details[$i]['partial_igv'],
-                    'partial_utility' => $details[$i]['partial_utility'],
-                    'partial_sale' => $details[$i]['partial_sale']
+                    'amount' => $details[$i]['partial_sale']
                 ]);
 
 
