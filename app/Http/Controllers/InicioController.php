@@ -24,8 +24,13 @@ class InicioController extends Controller
 
         $data = User::where('id',session('LoggedUser'))->first();
         $medicamentos = Medicine::all();
-        $ventas = Sale::pluck('date');
-        return view('admin.inicio.index', compact('medicamentos','data', 'ventas'));
+        $ventas = Sale::pluck('date')->unique();
+        $ventasNum = Sale::select(DB::raw('count(date)'))->groupBy('date')->get();
+        $arr = [];
+        foreach ($ventasNum as $num) {
+            array_push($arr,$num['count(date)']);   
+        }
+        return view('admin.inicio.index', compact('medicamentos','data', 'ventas', 'arr'));
     }
 
     /**

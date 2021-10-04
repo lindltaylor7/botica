@@ -135,7 +135,7 @@
         series: [
           {
             name: "Series 1",
-            data: [50, 52, 38, 45, 19, 23, 2, 8, 5, 8 ,5]
+            data: <?php echo json_encode($arr)?>
           }
         ],
         fill: {
