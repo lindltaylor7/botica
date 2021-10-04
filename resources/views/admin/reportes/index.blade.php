@@ -41,37 +41,37 @@
             <div class="container-fluid d-flex justify-content-between flex-wrap p-0">
                 <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
-                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de medicamentos</h5>
+                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
                             <span class="display-1">
                                 <i class="fas fa-prescription-bottle-alt"></i>
                             </span>
-                            <span class="fs-6 mb-3 w-50">Medicamentos más vendidos</span>
+                            <span class="fs-6 mb-3 w-50">Productos más vendidos</span>
                             <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.top')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
-                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de medicamentos</h5>
+                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
                             <span class="display-1">
                                 <i class="fas fa-tablets"></i>
                             </span>
-                            <span class="fs-6 mb-3 w-75">Medicamentos menos vendidos</span>
+                            <span class="fs-6 mb-3 w-75">Productos menos vendidos</span>
                             <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.bot')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
-                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de medicamentos</h5>
+                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
                             <span class="display-1">
                                 <i class="fas fa-capsules"></i>
                             </span>
-                            <span class="fs-6 mb-3 w-50">Medicamentos por caducar</span>
-                            <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.bot')}}"><span data-feather="message-square"></span> Ver Reporte</a>
+                            <span class="fs-6 mb-3 w-50">Productos por caducar</span>
+                            <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.ven')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
                 </div>
