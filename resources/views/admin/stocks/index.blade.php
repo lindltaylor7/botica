@@ -91,18 +91,17 @@
             {{-- {{$stocks->links()}} --}}
             @foreach($articles as $article)
                 <div class="col-xl-6 col-sm-6 col-md-6">
-                    <div class="card mb-3 mt-2 rounded">
+                    <div class="shadow card mb-3 mt-2 rounded">
                         <div class="row">
                             <div class="col-xl-5">
                                 <div class="text-center p-4 border-end">
                                     <div>
-                                        @if($medicine->img)
-                                        <img class="" src="{{Storage::url($medicamento->img)}}" alt="Imagen de medicamento" style="width:100%">
-                                        {{-- <img class="img__stock rounded-circle" src="https://boticaexcelentemente.com/storage/{{$stock->img}}" alt="Imagen de medicamento"> --}}
+                                        @if($article->image)
+                                        <img class="img__stock rounded-circle" src="{{Storage::url($article->image->url)}}" alt="Imagen de medicamento">
+                                        {{-- <img class=" rounded-circle" src="https://boticaexcelentemente.com/storage/{{$stock->img}}" alt="Imagen de medicamento"> --}}
                                         @else
                                         <img class="img__stock rounded-circle" src="{{asset('img/medic1.jpg')}}" alt="">
                                         @endif
-
                                     </div>
                                     <span class="text-truncate pb-1 fw-bold display-block mt-3">{{$article->tradename}}</span><br>
                                     <small class="text-truncate pb-1">{{$article->trademark}}</small>
@@ -146,7 +145,7 @@
                                                 <h5>
                                                     @foreach ($precio as $p)
                                                         @if ($article->id == $p->priceable_id && $p->priceable_type == "App\Models\Article")
-                                                            {{$p->sale_price}}
+                                                            S./ {{$p->sale_price}}
                                                         @endif
                                                     @endforeach
                                                 </h5>
