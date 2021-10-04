@@ -58,7 +58,7 @@
             <div class="separator mr-3"></div>
             <div class="main__grafic-text">
                 <span class="d-block fs-4 fw-bolder">Tabla de Medicamentos</span>
-                <span>Lorem ipsum dolor sit amet, consectetur</span>
+                <span>Medicamentos Disponibles</span>
             </div>
         </div>
       <div class="main__table">
@@ -82,7 +82,13 @@
                     <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
                     <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
                     <td>{{$medicamento->price->sale_price}}</td>
-                    <td>{{$medicamento->total}}</td>
+                    <td>
+                    @foreach ($medicamento->stocks as $stock)
+                    @foreach($stock->batches as $batch)
+                        {{$batch->quantity_unit}}
+                    @endforeach
+                    @endforeach
+                    </td>
                     <td>{{ucfirst(mb_strtolower($medicamento->laboratory,'UTF-8'))}}</td>
                     <td>
                     @foreach ($medicamento->stocks as $stock)
@@ -129,7 +135,7 @@
         series: [
           {
             name: "Series 1",
-            data: [45, 52, 38, 45, 19, 23, 2, 8, 5, 8 ,5]
+            data: <?php echo json_encode($arr)?>
           }
         ],
         fill: {
@@ -142,14 +148,12 @@
           }
         },
         xaxis: {
-          categories: ['Ene', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Dic'],
+          categories: <?php echo json_encode($ventas);?>,
         },
         colors: ['#ffc107', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
       };
 
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
-
-
     </script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicine;
 use App\Models\User;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,16 @@ class InicioController extends Controller
     {
 
         $data = User::where('id',session('LoggedUser'))->first();
-
         $medicamentos = Medicine::all();
+        // $ventas1 = Sale::unique('date');
 
-        return view('admin.inicio.index', compact('medicamentos','data'));
+        $ventas = Sale::groupBy('date')->pluck('date');
+        $ventasNum = Sale::select(DB::raw('count(date)'))->groupBy('date')->get();
+        $arr = [];
+        foreach ($ventasNum as $num) {
+            array_push($arr,$num['count(date)']);   
+        }
+        return view('admin.inicio.index', compact('medicamentos','data', 'ventas', 'arr'));
     }
 
     /**

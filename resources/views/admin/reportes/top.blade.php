@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover my-0">
+                        <table class="table table-hover my-0" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Nombre Genérico</th>
@@ -66,7 +66,7 @@
                                     <th class="d-none d-md-table-cell">Monto Total</th>
                                 </tr>
                             </thead>
-                            <tbody id="row-report" name='row-report'>                
+                            <tbody id="row-report" name='row-report'>
                                 @foreach($tops as $top)
                                     <tr>
                                         <td>{{$top->generic_name}}</td>
@@ -77,7 +77,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                       <div class="text-end"><p id="suma"></p></div>     
+                       <div class="text-end"><p id="suma"></p></div>
                     </div>
                 </div>
             </div>
@@ -88,4 +88,19 @@
 @section('javascript')
     <script src="{{ asset('js/reportes/top.js') }}"></script>
     <script src="{{ asset('js/reportes/year.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                language: {
+                searchPlaceholder: "Buscar medicamento",
+                search: "",
+                },
+                dom:"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'><'col-sm-7'p>>",
+
+            });
+        } );
+    </script>
 @endsection

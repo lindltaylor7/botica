@@ -160,7 +160,7 @@
                                                 <td class="columna">{{$detail->detailable->trademark}}</td>
                                                 @endif
                                                 <td class="columna">{{$detail->quantity}}</td>
-                                                <td class="columna">S/.{{number_format($detail->partial_sale, 2, ".", '')}}</td>
+                                                <td class="columna">S/.{{number_format($detail->amount, 2, ".", '')}}</td>
                                             </tr>
                                             {{-- @else
                                             <tr>

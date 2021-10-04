@@ -23,7 +23,6 @@ class SaleController extends Controller
     public function index(Request $request)
     {
         $ventas = Sale::orderBy('id','desc')->paginate(10);
-
         return view('admin.ventas.index', compact('ventas'));
     }
 
@@ -99,9 +98,7 @@ class SaleController extends Controller
                     'quantity' => $details[$i]['quantity'],
                     'unit_type' => $details[$i]['unit_type'],
                     'sale_id' => $sale->id,
-                    'partial_igv' => $details[$i]['partial_igv'],
-                    'partial_utility' => $details[$i]['partial_utility'],
-                    'partial_sale' => $details[$i]['partial_sale']
+                    'amount' => $details[$i]['partial_sale']
                 ]);
 
 
@@ -290,6 +287,10 @@ class SaleController extends Controller
 
     public function insertarVendedor(Request $request){
 
+    }
+
+    public function getFechas () {
+       
     }
 
 }
