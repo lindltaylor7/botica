@@ -1,7 +1,8 @@
   <nav class="nav col-2 col-sm-2 col-md-1 col-lg-3 h-100 justify-content-center p-0 overflow-auto" id="nav">
     <div class="nav__content w-75">
       <div class="nav__logo d-flex flex-nowrap justify-content-center d-lg-block my-2 py-lg-4 py-md-3 text-center">
-        <i class="fab fa-buysellads display-1 my-3 me--lg-2 my-lg-0 text-white"></i>
+        {{-- <i class="fab fa-buysellads display-1 my-3 me--lg-2 my-lg-0 text-white"></i> --}}
+        <img src="{{asset('img/icons/logo-01.svg')}}" style="width: 35%; max-width: 120px; min-width: 80px;" alt="Logotipo">
         <span class="span-logo fs-1 fw-bolder text-white d-none d-md-none d-lg-block">Excel</span>
       </div>
 

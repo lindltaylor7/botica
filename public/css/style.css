@@ -16,7 +16,6 @@ a {
 
 .nav {
   background: var(--bg-primary);
-  transition: all .5s ease;
   position: fixed;
   left: 0;
 }

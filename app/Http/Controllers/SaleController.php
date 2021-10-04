@@ -23,7 +23,6 @@ class SaleController extends Controller
     public function index(Request $request)
     {
         $ventas = Sale::orderBy('id','desc')->paginate(10);
-
         return view('admin.ventas.index', compact('ventas'));
     }
 
@@ -290,6 +289,10 @@ class SaleController extends Controller
 
     public function insertarVendedor(Request $request){
 
+    }
+
+    public function getFechas () {
+       
     }
 
 }
