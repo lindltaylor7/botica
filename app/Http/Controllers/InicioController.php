@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicine;
 use App\Models\User;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,9 @@ class InicioController extends Controller
     {
 
         $data = User::where('id',session('LoggedUser'))->first();
-
         $medicamentos = Medicine::all();
-
-        return view('admin.inicio.index', compact('medicamentos','data'));
+        $ventas = Sale::pluck('date');
+        return view('admin.inicio.index', compact('medicamentos','data', 'ventas'));
     }
 
     /**
