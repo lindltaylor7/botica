@@ -24,7 +24,9 @@ class InicioController extends Controller
 
         $data = User::where('id',session('LoggedUser'))->first();
         $medicamentos = Medicine::all();
-        $ventas = Sale::pluck('date')->unique();
+        // $ventas1 = Sale::unique('date');
+
+        $ventas = Sale::groupBy('date')->pluck('date');
         $ventasNum = Sale::select(DB::raw('count(date)'))->groupBy('date')->get();
         $arr = [];
         foreach ($ventasNum as $num) {
