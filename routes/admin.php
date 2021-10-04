@@ -54,6 +54,7 @@ Route::get('ventas/reporte/pdf/{id}', [SaleController::class, 'generarPdf'])->na
 Route::post('ventas/store', [SaleController::class, 'store'])->name('ventas.store');;
 Route::get('ventas/ticket/{id}', [SaleController::class, 'ticket'])->name('vistaticket.ventas');
 Route::get('ventas/ticket/pdf/{id}', [SaleController::class, 'generar_ticeketPdf'])->name('generar_pdfticket.ventas');
+Route::get('ventas/fechas', [SaleController::class, 'getFechas']);
 
 
 

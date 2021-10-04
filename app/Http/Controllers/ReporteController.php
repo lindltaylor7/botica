@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Detail;
 use App\Models\Stock;
 use App\Models\Sale;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -90,13 +91,13 @@ class ReporteController extends Controller
     }
 
     public function top(){
-        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->groupBy('details.detailable_id');
 
-        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('articles','details.detailable_id','=','articles.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
@@ -109,13 +110,13 @@ class ReporteController extends Controller
     }
 
     public function bot(){
-        $bots1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $bots1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
                             ->groupBy('details.detailable_id');
 
-        $bots = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $bots = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -128,17 +129,30 @@ class ReporteController extends Controller
     }
 
     public function ven(){
-        $vens=Stock::select('medicamentos.n_generico','medicamentos.n_comercial','medicamento_id','f_vencimiento')
-                    ->leftJoin('medicamentos','stocks.medicamento_id','=','medicamentos.id')
-                    ->where('f_vencimiento', '>', 'now()')
-                    ->orderBy('f_vencimiento', 'asc')
+
+        $vens1=Stock::select('medicines.generic_name','medicines.tradename','medicines.presentation', 'batches.expiry_date as fecha')
+                    ->leftJoin('medicines','stocks.stockable_id','=','medicines.id')
+                    ->leftJoin('batches','stocks.id','=','batches.stock_id')
+                    ->where('stocks.stockable_type','App\Models\Medicine')
+                    ->groupBy('stocks.stockable_id');
+
+        $vens=Stock::select('articles.tradename as generic_name','articles.trademark as tradename','articles.presentation', 'batches.expiry_date as fecha')
+                    ->leftJoin('articles','stocks.stockable_id','=','articles.id')
+                    ->leftJoin('batches','stocks.id','=','batches.stock_id')
+                    ->where('stocks.stockable_type','App\Models\Article')
+                    ->groupBy('stocks.stockable_id')
+                    ->union($vens1)
+                    ->orderBy('fecha','asc')
                     ->get();
-        return view('admin.reportes.ven', compact('vens'));
+        
+        $hoy=Carbon::now()->format('Y-m-d');
+        
+        return view('admin.reportes.ven', compact('vens','hoy'));
     }
 
     public function topDay(Request $request){
         if($request->get('id') == 1){
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -146,7 +160,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -157,7 +171,7 @@ class ReporteController extends Controller
                             ->get();
 
         }else if($request->get('id') == 2){
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -165,7 +179,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -176,7 +190,7 @@ class ReporteController extends Controller
                             ->get();
 
         }else{
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -184,7 +198,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -200,7 +214,7 @@ class ReporteController extends Controller
 
     public function botDay(Request $request){
         if($request->get('id') == 1){
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -208,7 +222,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -219,7 +233,7 @@ class ReporteController extends Controller
                             ->get();
 
         }else if($request->get('id') == 2){
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -227,7 +241,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -238,7 +252,7 @@ class ReporteController extends Controller
                             ->get();
 
         }else{
-            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details1 = Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Medicine')
@@ -246,7 +260,7 @@ class ReporteController extends Controller
                             ->groupBy('details.detailable_id');
 
 
-            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+            $details = Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                             ->leftJoin('articles','details.detailable_id','=','articles.id')
                             ->leftJoin('sales','details.sale_id','=','sales.id')
                             ->where('details.detailable_type','App\Models\Article')
@@ -261,7 +275,7 @@ class ReporteController extends Controller
     }
 
     public function topFecha(Request $request){
-        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
@@ -269,7 +283,7 @@ class ReporteController extends Controller
                     ->groupBy('details.detailable_id');
 
 
-        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('articles','details.detailable_id','=','articles.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
@@ -283,7 +297,7 @@ class ReporteController extends Controller
     }
 
     public function sellsDay(Request $request){
-        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
@@ -291,7 +305,7 @@ class ReporteController extends Controller
                     ->groupBy('details.detailable_id');
 
 
-        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $tops=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('articles','details.detailable_id','=','articles.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
@@ -308,14 +322,14 @@ class ReporteController extends Controller
         $fileName = 'Reporte'.date('d-m-Y').'.xls';
         $arrayDetalle = Array();
 
-        $items1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $items1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('medicines','details.detailable_id','=','medicines.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', date('Y-m-d').'%')
                     ->groupBy('details.detailable_id');
 
-        $items=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.partial_sale) as total'))
+        $items=Detail::select('articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('articles','details.detailable_id','=','articles.id')
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
@@ -345,7 +359,6 @@ class ReporteController extends Controller
             <th>".mb_convert_encoding('Nombre Genérico', 'UTF-16LE', 'UTF-8')."</th>
             <th>Nombre Comercial</th>
             <th>Cantidad</th>
-            <th>Precio Unitario</th>
             <th>Total</th>
         </tr>";
 
@@ -355,7 +368,6 @@ class ReporteController extends Controller
            <td>$item->tradename</td>
            <td>$item->cantidad</td>
            <td>$item->total</td>
-           <td>".$item->cantidad*$item->total."</td>
        </tr>";
         }
        echo"</table>";

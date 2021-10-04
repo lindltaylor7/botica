@@ -135,7 +135,7 @@
         series: [
           {
             name: "Series 1",
-            data: [45, 52, 38, 45, 19, 23, 2, 8, 5, 8 ,5]
+            data: <?php echo json_encode($arr)?>
           }
         ],
         fill: {
@@ -148,14 +148,12 @@
           }
         },
         xaxis: {
-          categories: ['Ene', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Dic'],
+          categories: <?php echo json_encode($ventas);?>,
         },
         colors: ['#ffc107', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
       };
 
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
-
-
     </script>
 @endsection

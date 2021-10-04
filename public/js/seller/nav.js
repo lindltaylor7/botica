@@ -4,11 +4,13 @@ const $header = d.getElementById("header");
 const $navMenu = d.querySelectorAll(".nav__span");
 const $link = d.querySelectorAll(".nav__link");
 const $logo = d.querySelector(".span-logo");
-
+// col-2 col-sm-2 col-md-1 col-lg-3 h-100 justify-content-center p-0 overflow-auto
 d.addEventListener("DOMContentLoaded", e => {
+  // $nav.classList.add("col-2", "col-sm-2", "col-md-1", "col-lg-3", "h-100", "justify-content-center", "p-0", "overflow-auto");
+
   if (localStorage.getItem("nav")) {
-    d.querySelector(".panel-btn").classList.add("is-active"); 
     $nav.classList.replace("col-lg-3", "col-lg-1");
+    d.querySelector(".panel-btn").classList.add("is-active"); 
     $header.classList.replace("col-lg-9", "col-lg-11");
     $logo.classList.replace("d-lg-block", "d-lg-none");
     $link.forEach(el => el.classList.replace("justify-content-lg-start", "justify-content-lg-center"))

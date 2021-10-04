@@ -118,7 +118,7 @@
                                                     @else
                                                 <td class="columna">{{$detail->detailable->tradename}}</td>
                                                 @endif
-                                                <td class="columna">S./ {{$detail->partial_sale}}</td>
+                                                <td class="columna">S./ {{$detail->amount}}</td>
                                             </tr>
                                             @endforeach
                                             <tr>
