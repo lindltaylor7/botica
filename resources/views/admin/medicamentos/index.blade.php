@@ -26,8 +26,6 @@
                             <th>Foto</th>
                             <th>Opciones</th>
                           </tr>
-
-
                       </thead>
                       <tbody id="dynamic-row">
                         @foreach($medicamentos as $medicamento)
@@ -39,17 +37,21 @@
                             <td>{{ucfirst(strtolower($medicamento->laboratory))}}</td>
                             <td>S./ {{$medicamento->price->sale_price}}</td>
                             <td>
-                                @foreach ($medicamento->stocks as $stock)
-                                    @php
-                                        $s=0;
-                                    @endphp
-                                    @foreach ($stock->batches as $batch)
-                                    @php
-                                        $s+=$batch->quantity_unit
-                                    @endphp
-                                    @endforeach
+                                @php
+                                $suma=0
+                                @endphp
+                                @foreach ($cantidad as $cant)
+                                    @if ($medicamento->id == $cant->stockable_id && $cant->stockable_type == "App\Models\Medicine")
+                                        @foreach ($cant->batches as $c)
+                                            @php
+                                                $suma += $c->quantity_unit;
+                                            @endphp
+                                        @endforeach
+                                    @endif
                                 @endforeach
-                                {{$s}}
+                                @php
+                                    echo $suma
+                                @endphp
                             </td>
                             <td>
                             @foreach ($medicamento->stocks as $stock)
