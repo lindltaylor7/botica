@@ -5,7 +5,7 @@
 @section('content')
 <main class="content">
     <div class="wrapper">
-        <form method="POST" action="{{route('stock.store')}}" class="formStock" id="wizard">
+        <form method="POST" action="{{route('stock.store')}}" class="formStock" id="wizard" style="height: auto;">
             @csrf
             <!-- SECTION 1 -->
             <h4></h4>
@@ -173,7 +173,7 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
-        
+
         $(document).ready(function(){
             $("a[href='#finish']").on('click',function(){
                 $('#wizard').submit();

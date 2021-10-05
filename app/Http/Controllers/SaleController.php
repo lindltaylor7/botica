@@ -101,20 +101,74 @@ class SaleController extends Controller
                     'amount' => $details[$i]['partial_sale']
                 ]);
 
+                //Cantidad total del medicamento en Stock
+                $stocks_med = $medicine->stocks;
+                $cant_total = 0;
+
+                $cost_stock = 0;
+                foreach ($stocks_med as $stock_med){
+                    foreach($stock_med->batches as $batch){
+                        $cant_total += $batch->quantity_unit;
+                    }
+                }
+
+                //return $cant_total;
+
+                //Restar la cantidad de pedido al Stock
+
+                $cant_pedido = $detail->quantity;
+
+                foreach ($stocks_med as $stock_med){
+                    if($cant_pedido != 0){
+
+                        foreach($stock_med->batches as $batch){
+                            if($batch->quantity_unit > $cant_pedido && $cant_pedido>0){
+                                $batch->update([
+                                    'quantity_unit' => $batch->quantity_unit - $cant_pedido,
+                                ]);
+                                $cant_pedido= 0;
+                                $batch->details()->attach($detail->id);
+                            }else{
+                                    $cant_pedido = $cant_pedido - $batch->quantity_unit;
+                                    $batch->update([
+                                        'quantity_unit' => 0
+                                    ]);
+                                    $batch->details()->attach($detail->id);
+                            }
+                        }
+
+                    }
+                }
 
 
-                $batches_med = $medicine->stocks->first()->batches;
 
+
+
+
+/*
+
+
+                $cant_pedido = $detail->quantity;
+
+                while($cant_pedido>0){
+                    if($cant_total>=$cant_pedido){
+                    $cant_pedido = $batch_med->quantity_unit - $cant_pedido;
+                    }else{
+                    $cant_pedido = 0;
+                    }
+                } */
+
+               /*   */
+
+/*
                 $total_stock=0;
                 foreach($batches_med as $batch){
                     $total_stock = $total_stock + $batch->quantity_unit;
                 }
 
-                $resta = $total_stock - $detail->quantity;
+                $resta = $total_stock - $detail->quantity; */
 
-                $medicine->stocks->first()->batches->first()->update([
-                        'quantity_unit' => $resta
-                ]);
+
 
 
             }else{
@@ -290,7 +344,7 @@ class SaleController extends Controller
     }
 
     public function getFechas () {
-       
+
     }
 
 }

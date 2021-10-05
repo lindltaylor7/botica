@@ -40,10 +40,8 @@ $(document).ready(function(){
                     $('#cant_caja').val($(this).data('nbox'))
                     $('#medicamentos_select').hide()
                 })
-
             }
-
-            });
+        });
     });
 
     $('#cajas').on('keyup',function(){
