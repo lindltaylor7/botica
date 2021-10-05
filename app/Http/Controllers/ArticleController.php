@@ -52,7 +52,7 @@ class ArticleController extends Controller
             'cost_price' => 'required',
             'utility' => 'required',
             'sale_price' => 'required',
-
+            'quantity_unit' => 'required'
     ]);
 
     $duplicate = Article::where('tradename', $request->get('tradename'))

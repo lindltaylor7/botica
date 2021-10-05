@@ -80,7 +80,7 @@
                 <tr>
                     <td>{{ucfirst(mb_strtolower($medicamento->generic_name,'UTF-8'))}}</td>
                     <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
-                    <td>{{ucfirst(strtolower($medicamento->concentration))}}</td>
+                    <td>{{$medicamento->concentration}}</td>
                     <td>{{$medicamento->price->sale_price}}</td>
                     <td>
                     @foreach ($medicamento->stocks as $stock)
