@@ -247,7 +247,7 @@
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
-                                    <input type="number" name="batch[0][quantity_unit]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                    <input type="number" name="batch[0][quantity_unit]" class="form-control" placeholder="Ingrese la cantidad de medicamentos" required autocomplete="off">
                                 </div>
                             </div>
 

@@ -19,16 +19,20 @@
                                 <tr>
                                     <th>Nombre Genérico</th>
                                     <th>Nombre Comercial</th>
+                                    <th>Presentación</th>
                                     <th class="d-none d-xl-table-cell">Fecha de Vencimiento</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($vens as $ven)
+                                @if ($ven->fecha >= $hoy)
                                     <tr>
-                                        <td>{{$ven->n_generico}}</td>
-                                        <td>{{$ven->n_comercial}}</td>
-                                        <td>{{date('d/m/Y', strtotime($ven->f_vencimiento))}}</td>
+                                        <td>{{$ven->generic_name}}</td>
+                                        <td>{{$ven->tradename}}</td>
+                                        <td>{{$ven->presentation}}</td>
+                                        <td>{{$ven->fecha}}</td>
                                     </tr>
+                                @endif
                                 @endforeach
                             </tbody>
                         </table>
