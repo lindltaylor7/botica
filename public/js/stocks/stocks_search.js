@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#search_stock").on("keyup", function () {
         var search = $("#search_stock").val();
-        console.log(search);
+        // console.log(search);
         var token = "{{csrf_token()}}";
 
         $.ajax({
@@ -15,7 +15,6 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (res) {
-                console.log(res);
                 var tableRow = "";
 
                 $("#dynamic-row").html("");
