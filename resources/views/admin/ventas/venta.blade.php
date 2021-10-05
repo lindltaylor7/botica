@@ -19,8 +19,14 @@
                             <div class="d-flex align-items-center">
                                 <input type="text" name="dni" class="d-inline form-control w-75" id="search_dni" placeholder="Ingrese el DNI del cliente">
                                 <a id="search_dni_btn" class="btn btn-primary w-25">Buscar</a>
+                                @error('dni')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <input type="text" name="name" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-100" readonly require>
+                            @error('name')
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-check mb-3">
