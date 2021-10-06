@@ -5,7 +5,7 @@
 @section('content')
 <main class="content">
     <div class="wrapper">
-        <form method="POST" action="{{route('articles.store')}}" enctype="multipart/form-data" id="wizard">
+        <form method="POST" action="{{route('articles.store')}}" enctype="multipart/form-data" id="wizard" style="height: auto;">
             @csrf
             <!-- SECTION 1 -->
             <h4></h4>

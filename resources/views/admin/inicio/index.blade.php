@@ -44,7 +44,7 @@
                 <div class="separator"></div>
                 <div class="main__grafic-text">
                     <span class="d-block fs-4 fw-bolder">Ventas por día</span>
-                    <span>Lorem ipsum dolor sit amet, consectetur</span>
+                    <span>Ventas de artículos y medicamentos</span>
                 </div>
             </div>
             <div id="chart" style="position: relative; max-width: 250px; min-width: 100%;"></div>
@@ -81,13 +81,19 @@
                     <td>{{ucfirst(mb_strtolower($medicamento->generic_name,'UTF-8'))}}</td>
                     <td>{{ucfirst(mb_strtolower($medicamento->tradename,'UTF-8'))}}</td>
                     <td>{{$medicamento->concentration}}</td>
-                    <td>{{$medicamento->price->sale_price}}</td>
+                    <td>S./{{$medicamento->price->sale_price}}</td>
                     <td>
-                    @foreach ($medicamento->stocks as $stock)
-                    @foreach($stock->batches as $batch)
-                        {{$batch->quantity_unit}}
+                    @php
+                        $s=0;
+                    @endphp
+                    @foreach($medicamento->stocks as $stock)
+                        @foreach($stock->batches as $batch)
+                            @php
+                                $s+=$batch->quantity_unit;
+                            @endphp
+                        @endforeach
                     @endforeach
-                    @endforeach
+                    {{$s}}
                     </td>
                     <td>{{ucfirst(mb_strtolower($medicamento->laboratory,'UTF-8'))}}</td>
                     <td>
@@ -95,7 +101,7 @@
                     <span class="badge bg-primary">{{$stock->shelf}}</span>
                     @endforeach
                     </td>
-                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
+                    <td><a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
                     @include('admin.inicio.imgmodal')
                 </tr>
             @endforeach
