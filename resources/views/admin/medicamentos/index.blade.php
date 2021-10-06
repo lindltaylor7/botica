@@ -137,12 +137,12 @@
                     $boxModal.querySelector("#sale_price_box").value = pc_box.toFixed(1)  == "NaN" ? "0" : pc_box.toFixed(1);
 
                     //BLISTER
-                    var pc_blister = pc_box / $boxModal.querySelector('#number_box_edit').value;
+                    var pc_blister = pc_box / $boxModal.querySelector('#number_blister_edit').value;
                     $boxModal.querySelector("#cost_price_blister").value = pc_blister.toFixed(2) == "NaN" ? "0" : pc_blister.toFixed(2);
                     $boxModal.querySelector('#sale_price_blister').value = pc_blister.toFixed(1) == "NaN" ? "0" : pc_blister.toFixed(1);
 
                     //UNIDAD
-                    var pc_ud = pc_box/ $boxModal.querySelector('#number_blister_edit').value
+                    var pc_ud = pc_box / $boxModal.querySelector('#number_box_edit').value
                     $boxModal.querySelector('#cost_price_unit').value = pc_ud.toFixed(2) == "NaN" ? "0" : pc_ud.toFixed(2)
                     $boxModal.querySelector('#sale_price_unit').value = pc_ud.toFixed(1)  == "NaN" ? "0" : pc_ud.toFixed(1)
                 });

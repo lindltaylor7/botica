@@ -19,7 +19,7 @@
                                 <label class="form-label">Precio de Costo por caja</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja" value={{$medicamento->price->cost_price*$medicamento->number_box}}>
+                                    <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja" value={{$medicamento->price->cost_price * $medicamento->number_box}}>
                                 </div>
                             </div>
                             <div class="form-col">
