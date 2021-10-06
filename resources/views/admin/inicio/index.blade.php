@@ -95,8 +95,10 @@
                     <span class="badge bg-primary">{{$stock->shelf}}</span>
                     @endforeach
                     </td>
-                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"><i class="fas fa-image"></i></a></td>
-                    @include('admin.inicio.imgmodal')
+                    <td>
+                      <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModal{{$medicamento->id}}"></button>
+                      @include('admin.inicio.imgmodal')
+                    </td>
                 </tr>
             @endforeach
           </tbody>
