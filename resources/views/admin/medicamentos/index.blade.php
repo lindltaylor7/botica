@@ -63,7 +63,7 @@
                                @include('admin.medicamentos.imgmodal')
                             </td>
                             <td>
-                              <button type="button"  class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-dollar-sign"></i></button>
+                              <button type="button" data-id="priceModal{{$medicamento->id}}" class="btn btn-xs btn-success btn-modal-access" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-dollar-sign"></i></button>
                               @include('admin.medicamentos.pricemodal')
                               <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$medicamento->id}}"><i class="fas fa-edit"></i></button>
                               @include('admin.medicamentos.medicinemodaledit')
@@ -108,48 +108,6 @@
                 $('#wizard').submit();
             });
 
-            $('#cost_box').on('keyup', function(){
-
-                //CAJA
-                var pc_box = parseFloat($(this).val())
-                $('#sale_price_box').val(pc_box.toFixed(1))
-
-                //BLISTER
-                var pc_blister = pc_box / $('#number_blister').val()
-                $('#cost_price_blister').val(pc_blister.toFixed(2))
-                $('#sale_price_blister').val(pc_blister.toFixed(1))
-
-                //UNIDAD
-                var pc_ud = pc_box/$('#number_box').val()
-                $('#cost_price_unit').val(pc_ud.toFixed(2))
-                $('#sale_price_unit').val(pc_ud.toFixed(1))
-
-            });
-
-            $('#utility_box').on('keyup', function(){
-
-                //CAJA
-                var pc_box = $('#cost_box').val();
-                var percent = $(this).val();
-                var total = parseFloat(pc_box) + parseFloat(pc_box*percent/100);
-                $('#sale_price_box').val(total.toFixed(1));
-
-                $('#utility_blister').val(percent)
-                $('#utility_unit').val(percent)
-
-                $('#sale_price_blister').val((total/$('#number_blister').val()).toFixed(1))
-                $('#sale_price_unit').val((total/$('#number_box').val()).toFixed(1))
-            });
-
-            $('#foto').on('change', function(e){
-                var file = e.target.files[0];
-                var reader = new FileReader();
-                reader.onload = (e) => {
-                    $("#picture").attr('src', e.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
-
             const $template = document.getElementById("template-input").content;
             const $fragment = document.createDocumentFragment();
             $('#inputDynamic').on('change', function (e) {
@@ -166,5 +124,52 @@
                 $('#boxDynamic').append($fragment)
             })
         });
+
+        document.addEventListener("click", e => {
+            if (e.target.matches(".modal-access, .modal-access *")) {
+                const $boxModal = e.target.closest(".modal-access");
+                const $cost_box = $boxModal.querySelector("#cost_box");
+                const $utility_box = $boxModal.querySelector("#utility_box");
+
+                $($cost_box).on('keyup', function(){
+                    //CAJA
+                    var pc_box = parseFloat($(this).val())
+                    $boxModal.querySelector("#sale_price_box").value = pc_box.toFixed(1)  == "NaN" ? "0" : pc_box.toFixed(1);
+
+                    //BLISTER
+                    var pc_blister = pc_box / $boxModal.querySelector('#number_box_edit').value;
+                    $boxModal.querySelector("#cost_price_blister").value = pc_blister.toFixed(2) == "NaN" ? "0" : pc_blister.toFixed(2);
+                    $boxModal.querySelector('#sale_price_blister').value = pc_blister.toFixed(1) == "NaN" ? "0" : pc_blister.toFixed(1);
+
+                    //UNIDAD
+                    var pc_ud = pc_box/ $boxModal.querySelector('#number_blister_edit').value
+                    $boxModal.querySelector('#cost_price_unit').value = pc_ud.toFixed(2) == "NaN" ? "0" : pc_ud.toFixed(2)
+                    $boxModal.querySelector('#sale_price_unit').value = pc_ud.toFixed(1)  == "NaN" ? "0" : pc_ud.toFixed(1)
+                });
+
+                $($utility_box).on('keyup', function(){
+                    //CAJA
+                    var pc_box = $boxModal.querySelector('#cost_box').value;
+                    var percent = e.target.value;
+                    var total = parseFloat(pc_box) + parseFloat(pc_box*percent/100);
+                    $boxModal.querySelector('#sale_price_box').value = total.toFixed(1);
+
+                    $boxModal.querySelector('#utility_blister').value = percent
+                    $boxModal.querySelector('#utility_unit').value = percent
+
+                    $boxModal.querySelector('#sale_price_blister').value = (total/ $boxModal.querySelector('#number_box_edit').value).toFixed(1)
+                    $boxModal.querySelector('#sale_price_unit').value = (total / $boxModal.querySelector('#number_blister_edit').value).toFixed(1)
+                });
+
+                $('#foto').on('change', function(e){
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        $("#picture").attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        })
     </script>
 @endsection

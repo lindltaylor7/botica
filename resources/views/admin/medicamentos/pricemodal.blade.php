@@ -1,4 +1,4 @@
-<div class="modal fade" id="priceModal{{$medicamento->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-access" id="priceModal{{$medicamento->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,7 +10,7 @@
                     @csrf
                     @method('put')
                     <input type="hidden"  id="number_box_edit" value="{{$medicamento->number_box}}">
-                    <input type="hidden"  id="number_box_edit" value="{{$medicamento->number_blister}}">
+                    <input type="hidden"  id="number_blister_edit" value="{{$medicamento->number_blister}}">
 
                     <section>
                         <h3>Precios del Medicamento</h3>
@@ -44,7 +44,7 @@
                                 <label class="form-label">Precio de Costo por blister</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    <input type="text" id="cost_price_blister" class="form-control" placeholder="Costo por blister" readonly>
+                                    <input type="text" id="cost_price_blister" class="form-control" placeholder="Costo por blister" readonly value="{{$medicamento->price->sale_price * $medicamento->number_blister}}">
                                 </div>
                             </div>
                             <div class="form-col">
@@ -60,7 +60,7 @@
                                 <label class="form-label">Precio de venta por blister</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly>
+                                    <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly value="{{$medicamento->price->sale_price * $medicamento->number_blister}}">
 
                                 </div>
                             </div>
@@ -86,7 +86,6 @@
                                 <div class="form-holder">
                                     <i>S./</i>
                                     <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly value="{{$medicamento->price->sale_price}}">
-
                                 </div>
                             </div>
                         </div>

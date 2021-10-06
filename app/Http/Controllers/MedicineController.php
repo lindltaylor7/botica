@@ -30,6 +30,10 @@ class MedicineController extends Controller
         $precios = Price::all();
         $cantidad = Stock::all();
 
+        // $batch = Batch::where('stock_id', $precios->priceable_id)->get();
+        // foreach($precios as $precio) {
+
+        // }
         return view('admin.medicamentos.index', compact('medicamentos','precios','cantidad'));
     }
 
