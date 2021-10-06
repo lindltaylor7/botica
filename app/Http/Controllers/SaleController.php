@@ -177,13 +177,50 @@ class SaleController extends Controller
                     'quantity' => $details[$i]['quantity'],
                     'unit_type' => $details[$i]['unit_type'],
                     'sale_id' => $sale->id,
-                    'partial_igv' => $details[$i]['partial_igv'],
-                    'partial_utility' => $details[$i]['partial_utility'],
-                    'partial_sale' => $details[$i]['partial_sale']
+                    'amount' => $details[$i]['partial_sale']
                 ]);
+
+                //Cantidad total del medicamento en Stock
+                $stocks_med = $article->stocks;
+                $cant_total = 0;
+
+                $cost_stock = 0;
+                foreach ($stocks_med as $stock_med){
+                    foreach($stock_med->batches as $batch){
+                        $cant_total += $batch->quantity_unit;
+                    }
+                }
+
+                //return $cant_total;
+
+                //Restar la cantidad de pedido al Stock
+
+                $cant_pedido = $detail->quantity;
+
+                foreach ($stocks_med as $stock_med){
+                    if($cant_pedido != 0){
+
+                        foreach($stock_med->batches as $batch){
+                            if($batch->quantity_unit > $cant_pedido && $cant_pedido>0){
+                                $batch->update([
+                                    'quantity_unit' => $batch->quantity_unit - $cant_pedido,
+                                ]);
+                                $cant_pedido= 0;
+                                $batch->details()->attach($detail->id);
+                            }else{
+                                    $cant_pedido = $cant_pedido - $batch->quantity_unit;
+                                    $batch->update([
+                                        'quantity_unit' => 0
+                                    ]);
+                                    $batch->details()->attach($detail->id);
+                            }
+                        }
+
+                    }
             }
         }
-
+    }
+    
 
 
         return redirect(route('ventas.index'));
