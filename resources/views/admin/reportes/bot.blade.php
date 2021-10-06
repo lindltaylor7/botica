@@ -23,7 +23,8 @@
                         <table class="table table-hover my-0">
                             <thead>
                                 <tr>
-                                    <th>Nombre de medicamentos</th>
+                                    <th>Nombre Productos</th>
+                                    <th>Nombre Comercial</th>
                                     <th>Cantidad de Ventas</th>
                                 </tr>
                             </thead>
@@ -31,6 +32,7 @@
                               @foreach($bots as $bot)
                                 <tr>
                                     <td>{{$bot->generic_name}}</td>
+                                    <td>{{$bot->tradename}}</td>
                                     <td>{{$bot->cantidad}}</td>
                                 </tr>
                               @endforeach

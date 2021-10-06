@@ -35,8 +35,24 @@
                                             <td>{{ $articulo->trademark}}</td>
                                             <td>{{ $articulo->supplier}}</td>
                                             <td>{{ $articulo->presentation}}</td>
-                                            <td>{{ $articulo->price->first()->sale_price}}</td>
-                                            <td>{{ $articulo->stocks->first()->batches->first()->quantity_unit}}</td>
+                                            <td>S./ {{$articulo->price->sale_price}}</td>
+                                            <td>                                        
+                                                @php
+                                                $suma=0
+                                                @endphp
+                                                @foreach ($cantidad as $cant)
+                                                    @if ($articulo->id == $cant->stockable_id && $cant->stockable_type == "App\Models\Article")
+                                                        @foreach ($cant->batches as $c)
+                                                            @php
+                                                                $suma += $c->quantity_unit;
+                                                            @endphp
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                                @php
+                                                    echo $suma
+                                                @endphp
+                                            </td>
                                             <td>
                                                 @foreach ($articulo->stocks as $stock)
                                                 <span class="badge bg-primary">{{$stock->shelf}}</span>

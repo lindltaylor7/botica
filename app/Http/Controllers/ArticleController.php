@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Batch;
 use App\Models\Price;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,8 +20,9 @@ class ArticleController extends Controller
     {
         $articulos = Article::all();
         $precios = Price::all();
+        $cantidad= Stock::all();
 
-        return view('admin.articles.index', compact('articulos','precios'));
+        return view('admin.articles.index', compact('articulos','precios','cantidad'));
     }
 
     /**

@@ -21,7 +21,6 @@
                         <div class="col-4">
                             <div class="card-header">
                                 <input type="date" class="form-control" name="fecha_calendar" id="fecha_calendar">
-                                <a class="btn btn-success mt-3" href="{{route('export')}}">Generar Excel</a>
                             </div>
                         </div>
                         <div class="col-4">
@@ -57,7 +56,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover my-0" id="myTable">
+                        <table class="table table-hover my-0" id="myTable" >
                             <thead>
                                 <tr>
                                     <th>Nombre Genérico</th>
@@ -89,17 +88,29 @@
     <script src="{{ asset('js/reportes/top.js') }}"></script>
     <script src="{{ asset('js/reportes/year.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
     <script>
         $(document).ready( function () {
             $('#myTable').DataTable({
                 language: {
-                searchPlaceholder: "Buscar medicamento",
+                searchPlaceholder: "Buscar producto",
                 search: "",
                 },
-                dom:"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'>>" +
+                "ordering": true,
+                "order": [[ 2, 'desc' ]],
+                dom:"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'B>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-5'><'col-sm-7'p>>",
-
+                buttons: [
+                    'excelHtml5',
+                    'pdfHtml5'
+                ]
             });
         } );
     </script>
