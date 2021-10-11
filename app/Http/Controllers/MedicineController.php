@@ -29,12 +29,8 @@ class MedicineController extends Controller
         $medicamentos = Medicine::all();
         $precios = Price::all();
         $cantidad = Stock::all();
-
-        // $batch = Batch::where('stock_id', $precios->priceable_id)->get();
-        // foreach($precios as $precio) {
-
-        // }
-        return view('admin.medicamentos.index', compact('medicamentos','precios','cantidad'));
+        $batches = Batch::all();
+        return view('admin.medicamentos.index', compact('medicamentos','precios','cantidad', 'batches'));
     }
 
     /**
@@ -175,6 +171,7 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
+
          $medicine= Medicine::where('id',$id)->first();
          $medicine->update($request->except(['_token','_method']));
 
@@ -261,9 +258,7 @@ class MedicineController extends Controller
     }
 
     public function preciosUpd(Request $request){
-
         $precio = Price::where('id',$request->get('id_precio'))->update(request()->except(['_token', 'id_precio']));
-
         return redirect(route('medicamentos.index'));
     }
 
