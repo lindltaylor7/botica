@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalA{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalA{{$a->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -20,24 +20,24 @@
                   <tbody>  
                     <tr>
                       <th scope="row">Nombre Comercial</th>
-                      <td>{{$article->tradename}}</td>
+                      <td>{{$a->tradename}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Marca Comercial</th>
-                      <td>{{$article->trademark}}</td>
+                      <td>{{$a->trademark}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Presentación</th>
-                      <td>{{$article->presentation}}</td>
+                      <td>{{$a->presentation}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Proovedor</th>
-                      <td>{{$article->supplier}}</td>
+                      <td>{{$a->supplier}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Anaquel</th>
-                      <td>@foreach($article->stocks as $a)
-                            <li> {{$a->shelf}}</li> 
+                      <td>@foreach($a->stocks as $ast)
+                            <li> {{$ast->shelf}}</li> 
                           @endforeach
                       </td>
                     </tr>

@@ -27,4 +27,12 @@ class Medicine extends Model
     public function details(){
         return $this->morphMany('App\Models\Detail','detailable');
     }
+
+    public function scopeBuscar($query, $buscar)
+    {
+        if ($buscar)
+        {
+            return $query->where('medicines.generic_name','like',"%$buscar%")->orWhere('medicines.tradename','like',"%$buscar%")->orWhere('medicines.laboratory','like',"%$buscar%");
+        }
+    }
 }
