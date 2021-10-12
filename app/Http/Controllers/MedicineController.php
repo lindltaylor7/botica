@@ -51,6 +51,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
+        
         //return $request;
         $request->validate([
                 'generic_name' => 'required',
@@ -64,7 +65,9 @@ class MedicineController extends Controller
                 'cost_price' => 'required',
                 'utility' => 'required',
                 'sale_price' => 'required',
-
+                'shelf'=>'required',
+                'cost_stock'=>'required',
+                'quantity_box'=>'required',
         ]);
 
         $duplicate = Medicine::where('generic_name', $request->get('generic_name'))
