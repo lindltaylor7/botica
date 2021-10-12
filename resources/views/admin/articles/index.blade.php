@@ -63,9 +63,9 @@
                                                  @include('admin.articles.imgarticlemodal')
                                               </td>
                                             <td class="text-center">
-                                                <button type="button"  class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-comments-dollar"></i></button>
+                                                <button type="button" class="btn btn-xs btn-success btn-modal-access" data-id="priceModal{{$articulo->id}}" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-comments-dollar" data-id="priceModal{{$articulo->id}}"></i></button>
                                                 @include('admin.articles.pricearticlemodal')
-                                                <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$articulo->id}}"><i class="far fa-edit"></i></button>
+                                                <button type="button" class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$articulo->id}}"><i class="far fa-edit"></i></button>
                                                 @include('admin.articles.articlemodaledit')
                                  {{--                <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$articulo->id}}"><i class="fas fa-trash-alt"></i></button> --}}
                                             </td>
@@ -98,13 +98,74 @@
         $(document).ready( function () {
             $('#tablearticles').DataTable({
                 language: {
-                searchPlaceholder: "Buscar medicamento",
-                search: ""
+                    searchPlaceholder: "Buscar medicamento",
+                    search: ""
                 },
                 "dom":"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-5'><'col-sm-7'p>>",
             });
-        } );
+        });
+
+        document.addEventListener("click", e => {
+            if (e.target.matches(".btn-modal-access, .btn-modal-access *")) {
+                let $boxModal = document.getElementById(`${e.target.dataset.id}`);
+                let $cost_box = $boxModal.querySelector("#cost_box");
+                let $utility_box = $boxModal.querySelector("#utility_box");
+                
+                document.addEventListener("keyup", e => {
+                    if (e.target === $cost_box || e.target === $utility_box) {
+                        let number_box = $boxModal.querySelector('#number_box');
+                        
+                        let cost_box = $cost_box.value;
+                        let utility_box = $utility_box.value;
+                        let sale_price_box = $boxModal.querySelector("#sale_price_box");
+
+                        let cost_price_unit = $boxModal.querySelector("#cost_price_unit");
+                        let utility_unit = $boxModal.querySelector("#utility_unit");
+                        let sale_price_unit = $boxModal.querySelector("#sale_price_unit");
+                        
+                        price();
+
+                        function price () {
+                            cost_box = parseFlotante(cost_box, 1)
+                            sale_price_box.value = parseFlotante(parseFlotante(cost_box,1) + parseFlotante(cost_box * utility_box / 100, 2),1)
+                            utility_unit.value = utility_box
+                            cost_price_unit.value = parseFlotante(cost_box / number_box.value,1)
+                            
+                            // let igv_calc = cost_box * 18 / 100
+                            // let igv_calc_total = parseFloat(cost_box) + parseFloat(cost_box * 18 / 100)
+
+                            sale_price_unit.value =  parseFlotante(sale_price_box.value / number_box.value, 1);
+                            
+                            // console.log(parseFlotante(sale_price_box.value / number_box.value))
+                            // console.log(cost_box + (cost_box * utility_box / 100))
+                            // let percent = cost_box.value * cost_box.value / 100
+                            // let subtotal = cost_box.value + percent;
+                            // sale_price_box.value = subtotal;
+                            // sale_price_unit.value = sale_price_box.value / number_box.value
+                        }
+
+                        function parseFlotante (number, cant = 1) {
+                            number = parseFloat(number).toFixed(cant) == "NaN" ? "0" : parseFloat(number).toFixed(cant)
+                            return parseFloat(number);
+                        }
+                    }
+                })
+
+
+
+               
+
+                $('#foto').on('change', function(e){
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        $("#picture").attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        })
     </script>
     @endsection
