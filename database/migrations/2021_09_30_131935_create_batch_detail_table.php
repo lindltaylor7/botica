@@ -19,6 +19,7 @@ class CreateBatchDetailTable extends Migration
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->unsignedBigInteger('detail_id');
             $table->foreign('detail_id')->references('id')->on('details')->onDelete('cascade');
+            $table->integer('quantity_sale');
             $table->timestamps();
         });
     }

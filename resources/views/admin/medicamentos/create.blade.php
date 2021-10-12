@@ -105,16 +105,21 @@
                         <label class="form-label">Precio de Costo por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja">
+                            <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja" value="{{old('cost_box')}}">
                         </div>
+                            @error('cost_box')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label">Porcentaje de Utilidad por caja</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" id="utility_box" class="form-control" placeholder="Utilidad por caja">
-
+                            <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}">
                         </div>
+                        @error('utility')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label">Precio de venta por caja</label>
@@ -163,7 +168,7 @@
                         <label class="form-label">Porcentaje de Utilidad por unidad</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility" id="utility_unit" class="form-control" placeholder="Utilidad por unidad" readonly>
+                            <input type="text" id="utility_unit" class="form-control" placeholder="Utilidad por unidad" readonly>
                         </div>
                     </div>
 
@@ -172,7 +177,6 @@
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly>
-
                         </div>
                     </div>
                 </div>
@@ -188,8 +192,11 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="text" name="shelf" class="form-control">
+                            <input type="text" name="shelf" class="form-control" value="{{old('shelf')}}">
                         </div>
+                        @error('shelf')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     </div>
                     <div class="form-col">
                         <label for="">
@@ -197,8 +204,11 @@
                         </label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_stock" class="form-control">
+                            <input type="text" name="cost_stock" class="form-control"  value="{{old('cost_stock')}}">
                         </div>
+                        @error('cost_stock')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     </div>
                 </div>
 
@@ -209,8 +219,11 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="number" name="quantity_box" class="form-control">
+                            <input type="number" name="quantity_box" class="form-control"  value="{{old('quantity_box')}}">
                         </div>
+                        @error('quantity_box')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     </div>
                     <div class="form-col">
                         <label for="">
@@ -238,7 +251,7 @@
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
                                     <input type="text" name="batch[0][code]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
-                                </div>
+                                </div>                                
                             </div>
 
                             <div class="form-col">

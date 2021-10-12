@@ -29,8 +29,8 @@ class MedicineController extends Controller
         $medicamentos = Medicine::all();
         $precios = Price::all();
         $cantidad = Stock::all();
-
-        return view('admin.medicamentos.index', compact('medicamentos','precios','cantidad'));
+        $batches = Batch::all();
+        return view('admin.medicamentos.index', compact('medicamentos','precios','cantidad', 'batches'));
     }
 
     /**
@@ -51,6 +51,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
+        
         //return $request;
         $request->validate([
                 'generic_name' => 'required',
@@ -64,7 +65,9 @@ class MedicineController extends Controller
                 'cost_price' => 'required',
                 'utility' => 'required',
                 'sale_price' => 'required',
-
+                'shelf'=>'required',
+                'cost_stock'=>'required',
+                'quantity_box'=>'required',
         ]);
 
         $duplicate = Medicine::where('generic_name', $request->get('generic_name'))
@@ -171,6 +174,7 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
+
          $medicine= Medicine::where('id',$id)->first();
          $medicine->update($request->except(['_token','_method']));
 
@@ -257,9 +261,7 @@ class MedicineController extends Controller
     }
 
     public function preciosUpd(Request $request){
-
         $precio = Price::where('id',$request->get('id_precio'))->update(request()->except(['_token', 'id_precio']));
-
         return redirect(route('medicamentos.index'));
     }
 

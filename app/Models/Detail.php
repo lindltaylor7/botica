@@ -24,7 +24,7 @@ class Detail extends Model
     }
     //muchos a muchos
     public function batches(){
-        return $this->belongsToMany("App\Models\Batch");
+        return $this->belongsToMany("App\Models\Batch")->withPivot('quantity_sale');
     }
 
 }

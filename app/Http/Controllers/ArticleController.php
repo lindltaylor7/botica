@@ -54,7 +54,14 @@ class ArticleController extends Controller
             'cost_price' => 'required',
             'utility' => 'required',
             'sale_price' => 'required',
-            'quantity_unit' => 'required'
+            'shelf'=>'required',
+            'cost_stock'=>'required',
+            'quantity_box'=>'required',
+            'code'=>'required',
+            'quantity_unit'=>'required',
+            'entry_date'=>'required',
+            'expiry_date'=>'required',
+
     ]);
 
     $duplicate = Article::where('tradename', $request->get('tradename'))

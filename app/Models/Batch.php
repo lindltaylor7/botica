@@ -16,6 +16,6 @@ class Batch extends Model
     }
     //muchos a muchos
     public function details(){
-        return $this->belongsToMany("App\Models\Detail");
+        return $this->belongsToMany("App\Models\Detail")->withPivot('quantity_sale');
     }
 }

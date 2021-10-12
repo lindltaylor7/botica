@@ -126,14 +126,16 @@ class SaleController extends Controller
                                 $batch->update([
                                     'quantity_unit' => $batch->quantity_unit - $cant_pedido,
                                 ]);
+                                $batch->details()->attach($detail->id,['quantity_sale' => $cant_pedido]);
                                 $cant_pedido= 0;
-                                $batch->details()->attach($detail->id);
+
                             }else{
                                     $cant_pedido = $cant_pedido - $batch->quantity_unit;
+                                    $batch->details()->attach($detail->id,['quantity_sale' => $batch->quantity_unit]);
                                     $batch->update([
                                         'quantity_unit' => 0
                                     ]);
-                                    $batch->details()->attach($detail->id);
+
                             }
                         }
 
@@ -220,7 +222,7 @@ class SaleController extends Controller
             }
         }
     }
-    
+
 
 
         return redirect(route('ventas.index'));
@@ -361,15 +363,19 @@ class SaleController extends Controller
         $venta = Sale::where('id', $id)->first();
         $details = Detail::where('sale_id',$venta->id)->get();
         $venta->update(['code'=>$venta->code."_a"]);
-        foreach($details as $detail){
-            // $last_stock = Stock::where('stockable_id',$detail->detailable_id)->first();
-            // $last_stock->update(['quantity' => $last_stock->quantity+$detail->quantity]);
-            $quantity = Batch::where('stock_id',$detail->detailable_id)->first();
-            $quantity->update(['quantity_unit' => $quantity->quantity_unit+$detail->quantity]);
-        }
 
-        $venta = Sale::where('id', $id);
+
+        foreach($details as $detail){
+
+            foreach($detail->batches as $batch){
+                $batch->update([
+                    'quantity_unit' => $batch->quantity_unit + $batch->pivot->quantity_sale
+                ]);
+            }
+
+        }
         return redirect()->route('ventas.index');
+
     }
 
     public function destroy($id)
