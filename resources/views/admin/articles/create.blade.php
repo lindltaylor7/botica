@@ -10,21 +10,32 @@
             <!-- SECTION 1 -->
             <h4></h4>
             <section>
+                @if (session()->has('message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    El articulo ya está registrado
+                </div>
+                @endif
                 <h3>Agregar Artículo</h3>
                 <div class="form-row">
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Nombre Comercial</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="tradename" class="form-control" id="tradenameart" placeholder="Nombre de Articulo">
+                            <input type="text" name="tradename" class="form-control" id="tradenameart" placeholder="Nombre de Articulo" value="{{old('tradename')}}">
                         </div>
+                        @error('tradename')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Nombre de Marca</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="trademark" class="form-control" id="trademarkart" placeholder="Nombre de Marca">
+                            <input type="text" name="trademark" class="form-control" id="trademarkart" placeholder="Nombre de Marca" value="{{old('trademark')}}">
                         </div>
+                        @error('trademark')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                 </div>
                 <div class="form-row">
@@ -32,15 +43,21 @@
                         <label class="form-label" for="inputUsername">Proveedor</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="supplier" class="form-control" id="supplierart" placeholder="Proveedor">
+                            <input type="text" name="supplier" class="form-control" id="supplierart" placeholder="Proveedor" value="{{old('supplier')}}">
                         </div>
+                        @error('supplier')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Presentación</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="presentation" class="form-control" id="presentationart" placeholder="Presentación">
+                            <input type="text" name="presentation" class="form-control" id="presentationart" placeholder="Presentación" value="{{old('presentation')}}">
                         </div>
+                        @error('presentation')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                 </div>
                 <div class="form-row">
@@ -48,8 +65,11 @@
                         <label class="form-label" for="inputUsername">Cantidad por caja</label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box" class="form-control" id="number_box" placeholder="Cantidad por caja">
+                            <input type="text" name="number_box" class="form-control" id="number_box" placeholder="Cantidad por caja" value="{{old('number_box')}}">
                         </div>
+                        @error('number_box')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
 
@@ -65,15 +85,21 @@
                         <label class="form-label" for="inputUsername">Precio de Costo por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_box" id="cost_price" class="form-control" id="inputUsername" placeholder="Costo por Caja">
+                            <input type="text" name="cost_box" id="cost_price" class="form-control" id="inputUsername" placeholder="Costo por Caja" value="{{old('cost_box')}}">
                         </div>
+                        @error('cost_box')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Porcentaje de Utilidad por caja</label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility_box" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja">
+                            <input type="text" name="utility" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja"  value="{{old('utility')}}">
                         </div>
+                        @error('utility')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">Precio de venta por caja</label>
@@ -119,8 +145,11 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="text" name="shelf" class="form-control">
+                            <input type="text" name="shelf" class="form-control" value="{{old('shelf')}}">
                         </div>
+                        @error('shelf')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label for="">
@@ -128,8 +157,11 @@
                         </label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="cost_stock" class="form-control">
+                            <input type="text" name="cost_stock" class="form-control" value="{{old('cost_stock')}}">
                         </div>
+                        @error('cost_box')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="form-col">
                         <label for="">
@@ -137,8 +169,11 @@
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
-                            <input type="nunmber" name="quantity_box" class="form-control">
+                            <input type="nunmber" name="quantity_box" class="form-control" value="{{old('quantity_box')}}">
                         </div>
+                        @error('quantity_box')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                     </div>
                 </div>
                 <h3>Lotes</h3>
@@ -150,8 +185,11 @@
                             </label>
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
-                                <input type="text" name="code" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
+                                <input type="text" name="code" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off" value="{{old('code')}}">
                             </div>
+                            @error('code')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-col">
@@ -160,8 +198,11 @@
                             </label>
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
-                                <input type="number" name="quantity_unit" class="form-control" placeholder="Ingrese la cantidad de articulos" required autocomplete="off">
+                                <input type="number" name="quantity_unit" class="form-control" placeholder="Ingrese la cantidad de articulos" required autocomplete="off" value="{{old('quantity_unit')}}">
                             </div>
+                            @error('quantity_unit')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
 
 
@@ -175,9 +216,9 @@
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
                                 <div class="form-holder">
-                                    <input type="date" name="entry_date" class="form-control" id="inputUsername" placeholder="">
-                                    @error('f_ingreso')
-                                        <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
+                                    <input type="date" name="entry_date" class="form-control" id="inputUsername" placeholder="" value="{{old('entry_date')}}">
+                                    @error('entry_date')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                             </div>
                             </div>
@@ -189,8 +230,11 @@
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
                                 <div class="form-holder">
-                                    <input type="date" name="expiry_date" class="form-control" id="inputUsername" placeholder="">
+                                    <input type="date" name="expiry_date" class="form-control" id="inputUsername" placeholder="" value="{{old('expiry_date')}}">
                                 </div>
+                                @error('expiry_date')
+                                <p class="text-danger">{{$message}}</p>
+                            @enderror
                             </div>
                         </div>
                     </div>
