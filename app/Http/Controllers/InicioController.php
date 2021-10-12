@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Article;
 use App\Models\Medicine;
 use App\Models\User;
 use App\Models\Sale;
@@ -23,7 +23,11 @@ class InicioController extends Controller
     {
 
         $data = User::where('id',session('LoggedUser'))->first();
+        //$medicamentos = Medicine::all();
+
         $medicamentos = Medicine::all();
+        $articulos = Article::all();
+        
         // $ventas1 = Sale::unique('date');
 
         $ventas = Sale::groupBy('date')->pluck('date');
@@ -32,7 +36,7 @@ class InicioController extends Controller
         foreach ($ventasNum as $num) {
             array_push($arr,$num['count(date)']);   
         }
-        return view('admin.inicio.index', compact('medicamentos','data', 'ventas', 'arr'));
+        return view('admin.inicio.index', compact('medicamentos','data', 'ventas', 'arr', 'articulos'));
     }
 
     /**

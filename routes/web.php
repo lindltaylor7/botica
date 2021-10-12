@@ -27,14 +27,14 @@ Route::get('storagelink', function () {
 Route::get('register',[InicioController::class , 'register'])->name('register');
 Route::post('save',[InicioController::class , 'save'])->name('save');
 Route::post('check',[InicioController::class,'check'])->name('check');
-Route::post('logout',[InicioController::class , 'logout'])->name('logout');
+Route::get('logout',[InicioController::class , 'logout'])->name('logout');
 Route::get('login',[InicioController::class , 'login'])->name('login')->middleware('guest');
 Route::get('seller', function (){
     return view('seller.index');
 });
 
-Route::get('/stock',[StockController::class, 'index'])->name('stock.index');
+Route::get('/stock',[StockController::class, 'index'])->middleware('auth')->name('stock.index');
 Route::get('/ventas/ventas', function()
 {
     return view('admin.ventas.ventas');
-})->name('prueba');
+})->middleware('auth')->name('prueba');

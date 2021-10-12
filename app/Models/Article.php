@@ -26,4 +26,12 @@ class Article extends Model
     public function details(){
         return $this->morphMany('App\Models\Detail','detailable');
     }
+
+    public function scopeBuscar($query, $buscar)
+    {
+        if ($buscar)
+        {
+            return $query->where('articles.tradename','like',"%$buscar%")->orWhere('articles.trademark','like',"%$buscar%")->orWhere('articles.supplier','like',"%$buscar%");
+        }
+    }
 }

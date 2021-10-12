@@ -57,8 +57,8 @@
         <div class="main__table-title">
             <div class="separator mr-3"></div>
             <div class="main__grafic-text">
-                <span class="d-block fs-4 fw-bolder">Tabla de Medicamentos</span>
-                <span>Medicamentos Disponibles</span>
+                <span class="d-block fs-4 fw-bolder">Tabla de Productos</span>
+                <span>Productos Disponibles</span>
             </div>
         </div>
       <div class="main__table">
@@ -101,6 +101,31 @@
                     </td>
                 </tr>
             @endforeach
+            @foreach($articulos as $articulo)
+                <tr>
+                    <td>{{ucfirst(mb_strtolower($articulo->tradename,'UTF-8'))}}</td>
+                    <td>{{ucfirst(mb_strtolower($articulo->trademark,'UTF-8'))}}</td>
+                    <td>{{$articulo->presentation}}</td>
+                    <td>{{$articulo->price->sale_price}}</td>
+                    <td>
+                    @foreach ($articulo->stocks as $stock)
+                    @foreach($stock->batches as $batch)
+                        {{$batch->quantity_unit}}
+                    @endforeach
+                    @endforeach
+                    </td>
+                    <td>{{ucfirst(mb_strtolower($articulo->supplier,'UTF-8'))}}</td>
+                    <td>
+                    @foreach ($articulo->stocks as $stock)
+                    <span class="badge bg-primary">{{$stock->shelf}}</span>
+                    @endforeach
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModalArt{{$articulo->id}}"></button>
+                      @include('admin.inicio.imgmodalart')
+                    </td>
+                </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -116,7 +141,7 @@
         $(document).ready( function () {
             $('#myTable').DataTable({
                 language: {
-                searchPlaceholder: "Buscar medicamento",
+                searchPlaceholder: "Buscar producto",
                 search: ""
                 },
                 "dom":"<'row'<'col-sm-8'<'pull-left'f>><'col-sm-4'>>" +

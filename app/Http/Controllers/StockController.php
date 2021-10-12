@@ -9,8 +9,7 @@ use App\Models\Medicine;
 use App\Models\Price;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
@@ -19,15 +18,40 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $medicines = Medicine::all();
-        $articles = Article::all();
+        $buscar = $request->get('buscar');
+
+        $medicine=Medicine::select('medicines.id', 'stocks.stockable_type as type', 'medicines.generic_name','medicines.tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'medicines.laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','medicines.id')
+                    ->where('stocks.stockable_type','App\Models\Medicine')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','medicines.id')
+                    ->where('prices.priceable_type','App\Models\Medicine')
+                    ->groupBy('stocks.stockable_id')
+                    ->buscar($buscar);
+                    
+        $productos=Article::select('articles.id', 'stocks.stockable_type as type', 'articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'articles.supplier as laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','articles.id')
+                    ->where('stocks.stockable_type','App\Models\Article')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','articles.id')
+                    ->where('prices.priceable_type','App\Models\Article')
+                    ->groupBy('stocks.stockable_id')
+                    ->buscar($buscar)
+                    ->union($medicine)
+                    ->paginate(8);
+
+        $ms = Medicine::all();
+        $as = Article::all();
+        
+
+        return view('admin.stocks.index', compact('productos', 'ms', 'as'));
+
         // $stocks = Stock::all();
-        $cantidad = Stock::all();
-        $precio = Price::all();
+        // $cantidad = Stock::all();
+        // $precio = Price::all();
         // return $cantidad;
-        return view('admin.stocks.index', compact('medicines', 'articles', 'cantidad', 'precio'));
     }
 
     /**
@@ -153,10 +177,24 @@ class StockController extends Controller
     public function export(){
         $fileName = 'Reporte_stock'.date('d-m-Y').'.xls';
         $arrayDetalle = Array();
-        $items = Stock::select('stocks.*','medicamentos.n_generico','medicamentos.n_comercial','medicamentos.lab')
-                        ->leftJoin('medicamentos', 'medicamentos.id', '=', 'stocks.medicamento_id')
-                        ->orderBy('medicamentos.n_generico', 'asc')
-                        ->get();
+        $medicine=Medicine::select('medicines.id', 'stocks.stockable_type as type', 'medicines.generic_name','medicines.tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'medicines.laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','medicines.id')
+                    ->where('stocks.stockable_type','App\Models\Medicine')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','medicines.id')
+                    ->where('prices.priceable_type','App\Models\Medicine')
+                    ->groupBy('stocks.stockable_id');
+                    
+        $productos=Article::select('articles.id', 'stocks.stockable_type as type', 'articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'articles.supplier as laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','articles.id')
+                    ->where('stocks.stockable_type','App\Models\Article')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','articles.id')
+                    ->where('prices.priceable_type','App\Models\Article')
+                    ->groupBy('stocks.stockable_id')
+                    ->union($medicine)
+                    ->paginate(8);
+
         $headers = array(
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
@@ -178,21 +216,47 @@ class StockController extends Controller
             <th>Nombre Comercial</th>
             <th>Laboratorio</th>
             <th>Cantidad</th>
-            <th>Fecha de Ingreso</th>
-            <th>Fecha de Vencimiento</th>
         </tr>";
 
-        foreach ($items as $item){
+        foreach ($productos as $producto){
           echo"<tr>
-           <td>" . mb_convert_encoding($item->n_generico, 'UTF-16LE', 'UTF-8') . "</td>
-           <td>". mb_convert_encoding($item->n_comercial, 'UTF-16LE', 'UTF-8') ."</td>
-           <td>". mb_convert_encoding($item->lab, 'UTF-16LE', 'UTF-8') ."</td>
-           <td>$item->cantidad</td>
-           <td>$item->f_ingreso</td>
-           <td>$item->f_vencimiento</td>
+           <td>" . mb_convert_encoding($producto->generic_name, 'UTF-16LE', 'UTF-8') . "</td>
+           <td>". mb_convert_encoding($producto->tradename, 'UTF-16LE', 'UTF-8') ."</td>
+           <td>". mb_convert_encoding($producto->laboratory, 'UTF-16LE', 'UTF-8') ."</td>
+           <td>$producto->cantidad</td>
        </tr>";
         }
        echo"</table>";
 
+    }
+
+    public function buscar(Request $request){
+        $buscar = $request->get('search_stock');
+
+        $medicine=Medicine::select('medicines.id', 'stocks.stockable_type as type', 'medicines.generic_name','medicines.tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'medicines.laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','medicines.id')
+                    ->where('stocks.stockable_type','App\Models\Medicine')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','medicines.id')
+                    ->where('prices.priceable_type','App\Models\Medicine')
+                    ->groupBy('stocks.stockable_id')
+                    ->buscar($buscar);
+                    
+        $productos=Article::select('articles.id', 'stocks.stockable_type as type', 'articles.tradename as generic_name','articles.trademark as tradename', DB::raw('SUM(batches.quantity_unit) as cantidad'), 'articles.supplier as laboratory', 'prices.sale_price')
+                    ->leftJoin('stocks','stocks.stockable_id','=','articles.id')
+                    ->where('stocks.stockable_type','App\Models\Article')
+                    ->leftJoin('batches','batches.stock_id','=', 'stocks.id')
+                    ->leftJoin('prices','prices.priceable_id','=','articles.id')
+                    ->where('prices.priceable_type','App\Models\Article')
+                    ->groupBy('stocks.stockable_id')
+                    ->buscar($buscar)
+                    ->union($medicine)
+                    ->paginate(8);
+
+        $ms = Medicine::all();
+        $as = Article::all();
+        
+
+        return view('admin.stocks.index', compact('productos', 'ms', 'as'));
     }
 }
