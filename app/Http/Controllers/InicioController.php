@@ -27,10 +27,10 @@ class InicioController extends Controller
         // $ventas1 = Sale::unique('date');
 
         $ventas = Sale::groupBy('date')->pluck('date');
-        $ventasNum = Sale::select(DB::raw('count(date)'))->groupBy('date')->get();
+        $ventasNum = Sale::select(DB::raw('sum(total_sale)'))->groupBy('date')->get();
         $arr = [];
         foreach ($ventasNum as $num) {
-            array_push($arr,$num['count(date)']);   
+            array_push($arr,$num['sum(total_sale)']);
         }
         return view('admin.inicio.index', compact('medicamentos','data', 'ventas', 'arr'));
     }

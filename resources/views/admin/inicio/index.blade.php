@@ -142,7 +142,7 @@
         },
         series: [
           {
-            name: "Series 1",
+            name: "Ventas en soles",
             data: <?php echo json_encode($arr)?>
           }
         ],
