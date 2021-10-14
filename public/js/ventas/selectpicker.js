@@ -270,7 +270,7 @@ $(document).ready(function(){
                             list = `
                                 <tr>
                                     <td>
-                                        <a class="search-link${index}" data-total="${total}" data-price="${value.sale_price}" data-box="${value.sale_price}" id="${value.id}">${value.tradename} - ${value.trademark} - ${value.presentation} - ${value.supplier} - Precio unitario: S/. ${value.price.sale_price} Cantidad: ${total}</a>
+                                        <a class="search-link${index} text-danger" data-total="${total}" data-price="${value.sale_price}" data-box="${value.sale_price}" id="${value.id}">${value.tradename} - ${value.trademark} - ${value.presentation} - ${value.supplier} - Precio unitario: S/. ${value.price.sale_price} Cantidad: ${total}</a>
                                     </td>
                                 </tr>
                             `

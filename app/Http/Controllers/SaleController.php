@@ -120,7 +120,6 @@ class SaleController extends Controller
 
                 foreach ($stocks_med as $stock_med){
                     if($cant_pedido != 0){
-
                         foreach($stock_med->batches as $batch){
                             if($batch->quantity_unit > $cant_pedido && $cant_pedido>0){
                                 $batch->update([
@@ -128,28 +127,17 @@ class SaleController extends Controller
                                 ]);
                                 $batch->details()->attach($detail->id,['quantity_sale' => $cant_pedido]);
                                 $cant_pedido= 0;
-
                             }else{
-                                    $cant_pedido = $cant_pedido - $batch->quantity_unit;
-                                    $batch->details()->attach($detail->id,['quantity_sale' => $batch->quantity_unit]);
-                                    $batch->update([
-                                        'quantity_unit' => 0
-                                    ]);
-
+                                $cant_pedido = $cant_pedido - $batch->quantity_unit;
+                                $batch->details()->attach($detail->id,['quantity_sale' => $batch->quantity_unit]);
+                                $batch->update([
+                                    'quantity_unit' => 0
+                                ]);
                             }
                         }
-
                     }
                 }
-
-
-
-
-
-
 /*
-
-
                 $cant_pedido = $detail->quantity;
 
                 while($cant_pedido>0){
@@ -169,10 +157,6 @@ class SaleController extends Controller
                 }
 
                 $resta = $total_stock - $detail->quantity; */
-
-
-
-
             }else{
                 $article = Article::find($details[$i]['article_id']);
                 $detail = $article->details()->create([
@@ -201,32 +185,26 @@ class SaleController extends Controller
 
                 foreach ($stocks_med as $stock_med){
                     if($cant_pedido != 0){
-
                         foreach($stock_med->batches as $batch){
                             if($batch->quantity_unit > $cant_pedido && $cant_pedido>0){
                                 $batch->update([
                                     'quantity_unit' => $batch->quantity_unit - $cant_pedido,
                                 ]);
+                                $batch->details()->attach($detail->id,['quantity_sale' => $cant_pedido]);
                                 $cant_pedido= 0;
-                                $batch->details()->attach($detail->id);
                             }else{
-                                    $cant_pedido = $cant_pedido - $batch->quantity_unit;
-                                    $batch->update([
-                                        'quantity_unit' => 0
-                                    ]);
-                                    $batch->details()->attach($detail->id);
+                                $cant_pedido = $cant_pedido - $batch->quantity_unit;
+                                $batch->details()->attach($detail->id,['quantity_sale' => $batch->quantity_unit]);
+                                $batch->update([
+                                    'quantity_unit' => 0
+                                ]);
                             }
                         }
-
                     }
+                }
             }
         }
-    }
-
-
-
         return redirect(route('ventas.index'));
-
     }
 
     /**
@@ -376,18 +354,18 @@ class SaleController extends Controller
         $details = Detail::where('sale_id',$venta->id)->get();
         $venta->update(['code'=>$venta->code."_a"]);
 
-
+        
         foreach($details as $detail){
-
+            // if ($detail->detailable_id == ) {
+    
+            // }
             foreach($detail->batches as $batch){
                 $batch->update([
                     'quantity_unit' => $batch->quantity_unit + $batch->pivot->quantity_sale
                 ]);
             }
-
         }
         return redirect()->route('ventas.index');
-
     }
 
     public function destroy($id)
