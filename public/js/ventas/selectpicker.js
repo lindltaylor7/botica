@@ -73,8 +73,8 @@ $(document).ready(function(){
                                 <td>
                                     <select id="tipo${value.id}" class="form-control">
                                         <option value="1">Unidad</option>
-                                        <option value=${value.number_blister}>Blister</option>
-                                        <option value=${value.number_box}>Caja</option>
+                                        <option value=${value.number_blister}>Blister (${value.number_blister})</option>
+                                        <option value=${value.number_box}>Caja (${value.number_box})</option>
                                     </select>
                                 </td>
                                 <td>
@@ -113,7 +113,7 @@ $(document).ready(function(){
                                 creado dinamicamente
                         ==========================================*/
                         $('#cant'+value.id).on('keyup',function(){
-                            if($(this).val()>total_input){
+                            if($(this).val()*$('#tipo'+value.id).val()>total_input){
                                 alert('La cantidad excede al stock')
                                 $(this).val('')
                             }
@@ -173,7 +173,7 @@ $(document).ready(function(){
                             *
                         ==========================================*/
                         $('#tipo'+value.id).on('change', function(){
-                            $('#vunit'+value.id).html(($(this).val()*value.sale_price).toFixed(2))
+                            $('#vunit'+value.id).html(($(this).val()*value.precio.sale_price).toFixed(2))
                             var importe1= parseFloat($('#vunit'+value.id).html()).toFixed(1)
                             $('#importe'+value.id).html(importe1)
                             var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
