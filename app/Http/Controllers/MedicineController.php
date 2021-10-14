@@ -247,17 +247,12 @@ class MedicineController extends Controller
 
     public function artPrice(Request $request)
     {
-            $res = Article::select('articles.*','prices.*')
-            ->join('prices', function($join){
-                $join->on('prices.priceable_id', '=', 'articles.id')
-                    ->where('prices.priceable_type','App\Models\Article');
-            })
-            ->where('trademark', 'like', '%' . $request->get('search') . '%')
-            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
-            ->take(5)
-            ->get();
-
-        return json_encode($res);
+        $article = Article::with('stocks.batches')
+                            ->with('price')
+                            ->where('tradename', 'like', '%' . $request->get('search') . '%')
+                            ->take(5)
+                            ->get();
+        return json_encode($article);
     }
     public function precios(Request $request){
         $precios = Price::where('priceable_id',$request->get('id'))->first();
