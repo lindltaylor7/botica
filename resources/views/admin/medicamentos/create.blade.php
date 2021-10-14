@@ -251,7 +251,7 @@
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
                                     <input type="text" name="batch[0][code]" class="form-control" placeholder="Ingrese el código de lote" required autocomplete="off">
-                                </div>                                
+                                </div>
                             </div>
 
                             <div class="form-col">
@@ -395,15 +395,15 @@
                 var pc_box = parseFloat($(this).val())
                 $('#sale_price_box').val(pc_box.toFixed(1))
 
-                //BLISTER
-                var pc_blister = pc_box / $('#number_blister').val()
-                $('#cost_price_blister').val(pc_blister.toFixed(2))
-                $('#sale_price_blister').val(pc_blister.toFixed(1))
-
                 //UNIDAD
                 var pc_ud = pc_box/$('#number_box').val()
                 $('#cost_price_unit').val(pc_ud.toFixed(2))
                 $('#sale_price_unit').val(pc_ud.toFixed(1))
+
+                //BLISTER
+                var pc_blister = pc_ud * $('#number_blister').val()
+                $('#cost_price_blister').val(pc_blister.toFixed(2))
+                $('#sale_price_blister').val(pc_blister.toFixed(1))
 
             });
 
