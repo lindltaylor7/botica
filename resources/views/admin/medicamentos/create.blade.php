@@ -19,7 +19,10 @@
                 <h3>Datos generales De Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label">Nombre genérico <span class="text-danger">*</span></label>
+                        <label class="form-label"> 
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Nombre genérico</span>
+                        </label>
                         <div class="form-holder">
                             <div class="form-holder">
                                 <i class="zmdi zmdi-edit"></i>
@@ -31,7 +34,10 @@
                         </div>
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Nombre Comercial</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Nombre Comercial</span>
+                        </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="tradename" class="form-control" autocomplete="off" placeholder="Nombre Comercial" value="{{old('tradename')}}">
@@ -43,7 +49,10 @@
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label">Concentración</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Concentración</span>
+                        </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="concentration" class="form-control" autocomplete="off" placeholder="Concentración" value="{{old('concentration')}}">
@@ -53,7 +62,10 @@
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Presentación</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Presentación</span>
+                        </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="presentation" class="form-control" autocomplete="off" placeholder="Presentación" value="{{old('presentation')}}">
@@ -65,7 +77,10 @@
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label">Laboratorio</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Laboratorio</span>
+                        </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="laboratory" class="form-control" autocomplete="off" placeholder="Laboratorio" value="{{old('laboratory')}}">
@@ -75,7 +90,10 @@
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Numero por cajas</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Número por cajas</span>
+                        </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero por cajas" value="{{old('number_box')}}">
@@ -85,7 +103,11 @@
                         @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Número por Blister</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Número por Blister</span>
+                        </label>
+
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
                             <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número por Blister" value="{{old('number_blister')}}">
@@ -102,7 +124,10 @@
                 <h3>Precios del Medicamento</h3>
                 <div class="form-row">
                     <div class="form-col">
-                        <label class="form-label">Precio de Costo por caja</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Precio de Costo por caja</span>
+                        </label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" name="cost_box" id="cost_box" class="form-control" placeholder="Costo por Caja" value="{{old('cost_box')}}">
@@ -112,7 +137,10 @@
                             @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Porcentaje de Utilidad por caja</label>
+                        <label class="form-label">
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Porcentaje de Utilidad por caja</span>
+                        </label>
                         <div class="form-holder">
                             <i>%</i>
                             <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}">
@@ -188,7 +216,8 @@
                 <div class="form-row">
                     <div class="form-col">
                         <label for="">
-                            Anaquel
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Anaquel</span> 
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
@@ -200,7 +229,8 @@
                     </div>
                     <div class="form-col">
                         <label for="">
-                            Costo de Stock
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Costo de Stock</span>
                         </label>
                         <div class="form-holder">
                             <i>S./</i>
@@ -215,7 +245,8 @@
                 <div class="form-row">
                     <div class="form-col">
                         <label for="">
-                            Cantidad de Cajas
+                            <i class="fas fa-asterisk text-danger"></i>
+                            <span>Cantidad de Cajas</span>
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
@@ -226,9 +257,7 @@
                     @enderror
                     </div>
                     <div class="form-col">
-                        <label for="">
-                            N° de Lotes
-                        </label>
+                        <label for=""><span>N° de Lotes</span></label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-account-o"></i>
                             <select class="form-control" name="" id="inputDynamic">
@@ -246,7 +275,8 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="">
-                                    Código de lote
+                                    <i class="fas fa-asterisk text-danger"></i>
+                                    <span>Código de lote</span>
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
@@ -256,7 +286,8 @@
 
                             <div class="form-col">
                                 <label for="">
-                                    Cantidad de unidades
+                                    <i class="fas fa-asterisk text-danger"></i>
+                                    <span>Cantidad de unidades</span>
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
@@ -270,7 +301,8 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="">
-                                    Fecha de ingreso
+                                    <i class="fas fa-asterisk text-danger"></i>
+                                    <span>Fecha de ingreso</span>
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
@@ -279,12 +311,13 @@
                                         @error('f_ingreso')
                                             <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
                                         @enderror
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-col">
                                 <label for="">
-                                    Fecha de vencimiento
+                                    <i class="fas fa-asterisk text-danger"></i>
+                                    <span>Fecha de vencimiento</span>
                                 </label>
                                 <div class="form-holder">
                                     <i class="zmdi zmdi-edit"></i>
@@ -323,7 +356,8 @@
         <div class="form-row">
             <div class="form-col">
                 <label for="">
-                    Código de lote
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Código de lote</span>
                 </label>
                 <div class="form-holder">
                     <i class="zmdi zmdi-edit"></i>
@@ -333,40 +367,41 @@
 
             <div class="form-col">
                 <label for="">
-                    Cantidad de unidades
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Cantidad de unidades</span>
                 </label>
                 <div class="form-holder">
                     <i class="zmdi zmdi-edit"></i>
                     <input type="number" name="" class="form-control quantity_unit" placeholder="Ingrese el código de lote" required autocomplete="off">
                 </div>
             </div>
-
-
         </div>
 
         <div class="form-row">
             <div class="form-col">
                 <label for="">
-                    Fecha de ingreso
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Fecha de ingreso</span>
                 </label>
                 <div class="form-holder">
                     <i class="zmdi zmdi-edit"></i>
                     <div class="form-holder">
-                        <input type="date" name="" class="form-control entry_date" placeholder="">
+                        <input type="date" name="" class="form-control entry_date" placeholder="" required>
                         @error('f_ingreso')
                             <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
                         @enderror
-                </div>
+                    </div>
                 </div>
             </div>
             <div class="form-col">
                 <label for="">
-                    Fecha de vencimiento
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Fecha de vencimiento</span>
                 </label>
                 <div class="form-holder">
                     <i class="zmdi zmdi-edit"></i>
                     <div class="form-holder">
-                        <input type="date" name=""  class="form-control expiry_date" placeholder="">
+                        <input type="date" name="" class="form-control expiry_date" placeholder="" required>
                     </div>
                 </div>
             </div>

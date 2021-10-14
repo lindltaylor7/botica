@@ -154,8 +154,9 @@
                             cost_box = parseFlotante(cost_box);
                             let total = parseFlotante(parseFlotante(cost_box) + parseFlotante(cost_box*utility_box/100));
                             sale_price_box.value = parseFlotante(total);
-                            
-                            cost_price_blister.value = parseFlotante(cost_box / number_blister.value,2);
+                            console.log(cost_price_unit.value * number_blister.value)
+                            cost_price_blister.value = parseFlotante(cost_box / (number_box.value / number_blister.value),2);
+
                             utility_blister.value = utility_box;
                             sale_price_blister.value = parseFlotante(parseFlotante(cost_price_blister.value) + parseFlotante(cost_price_blister.value * utility_blister.value / 100))
 

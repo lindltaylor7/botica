@@ -131,7 +131,7 @@
                             cost_box = parseFlotante(cost_box, 1)
                             sale_price_box.value = parseFlotante(parseFlotante(cost_box,1) + parseFlotante(cost_box * utility_box / 100, 2),1)
                             utility_unit.value = utility_box
-                            cost_price_unit.value = parseFlotante(cost_box / number_box.value,1)
+                            cost_price_unit.value = parseFlotante(cost_box / number_box.value,2)
                             
                             // let igv_calc = cost_box * 18 / 100
                             // let igv_calc_total = parseFloat(cost_box) + parseFloat(cost_box * 18 / 100)
