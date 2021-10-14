@@ -177,7 +177,6 @@ class MedicineController extends Controller
 
          $medicine= Medicine::where('id',$id)->first();
          $medicine->update($request->except(['_token','_method']));
-
          if ($request->file('imageMedicine')) {
             $medicine->image()->delete();
             $url = Storage::disk('public')->put('medicines', $request->file('imageMedicine'));
@@ -186,7 +185,7 @@ class MedicineController extends Controller
                 'url' => $url
             ]);
         }else{
-            $medicine->price()->update($request->except(['_token','_method','number_box','cost_box']));
+            $medicine->price()->update($request->except(['_token','_method','number_box','cost_box','generic_name','tradename','laboratory','concentration','presentation','number_box','number_blister']));
         }
 
 

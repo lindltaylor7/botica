@@ -19,11 +19,7 @@
                                 <label class="form-label">Precio de Costo por caja</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                        @if ($batch->stock_id == $medicamento->id)
-                                            <input type="text" name="cost_box" id="cost_box" class="form-control" required placeholder="Costo por Caja" value={{$batch->cost_box}}>
-                                        @endif                                     
-                                    @endforeach
+                                    <input type="text" name="cost_box" id="cost_box" class="form-control" required placeholder="Costo por Caja" value={{round($medicamento->price->cost_price * $medicamento->number_box,1)}}>
                                 </div>
                             </div>
                             <div class="form-col">
@@ -31,18 +27,13 @@
                                 <div class="form-holder">
                                     <i>%</i>
                                     <input type="text" id="utility_box" class="form-control" placeholder="Utilidad por caja" required value="{{$medicamento->price->utility}}">
-
                                 </div>
                             </div>
                             <div class="form-col">
                                 <label class="form-label">Precio de venta por caja</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                    @if ($batch->stock_id == $medicamento->id)
-                                        <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja" readonly value={{round($batch->cost_box + ($batch->cost_box * $medicamento->price->utility / 100), 1)}}>
-                                    @endif                                     
-                                    @endforeach
+                                        <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja" readonly value={{round(round($medicamento->price->cost_price * $medicamento->number_box,1) + (round($medicamento->price->cost_price * $medicamento->number_box,1) * $medicamento->price->utility / 100), 1)}}>
                                 </div>
                             </div>
                         </div>
@@ -53,11 +44,7 @@
                                 <label class="form-label">Precio de Costo por blister</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                    @if ($batch->stock_id == $medicamento->id)
-                                        <input type="text" id="cost_price_blister" class="form-control" placeholder="Costo por blister" readonly value={{round($batch->cost_box / $medicamento->number_blister, 2)}}>
-                                    @endif                                     
-                                    @endforeach
+                                        <input type="text" id="cost_price_blister" class="form-control" placeholder="Costo por blister" readonly value={{round($medicamento->price->cost_price * $medicamento->number_blister, 2)}}>
                                 </div>
                             </div>
                             <div class="form-col">
@@ -72,11 +59,7 @@
                                 <label class="form-label">Precio de venta por blister</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                    @if ($batch->stock_id == $medicamento->id)
-                                        <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly value={{round($batch->cost_box / $medicamento->number_blister + ($batch->cost_box / $medicamento->number_blister * $medicamento->price->utility / 100), 1)}}>
-                                    @endif                                     
-                                    @endforeach
+                                        <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly value={{round(round($medicamento->price->cost_price * $medicamento->number_blister, 2) + (round($medicamento->price->cost_price * $medicamento->number_blister, 2) * $medicamento->price->utility / 100), 1)}}>
                                 </div>
                             </div>
                         </div>
@@ -87,11 +70,7 @@
                                 <label class="form-label">Precio de Costo por unidad</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                    @if ($batch->stock_id == $medicamento->id)
-                                        <input type="text" name="cost_price" id="cost_price_unit" class="form-control" placeholder="Costo por unidad" readonly value={{round($batch->cost_box / $medicamento->number_box, 2)}}>
-                                    @endif                                     
-                                    @endforeach
+                                    <input type="text" name="cost_price" id="cost_price_unit" class="form-control" placeholder="Costo por unidad" readonly value={{round($medicamento->price->cost_price, 2)}}>
                                 </div>
                             </div>
                             <div class="form-col">
@@ -106,11 +85,7 @@
                                 <label class="form-label">Precio de venta por unidad</label>
                                 <div class="form-holder">
                                     <i>S./</i>
-                                    @foreach ($batches as $batch)
-                                    @if ($batch->stock_id == $medicamento->id)
-                                        <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly value={{round($batch->cost_box / $medicamento->number_box + ($batch->cost_box / $medicamento->number_box * $medicamento->price->utility / 100), 1)}}>
-                                    @endif                                     
-                                    @endforeach
+                                    <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly value={{round($medicamento->price->sale_price, 2)}}>
                                 </div>
                             </div>
                         </div>

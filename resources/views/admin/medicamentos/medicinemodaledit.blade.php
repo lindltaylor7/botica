@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Número por Caja</label>
-                        <input type="number" name="number_caja" id="nro_caja" class="form-control" value="{{$medicamento->number_box}}">
+                        <input type="number" name="number_box" id="nro_caja" class="form-control" value="{{$medicamento->number_box}}">
                     </div>
                     <div class="form-group">
                         <label for="">Numero por blister</label>

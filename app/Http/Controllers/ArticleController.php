@@ -150,7 +150,7 @@ class ArticleController extends Controller
            ]);
         }
         else{
-            $article->price()->update($request->except(['_token','_method','number_box','cost_box']));
+            $article->price()->update($request->except(['_token','_method','number_box','cost_box','tradename','trademark','supplier','presentation','number_box']));
         }
 
 
