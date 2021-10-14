@@ -38,19 +38,30 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success:function(res){
-                // console.log(res);
+                //console.log(res);
                 var list = '';
 
                 $('#medicamentos_select').html('');
-
+                var total = 0;
                 $.each(res, function(index, value){
-                    list = '<tr><td><a class="search-link'+index+'" data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.sale_price+'</a></td></tr>'
-                    $('#medicamentos_select').append(list);
 
+                    $.each(value.stocks, function(i,v){
+                        console.log(v.batches)
+                        $.each(v.batches, function(i2, v2){
+                            total += v2.quantity_unit
+                        })
+                    })
+                    if(total == 0){
+                        list = '<tr><td><a class="search-link'+index+' text-danger" data-total='+total+' data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
+                    }else{
+                        list = '<tr><td><a class="search-link'+index+'" data-total='+total+' data-price="'+value.price.sale_price+'" data-box="'+value.price.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
+                    }
+                    $('#medicamentos_select').append(list);
+                    total = 0;
                     $('.search-link'+index).on('click', function(){
                         $('#medicamentos_select').html('');
                         $('#search').val('')
-
+                        var total_input = $(this).data('total');
                         /*==========================================
                             * Crear filas dinamicamente a treves del
                             evento click
@@ -74,7 +85,7 @@ $(document).ready(function(){
                                     <input type="hidden" id="partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
                                     <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
                                 </td>
-                                <td id="vunit${value.id}" class="vunit">${value.sale_price}</td>
+                                <td id="vunit${value.id}" class="vunit">${value.price.sale_price}</td>
                                 <td id="subtotal${value.id}" class="subtotal"></td>
                                 <td id="igv_unique${value.id}"></td>
                                 <td id="importe${value.id}" class="importe"></td>
@@ -82,8 +93,8 @@ $(document).ready(function(){
                             </tr>`
 
                         /*==========================================
-                            * Validación de agregar duplicidad de 
-                            medicamentos 
+                            * Validación de agregar duplicidad de
+                            medicamentos
                         ==========================================*/
                         if (!document.getElementById(`row${value.id}`)) {
                             $('#cart-shop').append(row);
@@ -102,6 +113,10 @@ $(document).ready(function(){
                                 creado dinamicamente
                         ==========================================*/
                         $('#cant'+value.id).on('keyup',function(){
+                            if($(this).val()>total_input){
+                                alert('La cantidad excede al stock')
+                                $(this).val('')
+                            }
                             var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
                             $('#importe'+value.id).html(importe1)
                             $('#partial_sale'+value.id).val(importe1)
@@ -183,7 +198,7 @@ $(document).ready(function(){
                         })
 
                         /*==========================================
-                            * Cancelar compra por el boton x 
+                            * Cancelar compra por el boton x
                         ==========================================*/
                         $('#close'+value.id).on('click', function() {
                             var total = parseFloat($('#total').val()) - parseFloat($('#importe'+value.id).html())

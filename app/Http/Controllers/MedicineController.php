@@ -51,7 +51,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         //return $request;
         $request->validate([
                 'generic_name' => 'required',
@@ -225,18 +225,24 @@ class MedicineController extends Controller
     }
     public function medPrice(Request $request)
     {
-            $res = Medicine::select('medicines.*','prices.*')
+        $medicine = Medicine::with('stocks', 'stocks.batches')
+                            ->with('price')
+                            ->where('generic_name', 'like', '%' . $request->get('search') . '%')
+                            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
+                            ->take(5)
+                            ->get();
+           /*  $res = Medicine::select('medicines.*','prices.*','stocks.*','batches.*')
             ->join('prices', function($join){
                 $join->on('prices.priceable_id', '=', 'medicines.id')
                     ->where('prices.priceable_type','App\Models\Medicine');
             })
-            ->where('generic_name', 'like', '%' . $request->get('search') . '%')
-            ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
+            ->groupBy('stocks.id')
+
             ->take(5)
             ->get();
+ */
 
-
-        return json_encode($res);
+        return json_encode($medicine);
     }
 
     public function artPrice(Request $request)
