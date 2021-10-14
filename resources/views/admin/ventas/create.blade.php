@@ -44,10 +44,8 @@
                                     
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-primary">Agregar</button>
                         </form>
-
                     </div>
                 </div>
             </div>

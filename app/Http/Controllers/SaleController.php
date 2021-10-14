@@ -250,7 +250,19 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        //
+        /**
+         * Editar una nueva venta
+         */
+        $venta = Sale::where('id',$id)->first();
+        $details = Detail::where('sale_id', $id)->get();
+        $cliente = Customer::where('id',$id)->first();
+        $detalles = [];
+        $total = 0;
+        foreach ($details as $detail) {
+            array_push($detalles, $detail->detailable);
+            $total += $detail->amount;
+        }
+        return view('admin.ventas.edit_venta',compact('id','details','venta', 'cliente', 'detalles', 'total'));
     }
 
     /**

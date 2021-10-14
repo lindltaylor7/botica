@@ -57,7 +57,7 @@
                                             {{$venta->seller}}
                                         </td>
 
-                                        <td><a href="{{route('ventas.show', $venta->id)}}">Ver más</a></td>
+                                        <td><a href="{{route('ventas.edit', $venta->id)}}">Ver más</a></td>
 
                                         @can('nullSell')
                                         <td><a href="{{route('ventas.anular',$venta->id)}}" class="btn btn-danger">Anular</a></td>
@@ -82,10 +82,10 @@
                                             {{$venta->seller}}
                                         </td>
 
-                                        <td><a href="{{route('ventas.show', $venta->id)}}">Ver más</a></td>
+                                        <td><a href="{{route('ventas.edit', $venta->id)}}">Ver más</a></td>
 
                                         @can('nullSell')
-                                        <td><a href="{{route('ventas.anular',$venta->id)}}" class="btn btn-danger">Anular</a></td>
+                                        <td><a href="{{route('ventas.anular',$venta->id)}}" id={{$venta->id}} class="btn btn-danger anular-venta">Anular</a></td>
                                         @endcan
 
                                     </tr>
@@ -105,5 +105,6 @@
 
 @section('javascript')
     <script src="{{asset('js/ventas/reniec_dni.js')}}"></script>
+    <script src="{{asset('js/ventas/anular_venta.js')}}"></script>
 @endsection
 

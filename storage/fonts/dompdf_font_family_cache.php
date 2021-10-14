@@ -78,6 +78,6 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'roboto\', sans-serif' => array(
-    'normal' => $fontDir . '/roboto___sans_serif_normal_4d837db0bd83d0c54fbe5acc67e651f9',
+    'normal' => $fontDir . '/roboto___sans_serif_normal_abe0921e74d7a35ef11f515b3e1b3de3',
   ),
 ) ?>

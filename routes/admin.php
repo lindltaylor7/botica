@@ -25,6 +25,7 @@ Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic'])->m
 Route::put('medicamentos/{id}/update', [MedicineController::class, 'update'])->middleware('auth')->name('medicamentos.update');
 Route::post('medicamentos/store', [MedicineController::class, 'store'])->middleware('auth')->name('medicamentos.store');
 Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->middleware('auth')->name('medicamentos.medPrice');
+Route::post('medicamentos/medBatch', [MedicineController::class, 'medBatch'])->middleware('auth')->name('medicamentos.medBatch');
 Route::post('medicamentos/artPrice', [MedicineController::class, 'artPrice'])->middleware('auth')->name('medicamentos.artPrice');
 Route::post('medicamentos/precios', [MedicineController::class, 'precios'])->middleware('auth')->name('medicamentos.precios');
 Route::post('medicamentos/updprecios', [MedicineController::class, 'preciosUpd'])->middleware('auth')->name('medicamentos.prec_upd');
@@ -48,6 +49,7 @@ Route::get('ventas', [SaleController::class, 'index'])->middleware('auth')->name
 Route::post('ventas/create', [SaleController::class, 'create'])->middleware('auth')->name('ventas.create');
 Route::get('ventas/invoice/{id}', [SaleController::class, 'invoice'])->middleware('auth')->name('ventas.invoice');
 Route::get('ventas/{id}', [SaleController::class, 'show'])->middleware('auth')->name('ventas.show');
+Route::get('ventas/edit/{id}', [SaleController::class, 'edit'])->middleware('auth')->name('ventas.edit');
 Route::post('ventas/update/{id}', [SaleController::class, 'update'])->middleware('auth')->name('ventas.update');
 Route::get('ventas/reporte/{id}', [SaleController::class, 'vista'])->middleware('auth')->name('vistapdf.vista');
 Route::get('ventas/reporte/pdf/{id}', [SaleController::class, 'generarPdf'])->middleware('auth')->name('generarpdf.reporte');
