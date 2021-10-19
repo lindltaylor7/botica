@@ -9,6 +9,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\BatchController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -90,6 +91,8 @@ Route::get('principal/{id}/edit', [PrincipalController::class, 'edit'])->middlew
 Route::get('principal/editar_1', [PrincipalController::class, 'editar_1'])->middleware('auth')->name('principal.editar_1');
 Route::get('principal/editar_2', [PrincipalController::class, 'editar_2'])->middleware('auth')->name('principal.editar_2');
 
+
+Route::put('batch/{id}/update', [BatchController::class, 'update'])->middleware('auth')->name('batch.update');
 
 
 

@@ -9,7 +9,7 @@
   </div>
 
   <span class="header__admin" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    <img src="{{asset('img/avatars/avatar-2.jpg')}}" class="header__admin-img" alt="Carrillo">
+    <img src="{{asset('img/icons/logo-01.svg')}}" class="header__admin-img" alt="Icono de Usuario">
       <div class="header__admin-text">
         <span>{{Auth::user()->name}}</span>
         <small>Rol de Usuario</small>

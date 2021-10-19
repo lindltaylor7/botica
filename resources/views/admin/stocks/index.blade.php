@@ -7,9 +7,9 @@
     <div class="container-fluid p-0">
         <h1 class="h3 mb-3">Stock</h1>
         <div class="d-flex align-items-center flex-wrap">
-            <form class="form-inline">
-                <input type="text" class="form-control w-75 h-100" name="buscar" placeholder="Buscar...">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            <form class="form-inline d-flex w-75 justify-content-between">
+                <input type="text" class="form-control w-100 h-100" name="buscar" placeholder="Buscar...">
+                <button class="btn btn-outline-success my-sm-0 ms-2" type="submit">Buscar</button>
             </form>
             <a href="{{route('stock.create')}}" class="btn btn-primary btn-md fs-6 mx-2 my-2"><i class="align-middle" data-feather="plus"></i>Agregar Stock</a>
             <a href="{{route('stock.export')}}" class="btn btn-success btn-md fs-6">Excel</a>
@@ -75,19 +75,37 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-4">
-                                        @foreach ($as as $a)
-                                            @if ($a->id == $producto->id && $producto->type == 'App\Models\Article')
-                                                <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalA{{$a->id}}">Ver más <i class="mdi mdi-arrow-right"></i></a>
-                                            @endif
-                                            @include('admin.stocks.modal_article')
-                                        @endforeach
-                                        @foreach ($ms as $m)
-                                            @if ($m->id == $producto->id && $producto->type == 'App\Models\Medicine')
-                                                <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalM{{$m->id}}">Ver más <i class="mdi mdi-arrow-right"></i></a>
-                                            @endif
-                                            @include('admin.stocks.modal_medicine')
-                                        @endforeach
+                                    <div class="d-flex align-items-center justify-content-between mt-4"> 
+                                        <div class="" >
+                                            @foreach ($as as $a)
+                                                @if ($a->id == $producto->id && $producto->type == 'App\Models\Article')
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalA{{$a->id}}">Ver más</a>
+                                                @endif
+                                                @include('admin.stocks.modal_article')
+                                            @endforeach
+                                            @foreach ($ms as $m)
+                                                @if ($m->id == $producto->id && $producto->type == 'App\Models\Medicine')
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalM{{$m->id}}">Ver más</i></a>
+                                                @endif
+                                                @include('admin.stocks.modal_medicine')
+                                            @endforeach
+                                        </div>
+    
+                                        <div>
+                                            @foreach ($as as $a)
+                                                @if ($a->id == $producto->id && $producto->type == 'App\Models\Article')
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalEditA{{$a->id}}">Editar Lote</a>
+                                                @endif
+                                            @include('admin.stocks.editar_modal_article')
+                                            @endforeach
+                                                    
+                                            @foreach ($ms as $m)
+                                                @if ($m->id == $producto->id && $producto->type == 'App\Models\Medicine')
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalEditM{{$m->id}}">Editar Lote</a>
+                                                @endif
+                                            @include('admin.stocks.editar_modal_medicine')
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>

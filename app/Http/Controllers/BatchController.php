@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Batch;
 use Illuminate\Http\Request;
 
 class BatchController extends Controller
@@ -68,7 +70,9 @@ class BatchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $medicine= Batch::where('id',$id)->first();
+        $medicine->update($request->except(['_token','_method']));
+        return redirect()->back();
     }
 
     /**
