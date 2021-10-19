@@ -13,7 +13,7 @@
                     <th scope="col">Cantidad</th>
                     <th scope="col">Fecha de Ingreso</th>
                     <th scope="col">Fecha de Expiración</th>
-                    <th scope="col">Editar</th>
+                    <th scope="col">Actualizar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                           <input type="date" name="expiry_date" value="{{$batch->expiry_date}}" class="form-control px-1">
                         </td>
                         <td>
-                          <input type="submit" value="Editar" class="btn btn-primary">
+                          <input type="submit" value="Actualizar" class="btn btn-primary">
                         </td>
                       </tr>
                     </form>
