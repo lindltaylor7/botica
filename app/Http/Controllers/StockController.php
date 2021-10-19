@@ -44,30 +44,7 @@ class StockController extends Controller
 
         $ms = Medicine::all();
         $as = Article::all();
-
-        $batches = Batch::all();
-        $stocks = Stock::all();
-
-        $cantBatches = [];
-        
-        foreach($stocks as $stock) {
-            $lotes = [];
-            foreach($batches as $batch) {
-
-                if ($batch->stock_id == $stock->id) {
-                    array_push($lotes, $batch);  
-                }
-            }
-            $stock["lotes"] = $lotes;
-            array_push($cantBatches, $stock);
-        }
-        
-        return view('admin.stocks.index', compact('productos', 'ms', 'as', 'cantBatches'));
-
-        // $stocks = Stock::all();
-        // $cantidad = Stock::all();
-        // $precio = Price::all();
-        // return $cantidad;
+        return view('admin.stocks.index', compact('productos', 'ms', 'as'));
     }
 
     /**
