@@ -92,11 +92,11 @@
                     <div class="form-col">
                         <label class="form-label">
                             <i class="fas fa-asterisk text-danger"></i>
-                            <span>Número por cajas</span>
+                            <span>Número de unidades por caja</span>
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero por cajas" value="{{old('number_box')}}">
+                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero de unidades por caja" value="{{old('number_box')}}">
                         </div>
                         @error('number_box')
                         <p class="text-danger">{{$message}}</p>
@@ -105,12 +105,12 @@
                     <div class="form-col">
                         <label class="form-label">
                             <i class="fas fa-asterisk text-danger"></i>
-                            <span>Número por Blister</span>
+                            <span>Número de Blisters por caja</span>
                         </label>
 
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número por Blister" value="{{old('number_blister')}}">
+                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número de Blisters por caja" value="{{old('number_blister')}}">
                         </div>
                         @error('number_blister')
                         <p class="text-danger">{{$message}}</p>
