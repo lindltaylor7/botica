@@ -105,7 +105,7 @@
                     <div class="form-col">
                         <label class="form-label">
                             <i class="fas fa-asterisk text-danger"></i>
-                            <span>Número de Blisters por caja</span>
+                            <span>Número de unidades por blister</span>
                         </label>
 
                         <div class="form-holder">
@@ -143,17 +143,17 @@
                         </label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}">
+                            <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}" readonly>
                         </div>
                         @error('utility')
                                 <p class="text-danger">{{$message}}</p>
                             @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por caja</label>
+                        <label class="form-label"><b>Precio de venta por caja</b></label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja" readonly>
+                            <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja">
 
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por blister</label>
+                        <label class="form-label"><b>Precio de venta por blister</b></label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly>
@@ -201,7 +201,7 @@
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por unidad</label>
+                        <label class="form-label"><b>Precio de venta por unidad</b></label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly>
