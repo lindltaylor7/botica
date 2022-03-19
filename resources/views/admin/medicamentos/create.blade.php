@@ -428,10 +428,10 @@
 
                 //CAJA
                 var pc_box = parseFloat($(this).val())
-                $('#sale_price_box').val(pc_box.toFixed(1))
+                // $('#sale_price_box').val(pc_box.toFixed(1))
 
                 //UNIDAD
-                var pc_ud = pc_box/$('#number_box').val()
+                var pc_ud = pc_box / $('#number_box').val()
                 $('#cost_price_unit').val(pc_ud.toFixed(2))
                 $('#sale_price_unit').val(pc_ud.toFixed(1))
 
@@ -442,13 +442,13 @@
 
             });
 
-            $('#utility_box').on('keyup', function(){
-
+            $('#sale_price_box').on('keyup', function(){
                 //CAJA
+                var total = parseInt($(this).val()) // Precio de venta por caja
                 var pc_box = $('#cost_box').val();
-                var percent = $(this).val();
-                var total = parseFloat(pc_box) + parseFloat(pc_box*percent/100);
-                $('#sale_price_box').val(total.toFixed(1));
+                var percent = ((total - pc_box) * 100) / pc_box;
+
+                $('#utility_box').val(percent);
 
                 $('#utility_blister').val(percent)
                 $('#utility_unit').val(percent)

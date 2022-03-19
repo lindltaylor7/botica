@@ -109,6 +109,7 @@
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                     </div>
+
                     <div class="form-col">
                         <label class="form-label" for="inputUsername">
                             <i class="fas fa-asterisk text-danger"></i>
@@ -116,7 +117,7 @@
                         </label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja"  value="{{old('utility')}}">
+                            <input type="text" name="utility" id="utility_box" class="form-control" id="inputUsername" placeholder="Utilidad por caja" value="{{old('utility')}}" readonly>
                         </div>
                         @error('utility')
                                 <p class="text-danger">{{$message}}</p>
@@ -126,7 +127,7 @@
                         <label class="form-label" for="inputUsername">Precio de venta por caja</label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" name="tradename_box" id="sale_price_box" class="form-control" id="inputUsername" placeholder="P. de venta por caja" readonly>
+                            <input type="text" name="tradename_box" id="sale_price_box" class="form-control" id="inputUsername" placeholder="P. de venta por caja">
                         </div>
                     </div>
                 </div>
@@ -312,21 +313,23 @@
                 //BOX
                 var calc = $(this).val()/$('#number_box').val()
                 $('#cost_price_unit').val(calc.toFixed(1))
-                $('#sale_price_box').val($(this).val())
+
                 //UNIT
                 var igv_calc= calc*18/100
                 var igv_calc_total= calc+calc*18/100
                 $('#sale_price_unit').val(igv_calc_total.toFixed(1))
             });
 
-            $('#utility_box').on('keyup', function(){
-                $('#utility_unit').val($(this).val())
-
-                var percent = parseFloat($('#cost_price').val())*parseFloat($(this).val())/100
-                var subtotal = parseFloat($('#cost_price').val()) + percent
-               $('#sale_price_box').val(subtotal.toFixed(1))
-
-               $('#sale_price_unit').val(($('#sale_price_box').val()/$('#number_box').val()).toFixed(1))
+            $('#sale_price_box').on('keyup', function() {
+                
+                var total = parseFloat($(this).val());
+                var pc_box = parseFloat($('#cost_price').val());
+                var percent = ((total - pc_box) * 100) / pc_box;
+                
+                $('#utility_box').val(percent.toFixed(1))
+                $('#utility_unit').val(percent.toFixed(1))
+                
+                $('#sale_price_unit').val(($('#sale_price_box').val() / $('#number_box').val()).toFixed(1))
             });
 
             $('#fotoArticle').on('change', function(e){
