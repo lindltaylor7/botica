@@ -83,6 +83,7 @@
                                                 @endif
                                                 @include('admin.stocks.modal_article')
                                             @endforeach
+
                                             @foreach ($ms as $m)
                                                 @if ($m->id == $producto->id && $producto->type == 'App\Models\Medicine')
                                                     <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalM{{$m->id}}">Ver más</i></a>
@@ -95,8 +96,10 @@
                                             @foreach ($as as $a)
                                                 @if ($a->id == $producto->id && $producto->type == 'App\Models\Article')
                                                     <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalEditA{{$a->id}}">Editar Lote</a>
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalDeleteA{{$a->id}}">Eliminar Lotes</a>                    
                                                 @endif
-                                            @include('admin.stocks.editar_modal_article')
+                                                @include('admin.stocks.editar_modal_article')
+                                                @include('admin.stocks.delete_modal_article')
                                             @endforeach
                                                     
                                             @foreach ($ms as $m)
@@ -104,8 +107,8 @@
                                                     <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalEditM{{$m->id}}">Editar Lote</a>
                                                     <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalDeleteM{{$m->id}}">Eliminar Lotes</a>                       
                                                 @endif
-                                            @include('admin.stocks.editar_modal_medicine')
-                                            @include('admin.stocks.delete_modal')
+                                                @include('admin.stocks.editar_modal_medicine')
+                                                @include('admin.stocks.delete_modal_medicine')
                                             @endforeach
                                         </div>
                                     </div>
