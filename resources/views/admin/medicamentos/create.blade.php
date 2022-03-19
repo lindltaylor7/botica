@@ -92,11 +92,11 @@
                     <div class="form-col">
                         <label class="form-label">
                             <i class="fas fa-asterisk text-danger"></i>
-                            <span>Número por cajas</span>
+                            <span>Número de unidades por caja</span>
                         </label>
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero por cajas" value="{{old('number_box')}}">
+                            <input type="text" name="number_box"  id="number_box" class="form-control" autocomplete="off" placeholder="Numero de unidades por caja" value="{{old('number_box')}}">
                         </div>
                         @error('number_box')
                         <p class="text-danger">{{$message}}</p>
@@ -105,12 +105,12 @@
                     <div class="form-col">
                         <label class="form-label">
                             <i class="fas fa-asterisk text-danger"></i>
-                            <span>Número por Blister</span>
+                            <span>Número de unidades por blister</span>
                         </label>
 
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número por Blister" value="{{old('number_blister')}}">
+                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número de Blisters por caja" value="{{old('number_blister')}}">
                         </div>
                         @error('number_blister')
                         <p class="text-danger">{{$message}}</p>
@@ -143,17 +143,17 @@
                         </label>
                         <div class="form-holder">
                             <i>%</i>
-                            <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}">
+                            <input type="text" name="utility" id="utility_box" class="form-control" placeholder="Utilidad por caja" value="{{old('utility')}}" readonly>
                         </div>
                         @error('utility')
                                 <p class="text-danger">{{$message}}</p>
                             @enderror
                     </div>
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por caja</label>
+                        <label class="form-label"><b>Precio de venta por caja</b></label>
                         <div class="form-holder">
                             <i>S./</i>
-                            <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja" readonly>
+                            <input type="text" id="sale_price_box" class="form-control" placeholder="P. de venta por caja">
 
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por blister</label>
+                        <label class="form-label"><b>Precio de venta por blister</b></label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" id="sale_price_blister" class="form-control" placeholder="P. de venta por blister" readonly>
@@ -201,7 +201,7 @@
                     </div>
 
                     <div class="form-col">
-                        <label class="form-label">Precio de venta por unidad</label>
+                        <label class="form-label"><b>Precio de venta por unidad</b></label>
                         <div class="form-holder">
                             <i>S./</i>
                             <input type="text" name="sale_price" id="sale_price_unit" class="form-control" placeholder="P. de venta por unidad" readonly>
@@ -428,10 +428,10 @@
 
                 //CAJA
                 var pc_box = parseFloat($(this).val())
-                $('#sale_price_box').val(pc_box.toFixed(1))
+                // $('#sale_price_box').val(pc_box.toFixed(1))
 
                 //UNIDAD
-                var pc_ud = pc_box/$('#number_box').val()
+                var pc_ud = pc_box / $('#number_box').val()
                 $('#cost_price_unit').val(pc_ud.toFixed(2))
                 $('#sale_price_unit').val(pc_ud.toFixed(1))
 
@@ -442,13 +442,13 @@
 
             });
 
-            $('#utility_box').on('keyup', function(){
-
+            $('#sale_price_box').on('keyup', function(){
                 //CAJA
+                var total = parseInt($(this).val()) // Precio de venta por caja
                 var pc_box = $('#cost_box').val();
-                var percent = $(this).val();
-                var total = parseFloat(pc_box) + parseFloat(pc_box*percent/100);
-                $('#sale_price_box').val(total.toFixed(1));
+                var percent = ((total - pc_box) * 100) / pc_box;
+
+                $('#utility_box').val(percent);
 
                 $('#utility_blister').val(percent)
                 $('#utility_unit').val(percent)
