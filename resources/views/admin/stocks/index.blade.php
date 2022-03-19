@@ -102,8 +102,10 @@
                                             @foreach ($ms as $m)
                                                 @if ($m->id == $producto->id && $producto->type == 'App\Models\Medicine')
                                                     <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalEditM{{$m->id}}">Editar Lote</a>
+                                                    <a href="#" class="text-decoration-underline text-reset" data-bs-toggle="modal" data-bs-target="#modalDeleteM{{$m->id}}">Eliminar Lotes</a>                       
                                                 @endif
                                             @include('admin.stocks.editar_modal_medicine')
+                                            @include('admin.stocks.delete_modal')
                                             @endforeach
                                         </div>
                                     </div>

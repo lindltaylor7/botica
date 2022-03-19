@@ -93,7 +93,7 @@ Route::get('principal/editar_2', [PrincipalController::class, 'editar_2'])->midd
 
 
 Route::put('batch/{id}/update', [BatchController::class, 'update'])->middleware('auth')->name('batch.update');
-
+Route::delete('batch/{id}/delete', [BatchController::class, 'destroy'])->name('batch.delete');
 
 
 

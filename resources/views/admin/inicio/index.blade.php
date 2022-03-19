@@ -112,14 +112,20 @@
                     <td>{{ucfirst(mb_strtolower($articulo->tradename,'UTF-8'))}}</td>
                     <td>{{ucfirst(mb_strtolower($articulo->trademark,'UTF-8'))}}</td>
                     <td>{{$articulo->presentation}}</td>
-                    <td>{{$articulo->price->sale_price}}</td>
+                    <td>S./{{$articulo->price->sale_price}}</td>
                     <td>
-                    @foreach ($articulo->stocks as $stock)
-                    @foreach($stock->batches as $batch)
-                        {{$batch->quantity_unit}}
-                    @endforeach
-                    @endforeach
-                    </td>
+                        @php
+                            $s=0;
+                        @endphp
+                        @foreach($articulo->stocks as $stock)
+                            @foreach($stock->batches as $batch)
+                                @php
+                                    $s+=$batch->quantity_unit;
+                                @endphp
+                            @endforeach
+                        @endforeach
+                        {{$s}}
+                        </td>
                     <td>{{ucfirst(mb_strtolower($articulo->supplier,'UTF-8'))}}</td>
                     <td>
                     @foreach ($articulo->stocks as $stock)

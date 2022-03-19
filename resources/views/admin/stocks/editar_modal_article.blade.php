@@ -13,7 +13,7 @@
                     <th scope="col">Cantidad</th>
                     <th scope="col">Fecha de ingreso</th>
                     <th scope="col">Fecha de Expiración</th>
-                    <th scope="col">Actualizar</th>
+                    <th scope="col">Opciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,6 +37,7 @@
                         </td>
                         <td>
                           <input type="submit" value="Actualizar" class="btn btn-primary">
+                          <a href="{{route('batch.delete', $batch->id)}}" class="btn btn-danger">Eliminar</a>
                         </td>
                       </tr>
                     </form>

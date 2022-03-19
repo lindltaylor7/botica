@@ -1,4 +1,4 @@
-<div class="modal fade modal-access" id="modalEditM{{$m->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-access" id="modalDeleteM{{$m->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,15 +13,15 @@
                     <th scope="col">Cantidad</th>
                     <th scope="col">Fecha de Ingreso</th>
                     <th scope="col">Fecha de Expiración</th>
-                    <th scope="col">Actualizar</th>
+                    <th scope="col">Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($m->stocks as $stock)
                     @foreach ($stock->batches as $batch)
-                    <form action="{{route('batch.update', $batch->id)}}" method="POST">
+                    <form action="{{route('batch.delete', $batch->id)}}" method="POST">
                       @csrf
-                      @method('put')
+                      @method('delete')
                       <tr>
                         <td>
                           <input type="text" name="code" value="{{$batch->code}}" class="form-control px-1">
@@ -36,7 +36,7 @@
                           <input type="date" name="expiry_date" value="{{$batch->expiry_date}}" class="form-control px-1">
                         </td>
                         <td>
-                          <input type="submit" value="Actualizar" class="btn btn-primary">
+                          <input type="submit" value="Eliminar" class="btn btn-danger">
                         </td>
                        
                       </tr>

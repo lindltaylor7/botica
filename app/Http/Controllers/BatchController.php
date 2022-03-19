@@ -83,6 +83,8 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $batch = Batch::where('id',$id)->first();
+        $batch->delete();
+        return redirect()->back();
     }
 }
