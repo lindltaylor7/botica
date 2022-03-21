@@ -62,19 +62,22 @@ $(document).ready(function(){
                                 <td>${value.tradename}</td>
                                 <td>${value.concentration}</td>
                                 <td>
-                                    <select id="tipo${value.id}" class="form-control">
+                                    <select id="tipo${value.id}" class="form-control px-1 mx-1">
                                         <option value="1">Unidad</option>
                                         <option value=${value.number_blister}>Blister (${value.number_blister})</option>
                                         <option value=${value.number_box}>Caja (${value.number_box})</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cant${value.id}" class="form-control quantity" type="number"/>
+                                    <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cant${value.id}" class="form-control px-1 mx-1 w-75 quantity" type="number"/>
                                     <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
                                     <input type="hidden" id="partial_utility${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
                                     <input type="hidden" id="partial_igv${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
                                     <input type="hidden" id="partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
                                     <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
+                                </td>
+                                <td>
+                                    <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="dsc${value.id}" class="form-control px-1 mx-1 w-75 quantity" type="number"/>
                                 </td>
                                 <td id="vunit${value.id}" class="vunit">${value.price.sale_price}</td>
                                 <td id="subtotal${value.id}" class="subtotal"></td>

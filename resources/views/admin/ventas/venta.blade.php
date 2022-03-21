@@ -79,6 +79,7 @@
                                                     <th class="d-none d-xl-table-cell">Concent.</th>
                                                     <th class="d-none d-xl-table-cell">Tipo</th>
                                                     <th class="d-none d-xl-table-cell">Cantidad</th>
+                                                    <th class="d-none d-xl-table-cell">Desc</th>
                                                     <th class="d-none d-xl-table-cell">P. de Venta</th>
                                                     <th class="d-none d-xl-table-cell">Subtotal</th>
                                                     <th class="d-none d-xl-table-cell">IGV</th>
