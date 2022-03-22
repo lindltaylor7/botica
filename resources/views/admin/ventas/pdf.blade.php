@@ -151,7 +151,6 @@
                                 <tbody>
 
                                     @foreach($details as $detail)
-
                                             <tr>
                                                 <td class="columna">{{$detail->detailable->tradename}}</td>
                                                 @if ($detail->detailable_type == 'App\Models\Medicine')
@@ -187,7 +186,7 @@
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                         <th>Descuento </th>
-                                        <th class="text-end">0%</th>
+                                        <th class="text-end">S/. {{number_format($discount, 2, ".", '')}}</th>
                                     </tr>
                                     <tr>
                                         <th>&nbsp;</th>

@@ -321,9 +321,20 @@ class SaleController extends Controller
 
     public function generarPdf($id){
         $venta = Sale::where('id',$id)->first();
-        $details = Detail::where('sale_id', $id)->get();
+        $details = Detail::where('sale_id', $id)
+        ->with('detailable')
+        ->with('detailable.price')
+        ->get();
+
+        $priceTotal = 0;
+        foreach($details as $detail) {
+            $priceTotal = $priceTotal + ($detail->detailable->price->sale_price * $detail->quantity);
+        }
+
+        $discount = $priceTotal - $venta->total_sale;
+
         $cliente = Customer::where('id',$venta->customer_id)->first();
-        $pdf = PDF::loadView('admin.ventas.pdf', compact('cliente', 'venta', 'details', 'id'));
+        $pdf = PDF::loadView('admin.ventas.pdf', compact('cliente', 'venta', 'details', 'id', 'discount'));
         $pdf->setPaper('a5', 'landscape');
 
         return $pdf->stream('mi-archivo.pdf');
