@@ -17,6 +17,102 @@ $(document).ready(function(){
     $('#search').on('keyup', function(){
         var search = $(this).val()
         var tipo = $("input[name='u_type']:checked").val();
+        var total_input = null;
+
+        function calculatePrice(value, props) {
+            let { cant, vunit, tipo, importe, subtotal, igv_unique, partial_sale, partial_utility, partial_igv, desc } = props;
+            var suma = 0;
+            var importeTotal = 0;
+            
+            const inputCantVal = $(`#${cant}${value.id}`).val();
+
+            var importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html())*$(`#${tipo}${value.id}`).val()).toFixed(1)+'0'
+            var subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+
+            $(`#${importe}${value.id}`).html(importe1)
+            $(`#${subtotal}${value.id}`).html(subtotal1)
+            $(`#${igv_unique}${value.id}`).html((subtotal1 * 0.18).toFixed(2))
+
+
+            $('.subtotal').each(function() {
+                suma = suma + parseFloat(inputCantVal)
+            })
+
+            $('#total_igv').val((suma * 0.18).toFixed(2));
+
+            $('.importe').each(function() {
+                setTimeout(() => {
+                    importeTotal = importeTotal + parseFloat(this.textContent)
+                    $('#total').val((importeTotal).toFixed(1) + '0')
+                },0)
+            })
+
+            $(`#${partial_sale}${value.id}`).val(importe1 - $(`#${desc}${value.id}`).val())
+            $(`#${partial_utility}${value.id}`).val(subtotal1)
+            $(`#${partial_igv}${value.id}`).val((subtotal1 * 0.18).toFixed(2))
+
+            $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+        }
+
+        function validStock(value, props) {
+            let { cant, tipo } = props
+            const inputCant = $(`#${cant}${value.id}`).val();
+
+            if(inputCant * $(`#${tipo}${value.id}`).val() > total_input){
+                alert('La cantidad excede al stock')
+                $(`#${cant}${value.id}`).val('')
+            }
+        }
+
+        function discount(value, props) {
+            let { desc, cant, importe } = props
+            
+            const descValue = $(`#${desc}${value.id}`).val();
+
+            if (!descValue) return
+
+            const siblingCant = $(`#${cant}${value.id}`).val();
+
+            if (siblingCant) {
+                const descTotal = (value.price.sale_price * siblingCant) - descValue;
+                $(`#${importe}${value.id}`).html(descTotal.toFixed(1));
+            }
+        }
+
+        function deleteProduct(value, { importe, row }) {
+            var total = parseFloat($('#total').val()) - parseFloat($(`#${importe}${value.id}`).html())
+            $('#total').val(total.toFixed(1) + '0')
+            var subtotal = parseFloat($('#total').val() / 1.18)
+            $('#total_noigv').val(subtotal.toFixed(2))
+            $('#total_igv').val((subtotal * 0.18).toFixed(2))
+            $(`#${row}${value.id}`).remove()
+        }
+
+        function changeTipo(value, props) {
+            let { tipo, vunit, importe, subtotal, igv_unique } = props
+
+            let inputType = $(`#${tipo}${value.id}`).val();
+            $(`#${vunit}${value.id}`).html((inputType * value.price.sale_price).toFixed(2))
+            
+            const inputCant = $(`#cant${value.id}`).val()
+            if (!inputCant) return;
+            
+            let priceSale = $(`#${vunit}${value.id}`).html();
+            var importe1 = parseFloat(priceSale).toFixed(1)
+            var subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+            let igv = subtotal1 * 0.18;
+            
+            var suma = 0;
+
+            $(`#${importe}${value.id}`).html(importe1)
+            $(`#${subtotal}${value.id}`).html(subtotal1)
+            $(`#${igv_unique}${value.id}`).html((igv).toFixed(2))
+
+            $('.subtotal').each(function() {
+                suma = suma + parseFloat($(`#${tipo}${value.id}`).html())
+            });
+        }
+        
         if(tipo == 1){
             $.ajax({
                 url:"../medicamentos/medPrice",
@@ -41,199 +137,104 @@ $(document).ready(function(){
                             })
                         })
 
-                    if(total == 0){
-                        list = '<tr><td><a class="search-link'+index+' text-danger" data-total='+total+' data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
-                    }else{
-                        list = '<tr><td><a class="search-link'+index+'" data-total='+total+' data-price="'+value.price.sale_price+'" data-box="'+value.price.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
-                    }
-
-                    $('#medicamentos_select').append(list);
-                    total = 0;
-                    $('.search-link'+index).on('click', function(){
-                        $('#medicamentos_select').html('');
-                        $('#search').val('')
-                        var total_input = $(this).data('total');
-                        /*==========================================
-                            * Crear filas dinamicamente a treves del
-                            evento click
-                        ==========================================*/
-                        row = `<tr id="row${value.id}">
-                                <td>${value.generic_name}</td>
-                                <td>${value.tradename}</td>
-                                <td>${value.concentration}</td>
-                                <td>
-                                    <select id="tipo${value.id}" class="form-control">
-                                        <option value="1">Unidad</option>
-                                        <option value=${value.number_blister}>Blister (${value.number_blister})</option>
-                                        <option value=${value.number_box}>Caja (${value.number_box})</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cant${value.id}" class="form-control quantity" type="number"/>
-                                    <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
-                                    <input type="hidden" id="partial_utility${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
-                                    <input type="hidden" id="partial_igv${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
-                                    <input type="hidden" id="partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
-                                    <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
-                                </td>
-                                <td id="vunit${value.id}" class="vunit">${value.price.sale_price}</td>
-                                <td id="subtotal${value.id}" class="subtotal"></td>
-                                <td id="igv_unique${value.id}"></td>
-                                <td id="importe${value.id}" class="importe"></td>
-                                <td><a id="close${value.id}" class="btn btn-danger">X</a></td>
-                            </tr>`
-
-                        /*==========================================
-                            * Validación de agregar duplicidad de
-                            medicamentos
-                        ==========================================*/
-                        if (!document.getElementById(`row${value.id}`)) {
-                            $('#cart-shop').append(row);
-                        } else {
-                            alert("Este producto ya está en venta");
+                        if(total == 0){
+                            list = '<tr><td><a class="search-link'+index+' text-danger" data-total='+total+' data-price="'+value.sale_price+'" data-box="'+value.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
+                        }else{
+                            list = '<tr><td><a class="search-link'+index+'" data-total='+total+' data-price="'+value.price.sale_price+'" data-box="'+value.price.sale_price+'" id="'+value.id+'">'+value.generic_name+' - '+value.tradename+' - '+value.concentration+' - '+value.presentation+' - '+value.laboratory+' - Precio unitario: S./'+value.price.sale_price+' Cantidad: '+total+'</a></td></tr>'
                         }
-                    /*      $('#td-cant'+value.id).html($('<input>').attr({
-                            type: 'text',
-                            id: 'cant'+value.id,
-                            name: 'quantity'+index,
-                            class:'form-control'
-                        }).appendTo('form'));*/
 
-                        /*==========================================
-                            * Calcular Precio del a travez del input
-                                creado dinamicamente
-                        ==========================================*/
-                        $('#cant'+value.id).on('keyup',function(){
-                            if($(this).val()*$('#tipo'+value.id).val()>total_input){
-                                alert('La cantidad excede al stock')
-                                $(this).val('')
+                        $('#medicamentos_select').append(list);
+                        total = 0;
+                        $('.search-link'+index).on('click', function(){
+                            $('#medicamentos_select').html('');
+                            $('#search').val('')
+                            total_input = $(this).data('total');
 
+                            row = `<tr id="rowM${value.id}">
+                                    <td>${value.generic_name}</td>
+                                    <td>${value.tradename}</td>
+                                    <td>${value.concentration}</td>
+                                    <td>
+                                        <select id="tipoM${value.id}" class="form-control px-2" style="width:100px">
+                                            <option value="1">Unidad</option>
+                                            <option value=${value.number_blister}>Blister (${value.number_blister})</option>
+                                            <option value=${value.number_box}>Caja (${value.number_box})</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" step="1" id="cantM${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
+                                        <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
+                                        <input type="hidden" id="partial_utility_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
+                                        <input type="hidden" id="partial_igv_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
+                                        <input type="hidden" id="partial_sale_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
+                                        <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
+                                    </td>
+                                    <td><input class="form-control px-2" step="0.1" maxlength="4" type="number" id="descM${value.id}" name="descM${value.id}" style="width:80px"></td>
+                                    <td id="vunitM${value.id}" class="vunit">${value.price.sale_price}</td>
+                                    <td id="subtotalM${value.id}" class="subtotal"></td>
+                                    <td id="igv_uniqueM${value.id}"></td>
+                                    <td id="importeM${value.id}" class="importe"></td>
+                                    <td><a id="closeM${value.id}" class="btn btn-danger">X</a></td>
+                                </tr>`
+
+                            if (!document.getElementById(`row${value.id}`)) {
+                                $('#cart-shop').append(row);
+                            } else {
+                                alert("Este producto ya está en venta");
                             }
 
-                            /*==========================================
-                                * Calcular Precio del a travez del input
-                                    creado dinamicamente
-                            ==========================================*/
-                            $('#cant'+value.id).on('keyup',function(){
-                                if($(this).val()>total_input){
-                                    alert('La cantidad excede al stock')
-                                    $(this).val('')
-                                }
-                                var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
-                                $('#importe'+value.id).html(importe1)
-                                $('#partial_sale'+value.id).val(importe1)
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotal'+value.id).html(subtotal1)
-                                $('#partial_utility'+value.id).val(subtotal1)
-                                $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
-                                $('#partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
-                                var suma = 0;
+                            let props = {
+                                row: 'rowM',
+                                tipo: 'tipoM',
+                                cant: 'cantM',
+                                desc: 'descM',
+                                vunit: 'vunitM',
+                                subtotal: 'subtotalM',
+                                igv_unique: 'igv_uniqueM',
+                                importe: 'importeM',
+                                close: 'closeM',
+                                partial_sale: 'partial_sale_M',
+                                partial_utility: 'partial_utility_M',
+                                partial_igv: 'partial_igv_M'
+                            }
 
-                                $('.subtotal').each(function() {
-                                    suma = suma + parseFloat($(this).html())
+                            
+                            $('#cantM'+value.id).on('click',function(){
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
+                            })
+                            
+                            $('#cantM'+value.id).on('keyup',function(){
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
+                            })
+                            
+                            $('#closeM'+value.id).on('click', function() {
+                                deleteProduct(value, props)
+                            })
+                                
 
-                                })
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                    $('#total').val(importe.toFixed(1)+'0')
-                                })
-
-                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+                            $('#tipoM'+value.id).on('change', function(){
+                                validStock(value, props)
+                                changeTipo(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
                             })
 
-                            $('#cant'+value.id).on('click',function(){
-                                if($(this).val()>total_input){
-                                    alert('La cantidad excede al stock')
-                                    $(this).val('')
-                                }
-                                var importe1= parseFloat($(this).val()*parseFloat($('#vunit'+value.id).html())*$('#tipo'+value.id).val()).toFixed(1)+'0'
-                                $('#importe'+value.id).html(importe1)
-                                $('#partial_sale'+value.id).val(importe1)
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotal'+value.id).html(subtotal1)
-                                $('#partial_utility'+value.id).val(subtotal1)
-                                $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
-                                $('#partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
-                                var suma = 0;
-
-                                $('.subtotal').each(function() {suma = suma + parseFloat($(this).html())})
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                    $('#total').val(importe.toFixed(1)+'0')
-                                })
-
-                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+                            $(`#descM${value.id}`).on('keyup', function() {
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
                             })
 
-                            /*==========================================
-                                * Tipo de articulo
-                            ==========================================*/
-                            $('#tipo'+value.id).on('change', function(){
-                                $('#vunit'+value.id).html(($(this).val()*value.sale_price).toFixed(2))
-                                var importe1= parseFloat($('#vunit'+value.id).html()).toFixed(1)
-                                $('#importe'+value.id).html(importe1)
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotal'+value.id).html(subtotal1)
-                                $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
-
-                                var suma = 0;
-
-                                $('.subtotal').each(function() {
-                                    suma = suma + parseFloat($(this).html())
-                                })
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                })
-                                $('#total').val(importe.toFixed(1)+'0')
-
-                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+                            $(`#descM${value.id}`).on('click', function() {
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
                             })
-
-                            /*==========================================
-                                * Cancelar compra por el boton x
-                            ==========================================*/
-                            $('#close'+value.id).on('click', function() {
-                                var total = parseFloat($('#total').val()) - parseFloat($('#importe'+value.id).html())
-                                $('#total').val(total.toFixed(1)+'0')
-                                var subtotal = parseFloat($('#total').val()/1.18)
-                                $('#total_noigv').val(subtotal.toFixed(2))
-                                $('#total_igv').val((subtotal*0.18).toFixed(2))
-                                $('#row'+value.id).remove()
-                            })
-                        })
-
-
-                        /*==========================================
-                            *
-                        ==========================================*/
-                        $('#tipo'+value.id).on('change', function(){
-                            $('#vunit'+value.id).html(($(this).val()*value.precio.sale_price).toFixed(2))
-                            var importe1= parseFloat($('#vunit'+value.id).html()).toFixed(1)
-                            $('#importe'+value.id).html(importe1)
-                            var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                            $('#subtotal'+value.id).html(subtotal1)
-                            $('#igv_unique'+value.id).html((subtotal1*0.18).toFixed(2))
-
-                            var suma = 0;
-
-                            $('.subtotal').each(function() {
-                                suma = suma + parseFloat($(this).html())
-
-                    });
-                        })
-
-                    });
-
+                        });
                     })
                 }
             });
@@ -289,148 +290,91 @@ $(document).ready(function(){
                         total = 0;
 
                         $('.search-link'+index).on('click', function(){
-                            var total_input = $(this).data('total');
+                            total_input = $(this).data('total');
                             $('#medicamentos_select').html('');
                             $('#search').val('')
 
-                            /*==============================
-                                * Agregar filas dinamicas
-                            ==============================*/
                             row = `
-                                <tr id="rowart${value.id}">
+                                <tr id="rowA${value.id}">
                                     <td>${value.tradename}</td>
                                     <td>${value.tradename}</td>
                                     <td>${value.presentation}</td>
                                     <td>
-                                    <select name="detail[${$('#table_sales tr').length-1}][unit_type]" id="tipoart${value.id}" class="form-control">
+                                    <select name="detail[${$('#table_sales tr').length-1}][unit_type]" id="tipoA${value.id}" class="form-control px-2" style="width: 100px;">
                                         <option value="1">Unidad</option>
                                         <option value=${value.number_box}>Caja (${value.number_box})</option>
                                     </select>
                                     </td>
                                     <td>
-                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cantart${value.id}" class="form-control quantity" type="number"/>
+                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cantA${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
                                         <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
-                                        <input type="hidden" id="a_partial_utility${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
-                                        <input type="hidden" id="a_partial_igv${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
-                                        <input type="hidden" id="a_partial_sale${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
+                                        <input type="hidden" id="partial_utility_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
+                                        <input type="hidden" id="partial_igv_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
+                                        <input type="hidden" id="partial_sale_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
                                         <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][article_id]" />
                                     </td>
-                                    <td id="vunitart${value.id}" class="vunit">${value.price.sale_price}</td>
-                                    <td id="subtotalart${value.id}" class="subtotal"></td>
-                                    <td id="igv_uniqueart${value.id}"></td>
-                                    <td id="importeart${value.id}" class="importe"></td>
-                                    <td><a id="closeart${value.id}" class="btn btn-danger">X</a></td>
+                                    <td><input class="form-control px-2" step="0.1" type="number" id="descA${value.id}" name="descA${value.id}" style="width:80px"></td>
+                                    <td id="vunitA${value.id}" class="vunit">${value.price.sale_price}</td>
+                                    <td id="subtotalA${value.id}" class="subtotal"></td>
+                                    <td id="igv_uniqueA${value.id}"></td>
+                                    <td id="importeA${value.id}" class="importe"></td>
+                                    <td><a id="closeA${value.id}" class="btn btn-danger">X</a></td>
                                 </tr>`
 
-                            /*=========================================================
-                                * Validación de agregar duplicidad de medicamentos
-                            =========================================================*/
                             if (!document.getElementById(`rowart${value.id}`)) {
                                 $('#cart-shop').append(row);
                             } else {
                                 alert("Este producto ya está en venta");
                             }
 
-                            /*=============================
-                                * Input de la cantidad
-                            ==============================*/
-                            $('#cantart'+value.id).on('keyup',function(){
-                                if($(this).val()>total_input){
-                                    alert('La cantidad excede al stock')
-                                    $(this).val('')
-                                }
-                                var importe1= parseFloat($(this).val()*parseFloat($('#vunitart'+value.id).html())).toFixed(1)+'0'
-                                $('#importeart'+value.id).html(importe1)
-                                $('#a_partial_sale'+value.id).val(importe1)
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotalart'+value.id).html(subtotal1)
-                                $('#a_partial_utility'+value.id).val(subtotal1)
-                                $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
-                                $('#a_partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
-                                var suma = 0;
+                            let props = {
+                                row: 'rowA',
+                                tipo: 'tipoA',
+                                cant: 'cantA',
+                                desc: 'descA',
+                                vunit: 'vunitA',
+                                subtotal: 'subtotalA',
+                                igv_unique: 'igv_uniqueA',
+                                importe: 'importeA',
+                                close: 'closeA',
+                                partial_sale: 'partial_sale_A',
+                                partial_utility: 'partial_utility_A',
+                                partial_igv: 'partial_igv_A'
+                            }
 
-                                $('.subtotal').each(function() {
-                                    suma = suma + parseFloat($(this).html())
-
-                                })
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                    $('#total').val(importe.toFixed(1)+'0')
-                                })
-
-                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
-                            })
-                            $('#cantart'+value.id).on('click',function(){
-                                if($(this).val()>total_input){
-                                    alert('La cantidad excede al stock')
-                                    $(this).val('')
-                                }
-                                var importe1= parseFloat($(this).val()*parseFloat($('#vunitart'+value.id).html())).toFixed(1)+'0'
-                                $('#importeart'+value.id).html(importe1)
-                                $('#a_partial_sale'+value.id).val(importe1)
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotalart'+value.id).html(subtotal1)
-                                $('#a_partial_utility'+value.id).val(subtotal1)
-                                $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
-                                $('#a_partial_igv'+value.id).val((subtotal1*0.18).toFixed(2))
-                                var suma = 0;
-
-                                $('.subtotal').each(function() {
-                                    suma = suma + parseFloat($(this).html())
-
-                                })
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                    $('#total').val(importe.toFixed(1)+'0')
-                                })
-
-                                $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
+                            $('#cantA'+value.id).on('keyup',function() {
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
                             })
 
-                            /*=============================
-                                * Tipo de articulo
-                            ==============================*/
-                            $('#tipoart'+value.id).on('change', function(){
-                                $('#vunitart'+value.id).html(($(this).val()*value.sale_price).toFixed(2))
-                                var importe1= parseFloat(($('#vunitart'+value.id).html()*$('#cantart'+value.id).val()).toFixed(1))
-                                $('#importeart'+value.id).html(importe1.toFixed(2))
-                                var subtotal1 = parseFloat(importe1/1.18).toFixed(2)
-                                $('#subtotalart'+value.id).html(subtotal1)
-                                $('#igv_uniqueart'+value.id).html((subtotal1*0.18).toFixed(2))
-
-                                var suma = 0;
-
-                                $('.subtotal').each(function() {
-                                    suma = suma + parseFloat($(this).html())
-                                })
-                                $('#total_igv').val((suma*0.18).toFixed(2));
-
-                                var importe = 0;
-
-                                $('.importe').each(function() {
-                                    importe = importe + parseFloat($(this).html())
-                                })
-                                $('#total').val(importe.toFixed(1)+'0')
-
-                                $('#total_noigv').val(($('#total').html()-$('#total_igv').html()).toFixed(2))
+                            $('#cantA'+value.id).on('click',function(){
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
                             })
 
-                            /*=============================
-                                * Closes
-                            ==============================*/
-                            $('#closeart'+value.id).on('click', function() {
-                                var total = parseFloat($('#total').val()) - parseFloat($('#importeart'+value.id).html())
-                                $('#total').val(total.toFixed(1)+'0')
-                                var subtotal = parseFloat($('#total').val()/1.18)
-                                $('#total_noigv').val(subtotal.toFixed(2))
-                                $('#total_igv').val((subtotal*0.18).toFixed(2))
-                                $('#rowart'+value.id).remove()
+                            $(`#descA${value.id}`).on('keyup', function() {
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
+                            })
+
+                            $(`#descA${value.id}`).on('click', function() {
+                                validStock(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
+                            })
+
+                            $('#tipoA'+value.id).on('change', function(){
+                                validStock(value, props)
+                                changeTipo(value, props)
+                                calculatePrice(value, props)
+                                discount(value, props);
+                            })
+
+                            $('#closeA'+value.id).on('click', function() {
+                                deleteProduct(value, props)
                             })
                         });
                     });

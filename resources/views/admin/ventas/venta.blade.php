@@ -31,7 +31,7 @@
 
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="cajaCheck">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <label class="form-check-label" for="cajaCheck">
                             Sin DNI
                             </label>
                         </div>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div>
-                            <input type="radio" name="u_type" class="radiobtn" id="med" value="1" checked>
+                            <input type="radio" name="u_type" class="radiobtn" id="pr" value="1" checked>
                             <label for="pr">Medicamento</label>
                         </div>
 
@@ -74,16 +74,17 @@
                                         <table class="table table-hover my-0" id="table_sales">
                                             <thead>
                                                 <tr>
-                                                    <th class="d-none d-xl-table-cell">Nombre Genérico</th>
-                                                    <th class="d-none d-xl-table-cell">Nombre Comercial</th>
+                                                    <th class="d-none d-xl-table-cell">Nombre Gen.</th>
+                                                    <th class="d-none d-xl-table-cell">Nombre Com.</th>
                                                     <th class="d-none d-xl-table-cell">Concent.</th>
                                                     <th class="d-none d-xl-table-cell">Tipo</th>
-                                                    <th class="d-none d-xl-table-cell">Cantidad</th>
-                                                    <th class="d-none d-xl-table-cell">P. de Venta</th>
+                                                    <th class="d-none d-xl-table-cell">Cant.</th>
+                                                    <th class="d-none d-xl-table-cell">Desc.</th>
+                                                    <th class="d-none d-xl-table-cell">P. Venta</th>
                                                     <th class="d-none d-xl-table-cell">Subtotal</th>
                                                     <th class="d-none d-xl-table-cell">IGV</th>
                                                     <th class="d-none d-xl-table-cell">Importe</th>
-                                                    <th class="d-none d-md-table-cell">Operaciones</th>
+                                                    <th class="d-none d-md-table-cell">Ope.</th>
                                                 </tr>
                                             </thead>
 
