@@ -93,19 +93,25 @@
                                             </tbody>
 
                                         </table>
-                                        <div class="row">
-                                            <div class="col-md-8"></div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-8 d-flex align-items-start justify-content-end">
+                                                <button class="btn btn-primary" id="calculatePriceEnd">Calcular</button>
+                                            </div>
+
                                             <div class="col-md-4">
                                                 <label for="igv">Subtotal</label>
                                                 <input type="number" step="any" class="form-control" readonly name="total_utility" id="total_noigv">
+                                                
                                                 <label for="igv">I.G.V.(18%)</label>
                                                 <input type="number" step="any" class="form-control" readonly name="igv" id="total_igv">
+                                                
                                                 <label for="igv">Total</label>
                                                 <input type="number" step="any" class="form-control" readonly name="total_sale" id="total">
                                             </div>
                                         </div>
 
-                                        <input type="submit" id="save_form" class="btn btn-success" value="Guardar">
+                                        <a href="{{route('ventas.index')}}" class="btn btn-danger">Cancelar</a>
+                                        <input type="submit" id="save_form" class="btn btn-primary" value="Realizar venta">
                                     </div>
                                 </div>
                             </div>

@@ -19,20 +19,13 @@ $(document).ready(function(){
         var tipo = $("input[name='u_type']:checked").val();
         var total_input = null;
 
-        function calculatePrice(value, props) {
-            let { cant, vunit, tipo, importe, subtotal, igv_unique, partial_sale, partial_utility, partial_igv, desc } = props;
+        function calculatePriceTotal(value, props) {
+            event.preventDefault();
+            let { cant } = props;
+
+            const inputCantVal = $(`#${cant}${value.id}`).val();
             var suma = 0;
             var importeTotal = 0;
-            
-            const inputCantVal = $(`#${cant}${value.id}`).val();
-
-            var importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html())*$(`#${tipo}${value.id}`).val()).toFixed(1)+'0'
-            var subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
-
-            $(`#${importe}${value.id}`).html(importe1)
-            $(`#${subtotal}${value.id}`).html(subtotal1)
-            $(`#${igv_unique}${value.id}`).html((subtotal1 * 0.18).toFixed(2))
-
 
             $('.subtotal').each(function() {
                 suma = suma + parseFloat(inputCantVal)
@@ -41,17 +34,28 @@ $(document).ready(function(){
             $('#total_igv').val((suma * 0.18).toFixed(2));
 
             $('.importe').each(function() {
-                setTimeout(() => {
-                    importeTotal = importeTotal + parseFloat(this.textContent)
-                    $('#total').val((importeTotal).toFixed(1) + '0')
-                },0)
+                importeTotal = importeTotal + parseFloat(this.textContent)
+                $('#total').val((importeTotal).toFixed(1) + '0')
             })
 
+            $('#total_noigv').val(($('#total').val() - $('#total_igv').val()).toFixed(2))
+        }
+
+        function calculatePrice(value, props) {
+            let { cant, vunit, tipo, importe, subtotal, igv_unique, partial_sale, partial_utility, partial_igv, desc } = props;
+            
+            const inputCantVal = $(`#${cant}${value.id}`).val();
+
+            var importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html())*$(`#${tipo}${value.id}`).val()).toFixed(1)+'0'
+            var subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+            
+            $(`#${importe}${value.id}`).html(importe1)
+            $(`#${subtotal}${value.id}`).html(subtotal1)
+            $(`#${igv_unique}${value.id}`).html((subtotal1 * 0.18).toFixed(2))
+            
             $(`#${partial_sale}${value.id}`).val(importe1 - $(`#${desc}${value.id}`).val())
             $(`#${partial_utility}${value.id}`).val(subtotal1)
             $(`#${partial_igv}${value.id}`).val((subtotal1 * 0.18).toFixed(2))
-
-            $('#total_noigv').val(($('#total').val()-$('#total_igv').val()).toFixed(2))
         }
 
         function validStock(value, props) {
@@ -162,14 +166,14 @@ $(document).ready(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" step="1" id="cantM${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
+                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" min="0" step="1" id="cantM${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
                                         <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
                                         <input type="hidden" id="partial_utility_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
                                         <input type="hidden" id="partial_igv_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
                                         <input type="hidden" id="partial_sale_M${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
                                         <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][medicine_id]" />
                                     </td>
-                                    <td><input class="form-control px-2" step="0.1" maxlength="4" type="number" id="descM${value.id}" name="descM${value.id}" style="width:80px"></td>
+                                    <td><input class="form-control px-2" type="number" min="0" step="0.1" id="descM${value.id}" name="descM${value.id}" style="width:80px"></td>
                                     <td id="vunitM${value.id}" class="vunit">${value.price.sale_price}</td>
                                     <td id="subtotalM${value.id}" class="subtotal"></td>
                                     <td id="igv_uniqueM${value.id}"></td>
@@ -197,24 +201,17 @@ $(document).ready(function(){
                                 partial_utility: 'partial_utility_M',
                                 partial_igv: 'partial_igv_M'
                             }
-
-                            
-                            $('#cantM'+value.id).on('click',function(){
-                                validStock(value, props)
-                                calculatePrice(value, props)
-                                discount(value, props);
-                            })
                             
                             $('#cantM'+value.id).on('keyup',function(){
                                 validStock(value, props)
                                 calculatePrice(value, props)
                                 discount(value, props);
                             })
+
                             
                             $('#closeM'+value.id).on('click', function() {
                                 deleteProduct(value, props)
-                            })
-                                
+                            })    
 
                             $('#tipoM'+value.id).on('change', function(){
                                 validStock(value, props)
@@ -229,10 +226,8 @@ $(document).ready(function(){
                                 discount(value, props);
                             })
 
-                            $(`#descM${value.id}`).on('click', function() {
-                                validStock(value, props)
-                                calculatePrice(value, props)
-                                discount(value, props);
+                            $(`#calculatePriceEnd`).on('click', function() {
+                                calculatePriceTotal(value, props)
                             })
                         });
                     })
@@ -306,14 +301,14 @@ $(document).ready(function(){
                                     </select>
                                     </td>
                                     <td>
-                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" id="cantA${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
+                                        <input name="detail[${$('#table_sales tr').length-1}][quantity]" min="0" id="cantA${value.id}" class="form-control quantity px-2" type="number" style="width:80px"/>
                                         <input type="hidden" name="detail[${$('#table_sales tr').length-1}][unit_type]" value="${tipo}"/>
                                         <input type="hidden" id="partial_utility_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_utility]" />
                                         <input type="hidden" id="partial_igv_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_igv]" />
                                         <input type="hidden" id="partial_sale_A${value.id}" name="detail[${$('#table_sales tr').length-1}][partial_sale]" />
                                         <input type="hidden" id="medicine${value.id}" value="${value.id}" name="detail[${$('#table_sales tr').length-1}][article_id]" />
                                     </td>
-                                    <td><input class="form-control px-2" step="0.1" type="number" id="descA${value.id}" name="descA${value.id}" style="width:80px"></td>
+                                    <td><input class="form-control px-2" min="0" step="0.1" type="number" id="descA${value.id}" name="descA${value.id}" style="width:80px"></td>
                                     <td id="vunitA${value.id}" class="vunit">${value.price.sale_price}</td>
                                     <td id="subtotalA${value.id}" class="subtotal"></td>
                                     <td id="igv_uniqueA${value.id}"></td>
@@ -348,19 +343,7 @@ $(document).ready(function(){
                                 discount(value, props);
                             })
 
-                            $('#cantA'+value.id).on('click',function(){
-                                validStock(value, props)
-                                calculatePrice(value, props)
-                                discount(value, props);
-                            })
-
                             $(`#descA${value.id}`).on('keyup', function() {
-                                validStock(value, props)
-                                calculatePrice(value, props)
-                                discount(value, props);
-                            })
-
-                            $(`#descA${value.id}`).on('click', function() {
                                 validStock(value, props)
                                 calculatePrice(value, props)
                                 discount(value, props);
@@ -375,6 +358,10 @@ $(document).ready(function(){
 
                             $('#closeA'+value.id).on('click', function() {
                                 deleteProduct(value, props)
+                            })
+
+                            $(`#calculatePriceEnd`).on('click', function() {
+                                calculatePriceTotal(value, props)
                             })
                         });
                     });
