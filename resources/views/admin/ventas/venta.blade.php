@@ -81,6 +81,7 @@
                                                     <th class="d-none d-xl-table-cell">Cant.</th>
                                                     <th class="d-none d-xl-table-cell">Desc.</th>
                                                     <th class="d-none d-xl-table-cell">P. Venta</th>
+
                                                     <th class="d-none d-xl-table-cell">Subtotal</th>
                                                     <th class="d-none d-xl-table-cell">IGV</th>
                                                     <th class="d-none d-xl-table-cell">Importe</th>
