@@ -110,7 +110,7 @@
 
                         <div class="form-holder">
                             <i class="zmdi zmdi-edit"></i>
-                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número de Blisters por caja" value="{{old('number_blister')}}">
+                            <input type="text" name="number_blister"  id="number_blister" class="form-control" autocomplete="off" placeholder="Número de unidades por blister" value="{{old('number_blister')}}">
                         </div>
                         @error('number_blister')
                         <p class="text-danger">{{$message}}</p>

@@ -26,7 +26,6 @@ $(document).ready(function(){
             const inputCantVal = $(`#${cant}${value.id}`).val();
             var suma = 0;
             var importeTotal = 0;
-
             $('.subtotal').each(function() {
                 suma = suma + parseFloat(inputCantVal)
             })
@@ -45,9 +44,15 @@ $(document).ready(function(){
             let { cant, vunit, tipo, importe, subtotal, igv_unique, partial_sale, partial_utility, partial_igv, desc } = props;
             
             const inputCantVal = $(`#${cant}${value.id}`).val();
-
-            var importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html())*$(`#${tipo}${value.id}`).val()).toFixed(1)+'0'
-            var subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+            var importe1 = null;
+            var subtotal1 = null;
+            if ($(`#${tipo}${value.id}`).val() != 1) {
+                importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html())).toFixed(1)+'0'
+                subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+            } else {
+                importe1= parseFloat(inputCantVal * parseFloat($(`#${vunit}${value.id}`).html()) * $(`#${tipo}${value.id}`).val()).toFixed(1)+'0'
+                subtotal1 = parseFloat(importe1 / 1.18).toFixed(2)
+            }
             
             $(`#${importe}${value.id}`).html(importe1)
             $(`#${subtotal}${value.id}`).html(subtotal1)
@@ -78,7 +83,8 @@ $(document).ready(function(){
             const siblingCant = $(`#${cant}${value.id}`).val();
 
             if (siblingCant) {
-                const descTotal = (value.price.sale_price * siblingCant) - descValue;
+                const importeTotal = parseFloat($(`#${importe}${value.id}`).html()) 
+                const descTotal = importeTotal - descValue;
                 $(`#${importe}${value.id}`).html(descTotal.toFixed(1));
             }
         }
@@ -162,7 +168,7 @@ $(document).ready(function(){
                                         <select id="tipoM${value.id}" class="form-control px-2" style="width:100px">
                                             <option value="1">Unidad</option>
                                             <option value=${value.number_blister}>Blister (${value.number_blister})</option>
-                                            <option value=${value.number_box}>Caja (${value.number_box})</option>
+                                            <option value=${value.number_box * value.number_blister}>Caja (${value.number_box * value.number_blister})</option>
                                         </select>
                                     </td>
                                     <td>
