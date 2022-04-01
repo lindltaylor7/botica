@@ -23,7 +23,7 @@
                                 <p class="text-danger">{{$message}}</p>
                                 @enderror
                             </div>
-                            <input type="text" name="name" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-100" readonly require>
+                            <input type="text" name="name" style="text-transform:uppercase;" id="nombre_cliente" class="form-control mt-1 w-100" require>
                             @error('name')
                             <p class="text-danger">{{$message}}</p>
                             @enderror
