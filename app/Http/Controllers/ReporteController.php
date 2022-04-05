@@ -305,6 +305,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->where('sales.code', 'not like' ,'%_a')
                     ->groupBy('details.detailable_id');
 
 
@@ -313,6 +314,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->where('sales.code', 'not like' ,'%_a')
                     ->groupBy('details.detailable_id')
                     ->union($tops1)
                     ->orderBy('cantidad','desc')
