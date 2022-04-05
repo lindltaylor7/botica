@@ -19,7 +19,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $ventas = Sale::all();
+        $ventas = Sale::where('code','not like','%_a')->get();
         $stocks = Stock::all();
         return view('admin.reportes.index', compact('ventas','stocks'));
     }
@@ -93,7 +93,10 @@ class ReporteController extends Controller
     public function top(){
         $tops1=Detail::select('medicines.generic_name','medicines.tradename', DB::raw('SUM(details.quantity) as cantidad'), DB::raw('SUM(details.amount) as total'))
                     ->leftJoin('medicines','details.detailable_id','=','medicines.id')
-                    ->leftJoin('sales','details.sale_id','=','sales.id')
+                    ->leftJoin('sales', function($join){
+                        $join->on('details.sale_id','=','sales.id');
+                        $join->where('sales.code', 'not like', '%_a');
+                    })
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->groupBy('details.detailable_id');
 

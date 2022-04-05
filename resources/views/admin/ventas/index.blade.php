@@ -26,7 +26,7 @@
                                     <th class="d-none d-xl-table-cell">Código</th>
                                     <th class="d-none d-xl-table-cell">Cliente</th>
                                     <th class="d-none d-xl-table-cell">Fecha</th>
-                                    <th class="d-none d-md-table-cell">Utilidad</th>
+                                    <th class="d-none d-md-table-cell">V. Total</th>
                                     <th class="d-none d-md-table-cell">Boleta</th>
                                     <th class="d-none d-md-table-cell">Ticket</th>
                                     <th class="d-none d-md-table-cell">Vendedor</th>
@@ -44,8 +44,7 @@
                                         <td>B-000{{$venta->id}}</td>
                                         <td>{{$venta->customer->name}}</td>
                                         <td>{{date('d/m/Y', strtotime($venta->date))}}</td>
-
-                                        <td>S./{{$venta->total_utility}}</td>
+                                        <td>S./{{$venta->total_sale}}</td>
                                         <td>
                                             <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
                                         </td>
@@ -69,8 +68,7 @@
                                         <td>B-000{{$venta->id}}</td>
                                         <td>{{$venta->customer->name}}</td>
                                         <td>{{date('d/m/Y', strtotime($venta->date))}}</td>
-
-                                        <td>S./{{$venta->total_utility}}</td>
+                                        <td>S./{{$venta->total_sale}}</td>
                                         <td>
                                             <a target="_blank" href="{{route('generarpdf.reporte', $venta->id)}}"><span class="badge bg-success">Emitida</span></a>
                                         </td>

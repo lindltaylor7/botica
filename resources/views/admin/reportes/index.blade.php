@@ -13,7 +13,7 @@
                     <div class="shadow">
                         <div class="card-body py-3 px-5 d-flex justify-content-between align-items-center">
                             <div>
-                                <h5 class="card-title mb-4">Ingresos</h5>
+                                <h5 class="card-title mb-4">Ventas en general</h5>
                                 <h1 class="mt-1 mb-3 fs-3">S./{{number_format($ventas->sum('total_sale'), 2, ".", '')}}</h1>
                             </div>
                             <div class="display-1">

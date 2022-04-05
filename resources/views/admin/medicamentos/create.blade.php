@@ -444,9 +444,9 @@
 
             $('#sale_price_box').on('keyup', function(){
                 //CAJA
-                var total = parseInt($(this).val()) // Precio de venta por caja
+                var total = parseFloat($(this).val()) // Precio de venta por caja
                 var pc_box = $('#cost_box').val();
-                var percent = ((total - pc_box) * 100) / pc_box;
+                var percent = (((total - pc_box) * 100) / pc_box).toFixed(1);
 
                 $('#utility_box').val(percent);
 
