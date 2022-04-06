@@ -385,6 +385,7 @@ class ReporteController extends Controller
 
     public function economicYear(Request $request) {
         $saleYear = Sale::where('created_at', 'like', $request->get('año').'%')
+        ->where('code', 'not like', '%_a')
         ->select(
             DB::raw('sum(total_sale) as sums'),
             DB::raw("DATE_FORMAT(date,'%M %Y') as months")
@@ -397,6 +398,7 @@ class ReporteController extends Controller
 
     public function economicMonth(Request $request) {
         $saleMonth = Sale::whereYear('created_at', $request->get('año'))
+        ->where('code', 'not like', '%_a')
         ->whereMonth('created_at', $request->get('mes'))
         ->get();
         return response()->json($saleMonth);
@@ -404,6 +406,7 @@ class ReporteController extends Controller
 
     public function economicDay(Request $request) {
         $saleDay = Sale::whereDate('created_at', $request->get('dia'))
+        ->where('code', 'not like', '%_a')
         ->get();
 
         return response()->json($saleDay);
