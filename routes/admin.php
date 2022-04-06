@@ -67,6 +67,10 @@ Route::get('reportes', [ReporteController::class, 'index'])->middleware('auth')-
 Route::get('reportes/top', [ReporteController::class, 'top'])->middleware('auth')->name('reportes.top');
 Route::get('reportes/bot', [ReporteController::class, 'bot'])->middleware('auth')->name('reportes.bot');
 Route::get('reportes/ven', [ReporteController::class, 'ven'])->middleware('auth')->name('reportes.ven');
+Route::get('reportes/economico', [ReporteController::class, 'economic'])->middleware('auth')->name('reportes.eco');
+Route::post('reportes/economico/year', [ReporteController::class, 'economicYear'])->middleware('auth');
+Route::post('reportes/economico/month', [ReporteController::class, 'economicMonth'])->middleware('auth');
+Route::post('reportes/economico/day', [ReporteController::class, 'economicDay'])->middleware('auth');
 Route::post('reportes/top/day', [ReporteController::class, 'topDay'])->middleware('auth');
 Route::post('reportes/bot/day', [ReporteController::class, 'botDay'])->middleware('auth');
 Route::post('reportes/top/fecha', [ReporteController::class, 'topFecha'])->middleware('auth');

@@ -379,4 +379,33 @@ class ReporteController extends Controller
 
     }
 
+    public function economic() {
+        return view('admin.reportes.economico');
+    }
+
+    public function economicYear(Request $request) {
+        $saleYear = Sale::where('created_at', 'like', $request->get('año').'%')
+        ->select(
+            DB::raw('sum(total_sale) as sums'),
+            DB::raw("DATE_FORMAT(date,'%M %Y') as months")
+        )
+        ->groupBy('months')
+        ->get();
+
+        return response()->json($saleYear);
+    }
+
+    public function economicMonth(Request $request) {
+        $saleMonth = Sale::whereYear('created_at', $request->get('año'))
+        ->whereMonth('created_at', $request->get('mes'))
+        ->get();
+        return response()->json($saleMonth);
+    }
+
+    public function economicDay(Request $request) {
+        $saleDay = Sale::whereDate('created_at', $request->get('dia'))
+        ->get();
+
+        return response()->json($saleDay);
+    }
 }

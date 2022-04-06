@@ -405,16 +405,8 @@ table.dataTable.no-footer {
 .report-medicine {
   min-width: 350px;
   border-radius: 14px;
-  transition: background .5s ease;
-}
-
-.report-medicine:hover {
   background: #00C2F0;
-  color: #fff;
+  color: #fff !important;
 }
 
-.report-medicine:hover a {
-  color: #00C2F0 !important;
-  background: #FFf !important;
-}
 
