@@ -388,27 +388,61 @@ class ReporteController extends Controller
         ->where('code', 'not like', '%_a')
         ->select(
             DB::raw('sum(total_sale) as sums'),
-            DB::raw("DATE_FORMAT(date,'%M %Y') as months")
+            DB::raw("DATE_FORMAT(date,'%M %Y') as months"),
         )
         ->groupBy('months')
         ->get();
 
-        return response()->json($saleYear);
+        $sumaTotal = 0;
+
+        foreach ($saleYear as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->sums);
+        }
+            
+        return response()->json([
+            'sale' => $saleYear,
+            'sumaTotal' => $sumaTotal
+        ]);
     }
 
     public function economicMonth(Request $request) {
         $saleMonth = Sale::whereYear('created_at', $request->get('año'))
         ->where('code', 'not like', '%_a')
         ->whereMonth('created_at', $request->get('mes'))
+        ->with('details')
+        ->with('customer')
+        ->with('details.detailable')
         ->get();
-        return response()->json($saleMonth);
+
+        $sumaTotal = 0;
+
+        foreach ($saleMonth as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->total_sale);
+        }
+            
+        return response()->json([
+            'sale' => $saleMonth,
+            'sumaTotal' => $sumaTotal
+        ]);
     }
 
     public function economicDay(Request $request) {
         $saleDay = Sale::whereDate('created_at', $request->get('dia'))
         ->where('code', 'not like', '%_a')
+        ->with('details')
+        ->with('customer')
+        ->with('details.detailable')
         ->get();
 
-        return response()->json($saleDay);
+        $sumaTotal = 0;
+
+        foreach ($saleDay as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->total_sale);
+        }
+            
+        return response()->json([
+            'sale' => $saleDay,
+            'sumaTotal' => $sumaTotal
+        ]);
     }
 }

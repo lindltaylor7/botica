@@ -4,6 +4,17 @@
 
 @section('content')
 <main class="content">
+    <template id="template-table">
+        <table id="tableData" class="table table-hover my-0">
+            <thead>
+                <tr id="rowHead"></tr>
+            </thead>
+            <tbody id="table-body">
+                {{-- <tr id="rowBody"></tr> --}}
+            </tbody>
+        </table>
+    </template>
+
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12">
@@ -54,34 +65,51 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-hover my-0" id="myTable" >
-                            <thead>
-                                <tr>
-                                    <th>Nombre Genérico</th>
-                                    <th>Nombre Comercial</th>
-                                    <th class="d-none d-md-table-cell">Total de Vendidas</th>
-                                    <th class="d-none d-md-table-cell">Monto Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="row-report" name='row-report'>
-                                {{-- @foreach($tops as $top)
-                                    <tr>
-                                        <td>{{$top->generic_name}}</td>
-                                        <td>{{$top->tradename}}</td>
-                                        <td>{{$top->cantidad}}</td>
-                                        <td>S./{{$top->total}}</td>
-                                    </tr>
-                                @endforeach --}}
-                            </tbody>
-                        </table>
-                       <div class="text-end"><p id="suma"></p></div>
+                    <div class="card-body" id="contentTable"></div>
+                    <div class="px-3 fs-4">
+                        <b>Suma Total:</b>
+                        <span id="sumTotal"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+{{-- Modal --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalle de la venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" id="modalBody">
+            <div class="fs-5">
+                <p>
+                    <b>Cliente:</b>
+                    <span id="clienteModal"></span>
+                </p>
+                
+                <p>
+                    <b>DNI:</b>
+                    <span id="dniModal"></span>
+                </p>
+            </div>
+
+            <div id="tableModal">
+
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
 @endsection
 @section('javascript')
     <script src="{{ asset('js/reportes/eco.js') }}"></script>
