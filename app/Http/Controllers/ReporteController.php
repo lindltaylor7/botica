@@ -305,6 +305,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Medicine')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->where('sales.code', 'not like' ,'%_a')
                     ->groupBy('details.detailable_id');
 
 
@@ -313,6 +314,7 @@ class ReporteController extends Controller
                     ->leftJoin('sales','details.sale_id','=','sales.id')
                     ->where('details.detailable_type','App\Models\Article')
                     ->where('sales.created_at', 'like', $request->get('fecha').'%')
+                    ->where('sales.code', 'not like' ,'%_a')
                     ->groupBy('details.detailable_id')
                     ->union($tops1)
                     ->orderBy('cantidad','desc')
@@ -377,4 +379,70 @@ class ReporteController extends Controller
 
     }
 
+    public function economic() {
+        return view('admin.reportes.economico');
+    }
+
+    public function economicYear(Request $request) {
+        $saleYear = Sale::where('created_at', 'like', $request->get('año').'%')
+        ->where('code', 'not like', '%_a')
+        ->select(
+            DB::raw('sum(total_sale) as sums'),
+            DB::raw("DATE_FORMAT(date,'%M %Y') as months"),
+        )
+        ->groupBy('months')
+        ->get();
+
+        $sumaTotal = 0;
+
+        foreach ($saleYear as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->sums);
+        }
+            
+        return response()->json([
+            'sale' => $saleYear,
+            'sumaTotal' => $sumaTotal
+        ]);
+    }
+
+    public function economicMonth(Request $request) {
+        $saleMonth = Sale::whereYear('created_at', $request->get('año'))
+        ->where('code', 'not like', '%_a')
+        ->whereMonth('created_at', $request->get('mes'))
+        ->with('details')
+        ->with('customer')
+        ->with('details.detailable')
+        ->get();
+
+        $sumaTotal = 0;
+
+        foreach ($saleMonth as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->total_sale);
+        }
+            
+        return response()->json([
+            'sale' => $saleMonth,
+            'sumaTotal' => $sumaTotal
+        ]);
+    }
+
+    public function economicDay(Request $request) {
+        $saleDay = Sale::whereDate('created_at', $request->get('dia'))
+        ->where('code', 'not like', '%_a')
+        ->with('details')
+        ->with('customer')
+        ->with('details.detailable')
+        ->get();
+
+        $sumaTotal = 0;
+
+        foreach ($saleDay as $value) {
+            $sumaTotal = $sumaTotal + floatval($value->total_sale);
+        }
+            
+        return response()->json([
+            'sale' => $saleDay,
+            'sumaTotal' => $sumaTotal
+        ]);
+    }
 }

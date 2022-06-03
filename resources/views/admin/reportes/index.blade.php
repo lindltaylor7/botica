@@ -39,7 +39,7 @@
 
             <h2 class="fs-4 mb-3">Reportes del mes</h2>
             <div class="container-fluid d-flex justify-content-between flex-wrap p-0">
-                <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
+                <a href="{{route('reportes.top')}}" class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
                         <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
@@ -47,11 +47,11 @@
                                 <i class="fas fa-prescription-bottle-alt"></i>
                             </span>
                             <span class="fs-6 mb-3 w-50">Productos más vendidos</span>
-                            <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.top')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
+                </a>
+
+                <a href="{{route('reportes.bot')}}" class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
                         <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
@@ -59,11 +59,11 @@
                                 <i class="fas fa-tablets"></i>
                             </span>
                             <span class="fs-6 mb-3 w-75">Productos menos vendidos</span>
-                            <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.bot')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
+                </a>
+                
+                <a href="{{route('reportes.ven')}}" class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
                     <div class="py-3 px-2">
                         <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte de Productos</h5>
                         <div class="card-body text-center d-flex flex-column align-items-center">
@@ -71,10 +71,21 @@
                                 <i class="fas fa-capsules"></i>
                             </span>
                             <span class="fs-6 mb-3 w-50">Productos por caducar</span>
-                            <a class="btn btn-primary btn-sm bg-transparent border text-secondary py-2 px-4" href="{{route('reportes.ven')}}"><span data-feather="message-square"></span> Ver Reporte</a>
                         </div>
                     </div>
-                </div>
+                </a>
+                
+                <a href="{{route('reportes.eco')}}" class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
+                    <div class="py-3 px-2">
+                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte económico</h5>
+                        <div class="card-body text-center d-flex flex-column align-items-center">
+                            <span class="display-1">
+                                <i class="fa-solid fa-kit-medical"></i>
+                            </span>
+                            <span class="fs-6 mb-3 w-50">Ventas por dia, mes  y año</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
