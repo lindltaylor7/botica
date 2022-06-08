@@ -23,30 +23,28 @@
                     </div>
                     <div class="card-body">
                         <h1>Reporte Diario {{date('d/m/Y')}}</h1>
-                        <table class="table">
+                        <table class="table table-hover">
                             <tbody>
                                 @foreach ($sales as $sale)
                                 <tr>
-                                    <td rowspan="{{$sale->details->count()}}">
+                                    <th rowspan="{{$sale->details->count()}}">
                                         {{$sale->customer->name}}
-                                    </td>
-                                    <td rowspan="{{$sale->details->count()}}">
-                                        @foreach ($sale->details as $detail)
-                                        <table class="table">
-                                            <tr>
-                                              <td>
-                                                {{$detail->quantity}}
-                                              </td>
-                                              <td>
-                                                {{$detail->detailable->generic_name}} {{$detail->detailable->tradename}} {{$detail->detailable->concentration}}   
-                                              </td>
-                                              <td>
-                                                {{$detail->amount}}   
-                                              </td>
-                                            </tr>
-                                          </table>
+                                    </th>
+                                        @foreach ($sale->details as $detail)                                                  
+                                                    <td>
+                                                        {{$detail->quantity}}
+                                                      </td>
+                                                      <td>
+                                                        {{$detail->detailable->generic_name}} {{$detail->detailable->tradename}} {{$detail->detailable->concentration}}   
+                                                      </td>
+                                                      <td>
+                                                        S./ {{$detail->detailable->price->sale_price}}   
+                                                      </td>
+                                                      <td>
+                                                        {{$detail->amount}}   
+                                                      </td>
+                                                    </tr> 
                                         @endforeach  
-                                    </td>
                                     {{-- <td rowspan="{{$sale->details->count()}}">
                                         @foreach ($sale->details as $detail)
                                         
@@ -57,7 +55,7 @@
                                         <p>{{$detail}}</p>
                                         @endforeach  
                                     </td> --}}
-                                </tr>
+                                
                                 @endforeach  
                                 
                             </tbody>

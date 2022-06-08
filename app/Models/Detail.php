@@ -22,6 +22,9 @@ class Detail extends Model
     {
         return $this->morphTo();
     }
+    public function price(){
+        return $this->morphOne('App\Models\Price','priceable');
+    }
     //muchos a muchos
     public function batches(){
         return $this->belongsToMany("App\Models\Batch")->withPivot('quantity_sale');

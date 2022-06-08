@@ -387,7 +387,10 @@ class ReporteController extends Controller
         $sales = Sale::where('date',date('Y-m-d'))
                             ->with('customer')
                             ->with('details.detailable')
-                            ->get();
+                            ->with('details.detailable', function($query){
+                                $query->with('price');
+                            })
+                            ->get();                   
         $total = 0;
         foreach($sales as $sale){
             foreach($sale->details as $detail){
