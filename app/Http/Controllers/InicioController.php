@@ -29,9 +29,10 @@ class InicioController extends Controller
         $articulos = Article::all();
         
         // $ventas1 = Sale::unique('date');
-
-        $ventas = Sale::where('date','like',date('yyyy-mm').'%')->groupBy('date')->pluck('date');
-        $ventasNum = Sale::select(DB::raw('sum(total_sale)'))->where('code','not like','%_a')->where('date','like','2022-05%')->groupBy('date')->get();
+        $datee = date('Y-m');
+        $ventas = Sale::where('date','like',$datee.'%')->groupBy('date')->pluck('date');
+        
+        $ventasNum = Sale::select(DB::raw('sum(total_sale)'))->where('date','like',$datee.'%')->where('code','not like','%_a')->groupBy('date')->get();
         //return $ventasNum;
         $arr = [];
         foreach ($ventasNum as $num) {
