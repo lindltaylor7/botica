@@ -383,6 +383,20 @@ class ReporteController extends Controller
         return view('admin.reportes.economico');
     }
 
+    public function diaily(){
+        $sales = Sale::where('date',date('Y-m-d'))
+                            ->with('customer')
+                            ->with('details.detailable')
+                            ->get();
+        $total = 0;
+        foreach($sales as $sale){
+            foreach($sale->details as $detail){
+                $total = $total + $detail->amount;
+            }
+        }                    
+        return view('admin.reportes.diario', compact('sales','total'));
+    }
+
     public function economicYear(Request $request) {
         $saleYear = Sale::where('created_at', 'like', $request->get('año').'%')
         ->where('code', 'not like', '%_a')

@@ -68,6 +68,7 @@ Route::get('reportes/top', [ReporteController::class, 'top'])->middleware('auth'
 Route::get('reportes/bot', [ReporteController::class, 'bot'])->middleware('auth')->name('reportes.bot');
 Route::get('reportes/ven', [ReporteController::class, 'ven'])->middleware('auth')->name('reportes.ven');
 Route::get('reportes/economico', [ReporteController::class, 'economic'])->middleware('auth')->name('reportes.eco');
+Route::get('reportes/diaily', [ReporteController::class, 'diaily'])->middleware('auth')->name('reportes.diaily');
 Route::post('reportes/economico/year', [ReporteController::class, 'economicYear'])->middleware('auth');
 Route::post('reportes/economico/month', [ReporteController::class, 'economicMonth'])->middleware('auth');
 Route::post('reportes/economico/day', [ReporteController::class, 'economicDay'])->middleware('auth');

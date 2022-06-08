@@ -86,6 +86,18 @@
                         </div>
                     </div>
                 </a>
+
+                <a href="{{route('reportes.diaily')}}" class="col-md-4 col-xl-4 mb-4 shadow-sm w-25 report-medicine">
+                    <div class="py-3 px-2">
+                        <h5 class="card-title mb-0 px-3 text-center w-75 m-auto">Reporte diario</h5>
+                        <div class="card-body text-center d-flex flex-column align-items-center">
+                            <span class="display-1">
+                                <i class="fa-solid far fa-calendar-alt"></i>
+                            </span>
+                            <span class="fs-6 mb-3 w-50">Ventas por día</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
