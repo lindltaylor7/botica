@@ -5,7 +5,6 @@
         <img src="{{asset('img/icons/logo-01.svg')}}" style="width: 35%; max-width: 120px; min-width: 60px;" alt="Logotipo">
         <span class="span-logo fs-1 fw-bolder text-white d-none d-md-none d-lg-block">Excel</span>
       </div>
-
       <ul class="nav__menu list-group w-100">
         <li class="nav__list w-100 my-2">
           <a href="{{ route('inicio.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
@@ -13,24 +12,30 @@
             <span class="nav__span fs-6 d-none d-sm-none d-md-none d-lg-block ps-lg-2 text-white">Inicio</span>
           </a>
         </li>
+        @can('admin.medicamentos')
         <li class="nav__list w-100 my-2">
           <a href="{{ route('medicamentos.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
             <i class="fas fa-capsules fs-2 d-block text-white p-2 p-lg-3"></i>
             <span class="nav__span fs-6 d-none d-sm-none d-md-none d-lg-block ps-lg-2 text-white">Medicamento</span>
           </a>
         </li>
+        @endcan
+        @can('admin.medicamentos')
         <li class="nav__list w-100 my-2">
           <a href="{{ route('articles.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
             <i class="fas fa-archive fs-2 d-block text-white p-2 p-lg-3"></i>
             <span class="nav__span fs-6 d-none d-sm-none d-md-none d-lg-block ps-lg-2 text-white">Articulos</span>
           </a>
         </li>
+        @endcan
+        @can('admin.stocks')
         <li class="nav__list w-100 my-2">
           <a href="{{ route('stock.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
             <i class="fas fa-layer-group fs-2 d-block text-white p-2 p-lg-3"></i>
             <span class="nav__span fs-6 d-none d-sm-none d-md-none d-lg-block ps-lg-2 text-white">Stocks</span>
           </a>
         </li>
+        @endcan
         <li class="nav__list w-100 my-2">
           <a href="{{ route('ventas.index') }}" class="nav__link d-flex flex-nowrap justify-content-center justify-content-sm-center justify-content-lg-start align-items-center">
             <i class="fas fa-shopping-basket fs-2 d-block text-white p-2 p-lg-3"></i>

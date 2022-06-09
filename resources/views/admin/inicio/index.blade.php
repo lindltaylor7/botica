@@ -7,6 +7,7 @@
 
   <div class="">
     <div class="main__action">
+      @can('admin.stocks')
       <a href="{{ route('stock.create') }}" class="main__action-item">
         <div class="main__action-text">
           <h2>Stock</h2>
@@ -14,6 +15,8 @@
         </div>
         <span class="main__action-icon"><i class="fas fa-layer-group"></i></span>
       </a>
+      @endcan
+      @can('admin.medicamentos')
       <a href="{{ route('medicamentos.create') }}" class="main__action-item">
         <div class="main__action-text">
           <h2>Añadir</h2>
@@ -21,6 +24,7 @@
         </div>
         <span class="main__action-icon"> <i class="fas fa-capsules"></i></span>
       </a>
+      @endcan
       <a href="{{route('reportes.index')}}" class="main__action-item">
         <div class="main__action-text">
           <h2>Generar</h2>
