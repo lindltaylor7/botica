@@ -385,6 +385,7 @@ class ReporteController extends Controller
 
     public function diaily(){
         $sales = Sale::where('date',date('Y-m-d'))
+                            ->where('code','not like', '%_a')
                             ->with('customer')
                             ->with('details.detailable')
                             ->with('details.detailable', function($query){
