@@ -77,6 +77,7 @@
               <th>Laboratorio</th>
               <th>Anaquel</th>
               <th>Foto</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -140,6 +141,7 @@
                       <button type="button" class="btn btn-xs btn-danger fas fa-image" data-bs-toggle="modal" data-bs-target="#imgModalArt{{$articulo->id}}"></button>
                       @include('admin.inicio.imgmodalart')
                     </td>
+                    
                 </tr>
             @endforeach
           </tbody>

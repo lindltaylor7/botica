@@ -22,7 +22,7 @@ Route::get('medicamentos', [MedicineController::class, 'index'])->middleware('au
 Route::get('medicamentos/create', [MedicineController::class, 'create'])->middleware('auth')->name('medicamentos.create');
 Route::post('medicamentos/all', [MedicineController::class, 'all'])->middleware('auth')->name('medicamentos.all');
 Route::post('medicamentos/infoedit', [MedicineController::class, 'infoedit'])->middleware('auth');
-Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic'])->middleware('auth');
+Route::post('medicamentos/delmedic', [MedicineController::class, 'delmedic'])->middleware('auth')->name('medicamentos.delete');
 Route::put('medicamentos/{id}/update', [MedicineController::class, 'update'])->middleware('auth')->name('medicamentos.update');
 Route::post('medicamentos/store', [MedicineController::class, 'store'])->middleware('auth')->name('medicamentos.store');
 Route::post('medicamentos/medPrice', [MedicineController::class, 'medPrice'])->middleware('auth')->name('medicamentos.medPrice');

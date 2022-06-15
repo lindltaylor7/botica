@@ -67,7 +67,11 @@
                               @include('admin.medicamentos.pricemodal')
                               <button type="button"  class="btn btn-xs btn-info" data-bs-toggle="modal" data-bs-target="#editMedicineModal{{$medicamento->id}}"><i class="fas fa-edit"></i></button>
                               @include('admin.medicamentos.medicinemodaledit')
-                              {{-- <button type="button"  class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#priceModal{{$medicamento->id}}"><i class="fas fa-trash-alt"></i></button> --}}
+                              <form action="{{route('medicamentos.delete',$medicamento->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$medicamento->id}}">
+                                <input type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Esta seguro que desea eliminar este medicamento?')" value="Eliminar"></input>
+                              </form>
                             </td>
                         </tr>
                         @endforeach

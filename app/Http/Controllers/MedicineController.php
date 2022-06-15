@@ -221,7 +221,7 @@ class MedicineController extends Controller
     {
         $del_med = Medicine::where('id', $request->get('id'))->delete();
 
-        return $del_med;
+        return redirect()->back();
     }
     public function medPrice(Request $request)
     {
