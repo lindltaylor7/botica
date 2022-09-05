@@ -229,7 +229,7 @@ class MedicineController extends Controller
                             ->with('price')
                             ->where('generic_name', 'like', '%' . $request->get('search') . '%')
                             ->orWhere('tradename', 'like', '%' . $request->get('search') . '%')
-                            ->take(5)
+                            ->take(10)
                             ->get();
            /*  $res = Medicine::select('medicines.*','prices.*','stocks.*','batches.*')
             ->join('prices', function($join){

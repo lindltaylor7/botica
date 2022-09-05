@@ -34,6 +34,7 @@
 
         .columna{
             text-align: center;
+            text-transform: capitalize;
         }
         .content-1{
             position: relative;
@@ -70,11 +71,21 @@
             font-size:9px;
         }
         .titulo{
+            text-align: center;
             font-size:13px;
+            margin-top: -10px;
         }
         .slogan{
             font-size:8px;
             text-align: center;
+        }
+        h3{
+            font-size: 10px;
+            margin-top: -10px;
+            text-align: center;
+        }
+        #fecha{
+            margin-top: -10px;
         }
     </style>
     <title>Imprimir Ticket</title>
@@ -83,13 +94,14 @@
     <main class="container">
         <div class="container-fluid p-0">
 
-            <h1 class="titulo">Botica Excelentemente</h1>
-
+            <h1 class="titulo">Botica Excelentemente & Salud</h1>
+            <h3>RUC: 10440341654</h3>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body m-sm-3 m-md-5">
                             <div class="mb-4">
+                                <p id="fecha">Fecha: {{date_format(date_create($venta->date),'d/m/Y')}}</p>
                                 Hola <strong>{{$cliente->name}}</strong>,
                                 <br/>
                                 El Pago total es de: <strong>S/.{{number_format($venta->total_sale, 1, ".", '')}}0</strong> (PEN).
@@ -97,13 +109,14 @@
 
 
 
-                            <hr class="my-4" />
+                            <hr class="my-1" />
 
                             <div class="row mb-4">
 
                                     <table class="tabla">
                                         <thead>
                                             <tr>
+                                                <th>Cantidad</th>
                                                 <th>Nombre Producto</th>
                                                 <th>Precio</th>
                                             </tr>
@@ -113,17 +126,19 @@
 
                                             @foreach($details as $detail)
                                             <tr>
+                                                <td>{{$detail->quantity}}</td>
                                                 @if($detail->detailable_type == 'App\Models\Medicine')
-                                                <td class="columna">{{$detail->detailable->generic_name}}</td>
+                                                <td class="columna">{{strtolower($detail->detailable->tradename)}} {{$detail->detailable->concentration}}</td>
                                                     @else
-                                                <td class="columna">{{$detail->detailable->tradename}}</td>
+                                                <td class="columna">{{strtolower($detail->detailable->tradename)}}</td>
                                                 @endif
-                                                <td class="columna">S./ {{$detail->amount}}</td>
+                                                <td class="columna"> {{$detail->amount}}</td>
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td class="columna">Total</td>
-                                                <td class="columna">S/.{{number_format($venta->total_sale, 1, ".", '')}}0</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="columna"><strong> Total</strong> {{number_format($venta->total_sale, 1, ".", '')}}0</td>
                                             </tr>
                                         </tbody>
 

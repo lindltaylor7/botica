@@ -350,6 +350,7 @@ class SaleController extends Controller
     }
 
     public function generar_ticeketPdf($id){
+        
         $venta = Sale::where('id',$id)->first();
         $details = Detail::where('sale_id', $id)->get();
         $cliente = Customer::where('id',$venta->customer_id)->first();
