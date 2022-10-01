@@ -59,7 +59,7 @@
                             <select class="js-example-basic-single form-control" name="stockId">
                                 <option selected disabled>Search</option>
                                 @foreach ($medicamentos as $medicamento)
-                                    <option value="{{{$medicamento->id, 'App\Models\Medicine'}}}">{{$medicamento->generic_name}} - {{$medicamento->tradename}} - {{$medicamento->concentration}}</option>
+                                    <option value="{{{$medicamento->id, 'App\Models\Medicine'}}}">{{$medicamento->generic_name}} - {{$medicamento->tradename}} - {{$medicamento->concentration}} - {{$medicamento->laboratory}}</option>
                                 @endforeach
                             </select>
                         </div>
