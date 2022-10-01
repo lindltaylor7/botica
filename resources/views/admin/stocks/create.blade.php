@@ -71,6 +71,18 @@
                 <h3>stock</h3>
                 <div class="form-row">
                     <div class="form-col">
+                        <label for=""><span>N° de Lotes</span></label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <select class="form-control" name="" id="inputDynamic">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
                         <label for="">
                             Anaquel
                         </label>
@@ -99,6 +111,7 @@
                     </div>
                 </div>
                 <h3>Lotes</h3>
+                <div id="boxDynamic">
                 <div class="shadow card p-4">
                     <div class="form-row">
                         <div class="form-col">
@@ -152,12 +165,71 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </section>
 
             <h4></h4>
         </form>
     </div>
 </main>
+
+<template id="template-input">
+    <div class="p-4 border border-secondary mt-3">
+        <div class="form-row">
+            <div class="form-col">
+                <label for="">
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Código de lote</span>
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <input type="text" name="" class="form-control code" placeholder="Ingrese el código de lote" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-col">
+                <label for="">
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Cantidad de unidades</span>
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <input type="number" name="" class="form-control quantity_unit" placeholder="Ingrese el código de lote" required autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-col">
+                <label for="">
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Fecha de ingreso</span>
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <div class="form-holder">
+                        <input type="date" name="" class="form-control entry_date" placeholder="" required>
+                        @error('f_ingreso')
+                            <p class="alert alert-danger">La fecha de ingreso es obligatorio</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="form-col">
+                <label for="">
+                    <i class="fas fa-asterisk text-danger"></i>
+                    <span>Fecha de vencimiento</span>
+                </label>
+                <div class="form-holder">
+                    <i class="zmdi zmdi-edit"></i>
+                    <div class="form-holder">
+                        <input type="date" name="" class="form-control expiry_date" placeholder="" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 @endsection
 
 @section('javascript')
@@ -204,6 +276,24 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+        const $template = document.getElementById("template-input").content;
+            const $fragment = document.createDocumentFragment();
+            $('#inputDynamic').on('change', function (e) {
+                d.getElementById("boxDynamic").textContent = "";
+                for (let i = 0; i < $(this).val(); i++) {
+                    $template.querySelector(".code").name = `batch[${i}][code]`;
+                    $template.querySelector(".quantity_unit").name = `batch[${i}][quantity_unit]`;
+                    $template.querySelector(".entry_date").name = `batch[${i}][entry_date]`;
+                    $template.querySelector(".expiry_date").name = `batch[${i}][expiry_date]`;
+
+                    let $clone = d.importNode($template, true);
+                    $fragment.appendChild($clone);
+                }
+                $('#boxDynamic').append($fragment)
+            })
+        });    
     </script>
 
     <script src="{{asset('js/stocks/calc.js')}}"></script>
